@@ -1,0 +1,1099 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>20 ans sur la Seine</title>
+<meta name="description" content="Stéphanie et Henri renouvellent leurs vœux le samedi 27 février 2027, puis cap sur la Seine : invitation, programme, trombinoscope des marins, réponses et souvenirs.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="20 ans sur la Seine — Stéphanie & Henri">
+<meta property="og:description" content="Vingt ans après le 14 février 2007, on se redit oui : vœux à 10 h puis croisière rock'n'roll sur la Seine, samedi 27 février 2027. Embarquez !">
+<meta property="og:image" content="https://perezhenricontact-a11y.github.io/20ANSSEINE/img/apercu-partage.jpg">
+<meta property="og:url" content="https://perezhenricontact-a11y.github.io/20ANSSEINE/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@400;700;900&display=swap">
+<style>
+:root{color-scheme:light}
+html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<style>
+/* Layout : une affiche de croisière rétro — bandeau marine avec carrousel d'affiches, billet d'embarquement crème, onglets comme des talons de billets, vagues animées, jukebox. */
+:root{
+  --bg:#f3ecdc; --paper:#fffaf0; --paper-2:#f7efdf;
+  --ink:#1b2742; --ink-2:#4b5672; --line:#d9cbae;
+  --band:#13294b; --band-2:#0c1b35; --band-fg:#f6efe0;
+  --rouge:#c2303a; --rouge-2:#a3262f; --or:#c69b3b; --or-2:#e9d28c;
+  --seine:#3a76a6; --seine-2:#9cc3e1; --seine-3:#dcebf5; --time:#13294b;
+  --ok:#2f8a5b; --warn:#b7791f; --warn-bg:#fff2d6;
+  --shadow:0 10px 30px rgba(27,39,66,.12);
+  --f-script:'Yellowtail',cursive; --f-display:'Playfair Display',Georgia,'Times New Roman',serif; --f-body:'Lato',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --bg:#0b1730; --paper:#14264a; --paper-2:#0f1f3d;
+  --ink:#f1e9d8; --ink-2:#b9c2d6; --line:#2b4068;
+  --band:#08122a; --band-2:#050c1c; --band-fg:#f1e9d8;
+  --rouge:#e0525c; --rouge-2:#c2303a; --or:#d9b25a; --or-2:#e9d28c;
+  --seine:#6fa6d4; --seine-2:#2d5a86; --seine-3:#17345a; --time:#d9b25a;
+  --ok:#5cc08a; --warn:#e3b35a; --warn-bg:#3a2d12;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0b1730; --paper:#14264a; --paper-2:#0f1f3d;
+  --ink:#f1e9d8; --ink-2:#b9c2d6; --line:#2b4068;
+  --band:#08122a; --band-2:#050c1c; --band-fg:#f1e9d8;
+  --rouge:#e0525c; --rouge-2:#c2303a; --or:#d9b25a; --or-2:#e9d28c;
+  --seine:#6fa6d4; --seine-2:#2d5a86; --seine-3:#17345a; --time:#d9b25a;
+  --ok:#5cc08a; --warn:#e3b35a; --warn-bg:#3a2d12;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  color-scheme:dark }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--band)}
+img{max-width:100%;display:block}
+a{color:var(--seine)}
+h1,h2,h3{text-wrap:balance;margin:0}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--or);outline-offset:2px}
+.gutter{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1100px;margin:0 auto}
+
+/* ---------- bandeau + carrousel ---------- */
+.masthead{background:linear-gradient(180deg,var(--band) 0%,var(--band-2) 100%);color:var(--band-fg);padding-block:30px 0;position:relative;overflow:hidden}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:34px;align-items:center}
+.hero>*{min-width:0}
+@media (max-width:900px){.hero{grid-template-columns:1fr;gap:26px}}
+.hero-text{display:flex;flex-direction:column;gap:16px;align-items:center;text-align:center}
+.presente{font-family:var(--f-script);font-size:1.7rem;color:var(--or-2);line-height:1.1}
+.masthead h1{font-family:var(--f-display);font-weight:700;font-size:clamp(2.5rem,6.5vw,4.4rem);line-height:1.02;letter-spacing:-.01em}
+.masthead h1 .vingt{color:var(--or-2)}
+.masthead .sous{font-family:var(--f-display);font-style:italic;font-size:clamp(1.05rem,2.4vw,1.35rem);opacity:.92}
+.rule{display:flex;align-items:center;gap:12px;color:var(--or-2);font-size:.8rem;letter-spacing:.22em;text-transform:uppercase}
+.rule::before,.rule::after{content:"";width:48px;height:1px;background:var(--or-2);opacity:.7}
+
+.carousel{position:relative;width:min(100%,380px);aspect-ratio:2/3;max-width:100%;margin-inline:auto;border-radius:16px;overflow:hidden;box-shadow:0 24px 50px rgba(0,0,0,.45);background:var(--band-2)}
+.carousel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.1s ease;cursor:zoom-in}
+.carousel img.active{opacity:1}
+.carousel img:not(.active){pointer-events:none}
+.dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:8px;z-index:2}
+.dots button{width:10px;height:10px;border-radius:50%;border:1px solid rgba(255,255,255,.8);background:rgba(255,255,255,.25);padding:0}
+.dots button[aria-current="true"]{background:var(--or-2);border-color:var(--or-2)}
+.car-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:36px;height:36px;border-radius:50%;border:0;background:rgba(10,18,40,.55);color:#fff;font-size:1.2rem;display:grid;place-items:center}
+.car-nav.prev{left:10px}.car-nav.next{right:10px}
+
+/* tableau des départs */
+.board{display:flex;flex-direction:column;align-items:center;gap:10px}
+.board-label{font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;color:var(--or-2)}
+.tiles{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.tile{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:10px;min-width:72px;padding:10px 12px 8px;display:flex;flex-direction:column;align-items:center}
+.tile b{font-family:var(--f-display);font-size:2rem;line-height:1;font-variant-numeric:tabular-nums;transition:transform .25s}
+.tile.bump b{transform:translateY(-3px)}
+.tile span{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;opacity:.75;margin-top:6px}
+.badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 12px;font-size:.78rem;font-weight:700;letter-spacing:.04em}
+.badge.warn{background:var(--warn-bg);color:var(--warn);border:1px solid currentColor}
+.badge.ok{background:rgba(47,138,91,.15);color:var(--ok);border:1px solid currentColor}
+.badge.gold{background:rgba(233,210,140,.14);color:var(--or-2);border:1px solid var(--or-2)}
+
+/* jukebox */
+.jukebox{display:flex;flex-direction:column;align-items:center;gap:10px;width:100%}
+.juke-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.chip{border:1px solid rgba(255,255,255,.3);background:transparent;color:var(--band-fg);border-radius:999px;padding:6px 13px;font-size:.84rem;font-weight:700}
+.chip:hover{background:rgba(255,255,255,.08)}
+.chip[aria-pressed="true"]{background:var(--or-2);color:#1b2742;border-color:var(--or-2)}
+.music{display:inline-flex;align-items:center;gap:10px;background:var(--rouge);color:#fff;border:0;border-radius:999px;padding:9px 18px 9px 10px;font-weight:900;font-size:.92rem;letter-spacing:.02em}
+.music:hover{background:var(--rouge-2)}
+.vinyl{width:28px;height:28px;border-radius:50%;background:radial-gradient(circle,var(--or-2) 0 20%,#111 22% 40%,#333 41% 44%,#111 45% 62%,#2a2a2a 63% 66%,#111 67%);position:relative;flex:none}
+.music.on .vinyl{animation:spin 1.6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.juke-now{font-size:.8rem;opacity:.8;min-height:1.2em}
+
+/* vagues */
+.waves{position:relative;height:84px;margin-top:22px}
+.waves canvas{position:absolute;inset:0;width:100%;height:100%}
+.boat{position:absolute;bottom:26px;left:-120px;width:92px;animation:sail 38s linear infinite,bob 3.2s ease-in-out infinite;pointer-events:none}
+@keyframes sail{from{left:-120px}to{left:calc(100% + 30px)}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-4px) rotate(1.5deg)}}
+
+/* ---------- onglets ---------- */
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--paper);border-bottom:2px solid var(--or);box-shadow:0 4px 18px rgba(0,0,0,.08)}
+.tabs .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabs .wrap::-webkit-scrollbar{display:none}
+.tab{flex:none;border:0;background:transparent;color:var(--ink-2);padding:14px 14px 12px;font-weight:700;font-size:.92rem;letter-spacing:.02em;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;display:inline-flex;gap:8px;align-items:center}
+.tab svg{width:18px;height:18px;flex:none}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--rouge);border-bottom-color:var(--rouge)}
+
+/* ---------- sections ---------- */
+main .wrap{padding-block:34px 60px}
+.panel[hidden]{display:none}
+.panel{animation:fadein .35s ease}
+@keyframes fadein{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+.eyebrow{font-family:var(--f-script);font-size:1.9rem;color:var(--rouge);line-height:1}
+h2{font-family:var(--f-display);font-size:clamp(1.7rem,4vw,2.5rem);font-weight:700;line-height:1.1}
+.lead{font-size:1.12rem;color:var(--ink-2);max-width:62ch}
+.section-head{display:flex;flex-direction:column;gap:6px;margin-bottom:26px}
+.grid-2{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:start}
+@media (max-width:820px){.grid-2{grid-template-columns:1fr}}
+.grid-2>*{min-width:0}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:var(--shadow)}
+.prose p{margin:0 0 1em}
+.prose p:last-child{margin-bottom:0}
+.signature{font-family:var(--f-script);font-size:2rem;color:var(--rouge);line-height:1;margin-top:10px}
+
+/* billet d'embarquement */
+.ticket{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.ticket::before{content:"";position:absolute;inset:0 auto 0 0;width:10px;background:repeating-linear-gradient(180deg,var(--rouge) 0 14px,var(--paper) 14px 20px)}
+.ticket-head{background:var(--band);color:var(--band-fg);padding:14px 22px 14px 30px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.ticket-head b{font-family:var(--f-display);font-size:1.15rem;letter-spacing:.02em}
+.ticket-head span{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--or-2)}
+.ticket-body{padding:20px 22px 22px 30px;display:grid;grid-template-columns:repeat(2,1fr);gap:16px 20px}
+@media (max-width:520px){.ticket-body{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:3px;min-width:0}
+.field small{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2)}
+.field strong{font-family:var(--f-display);font-size:1.12rem;line-height:1.25}
+.field em{font-style:normal;font-size:.9rem;color:var(--ink-2)}
+.ticket-foot{border-top:1px dashed var(--line);padding:14px 22px 16px 30px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:11px 20px;font-weight:900;letter-spacing:.03em;border:2px solid transparent;text-decoration:none;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--rouge);color:#fff;border-color:var(--rouge)}
+.btn-primary:hover{background:var(--rouge-2)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--ink-2)}
+
+/* héros du jour */
+.duo{display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.duo img{width:120px;height:120px;border-radius:50%;object-fit:cover;border:5px solid var(--paper-2);box-shadow:var(--shadow)}
+.duo img+img{margin-left:-24px}
+.duo .heart{width:38px;height:38px;background:var(--rouge);color:#fff;border-radius:50%;display:grid;place-items:center;margin-left:-19px;position:relative;z-index:1;border:3px solid var(--paper);font-size:1.05rem}
+
+/* chapitres */
+.chapters{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+@media (max-width:760px){.chapters{grid-template-columns:1fr}}
+.chapter{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.chapter img{width:100%;aspect-ratio:4/3;object-fit:cover;cursor:zoom-in}
+.chapter .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px}
+.chapter .year{font-family:var(--f-script);font-size:1.9rem;color:var(--rouge);line-height:1}
+.chapter h3{font-family:var(--f-display);font-size:1.2rem}
+.chapter p{margin:0;color:var(--ink-2);font-size:.95rem}
+.chapters-title{margin-top:40px;display:flex;flex-direction:column;gap:4px}
+
+/* programme */
+.timeline{display:flex;flex-direction:column;gap:0;position:relative}
+.stop{display:grid;grid-template-columns:100px 28px 1fr;gap:0 14px;align-items:start;position:relative}
+.stop .time{font-family:var(--f-display);font-weight:700;font-size:1.15rem;padding-top:6px;font-variant-numeric:tabular-nums;color:var(--time);text-align:right}
+.stop .dot{display:flex;flex-direction:column;align-items:center;align-self:stretch}
+.stop .dot i{width:16px;height:16px;border-radius:50%;background:var(--rouge);border:3px solid var(--paper);box-shadow:0 0 0 2px var(--rouge);margin-top:10px;flex:none}
+.stop .dot::after{content:"";flex:1;width:2px;background:var(--line);margin-top:4px}
+.stop:last-child .dot::after{display:none}
+.stop .what{padding:0 0 26px}
+.stop h3{font-family:var(--f-display);font-size:1.25rem}
+.stop p{margin:4px 0 0;color:var(--ink-2)}
+.stop .tag{display:inline-block;margin-top:6px;font-size:.75rem;font-weight:700;color:var(--warn);letter-spacing:.06em;text-transform:uppercase}
+@media (max-width:520px){.stop{grid-template-columns:62px 24px 1fr}.stop .time{font-size:1rem}}
+.dress{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:10px}
+.dress div{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.dress b{display:block;font-family:var(--f-display)}
+.dress span{font-size:.92rem;color:var(--ink-2)}
+.cars{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.cars figure{margin:0;position:relative;border-radius:10px;overflow:hidden}
+.cars img{aspect-ratio:4/3;object-fit:cover;width:100%;cursor:zoom-in}
+.cars figcaption{position:absolute;inset:auto 0 0;background:linear-gradient(transparent,rgba(10,18,40,.85));color:#fff;padding:22px 10px 8px;font-size:.82rem}
+
+/* programme : photo par étape */
+.stop .what{display:flex;gap:14px;align-items:flex-start}
+.stop .what>div{min-width:0;flex:1}
+.stop .what img{width:118px;aspect-ratio:4/3;object-fit:cover;border-radius:10px;flex:none;cursor:zoom-in;box-shadow:var(--shadow)}
+@media (max-width:520px){.stop .what img{width:84px}}
+.infos-title{margin-top:36px;display:flex;flex-direction:column;gap:4px;margin-bottom:16px}
+
+/* QR codes */
+.qrs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+@media (max-width:460px){.qrs{grid-template-columns:1fr}}
+.qr{background:#fffaf0;color:#13294b;border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.qr .box{width:150px;height:150px;display:grid;place-items:center}
+.qr .box img,.qr .box canvas{width:150px!important;height:150px!important}
+.qr b{font-family:var(--f-display);font-size:1rem}
+.qr small{font-size:.78rem;color:#4b5672;word-break:break-all}
+
+/* équipage / trombinoscope */
+.ship-rule{background:var(--band);color:var(--band-fg);border-radius:14px;padding:18px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:22px}
+.ship-rule .eyebrow{color:var(--or-2);font-size:1.6rem}
+.ship-rule p{margin:0;flex:1;min-width:220px}
+.trombi{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.cabin{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;box-shadow:var(--shadow)}
+.cabin.hosts{grid-column:1/-1;background:linear-gradient(180deg,var(--paper),var(--paper-2));padding:0 0 18px}
+.cabin.hosts .banner{width:100%;aspect-ratio:16/9;object-fit:cover;cursor:zoom-in}
+.cabin.hosts .portholes{margin-top:-56px;position:relative;z-index:1}
+.ship-rule img{width:96px;aspect-ratio:1;object-fit:cover;border-radius:50%;border:4px solid var(--or);flex:none;cursor:zoom-in}
+.portholes{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.porthole{width:112px;height:112px;border-radius:50%;position:relative;background:var(--seine-3);border:7px solid var(--or);box-shadow:0 0 0 3px var(--or-2) inset,0 6px 16px rgba(0,0,0,.25);overflow:hidden;display:grid;place-items:center}
+.porthole img{width:100%;height:100%;object-fit:cover}
+.porthole .wait{font-size:.7rem;line-height:1.2;color:var(--seine);padding:10px;font-weight:700}
+.porthole::after{content:"";position:absolute;inset:0;border-radius:50%;background:linear-gradient(135deg,rgba(255,255,255,.35),transparent 45%);pointer-events:none}
+.cabin b{font-family:var(--f-display);font-size:1.05rem}
+.cabin span{font-size:.84rem;color:var(--ink-2)}
+.cabin .st{display:inline-block;border-radius:999px;padding:2px 10px;font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--seine-3);color:var(--seine)}
+.cabin .st.ok{background:rgba(47,138,91,.15);color:var(--ok)}
+
+/* équipage */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 24px}
+.stat{background:var(--band);color:var(--band-fg);border-radius:12px;padding:14px 16px}
+.stat b{font-family:var(--f-display);font-size:2rem;display:block;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--or-2)}
+.crew{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.mate{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;gap:12px;align-items:center}
+.mate .av{width:44px;height:44px;border-radius:50%;background:var(--seine-3);color:var(--seine);font-family:var(--f-display);font-weight:700;display:grid;place-items:center;flex:none;font-size:1.05rem}
+.mate.couple .av{background:var(--or);color:#1b2742}
+.mate b{display:block;font-size:1rem}
+.mate span{font-size:.85rem;color:var(--ink-2)}
+.empty{border:2px dashed var(--line);border-radius:14px;padding:28px;text-align:center;color:var(--ink-2)}
+.empty strong{display:block;font-family:var(--f-display);color:var(--ink);font-size:1.2rem;margin-bottom:6px}
+
+/* réponse */
+form{display:flex;flex-direction:column;gap:18px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:4px;background:var(--paper-2);gap:4px;flex-wrap:wrap}
+.seg label{border-radius:999px;padding:8px 16px;font-weight:700;cursor:pointer;color:var(--ink-2)}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg input:checked+label{background:var(--band);color:var(--band-fg)}
+.seg input:focus-visible+label{outline:3px solid var(--or)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:560px){.row{grid-template-columns:1fr}}
+.row>*{min-width:0}
+label.f{display:flex;flex-direction:column;gap:6px;font-weight:700;font-size:.9rem}
+label.f input,label.f select,label.f textarea{font:inherit;font-weight:400;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);width:100%}
+label.f textarea{min-height:90px;resize:vertical}
+.choices{display:flex;gap:8px;flex-wrap:wrap}
+.choices label{border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;font-weight:400;background:var(--paper)}
+.choices input{position:absolute;opacity:0;pointer-events:none}
+.choices input:checked+label{background:var(--rouge);color:#fff;border-color:var(--rouge)}
+.choices input:focus-visible+label{outline:3px solid var(--or)}
+fieldset{border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+legend{font-weight:700;font-size:.9rem;padding:0;margin-bottom:2px}
+.preview{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:16px;white-space:pre-wrap;font-size:.95rem;line-height:1.5}
+.copyline{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:.95rem}
+.copyline code{background:var(--paper-2);border:1px solid var(--line);padding:4px 8px;border-radius:6px;user-select:all;word-break:break-all}
+.mini{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 10px;font-size:.85rem;font-weight:700;color:var(--ink)}
+.toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--band);color:var(--band-fg);padding:10px 18px;border-radius:999px;opacity:0;transition:.25s;pointer-events:none;z-index:20;font-weight:700;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.steps div{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:14px}
+.steps b{display:block;font-family:var(--f-display);font-size:1.05rem;margin-bottom:4px}
+.steps span{font-size:.92rem;color:var(--ink-2)}
+
+/* souvenirs */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.filters button{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:7px 14px;font-weight:700;font-size:.9rem}
+.filters button[aria-pressed="true"]{background:var(--band);color:var(--band-fg);border-color:var(--band)}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;grid-auto-flow:dense}
+.shot{position:relative;border-radius:12px;overflow:hidden;background:var(--paper-2);border:1px solid var(--line);cursor:zoom-in;aspect-ratio:3/4;max-width:100%;margin:0}
+.shot.wide{grid-column:span 2;aspect-ratio:3/2}
+@media (max-width:480px){.shot.wide{grid-column:span 1;aspect-ratio:4/3}}
+.shot img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.shot:hover img{transform:scale(1.04)}
+.shot figcaption{position:absolute;inset:auto 0 0;background:linear-gradient(transparent,rgba(10,18,40,.85));color:#fff;padding:26px 12px 10px;font-size:.88rem}
+.shot .era{position:absolute;top:10px;left:10px;background:var(--or-2);color:#1b2742;font-size:.72rem;font-weight:900;letter-spacing:.08em;padding:3px 8px;border-radius:999px}
+.shot.video{cursor:default;aspect-ratio:auto;display:flex;flex-direction:column}
+.shot.video video{width:100%;height:auto;aspect-ratio:2/3;object-fit:contain;background:#000;flex:none}
+.shot.video figcaption{position:static;background:var(--paper-2);color:var(--ink-2);padding:10px 12px}
+.lightbox{position:fixed;inset:0;background:rgba(5,10,25,.92);display:none;align-items:center;justify-content:center;z-index:30;padding:max(16px,env(safe-area-inset-left,0px))}
+.lightbox.open{display:flex}
+.lightbox img{max-height:92vh;max-width:min(96vw,1000px);border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.lightbox button{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:calc(14px + env(safe-area-inset-right,0px));background:var(--paper);color:var(--ink);border:0;border-radius:999px;width:42px;height:42px;font-size:1.3rem;font-weight:700}
+
+/* surprises */
+.gifts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.gift{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px;position:relative;overflow:hidden}
+.gift.locked{background:var(--paper-2)}
+.gift .n{font-family:var(--f-script);color:var(--rouge);font-size:1.6rem;line-height:1}
+.gift h3{font-family:var(--f-display);font-size:1.2rem;margin:6px 0 8px}
+.gift .hint{color:var(--ink-2);font-style:italic}
+.gift .when{display:inline-flex;gap:6px;align-items:center;margin-top:12px;font-size:.85rem;font-weight:700;color:var(--seine)}
+.gift.locked .when{color:var(--warn)}
+.gift .reveal{margin-top:10px}
+.lock{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:var(--or-2);color:#1b2742;display:grid;place-items:center}
+
+/* infos */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.info{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px}
+.info h3{font-family:var(--f-display);font-size:1.15rem;margin-bottom:8px}
+.info p{margin:0 0 6px;color:var(--ink-2)}
+.info p b{color:var(--ink)}
+.tbc{color:var(--warn);font-weight:700;font-size:.85rem}
+
+footer{background:var(--band-2);color:var(--band-fg);text-align:center;padding-block:28px;font-size:.9rem}
+footer .wrap{display:flex;flex-direction:column;gap:8px;align-items:center}
+footer .presente{font-size:1.5rem}
+footer small{opacity:.7}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  .boat{display:none}
+}
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap gutter hero">
+    <div class="hero-text">
+      <div class="presente" id="presente">Les Cheeky Dancers présentent</div>
+      <h1><span class="vingt">20 ans</span><br>sur la Seine</h1>
+      <div class="sous">Du rock'n'roll aux flots de la Seine · Stéphanie &amp; Henri</div>
+      <div class="rule">Embarquement</div>
+      <div class="board" aria-live="polite">
+        <div class="board-label" id="board-label">Les vœux dans</div>
+        <div class="tiles" id="tiles">
+          <div class="tile"><b id="t-j">—</b><span>jours</span></div>
+          <div class="tile"><b id="t-h">—</b><span>heures</span></div>
+          <div class="tile"><b id="t-m">—</b><span>minutes</span></div>
+          <div class="tile"><b id="t-s">—</b><span>secondes</span></div>
+        </div>
+        <div id="date-badge"></div>
+      </div>
+      <div class="jukebox">
+        <div class="rule">Jukebox</div>
+        <div class="juke-chips" id="juke-chips" role="group" aria-label="Ambiance musicale"></div>
+        <button class="music" id="music" type="button" aria-pressed="false"><span class="vinyl" aria-hidden="true"></span><span id="music-label">Lancer la musique</span></button>
+        <div class="juke-now" id="juke-now">Choisissez une ambiance, puis lancez le vinyle.</div>
+      </div>
+    </div>
+    <div class="carousel" id="carousel" aria-roledescription="carrousel" aria-label="Les affiches de la croisière">
+      <img src="img/affiche-voyage.jpg" class="active" alt="Affiche : 20 ans après, le plus beau voyage, c'est nous. Stéphanie et Henri sur une vedette en bois sur la Seine, avec leurs trois chiens et leur chat." data-full="img/affiche-voyage.jpg">
+      <img src="img/affiche-grease.jpg" alt="Affiche rétro « Grease sur Seine » : Stéphanie et Henri dansent le rock sur le pont d'un bateau, Tour Eiffel en arrière-plan." data-full="img/affiche-grease.jpg">
+      <img src="img/affiche-abord.jpg" alt="Affiche « 20 ans d'amour, on remonte à bord ! » : le couple et la tribu à poils dans un canot sur la Seine." data-full="img/affiche-abord.jpg">
+      <button class="car-nav prev" type="button" id="car-prev" aria-label="Affiche précédente">‹</button>
+      <button class="car-nav next" type="button" id="car-next" aria-label="Affiche suivante">›</button>
+      <div class="dots" id="dots"></div>
+    </div>
+  </div>
+  <div class="waves" aria-hidden="true">
+    <canvas id="waves"></canvas>
+    <svg class="boat" viewBox="0 0 92 46" aria-hidden="true">
+      <path d="M4 30 L88 30 L78 42 L14 42 Z" fill="#f6efe0"/>
+      <path d="M4 30 L88 30 L84 35 L8 35 Z" fill="#c2303a"/>
+      <rect x="26" y="18" width="34" height="12" rx="2" fill="#13294b" stroke="#f6efe0" stroke-width="1.5"/>
+      <rect x="31" y="21" width="6" height="5" fill="#e9d28c"/><rect x="41" y="21" width="6" height="5" fill="#e9d28c"/><rect x="51" y="21" width="6" height="5" fill="#e9d28c"/>
+      <rect x="44" y="4" width="3" height="14" fill="#f6efe0"/>
+      <path d="M47 5 L60 9 L47 13 Z" fill="#c2303a"/>
+    </svg>
+  </div>
+</header>
+
+<nav class="tabs gutter" aria-label="Rubriques">
+  <div class="wrap" role="tablist" id="tablist">
+    <button class="tab" role="tab" data-tab="invitation" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9 6 9-6M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>Invitation</button>
+    <button class="tab" role="tab" data-tab="programme" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Programme &amp; infos</button>
+    <button class="tab" role="tab" data-tab="equipage" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19c0-3.3 2.7-6 6-6s6 2.7 6 6M15 19c0-2.2 1.3-4 3.5-4S22 16.8 22 19"/></svg>Trombinoscope</button>
+    <button class="tab" role="tab" data-tab="reponse" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Je réponds</button>
+    <button class="tab" role="tab" data-tab="souvenirs" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.5"/><path d="M9 6l1.5-2h3L15 6"/></svg>Souvenirs</button>
+    <button class="tab" role="tab" data-tab="surprise" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="9" width="18" height="12" rx="2"/><path d="M12 9v12M3 13h18M12 9c-3-1-5-4-3-5s3 2 3 5c0-3 1-6 3-5s-1 4-3 5"/></svg>Surprise</button>
+  </div>
+</nav>
+
+<main class="gutter">
+  <div class="wrap">
+
+    <!-- ================= INVITATION ================= -->
+    <section class="panel" id="panel-invitation" role="tabpanel">
+      <div class="grid-2">
+        <div>
+          <div class="section-head">
+            <div class="eyebrow">Embarquez pour la suite de notre histoire</div>
+            <h2>Vingt ans après le 14 février 2007, on se redit oui.</h2>
+            <p class="lead">Après un mariage rock'n'roll inoubliable, nous vous invitons à renouveler nos vœux et à poursuivre l'aventure, en petit comité, le temps d'une journée de rêve sur la Seine. Même amour, nouveaux horizons.</p>
+          </div>
+          <div class="ticket">
+            <div class="ticket-head"><b>Billet d'embarquement</b><span>Invitation nominative</span></div>
+            <div class="ticket-body">
+              <div class="field"><small>Date</small><strong id="f-date">—</strong><em id="f-date-note"></em></div>
+              <div class="field"><small>Les vœux</small><strong id="f-voeux">—</strong><em id="f-voeux-lieu"></em></div>
+              <div class="field"><small>Embarquement</small><strong id="f-heure">—</strong><em id="f-quai"></em></div>
+              <div class="field"><small>Navire</small><strong id="f-navire">—</strong><em id="f-compagnie"></em></div>
+              <div class="field"><small>Tenue</small><strong id="f-tenue">—</strong><em id="f-tenue-note"></em></div>
+              <div class="field"><small>Réponse souhaitée avant le</small><strong id="f-limite">—</strong><em id="f-limite-note"></em></div>
+            </div>
+            <div class="ticket-foot">
+              <a class="btn btn-primary" href="#reponse">Je réponds</a>
+              <a class="btn btn-ghost" href="#programme">Voir le programme</a>
+              <span class="badge gold" style="color:var(--or);border-color:var(--or)">Mot de passe : <span id="f-motcle">—</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="card prose">
+          <div class="duo">
+            <img src="img/stephanie-portrait.jpg" alt="Stéphanie">
+            <img src="img/henri-portrait.jpg" alt="Henri">
+            <span class="heart" aria-hidden="true">♥</span>
+          </div>
+          <div class="eyebrow" style="font-size:1.6rem">Les héros du jour</div>
+          <p><strong>Il y a vingt ans, nos chemins se sont croisés.</strong> Le 14 février 2007, nous nous sommes dit oui : Mustang rose, chemise rouge satin, escorte de motards et un rock endiablé sur le damier.</p>
+          <p>Dix ans plus tard, vœux renouvelés à la mairie de Serris, Cadillac rose à la porte et tout l'équipage sur la photo.</p>
+          <p>Pour les vingt ans, les Cheeky Dancers prennent le large. Le rock embarque avec nous : préparez vos chaussures qui glissent.</p>
+          <div class="signature">Stéphanie &amp; Henri</div>
+        </div>
+      </div>
+
+      <div class="chapters-title">
+        <div class="eyebrow">Notre histoire en trois chapitres</div>
+        <h2 style="font-size:1.6rem">Une Mustang, une Cadillac… et un bateau</h2>
+      </div>
+      <div class="chapters">
+        <div class="chapter"><img src="img/mariage-alliance-2.jpg" data-full="img/mariage-alliance-2.jpg" alt="Échange des alliances, 14 février 2007" loading="lazy"><div class="body"><div class="year">2007</div><h3>Le oui</h3><p>Saint-Valentin, alliances, Mustang rose et chemise rouge : notre mariage rock'n'roll, escorté par les motards.</p></div></div>
+        <div class="chapter"><img src="img/dix-ans-cadillac.jpg" data-full="img/dix-ans-cadillac.jpg" alt="Les invités autour de la Cadillac rose, dix ans de mariage" loading="lazy"><div class="body"><div class="year">2017</div><h3>Les vœux renouvelés</h3><p>Dix ans déjà : renouvellement des vœux à la mairie de Serris, Cadillac rose et tout l'équipage sur la photo.</p></div></div>
+        <div class="chapter"><img src="img/affiche-voyage.jpg" data-full="img/affiche-voyage.jpg" alt="Affiche de la croisière des 20 ans" loading="lazy"><div class="body"><div class="year">2027</div><h3>Le grand large</h3><p>Vingt ans : vœux renouvelés à 10 h, départ en voiture de collection, puis cap sur la Seine pour un après-midi de rêve.</p></div></div>
+      </div>
+    </section>
+
+    <!-- ================= PROGRAMME ================= -->
+    <section class="panel" id="panel-programme" role="tabpanel" hidden>
+      <div class="section-head">
+        <div class="eyebrow">Feuille de route</div>
+        <h2>Le programme de la journée</h2>
+        <p class="lead">Des vœux du matin au dernier rock sur le pont : une journée au fil de l'eau, en petit comité.</p>
+        <div id="programme-badge"></div>
+      </div>
+      <div class="grid-2">
+        <div class="timeline" id="timeline"></div>
+        <div style="display:flex;flex-direction:column;gap:22px">
+          <div class="card">
+            <div class="eyebrow" style="font-size:1.6rem">La voiture des mariés</div>
+            <p class="lead" style="font-size:1rem;margin:6px 0 0">Mustang rose en 2007, Cadillac rose en 2017. Pour 2027, la Cadillac repart en tête… sauf surprise. Elle nous conduira des vœux jusqu'au bateau.</p>
+            <div class="cars">
+              <figure><img src="img/mariage-mustang.jpg" data-full="img/mariage-mustang.jpg" alt="La Mustang rose du mariage, 2007" loading="lazy"><figcaption>2007 · la Mustang</figcaption></figure>
+              <figure><img src="img/dix-ans-cadillac-nb.jpg" data-full="img/dix-ans-cadillac-nb.jpg" alt="La Cadillac des dix ans, 2017" loading="lazy"><figcaption>2017 · la Cadillac</figcaption></figure>
+            </div>
+          </div>
+          <div class="card">
+            <div class="eyebrow" style="font-size:1.6rem">Dress code : rock chic</div>
+            <p class="lead" style="font-size:1rem;margin:6px 0 0">Comme sur l'affiche : on vient pour danser, pas pour rester assis.</p>
+            <div class="dress" id="dress"></div>
+          </div>
+        </div>
+      </div>
+      <div class="infos-title">
+        <div class="eyebrow">Infos pratiques, toutes simples</div>
+        <h2 style="font-size:1.6rem">Ce qu'il faut savoir avant d'embarquer</h2>
+      </div>
+      <div class="info-grid" id="infos"></div>
+    </section>
+
+    <!-- ================= ÉQUIPAGE ================= -->
+    <section class="panel" id="panel-equipage" role="tabpanel" hidden>
+      <div class="section-head">
+        <div class="eyebrow">Petit comité, grand équipage</div>
+        <h2>Le trombinoscope des marins</h2>
+        <p class="lead">Chaque invitation a sa cabine : un hublot pour une personne, deux pour un couple. Votre photo y apparaît dès réception. Prénom et initiale seulement : la discrétion est de mise sur le pont.</p>
+      </div>
+      <div class="ship-rule">
+        <img src="img/marin-stephanie-portrait.jpg" data-full="img/marin-killer-boogie.jpg" alt="Stéphanie en tenue de marin : l'exemple à suivre">
+        <div class="eyebrow">Règle du bord</div>
+        <p><strong>Tenue de marin obligatoire sur la photo</strong> : marinière, béret à pompon, casquette de capitaine, foulard noué ou vareuse, à vous de choisir. Sans photo de marin, pas de hublot : le capitaine est intraitable.</p>
+      </div>
+      <div class="stats" id="stats"></div>
+      <div id="crew"></div>
+      <div class="card" style="margin-top:22px">
+        <div class="eyebrow" style="font-size:1.6rem">Envoyer sa photo de marin</div>
+        <p class="lead" style="font-size:1rem;margin:6px 0 0" id="photo-howto">Par le formulaire photo (bientôt sur cette page) ou par mail avec le mot de passe en objet. Une photo par personne, visage bien visible, pompon facultatif mais recommandé.</p>
+      </div>
+    </section>
+
+    <!-- ================= JE RÉPONDS ================= -->
+    <section class="panel" id="panel-reponse" role="tabpanel" hidden>
+      <div class="section-head">
+        <div class="eyebrow">Larguez les amarres ?</div>
+        <h2>Je réponds à l'invitation</h2>
+        <p class="lead">Une invitation = une ou deux places, selon votre billet. Remplissez le formulaire : il prépare votre réponse, vous n'avez plus qu'à l'envoyer.</p>
+      </div>
+      <div class="grid-2">
+        <form id="rsvp" autocomplete="on">
+          <div>
+            <div class="seg" role="radiogroup" aria-label="Formule">
+              <input type="radio" name="formule" id="solo" value="solo" checked><label for="solo">Moi seul·e</label>
+              <input type="radio" name="formule" id="duo" value="duo"><label for="duo">Moi et mon·ma conjoint·e / ami·e</label>
+            </div>
+          </div>
+          <div class="row">
+            <label class="f">Prénom <input id="prenom" name="prenom" required placeholder="Votre prénom"></label>
+            <label class="f">Nom <input id="nom" name="nom" required placeholder="Votre nom"></label>
+          </div>
+          <div class="row" id="row-duo" hidden>
+            <label class="f">Prénom de l'accompagnant·e <input id="prenom2" name="prenom2" placeholder="Prénom"></label>
+            <label class="f">Nom de l'accompagnant·e <input id="nom2" name="nom2" placeholder="Nom"></label>
+          </div>
+          <fieldset>
+            <legend>Serez-vous à bord ?</legend>
+            <div class="choices">
+              <input type="radio" name="presence" id="p-oui" value="Oui, avec joie" checked><label for="p-oui">Oui, avec joie</label>
+              <input type="radio" name="presence" id="p-peut" value="Peut-être"><label for="p-peut">Peut-être</label>
+              <input type="radio" name="presence" id="p-non" value="Non, hélas"><label for="p-non">Non, hélas</label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>À partir de quand ?</legend>
+            <div class="choices">
+              <input type="radio" name="quand" id="q-1" value="Dès les vœux, à 10 h" checked><label for="q-1">Dès les vœux, à 10 h</label>
+              <input type="radio" name="quand" id="q-2" value="À l'embarquement"><label for="q-2">À l'embarquement</label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Le rock'n'roll et vous</legend>
+            <div class="choices">
+              <input type="radio" name="rock" id="r-1" value="Je danse, poussez les tables"><label for="r-1">Je danse, poussez les tables</label>
+              <input type="radio" name="rock" id="r-2" value="Quelques pas, pas plus"><label for="r-2">Quelques pas, pas plus</label>
+              <input type="radio" name="rock" id="r-3" value="Jamais, mais je veux apprendre"><label for="r-3">Jamais, mais je veux apprendre</label>
+            </div>
+          </fieldset>
+          <div class="row">
+            <label class="f">Régime ou allergies <input id="regime" name="regime" placeholder="Rien à signaler"></label>
+            <label class="f">Votre venue <select id="transport" name="transport"><option>Transports en commun</option><option>Voiture (parking souhaité)</option><option>Nous dormons sur place, un hôtel nous intéresse</option><option>Pas encore décidé</option></select></label>
+          </div>
+          <label class="f">Un mot pour les mariés <textarea id="message" name="message" placeholder="Une chanson à réclamer, un souvenir de 2007, un défi…"></textarea></label>
+          <div class="copyline">
+            <button class="btn btn-primary" type="submit">Préparer ma réponse</button>
+            <button class="btn btn-ghost" type="button" id="copy">Copier le texte</button>
+          </div>
+        </form>
+        <div>
+          <div class="card">
+            <div class="eyebrow" style="font-size:1.6rem">Votre réponse</div>
+            <div class="preview" id="preview">Remplissez le formulaire : votre message s'écrit ici.</div>
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:16px">
+              <div class="copyline">Objet du mail : <code id="objet">—</code><button class="mini" type="button" data-copy="objet">Copier</button></div>
+              <div class="copyline">À envoyer à : <code id="mail-cible">—</code><button class="mini" type="button" data-copy="mail-cible">Copier</button></div>
+              <div class="copyline" id="form-line"></div>
+              <a class="btn btn-ghost" id="mailto" href="#" target="_blank" rel="noopener">Ouvrir ma messagerie</a>
+            </div>
+          </div>
+          <div class="card" style="margin-top:18px">
+            <div class="eyebrow" style="font-size:1.6rem">Répondre avec son téléphone</div>
+            <p class="lead" style="font-size:1rem;margin:6px 0 0" id="qr-lead">Scannez le code de votre billet : « 1 personne » ou « 2 personnes ». Il ouvre le formulaire avec la bonne formule déjà cochée.</p>
+            <div class="qrs">
+              <div class="qr"><b>Billet 1 personne</b><div class="box" id="qr-solo"></div><small id="qr-solo-url"></small></div>
+              <div class="qr"><b>Billet 2 personnes</b><div class="box" id="qr-duo"></div><small id="qr-duo-url"></small></div>
+            </div>
+          </div>
+          <div class="steps" style="margin-top:18px">
+            <div><b>1. Je remplis</b><span>Formule, présence, petits détails utiles.</span></div>
+            <div><b>2. Je copie</b><span>Le texte et l'objet, avec le mot de passe.</span></div>
+            <div><b>3. J'envoie</b><span>Par mail ou WhatsApp. Réponse confirmée en retour.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SOUVENIRS ================= -->
+    <section class="panel" id="panel-souvenirs" role="tabpanel" hidden>
+      <div class="section-head">
+        <div class="eyebrow">Carnet de bord</div>
+        <h2>Photos &amp; vidéos</h2>
+        <p class="lead">Vingt ans en images : le mariage de 2007, les vœux de 2017, et nous aujourd'hui. Après la croisière, vos photos viendront compléter l'album.</p>
+      </div>
+      <div class="filters" id="filters" role="group" aria-label="Filtrer l'album"></div>
+      <div class="gallery" id="gallery"></div>
+      <div class="card" style="margin-top:26px">
+        <div class="eyebrow" style="font-size:1.6rem">Défi photo</div>
+        <p class="lead" style="font-size:1rem;margin:6px 0 0">Retrouvez une photo de vous à notre mariage de 2007 (ou aux dix ans), et envoyez-la nous : elle rejoindra l'album « vingt ans après ». Après la croisière, même défi avec la photo du jour. Adresse d'envoi et formulaire photo : à venir sur cette page.</p>
+      </div>
+    </section>
+
+    <!-- ================= SURPRISE ================= -->
+    <section class="panel" id="panel-surprise" role="tabpanel" hidden>
+      <div class="section-head">
+        <div class="eyebrow">Chut…</div>
+        <h2>Les surprises se dévoilent une à une</h2>
+        <p class="lead">Revenez régulièrement : chaque surprise s'ouvre à sa date. D'ici là, un indice seulement.</p>
+      </div>
+      <div class="gifts" id="gifts"></div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="gutter">
+  <div class="wrap">
+    <div class="presente">L'amour pour cap. Vous à nos côtés.</div>
+    <div>Stéphanie &amp; Henri · 14 février 2007 → 2027 · 20 ans sur la Seine</div>
+    <small>Site privé réservé aux invités · merci de ne pas le diffuser au-delà de l'équipage</small>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo agrandie">
+  <button type="button" id="lb-close" aria-label="Fermer">×</button>
+  <img id="lb-img" src="" alt="">
+</div>
+<div class="toast" id="toast" role="status"></div>
+<audio id="audio" src="media/bande-son.mp3" loop preload="none"></audio>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+/* ============================================================
+   PARAMÈTRES DE L'ÉVÉNEMENT — tout ce qui change se règle ici.
+   ============================================================ */
+const CONFIG = {
+  hotes: { elle: 'Stéphanie', lui: 'Henri' },
+  groupe: 'Les Cheeky Dancers',
+  mariage: '2007-02-14',
+  // Date retenue : premier samedi après les vacances d'hiver de la zone C (6 → 22 février 2027).
+  // Autre lecture possible (premier samedi du mois suivant) : '2027-03-06T10:00:00+01:00'.
+  dateEvenement: '2027-02-27T10:00:00+01:00',
+  dateNote: 'Premier samedi après les vacances d\'hiver (zone C)',
+  dateConfirmee: true,
+  voeux: { heure: '10 h 00', lieu: 'Lieu à confirmer', confirme: false },
+  embarquement: { heure: 'Vers midi', confirme: false },
+  dateLimiteReponse: '2027-01-31',
+  dateLimiteConfirmee: false,   // 31 janvier 2027 proposé
+  navire: { nom: 'Vedette privatisée sur la Seine', compagnie: 'Compagnie et bateau à confirmer', quai: 'Quai d\'embarquement à confirmer (Paris)', confirme: false },
+  voiture: 'Cadillac ou voiture de collection à définir',
+  tenue: { titre: 'Rock chic', note: 'Cuir, jupe qui tourne, foulard… et des chaussures pour danser' },
+  motCle: 'SEINE-20',
+  mailReponse: 'perez.henri.contact@gmail.com',
+  formulaireUrl: '',            // lien Google Forms (solo / duo) — vide tant qu'il n'est pas créé
+  formulaireSolo: '',           // lien pré-rempli « 1 personne » (QR solo) — vide : le QR renvoie vers cette page
+  formulaireDuo: '',            // lien pré-rempli « 2 personnes » (QR duo)
+  formulairePhotoUrl: '',       // formulaire photo séparé (tenue de marin)
+  siteUrl: 'https://perezhenricontact-a11y.github.io/20ANSSEINE/',   // adresse publique (GitHub Pages)
+  programmeConfirme: false,
+  programme: [
+    { h: '10 h 00', titre: 'Renouvellement des vœux', texte: 'Vingt ans après le 14 février 2007, on se redit oui. Lieu précisé dès confirmation.', tbc: 'Lieu à confirmer', img: 'img/mariage-alliance-1.jpg' },
+    { h: 'Ensuite', titre: 'Départ en voiture de collection', texte: 'Cadillac ou voiture à définir : les mariés ouvrent la route jusqu\'au bateau, le cortège suit.', tbc: 'Voiture à définir', img: 'img/dix-ans-cadillac-nb.jpg' },
+    { h: 'Midi', titre: 'Embarquement sur la Seine', texte: 'Accueil sur le quai, coupe de bienvenue et première photo d\'équipage.', tbc: 'Quai et horaire à confirmer', img: 'img/selfie-seine.jpg' },
+    { h: 'Après-midi', titre: 'L\'après-midi de rêve', texte: 'Croisière au fil de la Seine avec les invités triés sur le volet : Tour Eiffel, ponts et monuments, rock\'n\'roll sur le pont, photos et surprises.', img: 'img/marin-danse-nb.jpg' },
+    { h: 'Soir', titre: 'Retour à quai', texte: 'Dernière danse, dernière photo, et le quai qui se rapproche trop vite.', tbc: 'Horaire à caler', img: 'img/affiche-grease.jpg' }
+  ],
+  dress: [
+    { t: 'Elles', s: 'Robe qui tourne, foulard noué, baskets ou talons : ce qui danse.' },
+    { t: 'Eux', s: 'Perfecto ou veste, chemise rouge bienvenue : l\'esprit 2007.' },
+    { t: 'Tous', s: 'Une touche de rouge, de marine ou d\'or pour être raccord avec l\'affiche.' },
+    { t: 'À bord', s: 'Une petite laine pour le pont : fin février, la Seine rafraîchit.' }
+  ],
+  // Liste fermée des invités — une ligne par invitation (cabine).
+  // { prenom, initiale, photo: 'img/marins/xxx.jpg' ou '', avec: { prenom, initiale, photo } (facultatif), statut: 'oui' | 'attente' }
+  invites: [
+    { prenom: 'Sophie', initiale: 'P', statut: 'attente' },
+    { prenom: 'Nicolas', initiale: 'P', statut: 'attente' },
+    { prenom: 'Eliane', initiale: 'P', statut: 'attente' },
+    { prenom: 'Geneviève', initiale: 'R', statut: 'attente' },
+    { prenom: 'Alain', initiale: 'B', avec: { prenom: 'Madame', initiale: 'B' }, statut: 'attente' },
+    { prenom: 'Henri III', initiale: 'P', avec: { prenom: 'Valérie', initiale: 'P' }, statut: 'attente' },
+    { prenom: 'Henri II', initiale: 'P', statut: 'attente' },
+    { prenom: 'Antonio', initiale: 'H', avec: { prenom: 'Véronique', initiale: 'H' }, statut: 'attente' },
+    { prenom: 'Gilbert', initiale: '', avec: { prenom: 'Madame', initiale: '' }, statut: 'attente' },
+    { prenom: 'Marc', initiale: '', avec: { prenom: 'Madame', initiale: '' }, statut: 'attente' },
+    { prenom: 'Philippe', initiale: 'J', avec: { prenom: 'Madame', initiale: 'J' }, statut: 'attente' }
+  ],
+  surprises: [
+    { date: '2026-12-24', titre: 'Surprise n° 1', indice: 'Elle tient dans une pochette et se joue à 45 tours.', texte: 'Texte dévoilé à la date : à rédiger par les hôtes.' },
+    { date: '2027-01-27', titre: 'Surprise n° 2', indice: 'Elle a quatre roues, une couleur, et vingt ans de souvenirs.', texte: 'Texte dévoilé à la date : à rédiger par les hôtes.' },
+    { date: '2027-02-14', titre: 'Surprise n° 3', indice: 'Elle s\'ouvre le jour de nos vingt ans, jour de Saint-Valentin.', texte: 'Texte dévoilé à la date : à rédiger par les hôtes.' }
+  ],
+  contacts: [
+    { nom: 'Henri', tel: '06 31 04 20 42', mail: 'perez.henri.contact@gmail.com' },
+    { nom: 'Stéphanie', tel: 'À préciser', mail: '' }
+  ],
+  hotels: [],   // { nom, adresse, tel, lien, releve: 'jj/mm/aaaa' } — uniquement des informations vérifiées
+  galerie: [
+    { era: 'cheeky', src: 'img/hotes-marins.jpg', cap: 'Les hôtes en marins : porté acrobatique, rayures et casquettes', wide: true },
+    { era: 'cheeky', src: 'img/marin-danse-nb.jpg', cap: 'Les Cheeky Dancers en tenue de marin : le rock, version pont de navire', wide: true },
+    { era: 'cheeky', src: 'img/marin-killer-boogie.jpg', cap: '« The Serris\' Killer Boogie Dancers » : bouée, phare et cordage' },
+    { era: 'cheeky', src: 'img/marin-henri-affiche.jpg', cap: '« The Original Cheeky Dancers of Serris » : Henri, matelot de première classe' },
+    { era: 'cheeky', src: 'img/marin-rocknroll.jpg', cap: 'Rock\'n\'roll : calot et robe marine' },
+    { era: 'cheeky', src: 'img/marin-henri-khaki.jpg', cap: 'Henri version G.I., pouce levé' },
+    { era: 'cheeky', src: 'img/cheeky-porte.jpg', cap: 'Porté en pleine rue, à Serris : le public retient son souffle', wide: true },
+    { era: '2007', src: 'img/mariage-alliance-1.jpg', cap: '14 février 2007 : l\'alliance, et le sourire qui va avec', wide: true },
+    { era: '2007', src: 'img/mariage-mustang-arrivee.jpg', cap: 'Arrivée en Mustang rose, gants blancs et chemise rouge' },
+    { era: '2007', src: 'img/mariage-portrait.jpg', cap: 'Les mariés, chemise satin et robe brodée' },
+    { era: '2007', src: 'img/mariage-escorte.jpg', cap: 'Escorte de motards pour la Mustang : on ne rigole pas avec la sécurité des mariés', wide: true },
+    { era: '2007', src: 'img/mariage-rock.jpg', cap: 'Le premier rock, sur le damier : les Cheeky Dancers sont nés là', wide: true },
+    { era: '2007', src: 'img/mariage-voiture.jpg', cap: 'Banquette arrière, pluie dehors, soleil dedans', wide: true },
+    { era: '2007', src: 'img/mariage-scene-micro.jpg', cap: 'Sur scène, micro en main et bouquet sous le bras' },
+    { era: '2007', src: 'img/mariage-discours.jpg', cap: 'Le discours de Stéphanie, dans la brume de scène', wide: true },
+    { era: '2007', src: 'img/mariage-cadre.jpg', cap: 'Henri et le cadre offert par les amis', wide: true },
+    { era: '2007', src: 'img/mariage-piece-montee.jpg', cap: 'La pièce montée et le ballon rose : à la santé des mariés', wide: true },
+    { era: '2007', src: 'img/mariage-alliance-2.jpg', cap: 'L\'échange des alliances, devant toute la salle', wide: true },
+    { era: '2007', src: 'img/mariage-mustang.jpg', cap: 'La Mustang rose, nœuds de tulle sur la calandre', wide: true },
+    { era: '2007', src: 'img/mariage-voiture-ami.jpg', cap: 'Dans la Mustang, avec notre chauffeur du jour', wide: true },
+    { era: '2017', src: 'img/carte-10-ans.jpg', cap: 'L\'invitation des dix ans : « nos 20 ans de mariage sont pour demain… » Nous y voilà.' },
+    { era: '2017', src: 'img/dix-ans-cadillac.jpg', cap: 'Dix ans : tout l\'équipage autour de la Cadillac rose, à Serris', wide: true },
+    { era: '2017', src: 'img/dix-ans-cadillac-nb.jpg', cap: 'La même, en noir et blanc, pour le film', wide: true },
+    { era: '2017', src: 'img/dix-ans-merci.jpg', cap: 'La carte de remerciement des dix ans', wide: true },
+    { era: 'auj', src: 'img/selfie-seine.jpg', cap: 'Déjà sur la Seine, déjà la Tour Eiffel : une répétition générale' },
+    { era: 'auj', src: 'img/coeur-rouge.jpg', cap: 'Dans le cœur, toujours', wide: true },
+    { era: 'auj', src: 'img/mur-de-fleurs.jpg', cap: 'Devant le mur de fleurs, costume clair et veste noire' },
+    { era: 'auj', src: 'img/stephanie-resto.jpg', cap: 'Stéphanie, un kir et un sourire' },
+    { era: 'auj', src: 'img/henri-souk.jpg', cap: 'Henri en escale, version aventurier' },
+    { era: 'auj', src: 'img/henri-bateau.jpg', cap: 'Henri à bord, lunettes de capitaine' },
+    { era: 'auj', src: 'img/stephanie-selfie.jpg', cap: 'Stéphanie, soleil dans les cheveux' }
+  ],
+  eras: { tous: 'Tout', cheeky: 'Marins · Les Cheeky Dancers', '2007': '2007 · Le mariage', '2017': '2017 · Les dix ans', auj: 'Aujourd\'hui' },
+  video: { era: 'auj', src: 'media/20-ans-de-rencontre.mp4', cap: '« Stéphanie, mon amour, 20 ans de rencontre » : la carte vidéo d\'Henri (avec le son)' }
+};
+
+/* ---------- utilitaires ---------- */
+const $ = s => document.querySelector(s);
+const fmtDate = d => new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Paris' }).format(d);
+const fmtHeure = d => new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' }).format(d).replace(':', ' h ');
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let toastTimer;
+function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2400); }
+function copyText(txt, ok) {
+  const done = () => toast(ok || 'Copié');
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done).catch(() => fallbackCopy(txt, done));
+  else fallbackCopy(txt, done);
+}
+function fallbackCopy(txt, done) {
+  const ta = document.createElement('textarea'); ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); done(); } catch (e) { toast('Sélectionnez le texte et copiez-le'); }
+  document.body.removeChild(ta);
+}
+
+/* ---------- onglets + routage par #ancre ---------- */
+const TABS = ['invitation', 'programme', 'equipage', 'reponse', 'souvenirs', 'surprise'];
+function showTab(name, push, scrollTab) {
+  if (!TABS.includes(name)) name = 'invitation';
+  document.querySelectorAll('.tab').forEach(b => b.setAttribute('aria-selected', b.dataset.tab === name ? 'true' : 'false'));
+  TABS.forEach(t => { $('#panel-' + t).hidden = t !== name; });
+  if (push && location.hash !== '#' + name) { try { history.replaceState(null, '', '#' + name); } catch (e) { location.hash = name; } }
+  if (scrollTab) { const sel = document.querySelector('.tab[aria-selected="true"]'); if (sel && sel.scrollIntoView) sel.scrollIntoView({ block: 'nearest', inline: 'center' }); }
+}
+function goTab(name) { showTab(name, true, true); window.scrollTo({ top: $('.tabs').offsetTop - 2, behavior: reduceMotion ? 'auto' : 'smooth' }); }
+document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', () => goTab(b.dataset.tab)));
+window.addEventListener('hashchange', () => showTab(location.hash.slice(1), false, true));
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]'); if (!a) return;
+  const name = a.getAttribute('href').slice(1);
+  if (TABS.includes(name)) { e.preventDefault(); goTab(name); }
+});
+showTab(location.hash.slice(1), false, false);
+
+/* ---------- carrousel des affiches ---------- */
+(function carousel() {
+  const c = $('#carousel'), imgs = Array.from(c.querySelectorAll('img')), dots = $('#dots');
+  let i = 0, timer;
+  imgs.forEach((_, k) => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Affiche ' + (k + 1)); b.addEventListener('click', () => { go(k); restart(); }); dots.appendChild(b); });
+  function go(k) { i = (k + imgs.length) % imgs.length; imgs.forEach((im, n) => im.classList.toggle('active', n === i)); dots.querySelectorAll('button').forEach((b, n) => b.setAttribute('aria-current', n === i ? 'true' : 'false')); }
+  function restart() { clearInterval(timer); if (!reduceMotion) timer = setInterval(() => go(i + 1), 6000); }
+  $('#car-prev').addEventListener('click', () => { go(i - 1); restart(); });
+  $('#car-next').addEventListener('click', () => { go(i + 1); restart(); });
+  c.addEventListener('mouseenter', () => clearInterval(timer)); c.addEventListener('mouseleave', restart);
+  go(0); restart();
+})();
+
+/* ---------- billet + compte à rebours ---------- */
+const D = new Date(CONFIG.dateEvenement);
+$('#f-date').textContent = cap(fmtDate(D));
+$('#f-date-note').textContent = CONFIG.dateNote;
+$('#f-voeux').textContent = CONFIG.voeux.heure;
+$('#f-voeux-lieu').textContent = CONFIG.voeux.lieu;
+$('#f-heure').textContent = CONFIG.embarquement.heure;
+$('#f-quai').textContent = CONFIG.navire.quai;
+$('#f-navire').textContent = CONFIG.navire.nom;
+$('#f-compagnie').textContent = CONFIG.navire.compagnie;
+$('#f-tenue').textContent = CONFIG.tenue.titre;
+$('#f-tenue-note').textContent = CONFIG.tenue.note;
+$('#f-limite').textContent = cap(fmtDate(new Date(CONFIG.dateLimiteReponse + 'T12:00:00')));
+$('#f-limite-note').textContent = CONFIG.dateLimiteConfirmee ? '' : 'Date à confirmer';
+$('#f-motcle').textContent = CONFIG.motCle;
+$('#presente').textContent = CONFIG.groupe + ' présentent';
+$('#date-badge').innerHTML = CONFIG.dateConfirmee
+  ? '<span class="badge gold">' + esc(cap(fmtDate(D))) + ' · ' + esc(fmtHeure(D)) + '</span>'
+  : '<span class="badge warn">Date provisoire : ' + esc(fmtDate(D)) + ' · à confirmer</span>';
+
+let last = {};
+function tick() {
+  let diff = D.getTime() - Date.now();
+  if (diff <= 0) {
+    $('#board-label').textContent = diff > -86400000 ? 'C\'est aujourd\'hui : tous à bord !' : 'La croisière a eu lieu. Merci à tout l\'équipage !';
+    ['j', 'h', 'm', 's'].forEach(k => $('#t-' + k).textContent = '0'); return;
+  }
+  const j = Math.floor(diff / 86400000); diff -= j * 86400000;
+  const h = Math.floor(diff / 3600000); diff -= h * 3600000;
+  const m = Math.floor(diff / 60000); const s = Math.floor((diff - m * 60000) / 1000);
+  const vals = { j, h, m, s };
+  for (const k in vals) {
+    const el = $('#t-' + k), v = String(vals[k]).padStart(k === 'j' ? 1 : 2, '0');
+    if (last[k] !== v) { el.textContent = v; el.parentElement.classList.add('bump'); setTimeout(() => el.parentElement.classList.remove('bump'), 220); last[k] = v; }
+  }
+}
+tick(); setInterval(tick, 1000);
+
+/* ---------- Jukebox : mélodies originales (Web Audio) + bande-son d'Henri ---------- */
+const JUKE = (() => {
+  const audioEl = $('#audio'), btn = $('#music'), label = $('#music-label'), now = $('#juke-now'), chips = $('#juke-chips');
+  let ctx = null, master = null, noiseBuf = null, timer = null, current = 'rock', playing = false;
+  const m2f = m => 440 * Math.pow(2, (m - 69) / 12);
+
+  function tone(type, midi, t, dur, gain, o = {}) {
+    const osc = ctx.createOscillator(); osc.type = type; osc.frequency.value = m2f(midi);
+    if (o.detune) osc.detune.value = o.detune;
+    const g = ctx.createGain(); const a = o.attack || 0.01, rel = o.release || 0.06;
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(gain, t + a);
+    if (o.decay) g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    else { const hold = Math.max(t + a, t + dur - rel); g.gain.setValueAtTime(gain, hold); g.gain.exponentialRampToValueAtTime(0.0001, t + dur); }
+    let node = osc;
+    if (o.lp) { const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = o.lp; f.Q.value = o.q || 0.7; osc.connect(f); node = f; }
+    node.connect(g); g.connect(master); osc.start(t); osc.stop(t + dur + 0.1);
+  }
+  function noise(t, dur, gain, type, freq) {
+    const s = ctx.createBufferSource(); s.buffer = noiseBuf;
+    const f = ctx.createBiquadFilter(); f.type = type; f.frequency.value = freq;
+    const g = ctx.createGain(); g.gain.setValueAtTime(gain, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    s.connect(f); f.connect(g); g.connect(master); s.start(t); s.stop(t + dur + 0.05);
+  }
+  function swell(t, dur, gain) {
+    const s = ctx.createBufferSource(); s.buffer = noiseBuf; s.loop = true;
+    const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 420;
+    const g = ctx.createGain(); g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(gain, t + dur / 2); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    s.connect(f); f.connect(g); g.connect(master); s.start(t); s.stop(t + dur + 0.05);
+  }
+  function kick(t) { const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.setValueAtTime(150, t); o.frequency.exponentialRampToValueAtTime(45, t + 0.12); const g = ctx.createGain(); g.gain.setValueAtTime(0.8, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.25); o.connect(g); g.connect(master); o.start(t); o.stop(t + 0.3); }
+  function snare(t) { noise(t, 0.16, 0.45, 'highpass', 1600); tone('triangle', 57, t, 0.09, 0.25, { decay: true }); }
+  function hat(t) { noise(t, 0.045, 0.14, 'highpass', 8000); }
+  function accordeon(n, t, dur, gain) { tone('sawtooth', n, t, dur, gain, { detune: -7, lp: 1600, attack: 0.03 }); tone('sawtooth', n, t, dur, gain, { detune: 7, lp: 1600, attack: 0.03 }); }
+  function piano(n, t, dur, gain) { tone('sine', n, t, dur, gain, { decay: true, attack: 0.004 }); tone('triangle', n, t, dur * 0.6, gain * 0.35, { decay: true, attack: 0.004, lp: 2500 }); }
+
+  const STYLES = {
+    rock: { nom: 'Rock\'n\'roll', desc: 'Boogie 12 mesures en la, batterie swing : la piste de 2007.', barLen: 60 / 172 * 4, bar(i, t) {
+      const b = 60 / 172, prog = [45, 45, 45, 45, 50, 50, 45, 45, 52, 50, 45, 52], r = prog[i % 12];
+      const boogie = [0, 4, 7, 9, 10, 9, 7, 4], sw = [0, 0.66];
+      for (let k = 0; k < 8; k++) { const tt = t + (Math.floor(k / 2) + sw[k % 2]) * b; tone('sawtooth', r - 12 + boogie[k], tt, b * 0.5, 0.2, { lp: 520, decay: true }); hat(tt); }
+      kick(t); kick(t + 2 * b); snare(t + b); snare(t + 3 * b);
+      [1, 3].forEach(bt => { const tt = t + (bt + 0.66) * b; [r + 12, r + 16, r + 19].forEach(n => tone('square', n, tt, b * 0.3, 0.05, { lp: 2200, decay: true })); });
+      if (i % 12 === 11) [[0, 64], [0.66, 62], [1, 59], [1.66, 57], [2, 55], [2.66, 57], [3, 59], [3.66, 62]].forEach(([bt, n]) => tone('square', n, t + bt * b, b * 0.5, 0.06, { lp: 3000, decay: true }));
+    } },
+    valse: { nom: 'Valse de Paris', desc: 'Une valse musette en sol, accordéon des bords de Seine.', barLen: 1, bar(i, t) {
+      const b = 1 / 3;
+      const G = [55, 59, 62], G7 = [55, 59, 62, 65], D7 = [57, 60, 62, 66], C = [55, 60, 64];
+      const prog = [[43, G], [43, G], [38, D7], [38, D7], [38, D7], [38, D7], [43, G], [43, G], [43, G], [43, G7], [48, C], [48, C], [43, G], [38, D7], [43, G], [43, G]];
+      const [bass, chord] = prog[i % 16];
+      tone('triangle', bass, t, b * 0.9, 0.3, { decay: true }); tone('sawtooth', bass, t, b * 0.9, 0.07, { lp: 400, decay: true });
+      [1, 2].forEach(bt => chord.forEach(n => accordeon(n, t + bt * b, b * 0.7, 0.03)));
+      const mel = [[74, 71, 74], [79], [78, 76, 74], [69], [72, 74, 76], [78], [76, 74, 72], [71], [74, 71, 74], [79], [81, 79, 78], [76], [74, 76, 74], [72, 71, 69], [67], [67]];
+      const ns = mel[i % 16];
+      if (ns.length === 1) accordeon(ns[0], t, b * 2.9, 0.07); else ns.forEach((n, k) => accordeon(n, t + k * b, b * 0.95, 0.07));
+    } },
+    piano: { nom: 'Romance au piano', desc: 'Arpèges lents en do majeur : pour les vœux.', barLen: 60 / 68 * 4, bar(i, t) {
+      const b = 60 / 68, e = b / 2;
+      const prog = [[48, 4], [45, 3], [41, 4], [43, 4], [48, 4], [40, 3], [41, 4], [43, 4]];
+      const [r, third] = prog[i % 8];
+      [0, 7, 12, 12 + third, 19, 12 + third, 12, 7].forEach((iv, k) => piano(r + iv, t + k * e, e * 1.9, 0.14));
+      const mel = [[76], [72], [69, 72], [74], [76], [79, 71], [69], [74, 71]];
+      const ns = mel[i % 8]; ns.forEach((n, k) => piano(n, t + k * (4 * b / ns.length), 4 * b / ns.length * 0.95, 0.2));
+    } },
+    eau: { nom: 'Au fil de l\'eau', desc: 'Nappe douce, harpe pentatonique et houle de la Seine.', barLen: 4, bar(i, t) {
+      const chords = [[62, 66, 69, 74], [59, 62, 66, 71], [55, 59, 62, 67], [57, 61, 64, 69]];
+      chords[i % 4].forEach(n => { tone('sawtooth', n - 12, t, 4.3, 0.03, { attack: 1.6, release: 1.6, lp: 520, detune: -6 }); tone('sawtooth', n - 12, t, 4.3, 0.03, { attack: 1.6, release: 1.6, lp: 520, detune: 6 }); });
+      const pent = [62, 64, 66, 69, 71, 74, 76, 78, 81, 83];
+      let s = (i * 9301 + 49297) % 233280;
+      for (let k = 0; k < 8; k++) { s = (s * 9301 + 49297) % 233280; const r = s / 233280; if (r < 0.62) tone('triangle', pent[Math.floor(r * 16) % pent.length], t + k * 0.5, 1.5, 0.11, { decay: true, attack: 0.004 }); }
+      if (i % 2 === 0) swell(t, 8, 0.05);
+    } },
+    henri: { nom: 'La bande-son d\'Henri', desc: 'La musique de la carte vidéo « 20 ans de rencontre ».' }
+  };
+
+  function setUI() {
+    btn.classList.toggle('on', playing); btn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+    label.textContent = playing ? 'Couper la musique' : 'Lancer la musique';
+    chips.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.style === current ? 'true' : 'false'));
+    now.textContent = (playing ? '♪ ' : '') + STYLES[current].nom + ' — ' + STYLES[current].desc;
+  }
+  function stop() {
+    if (timer) { clearInterval(timer); timer = null; }
+    if (ctx) { const c = ctx, m = master; try { m.gain.setTargetAtTime(0.0001, c.currentTime, 0.08); } catch (e) { } setTimeout(() => { try { c.close(); } catch (e) { } }, 500); ctx = null; master = null; }
+    audioEl.pause(); playing = false; setUI();
+  }
+  function start() {
+    if (current === 'henri') {
+      audioEl.volume = 0.7;
+      audioEl.play().then(() => { playing = true; setUI(); }).catch(() => toast('Impossible de lancer le son sur cet appareil'));
+      return;
+    }
+    const AC = window.AudioContext || window.webkitAudioContext; if (!AC) { toast('Le son n\'est pas disponible sur ce navigateur'); return; }
+    ctx = new AC();
+    const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -18; comp.ratio.value = 4; comp.connect(ctx.destination);
+    master = ctx.createGain(); master.gain.value = 0.7; master.connect(comp);
+    noiseBuf = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate); const d = noiseBuf.getChannelData(0); for (let k = 0; k < d.length; k++) d[k] = Math.random() * 2 - 1;
+    const st = STYLES[current]; let bar = 0, next = ctx.currentTime + 0.15;
+    const pump = () => { while (next < ctx.currentTime + 0.6) { st.bar(bar, next); next += st.barLen; bar++; } };
+    pump(); timer = setInterval(pump, 120);
+    if (ctx.state === 'suspended') ctx.resume();
+    playing = true; setUI();
+  }
+  Object.keys(STYLES).forEach(k => { const c = document.createElement('button'); c.type = 'button'; c.className = 'chip'; c.dataset.style = k; c.textContent = STYLES[k].nom; c.addEventListener('click', () => { const was = playing; stop(); current = k; if (was) start(); else setUI(); }); chips.appendChild(c); });
+  btn.addEventListener('click', () => playing ? stop() : start());
+  setUI();
+  return { stop };
+})();
+
+/* ---------- vagues (canvas) ---------- */
+(function waves() {
+  const c = $('#waves'), ctx = c.getContext('2d');
+  let w, h, t = 0;
+  function size() { const r = c.getBoundingClientRect(); w = c.width = Math.max(1, Math.floor(r.width * devicePixelRatio)); h = c.height = Math.max(1, Math.floor(r.height * devicePixelRatio)); }
+  size(); window.addEventListener('resize', size);
+  const layers = [
+    { a: 9, l: 180, v: .9, col: 'rgba(58,118,166,.55)', y: .45 },
+    { a: 12, l: 260, v: -.6, col: 'rgba(156,195,225,.55)', y: .58 },
+    { a: 8, l: 140, v: 1.3, col: '', y: .72 }
+  ];
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    const s = devicePixelRatio, bg = getComputedStyle(document.body).getPropertyValue('--bg').trim() || '#f3ecdc';
+    layers.forEach((L, i) => {
+      ctx.beginPath(); ctx.moveTo(0, h);
+      for (let x = 0; x <= w; x += 4 * s) {
+        const y = h * L.y + Math.sin((x / s) / L.l * Math.PI * 2 + t * L.v) * L.a * s + Math.sin((x / s) / (L.l * .37) + t * L.v * 1.7) * L.a * .35 * s;
+        ctx.lineTo(x, y);
+      }
+      ctx.lineTo(w, h); ctx.closePath(); ctx.fillStyle = i === 2 ? bg : L.col; ctx.fill();
+    });
+    t += .018;
+    if (!reduceMotion) requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ---------- programme ---------- */
+$('#timeline').innerHTML = CONFIG.programme.map(p => '<div class="stop"><div class="time">' + esc(p.h) + '</div><div class="dot"><i></i></div><div class="what"><div><h3>' + esc(p.titre) + '</h3><p>' + esc(p.texte) + '</p>' + (p.tbc ? '<span class="tag">' + esc(p.tbc) + '</span>' : '') + '</div>' + (p.img ? '<img src="' + esc(p.img) + '" data-full="' + esc(p.img) + '" alt="' + esc(p.titre) + '" loading="lazy">' : '') + '</div></div>').join('');
+$('#dress').innerHTML = CONFIG.dress.map(d => '<div><b>' + esc(d.t) + '</b><span>' + esc(d.s) + '</span></div>').join('');
+$('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="badge warn">Programme provisoire : horaires à caler avec la mairie et la compagnie</span>';
+
+/* ---------- trombinoscope de l'équipage ---------- */
+(function crew() {
+  const inv = CONFIG.invites;
+  const invitations = inv.length;
+  const personnes = inv.reduce((n, i) => n + (i.avec ? 2 : 1), 0);
+  const abord = inv.filter(i => i.statut === 'oui').reduce((n, i) => n + (i.avec ? 2 : 1), 0);
+  const photos = inv.reduce((n, i) => n + (i.photo ? 1 : 0) + (i.avec && i.avec.photo ? 1 : 0), 0);
+  $('#stats').innerHTML = [['' + invitations, 'cabines'], ['' + personnes, 'personnes invitées'], ['' + abord, 'déjà à bord'], ['' + photos, 'photos de marins']]
+    .map(([b, st]) => '<div class="stat"><b>' + b + '</b><span>' + st + '</span></div>').join('');
+  const hole = (p, label) => '<div class="porthole">' + (p && p.photo ? '<img src="' + esc(p.photo) + '" alt="' + esc(label) + '">' : '<span class="wait">Photo de marin attendue</span>') + '</div>';
+  let html = '<div class="cabin hosts"><img class="banner" src="img/hotes-marins.jpg" data-full="img/hotes-marins.jpg" alt="Stéphanie et Henri en tenue de marin, porté acrobatique"><div class="portholes">' +
+    '<div class="porthole"><img src="img/marin-stephanie-portrait.jpg" alt="Stéphanie en marin"></div><div class="porthole"><img src="img/marin-henri-portrait.jpg" alt="Henri en marin"></div></div>' +
+    '<b>Stéphanie &amp; Henri</b><span>Les capitaines · cabine n° 0 · tenue réglementaire</span><span class="st ok">À bord depuis 2007</span></div>';
+  if (!inv.length) {
+    html += '<div class="empty"><strong>Les cabines se remplissent</strong>Les premiers matelots apparaîtront ici dès leurs réponses et leurs photos. Soyez les premiers : <a href="#reponse">je réponds</a>.</div>';
+  } else {
+    html += inv.map((i, k) => {
+      const nm = p => p.prenom + (p.initiale ? ' ' + p.initiale + '.' : '');
+      const names = esc(nm(i)) + (i.avec ? ' &amp; ' + esc(nm(i.avec)) : '');
+      return '<div class="cabin"><div class="portholes">' + hole(i, i.prenom) + (i.avec ? hole(i.avec, i.avec.prenom) : '') + '</div><b>' + names + '</b><span>Cabine n° ' + (k + 1) + '</span><span class="st' + (i.statut === 'oui' ? ' ok' : '') + '">' + (i.statut === 'oui' ? 'À bord' : 'Invitation en route') + '</span></div>';
+    }).join('');
+  }
+  $('#crew').innerHTML = '<div class="trombi">' + html + '</div>';
+  if (CONFIG.formulairePhotoUrl) $('#photo-howto').innerHTML = 'Envoyez votre photo de marin par le <a href="' + esc(CONFIG.formulairePhotoUrl) + '" target="_blank" rel="noopener">formulaire photo</a>, ou par mail avec le mot de passe en objet. Une photo par personne, visage bien visible, pompon facultatif mais recommandé.';
+})();
+
+/* ---------- je réponds ---------- */
+(function rsvp() {
+  const form = $('#rsvp'), rowDuo = $('#row-duo'), KEY = 'seine20-brouillon';
+  const FIELDS = ['prenom', 'nom', 'prenom2', 'nom2', 'regime', 'transport', 'message'], RADIOS = ['formule', 'presence', 'quand', 'rock'];
+  form.addEventListener('change', e => { if (e.target.name === 'formule') rowDuo.hidden = e.target.value !== 'duo'; save(); build(); });
+  form.addEventListener('input', () => { save(); build(); });
+  form.addEventListener('submit', e => { e.preventDefault(); copyText(build(), 'Réponse copiée : collez-la dans votre mail ou WhatsApp'); });
+  $('#copy').addEventListener('click', () => copyText(build(), 'Texte copié'));
+  document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', () => copyText($('#' + b.dataset.copy).textContent, 'Copié')));
+  $('#mail-cible').textContent = CONFIG.mailReponse;
+  $('#form-line').innerHTML = CONFIG.formulaireUrl
+    ? '<a class="btn btn-primary" href="' + esc(CONFIG.formulaireUrl) + '" target="_blank" rel="noopener">Répondre par le formulaire en ligne</a>'
+    : '<span class="badge warn">Formulaire en ligne (solo / duo) : bientôt disponible</span>';
+  const v = n => { const el = form.elements[n]; return el ? (el.value || '').trim() : ''; };
+  const checked = n => { const el = form.querySelector('input[name="' + n + '"]:checked'); return el ? el.value : ''; };
+  function build() {
+    const duo = checked('formule') === 'duo';
+    const moi = [v('prenom'), v('nom')].filter(Boolean).join(' ') || '…';
+    const lui = [v('prenom2'), v('nom2')].filter(Boolean).join(' ');
+    let txt = 'Bonjour Stéphanie et Henri,\n\n';
+    txt += 'Réponse à votre invitation « 20 ans sur la Seine » (' + CONFIG.motCle + ').\n';
+    txt += '• Invité·e : ' + moi + '\n';
+    txt += '• Formule : ' + (duo ? 'deux personnes' + (lui ? ', avec ' + lui : '') : 'une personne') + '\n';
+    txt += '• Présence : ' + (checked('presence') || '…') + '\n';
+    txt += '• À partir de : ' + (checked('quand') || '…') + '\n';
+    if (checked('rock')) txt += '• Rock\'n\'roll : ' + checked('rock') + '\n';
+    if (v('regime')) txt += '• Régime / allergies : ' + v('regime') + '\n';
+    txt += '• Venue : ' + v('transport') + '\n';
+    if (v('message')) txt += '\n' + v('message') + '\n';
+    txt += '\nÀ très vite sur le pont !\n' + moi;
+    $('#preview').textContent = txt;
+    const objet = CONFIG.motCle + ' – Réponse de ' + moi + (duo && lui ? ' et ' + lui : '');
+    $('#objet').textContent = objet;
+    $('#mailto').href = 'mailto:' + CONFIG.mailReponse + '?subject=' + encodeURIComponent(objet) + '&body=' + encodeURIComponent(txt);
+    return txt;
+  }
+  function save() { try { const o = {}; FIELDS.forEach(k => o[k] = v(k)); RADIOS.forEach(k => o[k] = checked(k)); localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) { } }
+  try {
+    const o = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (o) {
+      FIELDS.forEach(k => { if (form.elements[k] && o[k]) form.elements[k].value = o[k]; });
+      RADIOS.forEach(k => { if (!o[k]) return; Array.from(form.querySelectorAll('input[name="' + k + '"]')).forEach(el => { if (el.value === o[k]) el.checked = true; }); });
+      rowDuo.hidden = o.formule !== 'duo';
+    }
+  } catch (e) { }
+  build();
+
+  /* QR codes solo / duo : formulaire pré-rempli s'il existe, sinon cette page */
+  const pageUrl = (CONFIG.siteUrl || (location.origin + location.pathname)) + '#reponse';
+  const solo = CONFIG.formulaireSolo || CONFIG.formulaireUrl || pageUrl, duo = CONFIG.formulaireDuo || CONFIG.formulaireUrl || pageUrl;
+  if (!CONFIG.formulaireUrl) $('#qr-lead').textContent = 'En attendant le formulaire Google (solo / duo), les deux codes renvoient vers cette page. Ils seront remplacés par les liens pré-remplis « 1 personne » et « 2 personnes ».';
+  [['qr-solo', solo], ['qr-duo', duo]].forEach(([id, url]) => {
+    $('#' + id + '-url').textContent = url;
+    try { if (window.QRCode) new QRCode($('#' + id), { text: url, width: 150, height: 150, colorDark: '#13294b', colorLight: '#fffaf0', correctLevel: QRCode.CorrectLevel.M }); }
+    catch (e) { $('#' + id).textContent = 'QR indisponible'; }
+  });
+})();
+
+/* ---------- souvenirs : filtres par époque + galerie + lightbox ---------- */
+(function gallery() {
+  const g = $('#gallery'), f = $('#filters');
+  const items = CONFIG.galerie.map(p => Object.assign({}, p, { kind: 'img' })); items.push(Object.assign({}, CONFIG.video, { kind: 'video' }));
+  let era = 'tous';
+  Object.keys(CONFIG.eras).forEach(k => { const b = document.createElement('button'); b.type = 'button'; b.dataset.era = k; b.textContent = CONFIG.eras[k]; b.addEventListener('click', () => { era = k; render(); }); f.appendChild(b); });
+  function render() {
+    f.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.era === era ? 'true' : 'false'));
+    g.innerHTML = items.filter(p => era === 'tous' || p.era === era).map(p => {
+      const tag = '<span class="era">' + esc(CONFIG.eras[p.era].split(' ')[0]) + '</span>';
+      if (p.kind === 'video') return '<figure class="shot video"><video src="' + esc(p.src) + '" controls playsinline preload="metadata"></video><figcaption>' + esc(p.cap) + '</figcaption></figure>';
+      return '<figure class="shot' + (p.wide ? ' wide' : '') + '"><img src="' + esc(p.src) + '" alt="' + esc(p.cap) + '" data-full="' + esc(p.src) + '" loading="lazy">' + tag + '<figcaption>' + esc(p.cap) + '</figcaption></figure>';
+    }).join('');
+  }
+  render();
+  const lb = $('#lightbox'), lbi = $('#lb-img');
+  document.addEventListener('click', e => { const img = e.target.closest('img[data-full]'); if (!img) return; lbi.src = img.dataset.full; lbi.alt = img.alt; lb.classList.add('open'); });
+  function close() { lb.classList.remove('open'); lbi.src = ''; }
+  $('#lb-close').addEventListener('click', close);
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+})();
+
+/* ---------- surprises ---------- */
+(function gifts() {
+  const now = new Date();
+  $('#gifts').innerHTML = CONFIG.surprises.map((s, i) => {
+    const d = new Date(s.date + 'T09:00:00'); const open = now >= d; const jours = Math.ceil((d - now) / 86400000);
+    return '<div class="gift' + (open ? '' : ' locked') + '">' + (open ? '' : '<div class="lock" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div>') +
+      '<div class="n">' + (i + 1) + '</div><h3>' + esc(s.titre) + '</h3><div class="hint">Indice : ' + esc(s.indice) + '</div>' +
+      (open ? '<div class="reveal">' + esc(s.texte) + '</div><div class="when">Dévoilée le ' + esc(fmtDate(d)) + '</div>'
+        : '<div class="when">Se dévoile le ' + esc(fmtDate(d)) + ' · dans ' + jours + ' jour' + (jours > 1 ? 's' : '') + '</div>') + '</div>';
+  }).join('');
+})();
+
+/* ---------- infos pratiques (dans l'onglet Programme) ---------- */
+(function infos() {
+  const tbc = '<span class="tbc">À confirmer</span>';
+  const contacts = CONFIG.contacts.map(c => '<p><b>' + esc(c.nom) + '</b> · ' + esc(c.tel) + (c.mail ? '<br><span style="user-select:all">' + esc(c.mail) + '</span>' : '') + '</p>').join('');
+  $('#infos').innerHTML =
+    '<div class="info"><h3>Les vœux, à ' + esc(CONFIG.voeux.heure) + '</h3><p><b>' + esc(CONFIG.voeux.lieu) + '</b></p><p>Arrivez un quart d\'heure avant : les mariés sont ponctuels, la voiture aussi.</p>' + (CONFIG.voeux.confirme ? '' : tbc) + '</div>' +
+    '<div class="info"><h3>Le bateau, ' + esc(CONFIG.embarquement.heure.toLowerCase()) + '</h3><p><b>' + esc(CONFIG.navire.quai) + '</b></p><p>' + esc(CONFIG.navire.nom) + ' · ' + esc(CONFIG.navire.compagnie) + '. Un bateau n\'attend pas, même pour des danseurs.</p>' + (CONFIG.navire.confirme ? '' : tbc) + '</div>' +
+    '<div class="info"><h3>Venir, se garer, dormir</h3><p>Covoiturage possible depuis les vœux. Métro, parkings et hôtels proches du quai : précisés dès que l\'embarcadère est fixé.</p>' + tbc + '</div>' +
+    '<div class="info"><h3>Nous joindre</h3>' + contacts + '<p>Mot de passe en tête d\'objet de vos mails : <b>' + esc(CONFIG.motCle) + '</b></p></div>' +
+    '<div class="info"><h3>Bon à savoir</h3><p>Tenue du jour : rock chic. Photo du trombinoscope : en marin. La tribu à poils reste à la maison. Cadeaux : votre présence, une chanson à dédier, ou un pas de rock appris pour l\'occasion.</p></div>';
+})();
+</script>
+</body>
+</html>
