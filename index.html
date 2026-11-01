@@ -967,7 +967,8 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
     }).join('');
   }
   $('#crew').innerHTML = '<div class="trombi">' + html + '</div>';
-  if (CONFIG.formulairePhotoUrl) $('#photo-howto').innerHTML = 'Envoyez votre photo de marin par le <a href="' + esc(CONFIG.formulairePhotoUrl) + '" target="_blank" rel="noopener">formulaire photo</a>, ou par mail avec le mot de passe en objet. Une photo par personne, visage bien visible, pompon facultatif mais recommandé.';
+  if (CONFIG.formulairePhotoUrl) $('#photo-howto').innerHTML = 'Une photo par personne, visage bien visible, pompon facultatif mais recommandé. Le dépôt demande un compte Google (Gmail) ; sans compte, envoyez-la par mail à <span style="user-select:all">' + esc(CONFIG.mailReponse) + '</span>, objet « ' + esc(CONFIG.motCle) + ' PHOTO ».' +
+    '<div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-primary" href="' + esc(CONFIG.formulairePhotoUrl) + '" target="_blank" rel="noopener">Déposer ma photo de marin</a></div>';
 })();
 
 /* ---------- je réponds : retrouve ton nom (liste fermée), nom manquant, QR ---------- */
