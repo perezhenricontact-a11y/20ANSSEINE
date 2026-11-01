@@ -211,6 +211,19 @@ h2{font-family:var(--f-display);font-size:clamp(1.7rem,4vw,2.5rem);font-weight:7
 @media (max-width:520px){.stop .what img{width:84px}}
 .infos-title{margin-top:36px;display:flex;flex-direction:column;gap:4px;margin-bottom:16px}
 
+/* retrouve ton nom */
+.trouve{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.fiche{border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;background:var(--paper-2)}
+@media (max-width:460px){.fiche{grid-template-columns:1fr}}
+.fiche h3{font-family:var(--f-display);font-size:1.15rem}
+.fiche .formule{display:inline-block;border-radius:999px;padding:3px 10px;font-size:.76rem;font-weight:900;letter-spacing:.04em;background:var(--or-2);color:#1b2742;margin:6px 0 8px}
+.fiche p{margin:0 0 10px;color:var(--ink-2);font-size:.95rem}
+.fiche .qr{padding:8px}
+.fiche .qr .box,.fiche .qr .box img,.fiche .qr .box canvas{width:110px!important;height:110px!important}
+.hint-manquant{color:var(--warn);font-weight:700}
+#manquant.flash{animation:flash 1.2s ease}
+@keyframes flash{0%{box-shadow:0 0 0 0 rgba(216,27,96,.6)}100%{box-shadow:0 0 0 18px rgba(216,27,96,0)}}
+
 /* QR codes */
 .qrs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
 @media (max-width:460px){.qrs{grid-template-columns:1fr}}
@@ -506,80 +519,44 @@ footer small{opacity:.7}
       <div class="section-head">
         <div class="eyebrow">Larguez les amarres ?</div>
         <h2>Je réponds à l'invitation</h2>
-        <p class="lead">Une invitation = une ou deux places, selon votre billet. Remplissez le formulaire : il prépare votre réponse, vous n'avez plus qu'à l'envoyer.</p>
+        <p class="lead">Le formulaire est réservé aux personnes de la liste des invités. Retrouve ton nom : ton invitation s'affiche, pour toi seul·e ou pour toi et ton·ta conjoint·e ou ami·e, avec le bouton de réponse déjà rempli. Deux minutes suffisent.</p>
       </div>
       <div class="grid-2">
-        <form id="rsvp" autocomplete="on">
-          <div>
-            <div class="seg" role="radiogroup" aria-label="Formule">
-              <input type="radio" name="formule" id="solo" value="solo" checked><label for="solo">Moi seul·e</label>
-              <input type="radio" name="formule" id="duo" value="duo"><label for="duo">Moi et mon·ma conjoint·e / ami·e</label>
-            </div>
-          </div>
-          <div class="row">
-            <label class="f">Prénom <input id="prenom" name="prenom" required placeholder="Votre prénom"></label>
-            <label class="f">Nom <input id="nom" name="nom" required placeholder="Votre nom"></label>
-          </div>
-          <div class="row" id="row-duo" hidden>
-            <label class="f">Prénom de l'accompagnant·e <input id="prenom2" name="prenom2" placeholder="Prénom"></label>
-            <label class="f">Nom de l'accompagnant·e <input id="nom2" name="nom2" placeholder="Nom"></label>
-          </div>
-          <fieldset>
-            <legend>Serez-vous à bord ?</legend>
-            <div class="choices">
-              <input type="radio" name="presence" id="p-oui" value="Oui, avec joie" checked><label for="p-oui">Oui, avec joie</label>
-              <input type="radio" name="presence" id="p-peut" value="Peut-être"><label for="p-peut">Peut-être</label>
-              <input type="radio" name="presence" id="p-non" value="Non, hélas"><label for="p-non">Non, hélas</label>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>À partir de quand ?</legend>
-            <div class="choices">
-              <input type="radio" name="quand" id="q-1" value="Dès les vœux, à 10 h" checked><label for="q-1">Dès les vœux, à 10 h</label>
-              <input type="radio" name="quand" id="q-2" value="À l'embarquement"><label for="q-2">À l'embarquement</label>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>Le rock'n'roll et vous</legend>
-            <div class="choices">
-              <input type="radio" name="rock" id="r-1" value="Je danse, poussez les tables"><label for="r-1">Je danse, poussez les tables</label>
-              <input type="radio" name="rock" id="r-2" value="Quelques pas, pas plus"><label for="r-2">Quelques pas, pas plus</label>
-              <input type="radio" name="rock" id="r-3" value="Jamais, mais je veux apprendre"><label for="r-3">Jamais, mais je veux apprendre</label>
-            </div>
-          </fieldset>
-          <div class="row">
-            <label class="f">Régime ou allergies <input id="regime" name="regime" placeholder="Rien à signaler"></label>
-            <label class="f">Votre venue <select id="transport" name="transport"><option>Transports en commun</option><option>Voiture (parking souhaité)</option><option>Nous dormons sur place, un hôtel nous intéresse</option><option>Pas encore décidé</option></select></label>
-          </div>
-          <label class="f">Un mot pour les mariés <textarea id="message" name="message" placeholder="Une chanson à réclamer, un souvenir de 2007, un défi…"></textarea></label>
-          <div class="copyline">
-            <button class="btn btn-primary" type="submit">Préparer ma réponse</button>
-            <button class="btn btn-ghost" type="button" id="copy">Copier le texte</button>
-          </div>
-        </form>
         <div>
           <div class="card">
-            <div class="eyebrow" style="font-size:1.6rem">Votre réponse</div>
-            <div class="preview" id="preview">Remplissez le formulaire : votre message s'écrit ici.</div>
-            <div style="display:flex;flex-direction:column;gap:12px;margin-top:16px">
-              <div class="copyline">Objet du mail : <code id="objet">—</code><button class="mini" type="button" data-copy="objet">Copier</button></div>
-              <div class="copyline">À envoyer à : <code id="mail-cible">—</code><button class="mini" type="button" data-copy="mail-cible">Copier</button></div>
-              <div class="copyline" id="form-line"></div>
-              <a class="btn btn-ghost" id="mailto" href="#" target="_blank" rel="noopener">Ouvrir ma messagerie</a>
+            <div class="eyebrow" style="font-size:1.6rem">1. Retrouve ton nom</div>
+            <label class="f" style="margin-top:10px">Ton prénom <input id="cherche" placeholder="Ex. : Sophie, Antonio, Gilbert…" autocomplete="off"></label>
+            <div class="trouve" id="trouve"></div>
+          </div>
+          <div class="card" style="margin-top:18px" id="manquant">
+            <div class="eyebrow" style="font-size:1.6rem">Je ne trouve pas mon nom</div>
+            <p class="lead" style="font-size:1rem;margin:6px 0 12px">On t'a invité·e de vive voix et ton nom n'apparaît pas ? Pas de formulaire dans ce cas : envoie-nous ce message, nous vérifions la liste et nous te répondons.</p>
+            <div class="row">
+              <label class="f">Prénom et nom <input id="m-nom" placeholder="Ton prénom et ton nom"></label>
+              <label class="f">Téléphone <input id="m-tel" placeholder="06 …"></label>
+            </div>
+            <div class="preview" id="txt-manquant" style="margin-top:12px"></div>
+            <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
+              <div class="copyline">Objet : <code id="obj-manquant">—</code><button class="mini" type="button" data-copy="obj-manquant">Copier</button></div>
+              <div class="copyline">À : <code id="mail-cible">—</code><button class="mini" type="button" data-copy="mail-cible">Copier</button></div>
+              <div class="copyline"><button class="btn btn-primary" type="button" id="copy-manquant">Copier le message</button><a class="btn btn-ghost" id="mailto-manquant" href="#" target="_blank" rel="noopener">Ouvrir ma messagerie</a></div>
             </div>
           </div>
-          <div class="card" style="margin-top:18px">
-            <div class="eyebrow" style="font-size:1.6rem">Répondre avec son téléphone</div>
-            <p class="lead" style="font-size:1rem;margin:6px 0 0" id="qr-lead">Scannez le code de votre billet : « 1 personne » ou « 2 personnes ». Il ouvre le formulaire avec la bonne formule déjà cochée.</p>
+        </div>
+        <div>
+          <div class="card">
+            <div class="eyebrow" style="font-size:1.6rem">2. Réponds avec ton téléphone</div>
+            <p class="lead" style="font-size:1rem;margin:6px 0 0" id="qr-lead">Scanne le code de ton billet, « 1 personne » ou « 2 personnes » : il ouvre le formulaire avec la bonne formule déjà cochée. Il ne reste qu'à choisir ton nom dans la liste.</p>
             <div class="qrs">
               <div class="qr"><b>Billet 1 personne</b><div class="box" id="qr-solo"></div><small id="qr-solo-url"></small></div>
               <div class="qr"><b>Billet 2 personnes</b><div class="box" id="qr-duo"></div><small id="qr-duo-url"></small></div>
             </div>
+            <div class="copyline" id="form-line" style="margin-top:14px"></div>
           </div>
           <div class="steps" style="margin-top:18px">
-            <div><b>1. Je remplis</b><span>Formule, présence, petits détails utiles.</span></div>
-            <div><b>2. Je copie</b><span>Le texte et l'objet, avec le mot de passe.</span></div>
-            <div><b>3. J'envoie</b><span>Par mail ou WhatsApp. Réponse confirmée en retour.</span></div>
+            <div><b>1. Je retrouve mon nom</b><span>Mon invitation s'affiche : seul·e ou à deux.</span></div>
+            <div><b>2. Je réponds</b><span>Le formulaire, déjà rempli, en deux minutes.</span></div>
+            <div><b>3. Ma photo de marin</b><span>Pour mon hublot dans le trombinoscope.</span></div>
           </div>
         </div>
       </div>
@@ -655,6 +632,9 @@ const CONFIG = {
   formulaireSolo: 'https://docs.google.com/forms/d/e/1FAIpQLSdfyFYIhxCHG0TKyMtQvldGa-1vx7dskkfBsSNMivDm2UO0Bg/viewform?usp=pp_url&entry.780681837=Toi+seul%C2%B7e',   // QR « 1 personne »
   formulaireDuo: 'https://docs.google.com/forms/d/e/1FAIpQLSdfyFYIhxCHG0TKyMtQvldGa-1vx7dskkfBsSNMivDm2UO0Bg/viewform?usp=pp_url&entry.780681837=Toi+et+ton+conjoint%C2%B7e+ou+ami%C2%B7e',   // QR « 2 personnes »
   formulairePhotoUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSemTDuriAnBuFZZpLRrDZ8n5jS3cuMfL8q1-v-AWF1OwUz73w/viewform',   // formulaire photo (tenue de marin)
+  champFormule: 'entry.780681837',   // question « Ton invitation » (solo / duo)
+  champQui: 'entry.1445342010',      // question « Qui es-tu ? » (liste fermée)
+  valeurs: { solo: 'Toi seul·e', duo: 'Toi et ton conjoint·e ou ami·e' },
   siteUrl: 'https://perezhenricontact-a11y.github.io/20ANSSEINE/',   // adresse publique (GitHub Pages)
   programmeConfirme: false,
   programme: [
@@ -990,61 +970,58 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
   if (CONFIG.formulairePhotoUrl) $('#photo-howto').innerHTML = 'Envoyez votre photo de marin par le <a href="' + esc(CONFIG.formulairePhotoUrl) + '" target="_blank" rel="noopener">formulaire photo</a>, ou par mail avec le mot de passe en objet. Une photo par personne, visage bien visible, pompon facultatif mais recommandé.';
 })();
 
-/* ---------- je réponds ---------- */
+/* ---------- je réponds : retrouve ton nom (liste fermée), nom manquant, QR ---------- */
 (function rsvp() {
-  const form = $('#rsvp'), rowDuo = $('#row-duo'), KEY = 'seine20-brouillon';
-  const FIELDS = ['prenom', 'nom', 'prenom2', 'nom2', 'regime', 'transport', 'message'], RADIOS = ['formule', 'presence', 'quand', 'rock'];
-  form.addEventListener('change', e => { if (e.target.name === 'formule') rowDuo.hidden = e.target.value !== 'duo'; save(); build(); });
-  form.addEventListener('input', () => { save(); build(); });
-  form.addEventListener('submit', e => { e.preventDefault(); copyText(build(), 'Réponse copiée : collez-la dans votre mail ou WhatsApp'); });
-  $('#copy').addEventListener('click', () => copyText(build(), 'Texte copié'));
+  const norm = t => String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9 ]/g, '').trim();
+  const nomCourt = p => p.prenom + (p.initiale ? ' ' + p.initiale + '.' : '');
+  const libelle = i => nomCourt(i) + (i.avec ? ' & ' + nomCourt(i.avec) + ' — invitation pour deux' : ' — invitation pour une personne');
+  const lien = i => CONFIG.formulaireUrl + '?usp=pp_url&' + CONFIG.champFormule + '=' + encodeURIComponent(i.avec ? CONFIG.valeurs.duo : CONFIG.valeurs.solo) + '&' + CONFIG.champQui + '=' + encodeURIComponent(libelle(i));
+  const qr = (el, url, size) => { try { if (window.QRCode) new QRCode(el, { text: url, width: size, height: size, colorDark: '#d81b60', colorLight: '#fff5f8', correctLevel: QRCode.CorrectLevel.M }); } catch (e) { } };
   document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', () => copyText($('#' + b.dataset.copy).textContent, 'Copié')));
-  $('#mail-cible').textContent = CONFIG.mailReponse;
-  $('#form-line').innerHTML = CONFIG.formulaireUrl
-    ? '<a class="btn btn-primary" href="' + esc(CONFIG.formulaireUrl) + '" target="_blank" rel="noopener">Répondre par le formulaire Google (2 minutes)</a>'
-    : '<span class="badge warn">Formulaire en ligne (solo / duo) : bientôt disponible</span>';
-  const v = n => { const el = form.elements[n]; return el ? (el.value || '').trim() : ''; };
-  const checked = n => { const el = form.querySelector('input[name="' + n + '"]:checked'); return el ? el.value : ''; };
-  function build() {
-    const duo = checked('formule') === 'duo';
-    const moi = [v('prenom'), v('nom')].filter(Boolean).join(' ') || '…';
-    const lui = [v('prenom2'), v('nom2')].filter(Boolean).join(' ');
-    let txt = 'Bonjour Stéphanie et Henri,\n\n';
-    txt += 'Réponse à votre invitation « 20 ans sur la Seine » (' + CONFIG.motCle + ').\n';
-    txt += '• Invité·e : ' + moi + '\n';
-    txt += '• Formule : ' + (duo ? 'deux personnes' + (lui ? ', avec ' + lui : '') : 'une personne') + '\n';
-    txt += '• Présence : ' + (checked('presence') || '…') + '\n';
-    txt += '• À partir de : ' + (checked('quand') || '…') + '\n';
-    if (checked('rock')) txt += '• Rock\'n\'roll : ' + checked('rock') + '\n';
-    if (v('regime')) txt += '• Régime / allergies : ' + v('regime') + '\n';
-    txt += '• Venue : ' + v('transport') + '\n';
-    if (v('message')) txt += '\n' + v('message') + '\n';
-    txt += '\nÀ très vite sur le pont !\n' + moi;
-    $('#preview').textContent = txt;
-    const objet = CONFIG.motCle + ' – Réponse de ' + moi + (duo && lui ? ' et ' + lui : '');
-    $('#objet').textContent = objet;
-    $('#mailto').href = 'mailto:' + CONFIG.mailReponse + '?subject=' + encodeURIComponent(objet) + '&body=' + encodeURIComponent(txt);
+
+  /* 1. Retrouve ton nom */
+  const inp = $('#cherche'), out = $('#trouve');
+  function fiche(i) {
+    const duo = !!i.avec;
+    const d = document.createElement('div'); d.className = 'fiche';
+    d.innerHTML = '<div><h3>Bonjour ' + esc(nomCourt(i)) + ' !</h3><span class="formule">' + (duo ? 'Invitation pour deux' : 'Invitation pour une personne') + '</span>' +
+      '<p>' + (duo ? 'Ton invitation est pour deux personnes : toi et ' + esc(nomCourt(i.avec)) + '.' : 'Ton invitation est pour une personne : toi. Merci de répondre « Toi seul·e ».') + '</p>' +
+      '<a class="btn btn-primary" href="' + esc(lien(i)) + '" target="_blank" rel="noopener">Répondre au formulaire</a></div>' +
+      '<div class="qr"><div class="box"></div></div>';
+    qr(d.querySelector('.box'), lien(i), 110);
+    return d;
+  }
+  function chercher() {
+    const q = norm(inp.value); out.innerHTML = '';
+    if (q.length < 2) return;
+    const hits = CONFIG.invites.filter(i => norm(i.prenom).indexOf(q) === 0 || (i.avec && i.avec.prenom !== 'Madame' && norm(i.avec.prenom).indexOf(q) === 0));
+    if (!hits.length) { out.innerHTML = '<p class="hint-manquant">Aucune invitation à ce prénom. Essaie une autre orthographe, ou signale-nous ton nom juste en dessous.</p>'; const m = $('#manquant'); m.classList.remove('flash'); void m.offsetWidth; m.classList.add('flash'); return; }
+    hits.forEach(i => out.appendChild(fiche(i)));
+  }
+  inp.addEventListener('input', chercher);
+
+  /* 2. Nom manquant : message prêt à envoyer */
+  const objet = CONFIG.motCle + ' NOM MANQUANT';
+  $('#obj-manquant').textContent = objet; $('#mail-cible').textContent = CONFIG.mailReponse;
+  function msg() {
+    const n = ($('#m-nom').value || '').trim() || '…', t = ($('#m-tel').value || '').trim() || '…';
+    const txt = 'Bonjour Stéphanie et Henri,\n\nJe ne trouve pas mon nom dans la liste des invités du site « 20 ans sur la Seine ».\n• Prénom et nom : ' + n + '\n• Téléphone : ' + t + '\n\nMerci de vérifier la liste.\n' + n;
+    $('#txt-manquant').textContent = txt;
+    $('#mailto-manquant').href = 'mailto:' + CONFIG.mailReponse + '?subject=' + encodeURIComponent(objet) + '&body=' + encodeURIComponent(txt);
     return txt;
   }
-  function save() { try { const o = {}; FIELDS.forEach(k => o[k] = v(k)); RADIOS.forEach(k => o[k] = checked(k)); localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) { } }
-  try {
-    const o = JSON.parse(localStorage.getItem(KEY) || 'null');
-    if (o) {
-      FIELDS.forEach(k => { if (form.elements[k] && o[k]) form.elements[k].value = o[k]; });
-      RADIOS.forEach(k => { if (!o[k]) return; Array.from(form.querySelectorAll('input[name="' + k + '"]')).forEach(el => { if (el.value === o[k]) el.checked = true; }); });
-      rowDuo.hidden = o.formule !== 'duo';
-    }
-  } catch (e) { }
-  build();
+  ['m-nom', 'm-tel'].forEach(id => $('#' + id).addEventListener('input', msg)); msg();
+  $('#copy-manquant').addEventListener('click', () => copyText(msg(), 'Message copié : collez-le dans votre mail ou WhatsApp'));
 
-  /* QR codes solo / duo : formulaire pré-rempli s'il existe, sinon cette page */
+  /* 3. QR codes solo / duo (billets) */
   const pageUrl = (CONFIG.siteUrl || (location.origin + location.pathname)) + '#reponse';
   const solo = CONFIG.formulaireSolo || CONFIG.formulaireUrl || pageUrl, duo = CONFIG.formulaireDuo || CONFIG.formulaireUrl || pageUrl;
-  if (!CONFIG.formulaireUrl) $('#qr-lead').textContent = 'En attendant le formulaire Google (solo / duo), les deux codes renvoient vers cette page. Ils seront remplacés par les liens pré-remplis « 1 personne » et « 2 personnes ».';
+  $('#form-line').innerHTML = CONFIG.formulaireUrl
+    ? '<a class="btn btn-ghost" href="' + esc(CONFIG.formulaireUrl) + '" target="_blank" rel="noopener">Ouvrir le formulaire sans QR code</a>'
+    : '<span class="badge warn">Formulaire en ligne (solo / duo) : bientôt disponible</span>';
   [['qr-solo', solo], ['qr-duo', duo]].forEach(([id, url]) => {
     $('#' + id + '-url').innerHTML = '<a href="' + esc(url) + '" target="_blank" rel="noopener" style="color:#d81b60;font-weight:700;word-break:normal">Ouvrir le formulaire ' + (id === 'qr-solo' ? '« 1 personne »' : '« 2 personnes »') + '</a>';
-    try { if (window.QRCode) new QRCode($('#' + id), { text: url, width: 150, height: 150, colorDark: '#d81b60', colorLight: '#fff5f8', correctLevel: QRCode.CorrectLevel.M }); }
-    catch (e) { $('#' + id).textContent = 'QR indisponible'; }
+    qr($('#' + id), url, 150);
   });
 })();
 
