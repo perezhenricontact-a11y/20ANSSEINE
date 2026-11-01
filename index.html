@@ -215,10 +215,10 @@ h2{font-family:var(--f-display);font-size:clamp(1.7rem,4vw,2.5rem);font-weight:7
 /* QR codes */
 .qrs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
 @media (max-width:460px){.qrs{grid-template-columns:1fr}}
-.qr{background:#fffaf0;color:#13294b;border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.qr{background:#fff5f8;color:#13294b;border:2px solid #d81b60;border-radius:12px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
 .qr .box{width:150px;height:150px;display:grid;place-items:center}
 .qr .box img,.qr .box canvas{width:150px!important;height:150px!important}
-.qr b{font-family:var(--f-display);font-size:1rem}
+.qr b{font-family:var(--f-display);font-size:1rem;color:#d81b60}
 .qr small{font-size:.78rem;color:#4b5672;word-break:break-all}
 
 /* équipage / trombinoscope */
@@ -652,10 +652,10 @@ const CONFIG = {
   tenue: { titre: 'Rock chic', note: 'Cuir, jupe qui tourne, foulard… et des chaussures pour danser' },
   motCle: 'SEINE-20',
   mailReponse: 'perez.henri.contact@gmail.com',
-  formulaireUrl: '',            // lien Google Forms (solo / duo) — vide tant qu'il n'est pas créé
-  formulaireSolo: '',           // lien pré-rempli « 1 personne » (QR solo) — vide : le QR renvoie vers cette page
-  formulaireDuo: '',            // lien pré-rempli « 2 personnes » (QR duo)
-  formulairePhotoUrl: '',       // formulaire photo séparé (tenue de marin)
+  formulaireUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdfyFYIhxCHG0TKyMtQvldGa-1vx7dskkfBsSNMivDm2UO0Bg/viewform',   // formulaire Google de réponse
+  formulaireSolo: 'https://docs.google.com/forms/d/e/1FAIpQLSdfyFYIhxCHG0TKyMtQvldGa-1vx7dskkfBsSNMivDm2UO0Bg/viewform?usp=pp_url&entry.780681837=Toi+seul%C2%B7e',   // QR « 1 personne »
+  formulaireDuo: 'https://docs.google.com/forms/d/e/1FAIpQLSdfyFYIhxCHG0TKyMtQvldGa-1vx7dskkfBsSNMivDm2UO0Bg/viewform?usp=pp_url&entry.780681837=Toi+et+ton+conjoint%C2%B7e+ou+ami%C2%B7e',   // QR « 2 personnes »
+  formulairePhotoUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSemTDuriAnBuFZZpLRrDZ8n5jS3cuMfL8q1-v-AWF1OwUz73w/viewform',   // formulaire photo (tenue de marin)
   siteUrl: 'https://perezhenricontact-a11y.github.io/20ANSSEINE/',   // adresse publique (GitHub Pages)
   programmeConfirme: false,
   programme: [
@@ -1002,7 +1002,7 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
   document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', () => copyText($('#' + b.dataset.copy).textContent, 'Copié')));
   $('#mail-cible').textContent = CONFIG.mailReponse;
   $('#form-line').innerHTML = CONFIG.formulaireUrl
-    ? '<a class="btn btn-primary" href="' + esc(CONFIG.formulaireUrl) + '" target="_blank" rel="noopener">Répondre par le formulaire en ligne</a>'
+    ? '<a class="btn btn-primary" href="' + esc(CONFIG.formulaireUrl) + '" target="_blank" rel="noopener">Répondre par le formulaire Google (2 minutes)</a>'
     : '<span class="badge warn">Formulaire en ligne (solo / duo) : bientôt disponible</span>';
   const v = n => { const el = form.elements[n]; return el ? (el.value || '').trim() : ''; };
   const checked = n => { const el = form.querySelector('input[name="' + n + '"]:checked'); return el ? el.value : ''; };
@@ -1043,8 +1043,8 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
   const solo = CONFIG.formulaireSolo || CONFIG.formulaireUrl || pageUrl, duo = CONFIG.formulaireDuo || CONFIG.formulaireUrl || pageUrl;
   if (!CONFIG.formulaireUrl) $('#qr-lead').textContent = 'En attendant le formulaire Google (solo / duo), les deux codes renvoient vers cette page. Ils seront remplacés par les liens pré-remplis « 1 personne » et « 2 personnes ».';
   [['qr-solo', solo], ['qr-duo', duo]].forEach(([id, url]) => {
-    $('#' + id + '-url').textContent = url;
-    try { if (window.QRCode) new QRCode($('#' + id), { text: url, width: 150, height: 150, colorDark: '#13294b', colorLight: '#fffaf0', correctLevel: QRCode.CorrectLevel.M }); }
+    $('#' + id + '-url').innerHTML = '<a href="' + esc(url) + '" target="_blank" rel="noopener" style="color:#d81b60;font-weight:700;word-break:normal">Ouvrir le formulaire ' + (id === 'qr-solo' ? '« 1 personne »' : '« 2 personnes »') + '</a>';
+    try { if (window.QRCode) new QRCode($('#' + id), { text: url, width: 150, height: 150, colorDark: '#d81b60', colorLight: '#fff5f8', correctLevel: QRCode.CorrectLevel.M }); }
     catch (e) { $('#' + id).textContent = 'QR indisponible'; }
   });
 })();
