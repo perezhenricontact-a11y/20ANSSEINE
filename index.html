@@ -247,6 +247,15 @@ h2{font-family:var(--f-display);font-size:clamp(1.7rem,4vw,2.5rem);font-weight:7
 .defi-prompt b{color:var(--rouge);font-size:.78rem;letter-spacing:1.4px;text-transform:uppercase}
 .defi-prompt p{font-family:var(--f-display);font-style:italic;font-size:1.05rem;line-height:1.4;color:var(--ink);user-select:all}
 .defi-prompt .btn{justify-self:start;padding:10px 18px;font-size:.9rem}
+.defi-outil{grid-column:1/-1;padding-top:14px;border-top:1px dashed var(--or)}
+.defi-outil>b{display:block;color:var(--rouge);font-size:.78rem;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:10px}
+.defi-etapes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.defi-etapes>div{display:flex;gap:10px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px}
+.defi-etapes .num{flex:none;display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--band);color:var(--or-2);font-weight:900;font-size:.85rem}
+.defi-etapes strong{display:block;font-family:var(--f-display);font-size:1rem;margin-bottom:6px}
+.defi-etapes small{display:block;color:var(--ink-2);font-size:.86rem;line-height:1.45}
+.ia-btns{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
+.ia-btns .btn{padding:8px 14px;font-size:.86rem}
 .defi-envoi{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:16px;align-items:center;padding-top:14px;border-top:1px dashed var(--or)}
 .defi-envoi p{flex:1 1 300px;font-size:.95rem;margin:0}
 .fiche .note{font-size:.88rem;color:var(--ink-2);margin:10px 0 0}
@@ -555,6 +564,14 @@ footer small{opacity:.7}
           <b>Le texte à donner à l'IA</b>
           <p id="prompt-ia">Transforme cette photo de moi en portrait de marin pour les « 20 ans sur la Seine » de Stéphanie et Henri. Habille-moi d'une marinière rayée bleu et blanc ou d'une vareuse de capitaine, avec un béret à pompon rouge ou une casquette de capitaine, et un foulard rouge noué au cou. Place-moi sur le pont d'un bateau sur la Seine, avec la Tour Eiffel ou un pont de Paris en arrière-plan, dans une ambiance rétro années 50. Fais preuve d'imagination et d'humour, mais garde mon visage bien reconnaissable.</p>
           <button class="btn btn-primary" id="copier-prompt" type="button">Copier le texte</button>
+        </div>
+        <div class="defi-outil">
+          <b>L'utilitaire : trois étapes, c'est tout</b>
+          <div class="defi-etapes">
+            <div><span class="num">1</span><div><strong>Ouvre une IA gratuite</strong><div class="ia-btns"><a class="btn btn-primary" id="ia-chatgpt" href="https://chatgpt.com/" target="_blank" rel="noopener">ChatGPT (texte pré-rempli)</a><a class="btn btn-ghost" href="https://gemini.google.com/app" target="_blank" rel="noopener">Gemini</a><a class="btn btn-ghost" id="ia-copilot" href="https://copilot.microsoft.com/" target="_blank" rel="noopener">Copilot (pré-rempli)</a></div><small>Version gratuite, un compte suffit. Avec ChatGPT ou Copilot, le texte est déjà écrit : il ne reste qu'à joindre ta photo (le trombone) et envoyer. Avec Gemini, colle le texte copié ci-dessus.</small></div></div>
+            <div><span class="num">2</span><div><strong>Joins ta photo, puis envoie</strong><small>De face, bien éclairée, seul·e sur la photo. Le résultat arrive en quelques secondes ; tu peux demander une autre version (« plus de pompon », « casquette de capitaine »…).</small></div></div>
+            <div><span class="num">3</span><div><strong>Enregistre l'image et dépose-la</strong><small>Télécharge l'image obtenue (ou capture d'écran), puis le bouton « Déposer ma photo de marin » ci-dessous, ou par mail.</small></div></div>
+          </div>
         </div>
         <div class="defi-envoi" id="photo-howto"><p>Formulaire photo : bientôt sur cette page. En attendant, par mail avec le mot-clé en objet. Une photo par personne, visage bien visible.</p></div>
       </div>
@@ -1042,6 +1059,10 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
     '<p>Vraie tenue ou création par l\'IA : les deux ouvrent le hublot. Le dépôt passe par un petit formulaire Google (compte Google demandé). <b>Pas de compte Google ?</b> Envoie ta photo par mail à <span style="user-select:all">' + esc(CONFIG.mailReponse) + '</span>, objet « ' + esc(CONFIG.motCle) + ' PHOTO » et ton prénom.</p>';
   const bp = $('#copier-prompt');
   if (bp) bp.addEventListener('click', () => copyText($('#prompt-ia').textContent, 'Texte copié : colle-le dans ton IA avec ta photo !'));
+  // Liens directs : ChatGPT et Copilot acceptent un texte pré-rempli (?q=) ; la photo se joint ensuite.
+  const pre = 'Je vais t\'envoyer une photo de moi dans le message suivant. Quand tu l\'auras : ' + $('#prompt-ia').textContent.replace(/^Transforme cette photo de moi/, 'transforme cette photo');
+  const cg = $('#ia-chatgpt'); if (cg) cg.href = 'https://chatgpt.com/?q=' + encodeURIComponent(pre);
+  const cp = $('#ia-copilot'); if (cp) cp.href = 'https://copilot.microsoft.com/?q=' + encodeURIComponent(pre);
 })();
 
 /* ---------- je réponds : retrouve ton nom (liste fermée), nom manquant, QR ---------- */
