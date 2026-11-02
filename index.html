@@ -237,6 +237,19 @@ h2{font-family:var(--f-display);font-size:clamp(1.7rem,4vw,2.5rem);font-weight:7
 .ship-rule{background:var(--band);color:var(--band-fg);border-radius:14px;padding:18px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:22px}
 .ship-rule .eyebrow{color:var(--or-2);font-size:1.6rem}
 .ship-rule p{margin:0;flex:1;min-width:220px}
+/* Défi photo IA : deviens marin */
+.defi{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:24px;align-items:center;padding:26px;border-radius:16px;background:linear-gradient(135deg,var(--seine-3),var(--paper));border:2px dashed var(--seine);margin-top:22px;box-shadow:var(--shadow)}
+@media(max-width:820px){.defi{grid-template-columns:1fr;padding:20px}}
+.defi h3{font-family:var(--f-display);font-size:clamp(1.3rem,3vw,1.9rem);margin:6px 0 8px;line-height:1.1}
+.defi p{color:var(--ink-2);margin:0}
+.defi ol{margin:12px 0 0 20px;padding:0;display:grid;gap:6px;font-weight:700;color:var(--ink)}
+.defi-prompt{padding:18px;border-radius:14px;background:var(--paper);border:2px solid var(--or);display:grid;gap:10px}
+.defi-prompt b{color:var(--rouge);font-size:.78rem;letter-spacing:1.4px;text-transform:uppercase}
+.defi-prompt p{font-family:var(--f-display);font-style:italic;font-size:1.05rem;line-height:1.4;color:var(--ink);user-select:all}
+.defi-prompt .btn{justify-self:start;padding:10px 18px;font-size:.9rem}
+.defi-envoi{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:16px;align-items:center;padding-top:14px;border-top:1px dashed var(--or)}
+.defi-envoi p{flex:1 1 300px;font-size:.95rem;margin:0}
+.fiche .note{font-size:.88rem;color:var(--ink-2);margin:10px 0 0}
 .trombi{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
 .cabin{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;box-shadow:var(--shadow)}
 .cabin.hosts{grid-column:1/-1;background:linear-gradient(180deg,var(--paper),var(--paper-2));padding:0 0 18px}
@@ -303,6 +316,24 @@ legend{font-weight:700;font-size:.9rem;padding:0;margin-bottom:2px}
 .filters button{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:7px 14px;font-weight:700;font-size:.9rem}
 .filters button[aria-pressed="true"]{background:var(--band);color:var(--band-fg);border-color:var(--band)}
 .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;grid-auto-flow:dense}
+/* Albums du jour J */
+.album-tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+.album{background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden}
+.album-head{display:grid;grid-template-columns:120px 1fr auto;gap:16px;align-items:center;padding:14px 16px}
+@media (max-width:560px){.album-head{grid-template-columns:84px 1fr}.album-head .album-dl{grid-column:1/-1;justify-self:start}}
+.album-head img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;filter:saturate(.85);cursor:zoom-in}
+.album-head h3{font-family:var(--f-display);font-size:1.25rem;margin:0 0 4px;display:flex;align-items:center;gap:10px}
+.album-head h3 .num{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--band);color:var(--or-2);font-family:var(--f-body);font-size:.85rem;font-weight:900}
+.album-head p{margin:0;color:var(--ink-2);font-size:.95rem}
+.album-head .cpt{font-size:.82rem;color:var(--seine);font-weight:700;margin-top:4px;display:block}
+.album .gallery{padding:0 16px 16px}
+.album-empty{padding:0 16px 18px;color:var(--ink-2);font-size:.95rem;font-style:italic}
+.shot .dl{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;border:0;background:rgba(255,250,240,.92);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25);z-index:2}
+.shot .dl svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.shot.jj{aspect-ratio:1}
+.shot.jj.video{aspect-ratio:auto}
+.shot.jj.video video{aspect-ratio:16/9}
+.qr .mini{margin-top:2px}
 .shot{position:relative;border-radius:12px;overflow:hidden;background:var(--paper-2);border:1px solid var(--line);cursor:zoom-in;aspect-ratio:3/4;max-width:100%;margin:0}
 .shot.wide{grid-column:span 2;aspect-ratio:3/2}
 @media (max-width:480px){.shot.wide{grid-column:span 1;aspect-ratio:4/3}}
@@ -356,7 +387,7 @@ footer small{opacity:.7}
     <button class="tab" role="tab" data-tab="programme" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Programme &amp; infos</button>
     <button class="tab" role="tab" data-tab="equipage" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19c0-3.3 2.7-6 6-6s6 2.7 6 6M15 19c0-2.2 1.3-4 3.5-4S22 16.8 22 19"/></svg>Trombinoscope</button>
     <button class="tab" role="tab" data-tab="reponse" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Je réponds</button>
-    <button class="tab" role="tab" data-tab="souvenirs" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.5"/><path d="M9 6l1.5-2h3L15 6"/></svg>Souvenirs</button>
+    <button class="tab" role="tab" data-tab="souvenirs" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.5"/><path d="M9 6l1.5-2h3L15 6"/></svg>Photos &amp; vidéos</button>
     <button class="tab" role="tab" data-tab="surprise" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="9" width="18" height="12" rx="2"/><path d="M12 9v12M3 13h18M12 9c-3-1-5-4-3-5s3 2 3 5c0-3 1-6 3-5s-1 4-3 5"/></svg>Surprise</button>
   </div>
 </nav>
@@ -432,6 +463,7 @@ footer small{opacity:.7}
             <div class="ticket-foot">
               <a class="btn btn-primary" href="#reponse">Je réponds</a>
               <a class="btn btn-ghost" href="#programme">Voir le programme</a>
+              <button class="btn btn-ghost" type="button" id="ics-main">Ajouter à mon agenda</button>
               <span class="badge gold" style="color:var(--or);border-color:var(--or)">Mot de passe : <span id="f-motcle">—</span></span>
             </div>
           </div>
@@ -445,7 +477,7 @@ footer small{opacity:.7}
           <div class="eyebrow" style="font-size:1.6rem">Les héros du jour</div>
           <p><strong>Il y a vingt ans, nos chemins se sont croisés.</strong> Le 14 février 2007, nous nous sommes dit oui : Mustang rose, chemise rouge satin, escorte de motards et un rock endiablé sur le damier.</p>
           <p>Dix ans plus tard, vœux renouvelés à la mairie de Serris, Cadillac rose à la porte et tout l'équipage sur la photo.</p>
-          <p>Pour les vingt ans, les Cheeky Dancers prennent le large. Le rock embarque avec nous : préparez vos chaussures qui glissent.</p>
+          <p>Pour les vingt ans, les Cheeky Dancers prennent le large : cap sur la Seine, en petit comité. Pas de piste de danse cette fois, juste l'eau, Paris, la musique et vous.</p>
           <div class="signature">Stéphanie &amp; Henri</div>
         </div>
       </div>
@@ -466,7 +498,7 @@ footer small{opacity:.7}
       <div class="section-head">
         <div class="eyebrow">Feuille de route</div>
         <h2>Le programme de la journée</h2>
-        <p class="lead">Des vœux du matin au dernier rock sur le pont : une journée au fil de l'eau, en petit comité.</p>
+        <p class="lead">Des vœux du matin au retour à quai : une journée au fil de l'eau, en petit comité.</p>
         <div id="programme-badge"></div>
       </div>
       <div class="grid-2">
@@ -482,7 +514,7 @@ footer small{opacity:.7}
           </div>
           <div class="card">
             <div class="eyebrow" style="font-size:1.6rem">Dress code : rock chic</div>
-            <p class="lead" style="font-size:1rem;margin:6px 0 0">Comme sur l'affiche : on vient pour danser, pas pour rester assis.</p>
+            <p class="lead" style="font-size:1rem;margin:6px 0 0">L'esprit de l'affiche, sans obligation de danser : on vient pour la Seine, les retrouvailles et les photos.</p>
             <div class="dress" id="dress"></div>
           </div>
         </div>
@@ -504,13 +536,27 @@ footer small{opacity:.7}
       <div class="ship-rule">
         <img src="img/marin-stephanie-portrait.jpg" data-full="img/marin-killer-boogie.jpg" alt="Stéphanie en tenue de marin : l'exemple à suivre">
         <div class="eyebrow">Règle du bord</div>
-        <p><strong>Tenue de marin obligatoire sur la photo</strong> : marinière, béret à pompon, casquette de capitaine, foulard noué ou vareuse, à vous de choisir. Sans photo de marin, pas de hublot : le capitaine est intraitable.</p>
+        <p><strong>Tenue de marin obligatoire sur la photo</strong> : marinière, béret à pompon, casquette de capitaine, foulard noué ou vareuse, à vous de choisir. Pas de tenue sous la main ? L'IA vous habille en marin : le défi photo est juste en dessous. Sans photo de marin, pas de hublot : le capitaine est intraitable.</p>
       </div>
       <div class="stats" id="stats"></div>
       <div id="crew"></div>
-      <div class="card" style="margin-top:22px">
-        <div class="eyebrow" style="font-size:1.6rem">Envoyer sa photo de marin</div>
-        <p class="lead" style="font-size:1rem;margin:6px 0 0" id="photo-howto">Par le formulaire photo (bientôt sur cette page) ou par mail avec le mot de passe en objet. Une photo par personne, visage bien visible, pompon facultatif mais recommandé.</p>
+      <div class="defi" id="defi-marin">
+        <div class="defi-txt">
+          <div class="eyebrow" style="font-size:1.6rem">Le défi photo</div>
+          <h3>Deviens marin… grâce à l'IA !</h3>
+          <p>Pas de marinière dans le placard ? Demande à une intelligence artificielle (ChatGPT, Gemini, Claude, Copilot…) de t'habiller en marin : marinière, béret à pompon, casquette de capitaine, vareuse… ou toute autre idée, laisse l'IA faire preuve d'imagination !</p>
+          <ol>
+            <li>Ouvre l'IA de ton choix et envoie-lui une photo de toi (de face, bien éclairée).</li>
+            <li>Colle le texte ci-dessous et laisse-la travailler. Pas satisfait·e ? Demande-lui une autre version.</li>
+            <li>Dépose ta plus belle création : elle ouvre ton hublot dans le trombinoscope. <b>Une photo par personne</b> (un hublot chacun) ; une photo à deux convient aussi, nous la découperons.</li>
+          </ol>
+        </div>
+        <div class="defi-prompt">
+          <b>Le texte à donner à l'IA</b>
+          <p id="prompt-ia">Transforme cette photo de moi en portrait de marin pour les « 20 ans sur la Seine » de Stéphanie et Henri. Habille-moi d'une marinière rayée bleu et blanc ou d'une vareuse de capitaine, avec un béret à pompon rouge ou une casquette de capitaine, et un foulard rouge noué au cou. Place-moi sur le pont d'un bateau sur la Seine, avec la Tour Eiffel ou un pont de Paris en arrière-plan, dans une ambiance rétro années 50. Fais preuve d'imagination et d'humour, mais garde mon visage bien reconnaissable.</p>
+          <button class="btn btn-primary" id="copier-prompt" type="button">Copier le texte</button>
+        </div>
+        <div class="defi-envoi" id="photo-howto"><p>Formulaire photo : bientôt sur cette page. En attendant, par mail avec le mot-clé en objet. Une photo par personne, visage bien visible.</p></div>
       </div>
     </section>
 
@@ -519,7 +565,7 @@ footer small{opacity:.7}
       <div class="section-head">
         <div class="eyebrow">Larguez les amarres ?</div>
         <h2>Je réponds à l'invitation</h2>
-        <p class="lead">Le formulaire est réservé aux personnes de la liste des invités. Retrouve ton nom : ton invitation s'affiche, pour toi seul·e ou pour toi et ton·ta conjoint·e ou ami·e, avec le bouton de réponse déjà rempli. Deux minutes suffisent.</p>
+        <p class="lead">Le formulaire est réservé aux personnes de la liste des invités. Retrouve ton nom : ton invitation s'affiche, pour toi seul·e ou pour toi et ton·ta conjoint·e ou ami·e, avec le bouton de réponse déjà rempli. Deux minutes suffisent. Dans le formulaire, indique <b>ton adresse e-mail de correspondance</b> : c'est là que nous t'écrirons (rappel, quai, horaire). Nous la rapprochons de notre carnet d'adresses ; si elle diffère, nous te le confirmons.</p>
       </div>
       <div class="grid-2">
         <div>
@@ -549,15 +595,16 @@ footer small{opacity:.7}
             <div class="eyebrow" style="font-size:1.6rem">2. Réponds avec ton téléphone</div>
             <p class="lead" style="font-size:1rem;margin:6px 0 0" id="qr-lead">Scanne le code de ton billet, « 1 personne » ou « 2 personnes » : il ouvre le formulaire avec la bonne formule déjà cochée. Il ne reste qu'à choisir ton nom dans la liste.</p>
             <div class="qrs">
-              <div class="qr"><b>Billet 1 personne</b><div class="box" id="qr-solo"></div><small id="qr-solo-url"></small></div>
-              <div class="qr"><b>Billet 2 personnes</b><div class="box" id="qr-duo"></div><small id="qr-duo-url"></small></div>
+              <div class="qr"><b>Billet 1 personne</b><div class="box" id="qr-solo"></div><small id="qr-solo-url"></small><button class="mini" type="button" data-dlqr="qr-solo">Télécharger le QR</button></div>
+              <div class="qr"><b>Billet 2 personnes</b><div class="box" id="qr-duo"></div><small id="qr-duo-url"></small><button class="mini" type="button" data-dlqr="qr-duo">Télécharger le QR</button></div>
             </div>
             <div class="copyline" id="form-line" style="margin-top:14px"></div>
           </div>
           <div class="steps" style="margin-top:18px">
             <div><b>1. Je retrouve mon nom</b><span>Mon invitation s'affiche : seul·e ou à deux.</span></div>
             <div><b>2. Je réponds</b><span>Le formulaire, déjà rempli, en deux minutes.</span></div>
-            <div><b>3. Ma photo de marin</b><span>Pour mon hublot dans le trombinoscope.</span></div>
+            <div><b>3. Mon e-mail de correspondance</b><span>Celui où je veux recevoir le rappel et les infos de quai. Il est vérifié avec notre carnet d'adresses.</span></div>
+            <div><b>4. Ma photo de marin</b><span>Vraie tenue ou création par l'IA : <a href="#equipage">le défi photo</a>, pour mon hublot.</span></div>
           </div>
         </div>
       </div>
@@ -568,13 +615,24 @@ footer small{opacity:.7}
       <div class="section-head">
         <div class="eyebrow">Carnet de bord</div>
         <h2>Photos &amp; vidéos</h2>
-        <p class="lead">Vingt ans en images : le mariage de 2007, les vœux de 2017, et nous aujourd'hui. Après la croisière, vos photos viendront compléter l'album.</p>
+        <p class="lead">Le jour J en quatre albums, mairie, trajet, bateau et commémoration, remplis après le 27 février 2027 avec vos photos et les nôtres. Chaque photo se télécharge d'un clic, chaque album en entier. En attendant : vingt ans d'images.</p>
+      </div>
+      <div class="album-tools"><span class="badge" id="albums-etat">Les albums se rempliront après la croisière</span><button class="btn btn-ghost" type="button" id="dl-all" hidden>Tout télécharger (.zip)</button></div>
+      <div id="albums"></div>
+      <div class="card" style="margin:22px 0 30px">
+        <div class="eyebrow" style="font-size:1.6rem">Vos photos du jour J</div>
+        <p class="lead" style="font-size:1rem;margin:6px 0 0">Après la fête, envoyez-nous vos photos et vidéos par mail à <span style="user-select:all">perez.henri.contact@gmail.com</span>, objet « SEINE-20 PHOTO JOUR J » et le nom de l'album (mairie, trajet, bateau ou commémoration). Nous les trions, puis elles apparaissent ici, téléchargeables par tous les invités.</p>
+      </div>
+      <div class="section-head" style="margin-top:8px">
+        <div class="eyebrow">Avant le jour J</div>
+        <h2 style="font-size:1.6rem">Vingt ans d'images</h2>
+        <p class="lead" style="font-size:1rem">Le mariage de 2007, les vœux de 2017, les Cheeky Dancers en marins et nous aujourd'hui.</p>
       </div>
       <div class="filters" id="filters" role="group" aria-label="Filtrer l'album"></div>
       <div class="gallery" id="gallery"></div>
       <div class="card" style="margin-top:26px">
-        <div class="eyebrow" style="font-size:1.6rem">Défi photo</div>
-        <p class="lead" style="font-size:1rem;margin:6px 0 0">Retrouvez une photo de vous à notre mariage de 2007 (ou aux dix ans), et envoyez-la nous : elle rejoindra l'album « vingt ans après ». Après la croisière, même défi avec la photo du jour. Adresse d'envoi et formulaire photo : à venir sur cette page.</p>
+        <div class="eyebrow" style="font-size:1.6rem">Défi souvenir</div>
+        <p class="lead" style="font-size:1rem;margin:6px 0 0">Retrouvez une photo de vous à notre mariage de 2007 (ou aux dix ans), et envoyez-la nous : elle rejoindra l'album « vingt ans après ». Après la croisière, même défi avec la photo du jour. Par mail à <span style="user-select:all">perez.henri.contact@gmail.com</span>, objet « SEINE-20 SOUVENIR » et votre prénom. Pour la photo de marin du trombinoscope, c'est <a href="#equipage">dans l'onglet Équipage</a>.</p>
       </div>
     </section>
 
@@ -621,12 +679,13 @@ const CONFIG = {
   dateNote: 'Premier samedi après les vacances d\'hiver (zone C)',
   dateConfirmee: true,
   voeux: { heure: '10 h 00', lieu: 'Lieu à confirmer', confirme: false },
+  finEvenement: '2027-02-27T19:00:00+01:00',   // fin indicative (retour à quai) pour l'agenda
   embarquement: { heure: '13 h 30', confirme: true },   // embarquement 13 h 30 (confirmé par Henri le 02/11/2026)
   dateLimiteReponse: '2027-01-31',
   dateLimiteConfirmee: false,   // 31 janvier 2027 proposé
   navire: { nom: 'Vedette privatisée sur la Seine', compagnie: 'Compagnie et bateau à confirmer', quai: 'Quai d\'embarquement à confirmer (Paris)', confirme: false },
   voiture: 'Cadillac ou voiture de collection à définir',
-  tenue: { titre: 'Rock chic', note: 'Cuir, jupe qui tourne, foulard… et des chaussures pour danser' },
+  tenue: { titre: 'Rock chic', note: 'Cuir, foulard, touche de rouge… et des chaussures confortables pour le pont' },
   motCle: 'SEINE-20',
   mailReponse: 'perez.henri.contact@gmail.com',
   formulaireUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdfyFYIhxCHG0TKyMtQvldGa-1vx7dskkfBsSNMivDm2UO0Bg/viewform',   // formulaire Google de réponse
@@ -637,16 +696,27 @@ const CONFIG = {
   champQui: 'entry.1445342010',      // question « Qui es-tu ? » (liste fermée)
   valeurs: { solo: 'Toi seul·e', duo: 'Toi et ton conjoint·e ou ami·e' },
   siteUrl: 'https://perezhenricontact-a11y.github.io/20ANSSEINE/',   // adresse publique (GitHub Pages)
+  // Photos & vidéos du jour J : les fichiers déposés dans le dossier « photos » du dépôt GitHub s'affichent seuls.
+  // Le préfixe du nom de fichier range chaque photo ou vidéo dans son album : mairie-01.jpg, trajet-03.mp4, bateau-12.jpg, commemoration-02.jpg
+  github: { owner: 'perezhenricontact-a11y', repo: '20ANSSEINE', branch: 'main', folder: 'photos' },
+  albums: [
+    { cle: 'mairie', titre: 'Événement mairie', sous: 'Le renouvellement des vœux, à 10 h : la cérémonie, les signatures, les premières larmes.', cover: 'img/mariage-alliance-1.jpg' },
+    { cle: 'trajet', titre: 'Événement trajet', sous: 'En voiture de collection, des vœux jusqu\'au quai : le cortège, les klaxons, Paris qui défile.', cover: 'img/dix-ans-cadillac-nb.jpg' },
+    { cle: 'bateau', titre: 'Événement bateau', sous: 'L\'embarquement, la croisière sur la Seine, l\'équipage au complet sur le pont.', cover: 'img/selfie-seine.jpg' },
+    { cle: 'commemoration', titre: 'Événement commémoration', sous: 'Le moment du souvenir : vingt ans, les mots, les photos d\'hier et d\'aujourd\'hui.', cover: 'img/coeur-rouge.jpg' }
+  ],
+  // Itinéraires : dès qu'une adresse est renseignée, le bouton « Itinéraire » apparaît dans les infos pratiques.
+  adresses: { voeux: '', quai: '' },
   programmeConfirme: false,
   programme: [
     { h: '10 h 00', titre: 'Renouvellement des vœux', texte: 'Vingt ans après le 14 février 2007, on se redit oui. Lieu précisé dès confirmation.', tbc: 'Lieu à confirmer', img: 'img/mariage-alliance-1.jpg' },
     { h: 'Ensuite', titre: 'Départ en voiture de collection', texte: 'Cadillac ou voiture à définir : les mariés ouvrent la route jusqu\'au bateau, le cortège suit.', tbc: 'Voiture à définir', img: 'img/dix-ans-cadillac-nb.jpg' },
     { h: '13 h 30', titre: 'Embarquement sur la Seine', texte: 'Rendez-vous sur le quai à 13 h 30 : accueil, coupe de bienvenue et première photo d\'équipage, avant de larguer les amarres vers 14 h.', tbc: 'Quai à confirmer', img: 'img/selfie-seine.jpg' },
-    { h: 'Après-midi', titre: 'L\'après-midi de rêve', texte: 'Croisière au fil de la Seine avec les invités triés sur le volet : Tour Eiffel, ponts et monuments, rock\'n\'roll sur le pont, photos et surprises.', img: 'img/marin-danse-nb.jpg' },
-    { h: 'Soir', titre: 'Retour à quai', texte: 'Dernière danse, dernière photo, et le quai qui se rapproche trop vite.', tbc: 'Horaire à caler', img: 'img/affiche-grease.jpg' }
+    { h: 'Après-midi', titre: 'L\'après-midi de rêve', texte: 'Croisière au fil de la Seine avec les invités triés sur le volet : Tour Eiffel, ponts et monuments, musique d\'ambiance, photos et surprises.', img: 'img/marin-danse-nb.jpg' },
+    { h: 'Soir', titre: 'Retour à quai', texte: 'Dernière photo d\'équipage, dernier verre, et le quai qui se rapproche trop vite.', tbc: 'Horaire à caler', img: 'img/affiche-grease.jpg' }
   ],
   dress: [
-    { t: 'Elles', s: 'Robe qui tourne, foulard noué, baskets ou talons : ce qui danse.' },
+    { t: 'Elles', s: 'Robe ou jupe, foulard noué, baskets ou talons : ce qui vous plaît.' },
     { t: 'Eux', s: 'Perfecto ou veste, chemise rouge bienvenue : l\'esprit 2007.' },
     { t: 'Tous', s: 'Une touche de rouge, de marine ou d\'or pour être raccord avec l\'affiche.' },
     { t: 'À bord', s: 'Une petite laine pour le pont : fin février, la Seine rafraîchit.' }
@@ -968,8 +1038,10 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
     }).join('');
   }
   $('#crew').innerHTML = '<div class="trombi">' + html + '</div>';
-  if (CONFIG.formulairePhotoUrl) $('#photo-howto').innerHTML = 'Une photo par personne, visage bien visible, pompon facultatif mais recommandé. Le dépôt demande un compte Google (Gmail) ; sans compte, envoyez-la par mail à <span style="user-select:all">' + esc(CONFIG.mailReponse) + '</span>, objet « ' + esc(CONFIG.motCle) + ' PHOTO ».' +
-    '<div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-primary" href="' + esc(CONFIG.formulairePhotoUrl) + '" target="_blank" rel="noopener">Déposer ma photo de marin</a></div>';
+  if (CONFIG.formulairePhotoUrl) $('#photo-howto').innerHTML = '<a class="btn btn-primary" href="' + esc(CONFIG.formulairePhotoUrl) + '" target="_blank" rel="noopener">Déposer ma photo de marin</a>' +
+    '<p>Vraie tenue ou création par l\'IA : les deux ouvrent le hublot. Le dépôt passe par un petit formulaire Google (compte Google demandé). <b>Pas de compte Google ?</b> Envoie ta photo par mail à <span style="user-select:all">' + esc(CONFIG.mailReponse) + '</span>, objet « ' + esc(CONFIG.motCle) + ' PHOTO » et ton prénom.</p>';
+  const bp = $('#copier-prompt');
+  if (bp) bp.addEventListener('click', () => copyText($('#prompt-ia').textContent, 'Texte copié : colle-le dans ton IA avec ta photo !'));
 })();
 
 /* ---------- je réponds : retrouve ton nom (liste fermée), nom manquant, QR ---------- */
@@ -987,8 +1059,9 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
     const duo = !!i.avec;
     const d = document.createElement('div'); d.className = 'fiche';
     d.innerHTML = '<div><h3>Bonjour ' + esc(nomCourt(i)) + ' !</h3><span class="formule">' + (duo ? 'Invitation pour deux' : 'Invitation pour une personne') + '</span>' +
-      '<p>' + (duo ? 'Ton invitation est pour deux personnes : toi et ' + esc(nomCourt(i.avec)) + '.' : 'Ton invitation est pour une personne : toi. Merci de répondre « Toi seul·e ».') + '</p>' +
-      '<a class="btn btn-primary" href="' + esc(lien(i)) + '" target="_blank" rel="noopener">Répondre au formulaire</a></div>' +
+      '<p>' + (duo ? 'Ton invitation est pour deux personnes : toi et ' + esc(nomCourt(i.avec)) + (i.avec.initiale ? '' : '.') : 'Ton invitation est pour une personne : toi. Merci de répondre « Toi seul·e ».') + '</p>' +
+      '<a class="btn btn-primary" href="' + esc(lien(i)) + '" target="_blank" rel="noopener">Répondre au formulaire</a>' +
+      '<p class="note">Pense à ton e-mail de correspondance : il servira pour le rappel, le quai et l\'horaire.</p></div>' +
       '<div class="qr"><div class="box"></div></div>';
     qr(d.querySelector('.box'), lien(i), 110);
     return d;
@@ -1053,6 +1126,87 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
   document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 })();
 
+/* ---------- photos & vidéos du jour J : dossier GitHub « photos », albums par préfixe ---------- */
+(function albums() {
+  const gh = CONFIG.github, box = $('#albums'), etat = $('#albums-etat'), dlAll = $('#dl-all');
+  const IMG_RE = /\.(jpe?g|png|webp|gif|heic)$/i, VID_RE = /\.(mp4|webm|mov|m4v)$/i;
+  const slug = t => String(t).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const albumDe = p => { const nm = slug(p.name); const a = CONFIG.albums.find(a => nm.indexOf(a.cle) === 0); return a ? a.cle : 'autres'; };
+  let PHOTOS = [];
+  const ico = '<svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>';
+  async function charger() {
+    const keep = nm => IMG_RE.test(nm) || VID_RE.test(nm);
+    const item = nm => ({ src: gh.folder + '/' + nm, name: nm, video: VID_RE.test(nm) });
+    if (gh.owner && gh.repo) {
+      try {
+        const r = await fetch('https://api.github.com/repos/' + gh.owner + '/' + gh.repo + '/contents/' + gh.folder + '?ref=' + gh.branch);
+        if (r.ok) { const items = await r.json(); return items.filter(i => i.type === 'file' && keep(i.name)).sort((a, b) => a.name.localeCompare(b.name, 'fr', { numeric: true })).map(i => item(i.name)); }
+      } catch (e) { }
+    }
+    try { const r = await fetch(gh.folder + '/photos.json', { cache: 'no-store' }); if (r.ok) { const l = await r.json(); return l.filter(keep).map(item); } } catch (e) { }
+    return [];
+  }
+  async function telecharger(p) {
+    try { const blob = await (await fetch(p.src)).blob(); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = p.name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
+    catch (e) { toast('Téléchargement impossible pour ce fichier'); }
+  }
+  function loadScript(src) { return new Promise((ok, ko) => { const sc = document.createElement('script'); sc.src = src; sc.onload = ok; sc.onerror = ko; document.head.appendChild(sc); }); }
+  async function zip(list, file, btn) {
+    if (!list.length) return; const label = btn.textContent; btn.disabled = true;
+    try {
+      if (typeof JSZip === 'undefined') await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js');
+      const z = new JSZip();
+      for (let i = 0; i < list.length; i++) { btn.textContent = 'Préparation… ' + (i + 1) + '/' + list.length; z.file(list[i].name, await (await fetch(list[i].src)).blob()); }
+      btn.textContent = 'Compression…';
+      const a = document.createElement('a'); a.href = URL.createObjectURL(await z.generateAsync({ type: 'blob' })); a.download = file; a.click();
+    } catch (e) { toast('Téléchargement impossible, essayez photo par photo'); }
+    btn.textContent = label; btn.disabled = false;
+  }
+  function render() {
+    const groupes = CONFIG.albums.slice();
+    if (PHOTOS.some(p => albumDe(p) === 'autres')) groupes.push({ cle: 'autres', titre: 'Autres souvenirs du jour J', sous: '', cover: 'img/affiche-voyage.jpg' });
+    box.innerHTML = groupes.map((a, gi) => {
+      const liste = PHOTOS.map((p, i) => ({ p, i })).filter(x => albumDe(x.p) === a.cle);
+      const nb = liste.length, vids = liste.filter(x => x.p.video).length;
+      const cpt = nb ? (nb - vids) + ' photo' + (nb - vids > 1 ? 's' : '') + (vids ? ' · ' + vids + ' vidéo' + (vids > 1 ? 's' : '') : '') : 'Après le 27 février 2027';
+      return '<div class="album" data-album="' + a.cle + '"><div class="album-head"><img src="' + esc(a.cover) + '" data-full="' + esc(a.cover) + '" alt="' + esc(a.titre) + '" loading="lazy"><div><h3><span class="num">' + (gi + 1) + '</span>' + esc(a.titre) + '</h3><p>' + esc(a.sous) + '</p><span class="cpt">' + cpt + '</span></div>' +
+        (nb ? '<button class="btn btn-ghost album-dl" type="button" data-zip="' + a.cle + '">Télécharger l\'album (.zip)</button>' : '') + '</div>' +
+        (nb ? '<div class="gallery">' + liste.map(({ p, i }) => p.video
+          ? '<figure class="shot jj video"><video src="' + esc(p.src) + '" controls playsinline preload="metadata"></video><button class="dl" type="button" data-dl="' + i + '" aria-label="Télécharger la vidéo">' + ico + '</button><figcaption>' + esc(p.name) + '</figcaption></figure>'
+          : '<figure class="shot jj"><img src="' + esc(p.src) + '" data-full="' + esc(p.src) + '" alt="' + esc(a.titre) + '" loading="lazy"><button class="dl" type="button" data-dl="' + i + '" aria-label="Télécharger la photo">' + ico + '</button></figure>').join('') + '</div>'
+          : '<div class="album-empty">Les photos et vidéos de ce moment seront ajoutées après la croisière.</div>') + '</div>';
+    }).join('');
+    box.querySelectorAll('[data-dl]').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); telecharger(PHOTOS[+b.dataset.dl]); }));
+    box.querySelectorAll('[data-zip]').forEach(b => b.addEventListener('click', e => zip(PHOTOS.filter(p => albumDe(p) === b.dataset.zip), '20-ans-seine-' + b.dataset.zip + '.zip', e.currentTarget)));
+    dlAll.hidden = !PHOTOS.length;
+    etat.textContent = PHOTOS.length ? PHOTOS.length + ' fichier' + (PHOTOS.length > 1 ? 's' : '') + ' en ligne' : 'Les albums se rempliront après la croisière';
+  }
+  dlAll.addEventListener('click', e => zip(PHOTOS, '20-ans-seine-photos.zip', e.currentTarget));
+  render();
+  charger().then(l => { PHOTOS = l; render(); });
+})();
+
+/* ---------- agenda (.ics), téléchargement des QR codes, itinéraires ---------- */
+(function outils() {
+  const icsDate = d => new Date(d).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  function ics() {
+    const lieu = (CONFIG.voeux.lieu + ' · puis ' + CONFIG.navire.quai).replace(/,/g, '\\,');
+    const txt = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//20-ans-seine//FR', 'BEGIN:VEVENT', 'UID:20-ans-seine-20270227@perez', 'DTSTAMP:' + icsDate(new Date()),
+      'DTSTART:' + icsDate(CONFIG.dateEvenement), 'DTEND:' + icsDate(CONFIG.finEvenement || CONFIG.dateEvenement),
+      'SUMMARY:20 ans sur la Seine – Stéphanie & Henri', 'LOCATION:' + lieu,
+      'DESCRIPTION:Vœux à ' + CONFIG.voeux.heure + ' · embarquement à ' + CONFIG.embarquement.heure + ' · ' + (CONFIG.siteUrl || location.href.split('#')[0]),
+      'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([txt], { type: 'text/calendar' })); a.download = '20-ans-sur-la-seine.ics'; a.click();
+  }
+  const b = $('#ics-main'); if (b) b.addEventListener('click', ics);
+  document.querySelectorAll('[data-dlqr]').forEach(btn => btn.addEventListener('click', () => {
+    const el = $('#' + btn.dataset.dlqr); const cv = el && el.querySelector('canvas'), im = el && el.querySelector('img');
+    const src = cv ? cv.toDataURL('image/png') : (im ? im.src : '');
+    if (!src) { toast('QR code non disponible'); return; }
+    const a = document.createElement('a'); a.href = src; a.download = 'qr-20-ans-seine-' + (btn.dataset.dlqr === 'qr-solo' ? '1-personne' : '2-personnes') + '.png'; a.click();
+  }));
+})();
+
 /* ---------- surprises ---------- */
 (function gifts() {
   const now = new Date();
@@ -1069,12 +1223,13 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
 (function infos() {
   const tbc = '<span class="tbc">À confirmer</span>';
   const contacts = CONFIG.contacts.map(c => '<p><b>' + esc(c.nom) + '</b> · ' + esc(c.tel) + (c.mail ? '<br><span style="user-select:all">' + esc(c.mail) + '</span>' : '') + '</p>').join('');
+  const itin = adr => adr ? '<p><a class="btn btn-ghost" style="padding:8px 14px;font-size:.88rem" href="https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(adr) + '" target="_blank" rel="noopener">Itinéraire</a></p>' : '';
   $('#infos').innerHTML =
-    '<div class="info"><h3>Les vœux, à ' + esc(CONFIG.voeux.heure) + '</h3><p><b>' + esc(CONFIG.voeux.lieu) + '</b></p><p>Arrivez un quart d\'heure avant : les mariés sont ponctuels, la voiture aussi.</p>' + (CONFIG.voeux.confirme ? '' : tbc) + '</div>' +
-    '<div class="info"><h3>Le bateau : embarquement à ' + esc(CONFIG.embarquement.heure) + '</h3><p><b>' + esc(CONFIG.navire.quai) + '</b></p><p>' + esc(CONFIG.navire.nom) + ' · ' + esc(CONFIG.navire.compagnie) + '. Embarquement à 13 h 30, départ vers 14 h : un bateau n\'attend pas, même pour des danseurs.</p>' + (CONFIG.navire.confirme ? '' : tbc) + '</div>' +
+    '<div class="info"><h3>Les vœux, à ' + esc(CONFIG.voeux.heure) + '</h3><p><b>' + esc(CONFIG.voeux.lieu) + '</b></p><p>Arrivez un quart d\'heure avant : les mariés sont ponctuels, la voiture aussi.</p>' + itin(CONFIG.adresses.voeux) + (CONFIG.voeux.confirme ? '' : tbc) + '</div>' +
+    '<div class="info"><h3>Le bateau : embarquement à ' + esc(CONFIG.embarquement.heure) + '</h3><p><b>' + esc(CONFIG.navire.quai) + '</b></p><p>' + esc(CONFIG.navire.nom) + ' · ' + esc(CONFIG.navire.compagnie) + '. Embarquement à 13 h 30, départ vers 14 h : un bateau n\'attend pas, même les marins d\'eau douce.</p>' + itin(CONFIG.adresses.quai) + (CONFIG.navire.confirme ? '' : tbc) + '</div>' +
     '<div class="info"><h3>Venir, se garer, dormir</h3><p>Covoiturage possible depuis les vœux. Métro, parkings et hôtels proches du quai : précisés dès que l\'embarcadère est fixé.</p>' + tbc + '</div>' +
     '<div class="info"><h3>Nous joindre</h3>' + contacts + '<p>Mot de passe en tête d\'objet de vos mails : <b>' + esc(CONFIG.motCle) + '</b></p></div>' +
-    '<div class="info"><h3>Bon à savoir</h3><p>Tenue du jour : rock chic. Photo du trombinoscope : en marin. La tribu à poils reste à la maison. Cadeaux : votre présence, une chanson à dédier, ou un pas de rock appris pour l\'occasion.</p></div>';
+    '<div class="info"><h3>Bon à savoir</h3><p>Tenue du jour : rock chic. Photo du trombinoscope : en marin. La tribu à poils reste à la maison. Pas de danse imposée : on vient pour la Seine et les retrouvailles. Cadeaux : votre présence, une chanson à dédier, ou un souvenir à raconter sur le pont.</p></div>';
 })();
 </script>
 </body>
