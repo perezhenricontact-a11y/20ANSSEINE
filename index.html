@@ -7,7 +7,7 @@
 <meta name="description" content="Stéphanie et Henri renouvellent leurs vœux le samedi 27 février 2027, puis cap sur la Seine : invitation, programme, trombinoscope des marins, réponses et souvenirs.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="20 ans sur la Seine — Stéphanie & Henri">
-<meta property="og:description" content="Vingt ans après le 14 février 2007, on se redit oui : vœux à 10 h puis croisière rock'n'roll sur la Seine, samedi 27 février 2027. Embarquez !">
+<meta property="og:description" content="Vingt ans après le 14 février 2007, on se redit oui : vœux à 10 h, embarquement à 13 h 30 pour une croisière rock'n'roll sur la Seine, samedi 27 février 2027. Embarquez !">
 <meta property="og:image" content="https://perezhenricontact-a11y.github.io/20ANSSEINE/img/apercu-partage.jpg">
 <meta property="og:url" content="https://perezhenricontact-a11y.github.io/20ANSSEINE/">
 <meta name="twitter:card" content="summary_large_image">
@@ -621,7 +621,7 @@ const CONFIG = {
   dateNote: 'Premier samedi après les vacances d\'hiver (zone C)',
   dateConfirmee: true,
   voeux: { heure: '10 h 00', lieu: 'Lieu à confirmer', confirme: false },
-  embarquement: { heure: 'Vers midi', confirme: false },
+  embarquement: { heure: '13 h 30', confirme: true },   // embarquement 13 h 30 (confirmé par Henri le 02/11/2026)
   dateLimiteReponse: '2027-01-31',
   dateLimiteConfirmee: false,   // 31 janvier 2027 proposé
   navire: { nom: 'Vedette privatisée sur la Seine', compagnie: 'Compagnie et bateau à confirmer', quai: 'Quai d\'embarquement à confirmer (Paris)', confirme: false },
@@ -641,7 +641,7 @@ const CONFIG = {
   programme: [
     { h: '10 h 00', titre: 'Renouvellement des vœux', texte: 'Vingt ans après le 14 février 2007, on se redit oui. Lieu précisé dès confirmation.', tbc: 'Lieu à confirmer', img: 'img/mariage-alliance-1.jpg' },
     { h: 'Ensuite', titre: 'Départ en voiture de collection', texte: 'Cadillac ou voiture à définir : les mariés ouvrent la route jusqu\'au bateau, le cortège suit.', tbc: 'Voiture à définir', img: 'img/dix-ans-cadillac-nb.jpg' },
-    { h: 'Midi', titre: 'Embarquement sur la Seine', texte: 'Accueil sur le quai, coupe de bienvenue et première photo d\'équipage.', tbc: 'Quai et horaire à confirmer', img: 'img/selfie-seine.jpg' },
+    { h: '13 h 30', titre: 'Embarquement sur la Seine', texte: 'Rendez-vous sur le quai à 13 h 30 : accueil, coupe de bienvenue et première photo d\'équipage, avant de larguer les amarres vers 14 h.', tbc: 'Quai à confirmer', img: 'img/selfie-seine.jpg' },
     { h: 'Après-midi', titre: 'L\'après-midi de rêve', texte: 'Croisière au fil de la Seine avec les invités triés sur le volet : Tour Eiffel, ponts et monuments, rock\'n\'roll sur le pont, photos et surprises.', img: 'img/marin-danse-nb.jpg' },
     { h: 'Soir', titre: 'Retour à quai', texte: 'Dernière danse, dernière photo, et le quai qui se rapproche trop vite.', tbc: 'Horaire à caler', img: 'img/affiche-grease.jpg' }
   ],
@@ -1071,7 +1071,7 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
   const contacts = CONFIG.contacts.map(c => '<p><b>' + esc(c.nom) + '</b> · ' + esc(c.tel) + (c.mail ? '<br><span style="user-select:all">' + esc(c.mail) + '</span>' : '') + '</p>').join('');
   $('#infos').innerHTML =
     '<div class="info"><h3>Les vœux, à ' + esc(CONFIG.voeux.heure) + '</h3><p><b>' + esc(CONFIG.voeux.lieu) + '</b></p><p>Arrivez un quart d\'heure avant : les mariés sont ponctuels, la voiture aussi.</p>' + (CONFIG.voeux.confirme ? '' : tbc) + '</div>' +
-    '<div class="info"><h3>Le bateau, ' + esc(CONFIG.embarquement.heure.toLowerCase()) + '</h3><p><b>' + esc(CONFIG.navire.quai) + '</b></p><p>' + esc(CONFIG.navire.nom) + ' · ' + esc(CONFIG.navire.compagnie) + '. Un bateau n\'attend pas, même pour des danseurs.</p>' + (CONFIG.navire.confirme ? '' : tbc) + '</div>' +
+    '<div class="info"><h3>Le bateau : embarquement à ' + esc(CONFIG.embarquement.heure) + '</h3><p><b>' + esc(CONFIG.navire.quai) + '</b></p><p>' + esc(CONFIG.navire.nom) + ' · ' + esc(CONFIG.navire.compagnie) + '. Embarquement à 13 h 30, départ vers 14 h : un bateau n\'attend pas, même pour des danseurs.</p>' + (CONFIG.navire.confirme ? '' : tbc) + '</div>' +
     '<div class="info"><h3>Venir, se garer, dormir</h3><p>Covoiturage possible depuis les vœux. Métro, parkings et hôtels proches du quai : précisés dès que l\'embarcadère est fixé.</p>' + tbc + '</div>' +
     '<div class="info"><h3>Nous joindre</h3>' + contacts + '<p>Mot de passe en tête d\'objet de vos mails : <b>' + esc(CONFIG.motCle) + '</b></p></div>' +
     '<div class="info"><h3>Bon à savoir</h3><p>Tenue du jour : rock chic. Photo du trombinoscope : en marin. La tribu à poils reste à la maison. Cadeaux : votre présence, une chanson à dédier, ou un pas de rock appris pour l\'occasion.</p></div>';
