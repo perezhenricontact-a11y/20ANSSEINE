@@ -525,7 +525,8 @@ footer small{opacity:.7}
         <div>
           <div class="card">
             <div class="eyebrow" style="font-size:1.6rem">1. Retrouve ton nom</div>
-            <label class="f" style="margin-top:10px">Ton prénom <input id="cherche" placeholder="Ex. : Sophie, Antonio, Gilbert…" autocomplete="off"></label>
+            <label class="f" style="margin-top:10px">Choisis ton invitation dans la liste <select id="sel-invite"><option value="">— Sélectionner —</option></select></label>
+            <label class="f" style="margin-top:12px">ou tape ton prénom <input id="cherche" placeholder="Ex. : Sophie, Antonio, Gilbert…" autocomplete="off"></label>
             <div class="trouve" id="trouve"></div>
           </div>
           <div class="card" style="margin-top:18px" id="manquant">
@@ -999,7 +1000,10 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
     if (!hits.length) { out.innerHTML = '<p class="hint-manquant">Aucune invitation à ce prénom. Essaie une autre orthographe, ou signale-nous ton nom juste en dessous.</p>'; const m = $('#manquant'); m.classList.remove('flash'); void m.offsetWidth; m.classList.add('flash'); return; }
     hits.forEach(i => out.appendChild(fiche(i)));
   }
-  inp.addEventListener('input', chercher);
+  inp.addEventListener('input', () => { sel.value = ''; chercher(); });
+  const sel = $('#sel-invite');
+  CONFIG.invites.forEach((i, k) => { const o = document.createElement('option'); o.value = k; o.textContent = libelle(i); sel.appendChild(o); });
+  sel.addEventListener('change', () => { out.innerHTML = ''; inp.value = ''; if (sel.value !== '') out.appendChild(fiche(CONFIG.invites[+sel.value])); });
 
   /* 2. Nom manquant : message prêt à envoyer */
   const objet = CONFIG.motCle + ' NOM MANQUANT';
