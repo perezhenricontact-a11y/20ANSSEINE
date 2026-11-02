@@ -259,6 +259,43 @@ h2{font-family:var(--f-display);font-size:clamp(1.7rem,4vw,2.5rem);font-weight:7
 .defi-envoi{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:16px;align-items:center;padding-top:14px;border-top:1px dashed var(--or)}
 .defi-envoi p{flex:1 1 300px;font-size:.95rem;margin:0}
 .fiche .note{font-size:.88rem;color:var(--ink-2);margin:10px 0 0}
+/* Je réponds : mode 60 ans (sélecteur, deux billets, liste des invitations) */
+.trouve .ou{text-align:center;color:var(--ink-2);font-weight:700;margin:-4px 0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.trouve-res{display:grid;gap:12px}
+.trouve-vide{color:var(--ink-2);font-style:italic;margin:0;padding:12px 14px;border:1px dashed var(--line);border-radius:12px;background:var(--paper-2)}
+.trouve-vide a,.lien-defi{color:#d81b60;font-weight:800}
+.deux-qr{margin-top:22px}
+.qr-card{position:relative;padding-top:38px;transition:transform .2s,box-shadow .2s}
+.qr-card.choisie{transform:translateY(-3px);box-shadow:0 0 0 4px rgba(216,27,96,.25),var(--shadow)}
+.qr-bandeau{position:absolute;top:0;left:0;right:0;background:#d81b60;color:#fff;font-size:.74rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;padding:7px 10px;border-radius:10px 10px 0 0}
+.qr-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:4px}
+.qr-actions .btn{padding:8px 14px;font-size:.86rem}
+.qr .box:empty::before{content:"QR code en préparation";font-size:.8rem;color:#4b5672}
+.colonnes{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.colonnes{grid-template-columns:1fr}}
+.colonne{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
+.colonne h3{font-family:var(--f-display);font-size:1.05rem;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.colonne h3 small{font-weight:400;color:var(--ink-2);font-size:.85rem}
+.pastille{width:12px;height:12px;border-radius:50%;display:inline-block;background:var(--seine)}
+.pastille.duo{background:#d81b60}
+.noms-inv{display:flex;flex-wrap:wrap;gap:8px}
+.noms-inv button{border:1px solid var(--line);background:var(--paper-2);color:var(--ink);border-radius:999px;padding:7px 13px;font-weight:700;font-size:.9rem;cursor:pointer}
+.noms-inv button:hover{border-color:#d81b60;color:#d81b60}
+.noms-inv button em{font-style:normal;color:var(--ink-2);font-weight:600}
+.defi{margin-top:22px}
+/* Trombinoscope : places libres, photo à deux, taille automatique */
+.trombi{--t:112px}
+.porthole{width:var(--t);height:var(--t)}
+.porthole.duo{width:calc(var(--t) * 2 + 10px);border-radius:calc(var(--t) / 2)}
+.porthole.duo::after{border-radius:calc(var(--t) / 2)}
+.cabin.place{border-style:dashed;text-decoration:none;color:inherit;background:var(--paper-2)}
+.cabin.place .porthole{border-color:var(--line);background:var(--paper)}
+.cabin.place .porthole span{font-family:var(--f-display);font-size:2rem;color:var(--line)}
+.trombi.compact{--t:84px}
+.trombi.compact .cabin{padding:10px}
+.trombi.mini{--t:64px}
+.trombi.mini .cabin.hosts .banner{aspect-ratio:21/9}
 .trombi{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
 .cabin{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;box-shadow:var(--shadow)}
 .cabin.hosts{grid-column:1/-1;background:linear-gradient(180deg,var(--paper),var(--paper-2));padding:0 0 18px}
@@ -538,92 +575,117 @@ footer small{opacity:.7}
     <!-- ================= ÉQUIPAGE ================= -->
     <section class="panel" id="panel-equipage" role="tabpanel" hidden>
       <div class="section-head">
-        <div class="eyebrow">Petit comité, grand équipage</div>
+        <div class="eyebrow">Ils ont dit oui !</div>
         <h2>Le trombinoscope des marins</h2>
-        <p class="lead">Chaque invitation a sa cabine : un hublot pour une personne, deux pour un couple. Votre photo y apparaît dès réception. Prénom et initiale seulement : la discrétion est de mise sur le pont.</p>
+        <p class="lead" id="trombi-intro">Les invités qui ont confirmé leur venue, en tenue de marin. Une photo par personne, ou une seule photo à deux pour les couples et les duos d'amis. Prénom et initiale seulement : la discrétion est de mise sur le pont.</p>
       </div>
       <div class="ship-rule">
         <img src="img/marin-stephanie-portrait.jpg" data-full="img/marin-killer-boogie.jpg" alt="Stéphanie en tenue de marin : l'exemple à suivre">
         <div class="eyebrow">Règle du bord</div>
-        <p><strong>Tenue de marin obligatoire sur la photo</strong> : marinière, béret à pompon, casquette de capitaine, foulard noué ou vareuse, à vous de choisir. Pas de tenue sous la main ? L'IA vous habille en marin : le défi photo est juste en dessous. Sans photo de marin, pas de hublot : le capitaine est intraitable.</p>
+        <p><strong>Tenue de marin obligatoire sur la photo</strong> : marinière, béret à pompon, casquette de capitaine, foulard noué ou vareuse, à vous de choisir. Pas de tenue sous la main ? L'IA vous habille en marin en deux minutes : <a href="#reponse" class="lien-defi">le défi photo</a>. Vraiment pas à l'aise ? Envoyez une photo normale en précisant « à transformer » : les capitaines s'en chargent.</p>
       </div>
       <div class="stats" id="stats"></div>
       <div id="crew"></div>
-      <div class="defi" id="defi-marin">
-        <div class="defi-txt">
-          <div class="eyebrow" style="font-size:1.6rem">Le défi photo</div>
-          <h3>Deviens marin… grâce à l'IA !</h3>
-          <p>Pas de marinière dans le placard ? Demande à une intelligence artificielle (ChatGPT, Gemini, Claude, Copilot…) de t'habiller en marin : marinière, béret à pompon, casquette de capitaine, vareuse… ou toute autre idée, laisse l'IA faire preuve d'imagination !</p>
-          <ol>
-            <li>Ouvre l'IA de ton choix et envoie-lui une photo de toi (de face, bien éclairée).</li>
-            <li>Colle le texte ci-dessous et laisse-la travailler. Pas satisfait·e ? Demande-lui une autre version.</li>
-            <li>Dépose ta plus belle création : elle ouvre ton hublot dans le trombinoscope. <b>Une photo par personne</b> (un hublot chacun) ; une photo à deux convient aussi, nous la découperons.</li>
-          </ol>
-        </div>
-        <div class="defi-prompt">
-          <b>Le texte à donner à l'IA</b>
-          <p id="prompt-ia">Transforme cette photo de moi en portrait de marin pour les « 20 ans sur la Seine » de Stéphanie et Henri. Habille-moi d'une marinière rayée bleu et blanc ou d'une vareuse de capitaine, avec un béret à pompon rouge ou une casquette de capitaine, et un foulard rouge noué au cou. Place-moi sur le pont d'un bateau sur la Seine, avec la Tour Eiffel ou un pont de Paris en arrière-plan, dans une ambiance rétro années 50. Fais preuve d'imagination et d'humour, mais garde mon visage bien reconnaissable.</p>
-          <button class="btn btn-primary" id="copier-prompt" type="button">Copier le texte</button>
-        </div>
-        <div class="defi-outil">
-          <b>L'utilitaire : trois étapes, c'est tout</b>
-          <div class="defi-etapes">
-            <div><span class="num">1</span><div><strong>Ouvre une IA gratuite</strong><div class="ia-btns"><a class="btn btn-primary" id="ia-chatgpt" href="https://chatgpt.com/" target="_blank" rel="noopener">ChatGPT (texte pré-rempli)</a><a class="btn btn-ghost" href="https://gemini.google.com/app" target="_blank" rel="noopener">Gemini</a><a class="btn btn-ghost" id="ia-copilot" href="https://copilot.microsoft.com/" target="_blank" rel="noopener">Copilot (pré-rempli)</a></div><small>Version gratuite, un compte suffit. Avec ChatGPT ou Copilot, le texte est déjà écrit : il ne reste qu'à joindre ta photo (le trombone) et envoyer. Avec Gemini, colle le texte copié ci-dessus.</small></div></div>
-            <div><span class="num">2</span><div><strong>Joins ta photo, puis envoie</strong><small>De face, bien éclairée, seul·e sur la photo. Le résultat arrive en quelques secondes ; tu peux demander une autre version (« plus de pompon », « casquette de capitaine »…).</small></div></div>
-            <div><span class="num">3</span><div><strong>Enregistre l'image et dépose-la</strong><small>Télécharge l'image obtenue (ou capture d'écran), puis le bouton « Déposer ma photo de marin » ci-dessous, ou par mail.</small></div></div>
-          </div>
-        </div>
-        <div class="defi-envoi" id="photo-howto"><p>Formulaire photo : bientôt sur cette page. En attendant, par mail avec le mot-clé en objet. Une photo par personne, visage bien visible.</p></div>
-      </div>
+      <div class="card" style="margin-top:22px" id="photo-howto"></div>
     </section>
 
     <!-- ================= JE RÉPONDS ================= -->
     <section class="panel" id="panel-reponse" role="tabpanel" hidden>
       <div class="section-head">
         <div class="eyebrow">Larguez les amarres ?</div>
-        <h2>Je réponds à l'invitation</h2>
-        <p class="lead">Le formulaire est réservé aux personnes de la liste des invités. Retrouve ton nom : ton invitation s'affiche, pour toi seul·e ou pour toi et ton·ta conjoint·e ou ami·e, avec le bouton de réponse déjà rempli. Deux minutes suffisent. Dans le formulaire, indique <b>ton adresse e-mail de correspondance</b> : c'est là que nous t'écrirons (rappel, quai, horaire). Nous la rapprochons de notre carnet d'adresses ; si elle diffère, nous te le confirmons.</p>
+        <span class="badge gold" id="badge-limite" style="color:var(--or);border-color:var(--or);margin-bottom:8px">Réponse souhaitée avant le —</span>
+        <h2>Tu viens ? Dis-le nous !</h2>
+        <p class="lead">Deux minutes suffisent. Commence par retrouver ton nom : ton invitation est prévue <b>pour toi seul·e</b> ou <b>pour toi et ton·ta conjoint·e ou ami·e</b>, merci de la respecter. <b>Ce formulaire est réservé aux personnes figurant sur la liste des invités</b> : une réponse d'une personne non invitée ne sera pas prise en compte. Dans le formulaire, indique <b>ton e-mail de correspondance</b> : c'est là que nous t'écrirons (rappel, quai, horaire) ; nous le rapprochons de notre carnet d'adresses.</p>
       </div>
-      <div class="grid-2">
-        <div>
-          <div class="card">
-            <div class="eyebrow" style="font-size:1.6rem">1. Retrouve ton nom</div>
-            <label class="f" style="margin-top:10px">Choisis ton invitation dans la liste <select id="sel-invite"><option value="">— Sélectionner —</option></select></label>
-            <label class="f" style="margin-top:12px">ou tape ton prénom <input id="cherche" placeholder="Ex. : Sophie, Antonio, Gilbert…" autocomplete="off"></label>
-            <div class="trouve" id="trouve"></div>
-          </div>
-          <div class="card" style="margin-top:18px" id="manquant">
-            <div class="eyebrow" style="font-size:1.6rem">Je ne trouve pas mon nom</div>
-            <p class="lead" style="font-size:1rem;margin:6px 0 12px">On t'a invité·e de vive voix et ton nom n'apparaît pas ? Pas de formulaire dans ce cas : envoie-nous ce message, nous vérifions la liste et nous te répondons.</p>
-            <div class="row">
-              <label class="f">Prénom et nom <input id="m-nom" placeholder="Ton prénom et ton nom"></label>
-              <label class="f">Téléphone <input id="m-tel" placeholder="06 …"></label>
-            </div>
-            <div class="preview" id="txt-manquant" style="margin-top:12px"></div>
-            <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
-              <div class="copyline">Objet : <code id="obj-manquant">—</code><button class="mini" type="button" data-copy="obj-manquant">Copier</button></div>
-              <div class="copyline">À : <code id="mail-cible">—</code><button class="mini" type="button" data-copy="mail-cible">Copier</button></div>
-              <div class="copyline"><button class="btn btn-primary" type="button" id="copy-manquant">Copier le message</button><a class="btn btn-ghost" id="mailto-manquant" href="#" target="_blank" rel="noopener">Ouvrir ma messagerie</a></div>
-            </div>
+
+      <div class="card">
+        <div class="eyebrow" style="font-size:1.6rem">Retrouve ton invitation</div>
+        <div class="trouve">
+          <label class="f">Choisis ton nom dans la liste des invités <select id="sel-invite"><option value="">— Sélectionne ton nom —</option></select></label>
+          <p class="ou">ou tape ton prénom :</p>
+          <label class="f"><span class="sr">Prénom</span><input id="cherche" type="search" placeholder="Tape ton prénom…" autocomplete="off" aria-label="Retrouver ton invitation"></label>
+          <div class="trouve-res" id="trouve" aria-live="polite"><p class="trouve-vide">Choisis ton nom ou tape ton prénom.</p></div>
+        </div>
+      </div>
+
+      <div class="qrs deux-qr">
+        <div class="qr qr-card" data-formule="solo">
+          <span class="qr-bandeau">Invitation pour 1 personne</span>
+          <div class="box" id="qr-solo"></div>
+          <b>Tu es invité·e seul·e</b>
+          <small><span id="nb-solo">–</span> invitations · formulaire « Toi seul·e »</small>
+          <div class="qr-actions"><a class="btn btn-primary" id="lien-solo" target="_blank" rel="noopener">Répondre</a><button class="btn btn-ghost" type="button" data-dlqr="qr-solo">Télécharger</button></div>
+        </div>
+        <div class="qr qr-card" data-formule="duo">
+          <span class="qr-bandeau">Invitation pour 2 personnes</span>
+          <div class="box" id="qr-duo"></div>
+          <b>Toi et ton·ta conjoint·e ou ami·e</b>
+          <small><span id="nb-duo">–</span> invitations · couple ou deux amis</small>
+          <div class="qr-actions"><a class="btn btn-primary" id="lien-duo" target="_blank" rel="noopener">Répondre</a><button class="btn btn-ghost" type="button" data-dlqr="qr-duo">Télécharger</button></div>
+        </div>
+      </div>
+      <div class="copyline" id="form-line" style="margin:12px 0 0"></div>
+
+      <div class="defi" id="defi-marin">
+        <div class="defi-txt">
+          <div class="eyebrow" style="font-size:1.6rem">Le défi photo</div>
+          <h3>Deviens marin… grâce à l'IA !</h3>
+          <p>Pour le trombinoscope, on fait un délire collectif : demande à une intelligence artificielle (ChatGPT, Gemini, Copilot…) de t'habiller en marin. Marinière, béret à pompon, casquette de capitaine, vareuse… ou toute autre idée : laisse l'IA faire preuve d'imagination !</p>
+          <ol>
+            <li>Ouvre l'IA de ton choix et envoie-lui une photo de toi (de face, bien éclairée). Le plus simple : <a class="lien-defi" href="ia.html" target="_blank" rel="noopener">notre assistant photo</a>, qui ouvre ChatGPT avec le texte déjà prêt.</li>
+            <li>Colle le texte ci-dessous et laisse-la travailler. Pas satisfait·e ? Demande-lui une autre version.</li>
+            <li>Dépose ta plus belle création : elle ouvre ton hublot dans le trombinoscope. <b>En couple ou en duo d'amis : une seule photo à deux</b>, déguisés ensemble.</li>
+          </ol>
+        </div>
+        <div class="defi-prompt">
+          <b>Le texte à donner à l'IA</b>
+          <p id="prompt-ia">Transforme cette photo de moi en portrait de marin pour les « 20 ans sur la Seine » de Stéphanie et Henri. Habille-moi d'une marinière rayée bleu et blanc ou d'une vareuse de capitaine, avec un béret à pompon rouge ou une casquette de capitaine, et un foulard rouge noué au cou. Place-moi sur le pont d'un bateau sur la Seine, avec la Tour Eiffel ou un pont de Paris en arrière-plan, dans une ambiance rétro années 50. Fais preuve d'imagination et d'humour, mais garde mon visage bien reconnaissable.</p>
+          <button class="btn btn-primary" id="copier-prompt" type="button">Copier le texte</button>
+          <a class="btn btn-ghost" href="ia.html" target="_blank" rel="noopener">Assistant pas à pas (ChatGPT gratuit)</a>
+        </div>
+        <div class="defi-outil">
+          <b>L'utilitaire : trois étapes, c'est tout</b>
+          <div class="defi-etapes">
+            <div><span class="num">1</span><div><strong>Ouvre une IA gratuite</strong><div class="ia-btns"><a class="btn btn-primary" id="ia-chatgpt" href="https://chatgpt.com/" target="_blank" rel="noopener">ChatGPT (texte pré-rempli)</a><a class="btn btn-ghost" href="https://gemini.google.com/app" target="_blank" rel="noopener">Gemini</a><a class="btn btn-ghost" id="ia-copilot" href="https://copilot.microsoft.com/" target="_blank" rel="noopener">Copilot (pré-rempli)</a></div><small>Version gratuite, un compte suffit. Avec ChatGPT ou Copilot, le texte est déjà écrit : il ne reste qu'à joindre ta photo (le trombone) et envoyer. Avec Gemini, colle le texte copié ci-dessus.</small></div></div>
+            <div><span class="num">2</span><div><strong>Joins ta photo, puis envoie</strong><small>De face, bien éclairée, seul·e sur la photo (ou à deux pour une invitation à deux). Le résultat arrive en une à deux minutes ; tu peux demander une autre version (« plus de pompon », « casquette de capitaine »…).</small></div></div>
+            <div><span class="num">3</span><div><strong>Enregistre l'image et dépose-la</strong><small>Sur téléphone : appui long sur l'image, « Enregistrer ». Puis le bouton « Déposer ma photo de marin » ci-dessous, ou par mail.</small></div></div>
           </div>
         </div>
-        <div>
-          <div class="card">
-            <div class="eyebrow" style="font-size:1.6rem">2. Réponds avec ton téléphone</div>
-            <p class="lead" style="font-size:1rem;margin:6px 0 0" id="qr-lead">Scanne le code de ton billet, « 1 personne » ou « 2 personnes » : il ouvre le formulaire avec la bonne formule déjà cochée. Il ne reste qu'à choisir ton nom dans la liste.</p>
-            <div class="qrs">
-              <div class="qr"><b>Billet 1 personne</b><div class="box" id="qr-solo"></div><small id="qr-solo-url"></small><button class="mini" type="button" data-dlqr="qr-solo">Télécharger le QR</button></div>
-              <div class="qr"><b>Billet 2 personnes</b><div class="box" id="qr-duo"></div><small id="qr-duo-url"></small><button class="mini" type="button" data-dlqr="qr-duo">Télécharger le QR</button></div>
-            </div>
-            <div class="copyline" id="form-line" style="margin-top:14px"></div>
-          </div>
-          <div class="steps" style="margin-top:18px">
-            <div><b>1. Je retrouve mon nom</b><span>Mon invitation s'affiche : seul·e ou à deux.</span></div>
-            <div><b>2. Je réponds</b><span>Le formulaire, déjà rempli, en deux minutes.</span></div>
-            <div><b>3. Mon e-mail de correspondance</b><span>Celui où je veux recevoir le rappel et les infos de quai. Il est vérifié avec notre carnet d'adresses.</span></div>
-            <div><b>4. Ma photo de marin</b><span>Vraie tenue ou création par l'IA : <a href="#equipage">le défi photo</a>, pour mon hublot.</span></div>
-          </div>
+        <div class="defi-envoi" id="defi-envoi"></div>
+      </div>
+
+      <div class="card" id="manquant" style="margin-top:22px">
+        <div class="eyebrow" style="font-size:1.6rem">Je ne trouve pas mon nom</div>
+        <p class="lead" style="font-size:1rem;margin:6px 0 12px">Ce formulaire est réservé aux personnes invitées. On t'a invité·e de vive voix et ton nom n'apparaît pas ? S'il s'agit d'une erreur ou d'un oubli, envoie-nous ce message : nous vérifions la liste et nous te répondons très vite.</p>
+        <div class="row">
+          <label class="f">Prénom et nom <input id="m-nom" placeholder="Ton prénom et ton nom"></label>
+          <label class="f">Téléphone <input id="m-tel" placeholder="06 …"></label>
         </div>
+        <div class="preview" id="txt-manquant" style="margin-top:12px"></div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
+          <div class="copyline">Objet : <code id="obj-manquant">—</code><button class="mini" type="button" data-copy="obj-manquant">Copier</button></div>
+          <div class="copyline">À : <code id="mail-cible">—</code><button class="mini" type="button" data-copy="mail-cible">Copier</button></div>
+          <div class="copyline"><button class="btn btn-primary" type="button" id="copy-manquant">Copier le message</button><a class="btn btn-ghost" id="mailto-manquant" href="#" target="_blank" rel="noopener">Ouvrir ma messagerie</a></div>
+        </div>
+      </div>
+
+      <div class="liste-inv">
+        <div class="section-head" style="margin:30px 0 16px">
+          <div class="eyebrow">Pour qu'il n'y ait pas d'erreur</div>
+          <h2 style="font-size:1.6rem">La liste des invitations</h2>
+          <p class="lead" style="font-size:1rem">Si une réponse ne correspond pas à l'invitation prévue, nous te le rappellerons gentiment. Clique sur ton nom : ta fiche s'affiche en haut.</p>
+        </div>
+        <div class="colonnes">
+          <div class="colonne"><h3><span class="pastille solo"></span>Invité·es seul·es <small id="cpt-solo"></small></h3><div class="noms-inv" id="liste-solo"></div></div>
+          <div class="colonne"><h3><span class="pastille duo"></span>Invité·es à deux <small id="cpt-duo"></small></h3><div class="noms-inv" id="liste-duo"></div></div>
+        </div>
+      </div>
+
+      <div class="steps" style="margin-top:22px">
+        <div><b>1. Je retrouve mon nom</b><span>Mon invitation s'affiche : seul·e ou à deux. « Répondre » ouvre le formulaire déjà rempli avec mon nom et ma formule.</span></div>
+        <div><b>2. Je réponds à tout</b><span>Présence, dès les vœux ou à l'embarquement, venue, taille de t-shirt, régime. Pour deux : si mon conjoint·e ou ami·e vient.</span></div>
+        <div><b>3. Mon e-mail de correspondance</b><span>Celui où je veux recevoir le rappel et les infos de quai. Il est vérifié avec notre carnet d'adresses.</span></div>
+        <div><b>4. Ma photo de marin</b><span>Vraie tenue ou création par l'IA (une seule photo à deux pour un couple), sur le formulaire photo ou par mail.</span></div>
       </div>
     </section>
 
@@ -739,7 +801,8 @@ const CONFIG = {
     { t: 'À bord', s: 'Une petite laine pour le pont : fin février, la Seine rafraîchit.' }
   ],
   // Liste fermée des invités — une ligne par invitation (cabine).
-  // { prenom, initiale, photo: 'img/marins/xxx.jpg' ou '', avec: { prenom, initiale, photo } (facultatif), statut: 'oui' | 'attente' }
+  // { prenom, initiale, photo: 'img/marins/xxx.jpg' ou '', avec: { prenom, initiale, photo } (facultatif), photoDuo: 'img/marins/xxx-duo.jpg' (une seule photo à deux), statut: 'oui' | 'attente' }
+  // Seules les invitations « oui » apparaissent dans le trombinoscope (ils ont dit oui), comme sur le site des 60 ans.
   invites: [
     { prenom: 'Sophie', initiale: 'P', statut: 'attente' },
     { prenom: 'Nicolas', initiale: 'P', statut: 'attente' },
@@ -1032,74 +1095,99 @@ $('#timeline').innerHTML = CONFIG.programme.map(p => '<div class="stop"><div cla
 $('#dress').innerHTML = CONFIG.dress.map(d => '<div><b>' + esc(d.t) + '</b><span>' + esc(d.s) + '</span></div>').join('');
 $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="badge warn">Programme provisoire : horaires à caler avec la mairie et la compagnie</span>';
 
-/* ---------- trombinoscope de l'équipage ---------- */
+/* ---------- trombinoscope de l'équipage : ils ont dit oui (mode 60 ans) ---------- */
 (function crew() {
   const inv = CONFIG.invites;
+  const nm = p => p.prenom + (p.initiale ? ' ' + p.initiale + '.' : '');
   const invitations = inv.length;
   const personnes = inv.reduce((n, i) => n + (i.avec ? 2 : 1), 0);
-  const abord = inv.filter(i => i.statut === 'oui').reduce((n, i) => n + (i.avec ? 2 : 1), 0);
-  const photos = inv.reduce((n, i) => n + (i.photo ? 1 : 0) + (i.avec && i.avec.photo ? 1 : 0), 0);
+  const ok = inv.filter(i => i.statut === 'oui');
+  const abord = ok.reduce((n, i) => n + (i.avec ? 2 : 1), 0);
+  const photos = inv.reduce((n, i) => n + (i.photoDuo ? 2 : (i.photo ? 1 : 0) + (i.avec && i.avec.photo ? 1 : 0)), 0);
   $('#stats').innerHTML = [['' + invitations, 'cabines'], ['' + personnes, 'personnes invitées'], ['' + abord, 'déjà à bord'], ['' + photos, 'photos de marins']]
     .map(([b, st]) => '<div class="stat"><b>' + b + '</b><span>' + st + '</span></div>').join('');
-  const hole = (p, label) => '<div class="porthole">' + (p && p.photo ? '<img src="' + esc(p.photo) + '" alt="' + esc(label) + '">' : '<span class="wait">Photo de marin attendue</span>') + '</div>';
+  $('#trombi-intro').textContent = (abord ? abord + ' invité' + (abord > 1 ? 's' : '') + ' confirmé' + (abord > 1 ? 's' : '') + ' à ce jour. ' : 'Les premiers marins apparaîtront ici dès leur réponse. ') +
+    'Une photo par personne, ou une seule photo à deux pour les couples et les duos d\'amis. Prénom et initiale seulement : la discrétion est de mise sur le pont.';
+  const hole = (p, label) => '<div class="porthole">' + (p && p.photo ? '<img src="' + esc(p.photo) + '" data-full="' + esc(p.photo) + '" alt="' + esc(label) + '">' : '<span class="wait">Photo de marin attendue</span>') + '</div>';
   let html = '<div class="cabin hosts"><img class="banner" src="img/hotes-marins.jpg" data-full="img/hotes-marins.jpg" alt="Stéphanie et Henri en tenue de marin, porté acrobatique"><div class="portholes">' +
     '<div class="porthole"><img src="img/marin-stephanie-portrait.jpg" alt="Stéphanie en marin"></div><div class="porthole"><img src="img/marin-henri-portrait.jpg" alt="Henri en marin"></div></div>' +
     '<b>Stéphanie &amp; Henri</b><span>Les capitaines · cabine n° 0 · tenue réglementaire</span><span class="st ok">À bord depuis 2007</span></div>';
-  if (!inv.length) {
-    html += '<div class="empty"><strong>Les cabines se remplissent</strong>Les premiers matelots apparaîtront ici dès leurs réponses et leurs photos. Soyez les premiers : <a href="#reponse">je réponds</a>.</div>';
-  } else {
-    html += inv.map((i, k) => {
-      const nm = p => p.prenom + (p.initiale ? ' ' + p.initiale + '.' : '');
-      const names = esc(nm(i)) + (i.avec ? ' &amp; ' + esc(nm(i.avec)) : '');
-      return '<div class="cabin"><div class="portholes">' + hole(i, i.prenom) + (i.avec ? hole(i.avec, i.avec.prenom) : '') + '</div><b>' + names + '</b><span>Cabine n° ' + (k + 1) + '</span><span class="st' + (i.statut === 'oui' ? ' ok' : '') + '">' + (i.statut === 'oui' ? 'À bord' : 'Invitation en route') + '</span></div>';
-    }).join('');
-  }
-  $('#crew').innerHTML = '<div class="trombi">' + html + '</div>';
-  if (CONFIG.formulairePhotoUrl) $('#photo-howto').innerHTML = '<a class="btn btn-primary" href="' + esc(CONFIG.formulairePhotoUrl) + '" target="_blank" rel="noopener">Déposer ma photo de marin</a>' +
-    '<p>Vraie tenue ou création par l\'IA : les deux ouvrent le hublot. Le dépôt passe par un petit formulaire Google (compte Google demandé). <b>Pas de compte Google ?</b> Envoie ta photo par mail à <span style="user-select:all">' + esc(CONFIG.mailReponse) + '</span>, objet « ' + esc(CONFIG.motCle) + ' PHOTO » et ton prénom.</p>';
+  html += ok.map((i, k) => {
+    const names = esc(nm(i)) + (i.avec ? ' &amp; ' + esc(nm(i.avec)) : '');
+    const ports = i.avec && i.photoDuo ? '<div class="porthole duo"><img src="' + esc(i.photoDuo) + '" data-full="' + esc(i.photoDuo) + '" alt="' + names + '"></div>' : hole(i, i.prenom) + (i.avec ? hole(i.avec, i.avec.prenom) : '');
+    return '<div class="cabin"><div class="portholes">' + ports + '</div><b>' + names + '</b><span>Cabine n° ' + (k + 1) + '</span><span class="st ok">À bord</span></div>';
+  }).join('');
+  const nPlaces = abord < 12 ? 3 : 0;
+  for (let p = 0; p < nPlaces; p++) html += '<a class="cabin place" href="#reponse"><div class="portholes"><div class="porthole"><span>?</span></div></div><b>Ta cabine ici !</b><span>Réponds et envoie ta photo de marin</span></a>';
+  const trombi = $('#crew'); trombi.innerHTML = '<div class="trombi' + (abord > 45 ? ' mini' : abord > 20 ? ' compact' : '') + '">' + html + '</div>';
+  const envoi = '<a class="btn btn-primary" href="' + esc(CONFIG.formulairePhotoUrl || '#reponse') + '" target="_blank" rel="noopener">Déposer ma photo de marin</a>' +
+    '<p>Le dépôt passe par un petit formulaire Google : Google demande d\'être connecté à un compte Google (Gmail…).<br><b>Tu ne sais pas utiliser l\'IA ?</b> Aucun souci : dépose une photo normale en précisant « à transformer », Stéphanie et Henri la déguiseront pour toi.<br><b>Pas de compte Google ?</b> Envoie ta photo par mail (précise « à transformer » si besoin) : <span style="user-select:all">' + esc(CONFIG.mailReponse) + '</span>, objet « ' + esc(CONFIG.motCle) + ' PHOTO » et ton prénom.</p>';
+  $('#defi-envoi').innerHTML = envoi;
+  $('#photo-howto').innerHTML = '<div class="eyebrow" style="font-size:1.6rem">Envoyer sa photo de marin</div><div class="defi-envoi" style="border:0;padding-top:8px">' + envoi + '</div><p class="lead" style="font-size:.95rem;margin:10px 0 0">Pas encore de tenue ? <a class="lien-defi" href="#reponse">Le défi photo</a> : l\'IA t\'habille en marin en deux minutes.</p>';
   const bp = $('#copier-prompt');
   if (bp) bp.addEventListener('click', () => copyText($('#prompt-ia').textContent, 'Texte copié : colle-le dans ton IA avec ta photo !'));
   // Liens directs : ChatGPT et Copilot acceptent un texte pré-rempli (?q=) ; la photo se joint ensuite.
-  const pre = 'Je vais t\'envoyer une photo de moi dans le message suivant. Quand tu l\'auras : ' + $('#prompt-ia').textContent.replace(/^Transforme cette photo de moi/, 'transforme cette photo');
+  const pre = 'Je vais t\'envoyer une photo de moi dans le message suivant. Quand tu l\'auras : ' + $('#prompt-ia').textContent.replace(/^Transforme cette photo de moi/, 'transforme cette photo') + ' Si tu n\'as pas encore la photo, demande-la-moi.';
   const cg = $('#ia-chatgpt'); if (cg) cg.href = 'https://chatgpt.com/?q=' + encodeURIComponent(pre);
   const cp = $('#ia-copilot'); if (cp) cp.href = 'https://copilot.microsoft.com/?q=' + encodeURIComponent(pre);
 })();
 
-/* ---------- je réponds : retrouve ton nom (liste fermée), nom manquant, QR ---------- */
+/* ---------- je réponds : retrouve ton nom (liste fermée), billets QR, liste des invitations, nom manquant (mode 60 ans) ---------- */
 (function rsvp() {
-  const norm = t => String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9 ]/g, '').trim();
+  const norm = t => String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9 ]/g, '').trim();
   const nomCourt = p => p.prenom + (p.initiale ? ' ' + p.initiale + '.' : '');
   const libelle = i => nomCourt(i) + (i.avec ? ' & ' + nomCourt(i.avec) + ' — invitation pour deux' : ' — invitation pour une personne');
+  const invNom = i => nomCourt(i) + (i.avec ? ' & ' + nomCourt(i.avec) : '');
   const lien = i => CONFIG.formulaireUrl + '?usp=pp_url&' + CONFIG.champFormule + '=' + encodeURIComponent(i.avec ? CONFIG.valeurs.duo : CONFIG.valeurs.solo) + '&' + CONFIG.champQui + '=' + encodeURIComponent(libelle(i));
   const qr = (el, url, size) => { try { if (window.QRCode) new QRCode(el, { text: url, width: size, height: size, colorDark: '#d81b60', colorLight: '#fff5f8', correctLevel: QRCode.CorrectLevel.M }); } catch (e) { } };
   document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', () => copyText($('#' + b.dataset.copy).textContent, 'Copié')));
+  const limite = CONFIG.dateLimiteReponse ? fmtDate(new Date(CONFIG.dateLimiteReponse + 'T12:00:00')) : '';
+  $('#badge-limite').textContent = 'Réponse souhaitée avant le ' + (limite || '—') + (CONFIG.dateLimiteConfirmee ? '' : ' (à confirmer)');
 
-  /* 1. Retrouve ton nom */
-  const inp = $('#cherche'), out = $('#trouve');
+  /* 1. Retrouve ton nom : sélecteur, recherche, fiche + QR, billet mis en avant */
+  const inp = $('#cherche'), out = $('#trouve'), sel = $('#sel-invite');
+  const VIDE = '<p class="trouve-vide">Choisis ton nom ou tape ton prénom.</p>';
   function fiche(i) {
     const duo = !!i.avec;
     const d = document.createElement('div'); d.className = 'fiche';
     d.innerHTML = '<div><h3>Bonjour ' + esc(nomCourt(i)) + ' !</h3><span class="formule">' + (duo ? 'Invitation pour deux' : 'Invitation pour une personne') + '</span>' +
-      '<p>' + (duo ? 'Ton invitation est pour deux personnes : toi et ' + esc(nomCourt(i.avec)) + (i.avec.initiale ? '' : '.') : 'Ton invitation est pour une personne : toi. Merci de répondre « Toi seul·e ».') + '</p>' +
+      '<p>' + (duo ? 'Ton invitation est pour deux personnes : toi et ' + esc(nomCourt(i.avec)) + (i.avec.initiale ? '' : '.') + ' Merci de répondre « Toi et ton conjoint·e ou ami·e ».' : 'Ton invitation est pour une personne : toi. Merci de répondre « Toi seul·e ».') + '</p>' +
       '<a class="btn btn-primary" href="' + esc(lien(i)) + '" target="_blank" rel="noopener">Répondre au formulaire</a>' +
       '<p class="note">Pense à ton e-mail de correspondance : il servira pour le rappel, le quai et l\'horaire.</p></div>' +
       '<div class="qr"><div class="box"></div></div>';
     qr(d.querySelector('.box'), lien(i), 110);
     return d;
   }
-  function chercher() {
-    const q = norm(inp.value); out.innerHTML = '';
-    if (q.length < 2) return;
-    const hits = CONFIG.invites.filter(i => norm(i.prenom).indexOf(q) === 0 || (i.avec && i.avec.prenom !== 'Madame' && norm(i.avec.prenom).indexOf(q) === 0));
-    if (!hits.length) { out.innerHTML = '<p class="hint-manquant">Aucune invitation à ce prénom. Essaie une autre orthographe, ou signale-nous ton nom juste en dessous.</p>'; const m = $('#manquant'); m.classList.remove('flash'); void m.offsetWidth; m.classList.add('flash'); return; }
-    hits.forEach(i => out.appendChild(fiche(i)));
+  function montrer(liste) {
+    out.innerHTML = '';
+    document.querySelectorAll('.deux-qr .qr-card').forEach(c => c.classList.remove('choisie'));
+    if (!liste.length) { out.innerHTML = '<p class="trouve-vide">Pas trouvé : vérifie l\'orthographe, ou <a href="#manquant">signale-le-nous</a> juste en dessous.</p>'; const m = $('#manquant'); m.classList.remove('flash'); void m.offsetWidth; m.classList.add('flash'); return; }
+    if (liste.length > 4) { out.innerHTML = '<p class="trouve-vide">Continue à taper ton prénom…</p>'; return; }
+    liste.forEach(i => out.appendChild(fiche(i)));
+    if (liste.length === 1) { const c = document.querySelector('.deux-qr .qr-card[data-formule="' + (liste[0].avec ? 'duo' : 'solo') + '"]'); if (c) c.classList.add('choisie'); }
   }
-  inp.addEventListener('input', () => { sel.value = ''; chercher(); });
-  const sel = $('#sel-invite');
-  CONFIG.invites.forEach((i, k) => { const o = document.createElement('option'); o.value = k; o.textContent = libelle(i); sel.appendChild(o); });
-  sel.addEventListener('change', () => { out.innerHTML = ''; inp.value = ''; if (sel.value !== '') out.appendChild(fiche(CONFIG.invites[+sel.value])); });
+  inp.addEventListener('input', () => { sel.value = ''; const q = norm(inp.value); if (q.length < 2) { out.innerHTML = VIDE; document.querySelectorAll('.deux-qr .qr-card').forEach(c => c.classList.remove('choisie')); return; }
+    montrer(CONFIG.invites.filter(i => norm(i.prenom).indexOf(q) === 0 || norm(invNom(i)).indexOf(q) === 0 || (i.avec && i.avec.prenom !== 'Madame' && norm(i.avec.prenom).indexOf(q) === 0))); });
+  const tri = CONFIG.invites.map((i, k) => ({ i, k })).sort((a, b) => invNom(a.i).localeCompare(invNom(b.i), 'fr'));
+  tri.forEach(({ i, k }) => { const o = document.createElement('option'); o.value = k; o.textContent = invNom(i) + (i.avec ? ' (à deux)' : ' (seul·e)'); sel.appendChild(o); });
+  const oa = document.createElement('option'); oa.value = 'absent'; oa.textContent = 'Mon nom n\'est pas dans la liste'; sel.appendChild(oa);
+  sel.addEventListener('change', () => {
+    inp.value = '';
+    if (sel.value === 'absent') { out.innerHTML = '<p class="trouve-vide">Ce formulaire est réservé aux personnes invitées. S\'il s\'agit d\'une erreur ou d\'un oubli, <a href="#manquant">signale-le-nous</a> avec le message prêt à envoyer juste en dessous : nous te répondrons très vite.</p>'; const m = $('#manquant'); m.classList.remove('flash'); void m.offsetWidth; m.classList.add('flash'); m.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+    if (sel.value === '') { out.innerHTML = VIDE; return; }
+    montrer([CONFIG.invites[+sel.value]]);
+  });
 
-  /* 2. Nom manquant : message prêt à envoyer */
+  /* 2. La liste des invitations : deux colonnes cliquables */
+  const solo = tri.filter(x => !x.i.avec), duo = tri.filter(x => x.i.avec);
+  const remplir = (id, liste) => { const box = $('#' + id); box.innerHTML = ''; liste.forEach(({ i, k }) => { const b = document.createElement('button'); b.type = 'button';
+    b.innerHTML = esc(nomCourt(i)) + (i.avec ? ' <em>&amp; ' + esc(nomCourt(i.avec)) + '</em>' : '');
+    b.addEventListener('click', () => { sel.value = k; inp.value = ''; montrer([i]); $('#panel-reponse .card').scrollIntoView({ behavior: 'smooth', block: 'start' }); }); box.appendChild(b); }); };
+  remplir('liste-solo', solo); remplir('liste-duo', duo);
+  $('#cpt-solo').textContent = '· ' + solo.length; $('#cpt-duo').textContent = '· ' + duo.length;
+  $('#nb-solo').textContent = solo.length; $('#nb-duo').textContent = duo.length;
+
+  /* 3. Nom manquant : message prêt à envoyer */
   const objet = CONFIG.motCle + ' NOM MANQUANT';
   $('#obj-manquant').textContent = objet; $('#mail-cible').textContent = CONFIG.mailReponse;
   function msg() {
@@ -1112,16 +1200,14 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
   ['m-nom', 'm-tel'].forEach(id => $('#' + id).addEventListener('input', msg)); msg();
   $('#copy-manquant').addEventListener('click', () => copyText(msg(), 'Message copié : collez-le dans votre mail ou WhatsApp'));
 
-  /* 3. QR codes solo / duo (billets) */
+  /* 4. Les deux billets QR (solo / duo) */
   const pageUrl = (CONFIG.siteUrl || (location.origin + location.pathname)) + '#reponse';
-  const solo = CONFIG.formulaireSolo || CONFIG.formulaireUrl || pageUrl, duo = CONFIG.formulaireDuo || CONFIG.formulaireUrl || pageUrl;
+  const uSolo = CONFIG.formulaireSolo || CONFIG.formulaireUrl || pageUrl, uDuo = CONFIG.formulaireDuo || CONFIG.formulaireUrl || pageUrl;
+  $('#lien-solo').href = uSolo; $('#lien-duo').href = uDuo;
+  qr($('#qr-solo'), uSolo, 150); qr($('#qr-duo'), uDuo, 150);
   $('#form-line').innerHTML = CONFIG.formulaireUrl
-    ? '<a class="btn btn-ghost" href="' + esc(CONFIG.formulaireUrl) + '" target="_blank" rel="noopener">Ouvrir le formulaire sans QR code</a>'
+    ? '<a class="btn btn-ghost" href="' + esc(CONFIG.formulaireUrl) + '" target="_blank" rel="noopener">Ouvrir le formulaire sans QR code</a><span style="font-size:.9rem;color:var(--ink-2)">Le billet scanné ouvre le formulaire avec la bonne formule déjà cochée ; il ne reste qu\'à choisir ton nom dans la liste.</span>'
     : '<span class="badge warn">Formulaire en ligne (solo / duo) : bientôt disponible</span>';
-  [['qr-solo', solo], ['qr-duo', duo]].forEach(([id, url]) => {
-    $('#' + id + '-url').innerHTML = '<a href="' + esc(url) + '" target="_blank" rel="noopener" style="color:#d81b60;font-weight:700;word-break:normal">Ouvrir le formulaire ' + (id === 'qr-solo' ? '« 1 personne »' : '« 2 personnes »') + '</a>';
-    qr($('#' + id), url, 150);
-  });
 })();
 
 /* ---------- souvenirs : filtres par époque + galerie + lightbox ---------- */

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assistant photo de marin</title>
+<meta name="description" content="Transforme ta photo en portrait de marin avec ChatGPT (gratuit) pour les 20 ans sur la Seine de Stéphanie et Henri.">
+<meta property="og:title" content="Assistant photo : deviens marin pour les 20 ans sur la Seine">
+<meta property="og:image" content="https://perezhenricontact-a11y.github.io/20ANSSEINE/img/apercu-partage.jpg">
+<link rel="icon" href="img/favicon.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3ecdc;--paper:#fffaf0;--paper-2:#f7efdf;--ink:#1b2742;--ink-2:#4b5672;--line:#d9cbae;--band:#13294b;--rouge:#c2303a;--or:#c69b3b;--or-2:#e9d28c;--seine:#3a76a6;--seine-3:#dcebf5;--rose:#d81b60}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:Lato,system-ui,sans-serif;line-height:1.5;font-size:17px}
+.bandeau{height:16px;background:repeating-linear-gradient(90deg,var(--band) 0 28px,#fff 28px 56px);border-bottom:3px solid var(--or)}
+main{max-width:720px;margin:0 auto;padding:28px 16px 60px}
+.kicker{font-family:Yellowtail,cursive;color:var(--rouge);font-size:1.7rem;text-align:center;line-height:1}
+h1{font-family:"Playfair Display",Georgia,serif;font-size:clamp(1.6rem,6vw,2.3rem);line-height:1.1;text-align:center;margin-top:4px}
+.sous{font-family:"Playfair Display",Georgia,serif;font-style:italic;color:var(--ink-2);text-align:center;font-size:1.15rem;margin:6px 0 22px}
+.carte{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 10px 30px rgba(27,39,66,.10)}
+.carte h2{font-family:"Playfair Display",Georgia,serif;font-size:1.15rem;margin-bottom:10px;display:flex;gap:10px;align-items:center}
+.num{flex:none;width:32px;height:32px;border-radius:50%;background:var(--band);color:var(--or-2);display:grid;place-items:center;font-size:.95rem;font-weight:900;font-family:Lato,sans-serif}
+.choix{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.choix label{border:2px solid var(--line);border-radius:14px;padding:12px;text-align:center;font-weight:900;cursor:pointer;background:var(--paper-2)}
+.choix input{display:none}
+.choix label:has(input:checked){border-color:var(--rose);background:#fff5f8;color:var(--rose)}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px 18px;border-radius:999px;border:2px solid transparent;font:900 1.02rem Lato,sans-serif;letter-spacing:.03em;text-decoration:none;cursor:pointer;margin-top:10px}
+.btn-main{background:var(--rouge);color:#fff;box-shadow:0 10px 24px rgba(194,48,58,.28)}
+.btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+p,li{color:var(--ink-2)}
+ol{margin:6px 0 0 20px;display:grid;gap:6px}
+li b,p b{color:var(--ink)}
+.prompt{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-size:1.05rem;color:var(--ink);background:var(--seine-3);border-radius:12px;padding:12px 14px;margin-top:10px;user-select:all}
+.note{font-size:.9rem;margin-top:8px}
+.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,120px);background:var(--band);color:var(--or-2);padding:10px 18px;border-radius:999px;font-weight:800;transition:transform .3s;visibility:hidden}
+.toast.on{transform:translate(-50%,0);visibility:visible}
+a.lien{color:var(--rose);font-weight:800}
+@media (prefers-color-scheme:dark){:root{--bg:#0b1730;--paper:#14264a;--paper-2:#0f1f3d;--ink:#f1e9d8;--ink-2:#b9c2d6;--line:#2b4068;--seine-3:#17345a;--rouge:#e0525c;--or:#d9b25a}.choix label:has(input:checked){background:#3a1a2a}}
+</style>
+</head>
+<body>
+<div class="bandeau"></div>
+<main>
+  <div class="kicker">20 ans sur la Seine</div>
+  <h1>L'assistant photo de marin</h1>
+  <p class="sous">Deviens marin en 2 minutes avec ChatGPT (gratuit)</p>
+
+  <div class="carte">
+    <h2><span class="num">1</span>Tu te déguises…</h2>
+    <div class="choix">
+      <label><input type="radio" name="qui" value="seul" checked><span>Seul·e</span></label>
+      <label><input type="radio" name="qui" value="duo"><span>À deux (couple ou amis)</span></label>
+    </div>
+    <p class="note">À deux : une seule photo de vous deux ensemble, pour un hublot à deux dans le trombinoscope.</p>
+  </div>
+
+  <div class="carte">
+    <h2><span class="num">2</span>Ouvre ChatGPT avec le texte déjà prêt</h2>
+    <a class="btn btn-main" id="go-chatgpt" target="_blank" rel="noopener">Ouvrir ChatGPT</a>
+    <p class="note">Un compte ChatGPT gratuit est demandé pour créer des images (inscription avec ton adresse e-mail ou ton compte Google). La version gratuite permet quelques images par jour : largement assez !</p>
+    <div class="prompt" id="prompt"></div>
+    <button class="btn btn-ghost" id="copier" type="button">Copier le texte (pour Gemini ou une autre IA)</button>
+    <p class="note">Autre IA gratuite : <a class="lien" href="https://gemini.google.com/app" target="_blank" rel="noopener">Gemini</a> ou <a class="lien" id="go-copilot" href="https://copilot.microsoft.com/" target="_blank" rel="noopener">Copilot</a> (texte déjà prêt) : ajoute ta photo, puis envoie.</p>
+  </div>
+
+  <div class="carte">
+    <h2><span class="num">3</span>Ajoute ta photo</h2>
+    <ol>
+      <li>Dans ChatGPT, appuie sur <b>+</b> (ou le trombone) à gauche de la zone de message.</li>
+      <li id="etape-photo">Choisis une photo <b>de face, bien éclairée</b>.</li>
+      <li>Envoie : l'image se fabrique en une à deux minutes. Pas satisfait·e ? Écris « refais-la », « plus de pompon » ou « casquette de capitaine ».</li>
+    </ol>
+  </div>
+
+  <div class="carte">
+    <h2><span class="num">4</span>Enregistre l'image et envoie-la nous</h2>
+    <ol>
+      <li>Sur téléphone : <b>appui long sur l'image</b> puis « Enregistrer ». Sur ordinateur : bouton de téléchargement sur l'image.</li>
+      <li>Dépose-la sur <a class="lien" href="https://docs.google.com/forms/d/e/1FAIpQLSemTDuriAnBuFZZpLRrDZ8n5jS3cuMfL8q1-v-AWF1OwUz73w/viewform" target="_blank" rel="noopener">le formulaire photo</a> (compte Google), ou envoie-la par mail à <a class="lien" href="mailto:perez.henri.contact@gmail.com?subject=SEINE-20%20PHOTO%20%E2%80%93%20">perez.henri.contact@gmail.com</a>, objet « SEINE-20 PHOTO » et ton prénom.</li>
+    </ol>
+    <p class="note"><b>Vraiment pas à l'aise ?</b> Envoie une photo normale par mail en précisant « à transformer » : Stéphanie et Henri s'en chargent.</p>
+  </div>
+
+  <p style="text-align:center;margin-top:10px"><a class="lien" href="./#reponse">← Retour au site des 20 ans</a></p>
+</main>
+<div class="toast" id="toast"></div>
+<script>
+const TEXTES = {
+  seul: "Je vais t'envoyer une photo de moi. Transforme-la en portrait de marin pour les « 20 ans sur la Seine » de Stéphanie et Henri. Habille-moi d'une marinière rayée bleu et blanc ou d'une vareuse de capitaine, avec un béret à pompon rouge ou une casquette de capitaine, et un foulard rouge noué au cou. Place-moi sur le pont d'un bateau sur la Seine, avec la Tour Eiffel ou un pont de Paris en arrière-plan, dans une ambiance rétro années 50. Fais preuve d'imagination et d'humour, mais garde mon visage bien reconnaissable. Si tu n'as pas encore la photo, demande-la-moi.",
+  duo: "Je vais t'envoyer une photo de nous deux. Transforme-la en un seul portrait de marins pour les « 20 ans sur la Seine » de Stéphanie et Henri. Habille chacun d'une marinière rayée bleu et blanc ou d'une vareuse de capitaine, avec un béret à pompon rouge ou une casquette de capitaine, et un foulard rouge noué au cou. Place-nous sur le pont d'un bateau sur la Seine, avec la Tour Eiffel ou un pont de Paris en arrière-plan, dans une ambiance rétro années 50. Fais preuve d'imagination et d'humour, mais garde nos deux visages bien reconnaissables. Si tu n'as pas encore la photo, demande-la-moi."
+};
+const qui = () => document.querySelector('input[name="qui"]:checked').value;
+function maj(){
+  const t = TEXTES[qui()];
+  document.getElementById("prompt").textContent = "« " + t + " »";
+  document.getElementById("go-chatgpt").href = "https://chatgpt.com/?q=" + encodeURIComponent(t);
+  document.getElementById("go-copilot").href = "https://copilot.microsoft.com/?q=" + encodeURIComponent(t);
+  document.getElementById("etape-photo").innerHTML = 'Choisis une photo <b>de face, bien éclairée</b>' + (qui() === "duo" ? ', <b>où l\'on vous voit tous les deux</b>.' : '.');
+}
+document.querySelectorAll('input[name="qui"]').forEach(r => r.onchange = maj);
+function toast(m){ const el = document.getElementById("toast"); el.textContent = m; el.classList.add("on"); setTimeout(()=>el.classList.remove("on"), 2500); }
+document.getElementById("copier").onclick = async ()=>{
+  try { await navigator.clipboard.writeText(TEXTES[qui()]); toast("Texte copié !"); }
+  catch(e){ const r = document.createRange(); r.selectNodeContents(document.getElementById("prompt")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast("Texte sélectionné : copie-le."); }
+};
+maj();
+</script>
+</body>
+</html>
