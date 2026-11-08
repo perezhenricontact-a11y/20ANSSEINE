@@ -21,7 +21,8 @@ img{max-width:100%}
 [hidden]{display:none!important}
 </style>
 <style>
-/* v1.9 — trombinoscope au format exact du site des 60 ans (mosaïque, taille automatique, hôtes en tête).
+/* v1.9.1 — onglet Trombinoscope réduit à l'essentiel comme Casablanca (intro, stats, hôtes, mosaïque) ; cadre des hôtes optionnel.
+   v1.9 — trombinoscope au format exact du site des 60 ans (mosaïque, taille automatique, hôtes en tête).
    v1.8.1 — renvois identiques au modèle (compteur « voir qui vient », logo + J-xxx, fiche #prenom-initiale, aide par mail).
    v1.8 — 9 onglets, même fonctionnement que « De Casablanca au cochonnet » (statistiques invités, défi photo, hôtels), personnalité croisière conservée.
    Layout : une affiche de croisière rétro — bandeau marine avec carrousel d'affiches, billet d'embarquement crème, onglets comme des talons de billets, vagues animées, jukebox. */
@@ -703,15 +704,10 @@ footer small{opacity:.7}
       <div class="section-head">
         <div class="eyebrow">Ils ont dit oui !</div>
         <h2>Le trombinoscope des marins</h2>
-        <p class="lead" id="trombi-intro">Les invités qui ont confirmé leur venue, en tenue de marin. Une photo par personne, ou une seule photo à deux pour les couples et les duos d'amis. Prénom et initiale seulement : la discrétion est de mise sur le pont.</p>
+        <p class="lead" id="trombi-intro">Les invités qui ont confirmé leur venue, en tenue de marin. Une photo par personne, ou une seule photo à deux pour les couples et les duos d'amis.</p>
+        <p class="lead" style="font-size:1rem"><b>Tenue de marin obligatoire sur la photo</b> (marinière, béret à pompon, casquette de capitaine, vareuse…) : <a href="#defi" class="lien-defi">le défi photo</a> t'habille en deux minutes, ou dépose une photo normale « à transformer ».</p>
       </div>
       <div id="crew"></div>
-      <div class="ship-rule">
-        <img src="img/marin-stephanie-portrait.jpg" data-full="img/marin-killer-boogie.jpg" alt="Stéphanie en tenue de marin : l'exemple à suivre">
-        <div class="eyebrow">Règle du bord</div>
-        <p><strong>Tenue de marin obligatoire sur la photo</strong> : marinière, béret à pompon, casquette de capitaine, foulard noué ou vareuse, à vous de choisir. Pas de tenue sous la main ? L'IA vous habille en marin en deux minutes : <a href="#defi" class="lien-defi">le défi photo</a>. Vraiment pas à l'aise ? Envoyez une photo normale en précisant « à transformer » : les capitaines s'en chargent.</p>
-      </div>
-      <div class="card" style="margin-top:22px" id="photo-howto"></div>
     </section>
 
     <!-- ================= DÉFI PHOTO ================= -->
@@ -975,7 +971,7 @@ const CONFIG = {
     { t: 'Tous', s: 'Une touche de rouge, de marine ou d\'or pour être raccord avec l\'affiche.' },
     { t: 'À bord', s: 'Une petite laine pour le pont : en mars, la Seine rafraîchit encore.' }
   ],
-  // Les hôtes en tête du trombinoscope (un cadre par couple d'hôtes, comme sur le site des 60 ans)
+  // Les hôtes en tête du trombinoscope (un cadre par couple d'hôtes, comme sur le site des 60 ans). Mettre [] pour retirer le cadre et laisser toute la place aux invités.
   hotesTrombi: [{ noms: 'Stéphanie & Henri', photo: 'img/hotes-marins.jpg' }],
   // Liste fermée des invités — une ligne par invitation (cabine).
   // { prenom, initiale, photo: 'img/marins/xxx.jpg' ou '', avec: { prenom, initiale, photo } (facultatif), photoDuo: 'img/marins/xxx-duo.jpg' (une seule photo à deux), statut: 'oui' | 'attente' }
@@ -1318,7 +1314,7 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
     $('#trombi-intro').textContent = (nbPers ? nbPers + ' invité' + (nbPers > 1 ? 's' : '') + ' confirmé' + (nbPers > 1 ? 's' : '') + ' à ce jour. ' : 'Les premiers marins apparaîtront ici dès leur réponse. ') +
       'Une photo par personne, ou une seule photo à deux pour les couples et les duos d\'amis. Prénom et initiale seulement : la discrétion est de mise sur le pont.';
     const vide = t => '<div class="t-vide"><span>' + t + '</span></div>';
-    const hotes = '<div class="t-hotes" style="--nh:' + CONFIG.hotesTrombi.length + '">' + CONFIG.hotesTrombi.map(h => '<figure class="t-orient"><div class="t-orient-in">' +
+    const hotes = !CONFIG.hotesTrombi.length ? '' : '<div class="t-hotes" style="--nh:' + CONFIG.hotesTrombi.length + '">' + CONFIG.hotesTrombi.map(h => '<figure class="t-orient"><div class="t-orient-in">' +
       (h.photo ? '<img src="' + esc(h.photo) + '" data-full="' + esc(h.photo) + '" alt="' + esc(h.noms) + ' en tenue de marin">' : vide('Photo à venir')) + '</div><figcaption>' + esc(h.noms) + '</figcaption></figure>').join('') + '</div>';
     const cartes = ok.map((i, k) => {
       const grad = GRADS[(k * 3) % GRADS.length];
@@ -1340,7 +1336,6 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
   const envoi = '<a class="btn btn-primary" href="' + esc(CONFIG.formulairePhotoUrl || '#reponse') + '" target="_blank" rel="noopener">Déposer ma photo de marin</a>' +
     '<p><b>Le plus simple :</b> joins ta photo en répondant au formulaire (question « Ta photo de marin ») ; tu peux aussi la déposer plus tard avec ce bouton. Dans les deux cas, Google demande d\'être connecté à un compte Google (Gmail…) pour recevoir le fichier.<br><b>Tu ne sais pas utiliser l\'IA ?</b> Aucun souci : dépose une photo normale et coche « photo normale, à transformer », Stéphanie et Henri la déguiseront pour toi.<br><b>Pas de compte Google ?</b> Envoie ta photo par mail (précise « à transformer » si besoin) : <span style="user-select:all">' + esc(CONFIG.mailReponse) + '</span>, objet « ' + esc(CONFIG.motCle) + ' PHOTO » et ton prénom.</p>';
   $('#defi-envoi').innerHTML = envoi;
-  $('#photo-howto').innerHTML = '<div class="eyebrow" style="font-size:1.6rem">Envoyer sa photo de marin</div><div class="defi-envoi" style="border:0;padding-top:8px">' + envoi + '</div><p class="lead" style="font-size:.95rem;margin:10px 0 0">Pas encore de tenue ? <a class="lien-defi" href="#defi">Le défi photo</a> : l\'IA t\'habille en marin en deux minutes.</p>';
   const bp = $('#copier-prompt');
   if (bp) bp.addEventListener('click', () => copyText($('#prompt-ia').textContent, 'Texte copié : colle-le dans ton IA avec ta photo !'));
   // Liens directs : ChatGPT et Copilot acceptent un texte pré-rempli (?q=) ; la photo se joint ensuite. Version « à deux » : une seule photo pour le couple ou le duo.
