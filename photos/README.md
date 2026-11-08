@@ -1,6 +1,6 @@
 # Photos & vidéos du jour J
 
-Déposez ici les photos et vidéos du 27 février 2027 : elles s'affichent automatiquement dans l'onglet « Photos & vidéos » du site, rangées par album selon le **préfixe du nom de fichier** :
+Déposez ici les photos et vidéos du 20 mars 2027 : elles s'affichent automatiquement dans l'onglet « Photos & vidéos » du site, rangées par album selon le **préfixe du nom de fichier** :
 
 | Préfixe | Album |
 |---|---|

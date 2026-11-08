@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>20 ans sur la Seine</title>
-<meta name="description" content="Stéphanie et Henri renouvellent leurs vœux le samedi 27 février 2027, puis cap sur la Seine : invitation, programme, trombinoscope des marins, réponses et souvenirs.">
+<meta name="description" content="Stéphanie et Henri renouvellent leurs vœux le samedi 20 mars 2027, puis cap sur la Seine : invitation, programme, trombinoscope des marins, réponses et souvenirs.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="20 ans sur la Seine — Stéphanie & Henri">
 <meta property="og:description" content="Vingt ans après le 14 février 2007, on se redit oui : vœux à 10 h, embarquement à 13 h 30 pour une croisière rock'n'roll sur la Seine, samedi 27 février 2027. Embarquez !">
@@ -694,7 +694,7 @@ footer small{opacity:.7}
       <div class="section-head">
         <div class="eyebrow">Carnet de bord</div>
         <h2>Photos &amp; vidéos</h2>
-        <p class="lead">Le jour J en quatre albums, mairie, trajet, bateau et commémoration, remplis après le 27 février 2027 avec vos photos et les nôtres. Chaque photo se télécharge d'un clic, chaque album en entier. En attendant : vingt ans d'images.</p>
+        <p class="lead">Le jour J en quatre albums, mairie, trajet, bateau et commémoration, remplis après le 20 mars 2027 avec vos photos et les nôtres. Chaque photo se télécharge d'un clic, chaque album en entier. En attendant : vingt ans d'images.</p>
       </div>
       <div class="album-tools"><span class="badge" id="albums-etat">Les albums se rempliront après la croisière</span><button class="btn btn-ghost" type="button" id="dl-all" hidden>Tout télécharger (.zip)</button></div>
       <div id="albums"></div>
@@ -752,16 +752,15 @@ const CONFIG = {
   hotes: { elle: 'Stéphanie', lui: 'Henri' },
   groupe: 'Les Cheeky Dancers',
   mariage: '2007-02-14',
-  // Date retenue : premier samedi après les vacances d'hiver de la zone C (6 → 22 février 2027).
-  // Autre lecture possible (premier samedi du mois suivant) : '2027-03-06T10:00:00+01:00'.
-  dateEvenement: '2027-02-27T10:00:00+01:00',
-  dateNote: 'Premier samedi après les vacances d\'hiver (zone C)',
+  // Date arrêtée par Stéphanie et Henri le 08/11/2026 : samedi 20 mars 2027.
+  dateEvenement: '2027-03-20T10:00:00+01:00',
+  dateNote: 'Date arrêtée · premier jour du printemps',
   dateConfirmee: true,
   voeux: { heure: '10 h 00', lieu: 'Lieu à confirmer', confirme: false },
-  finEvenement: '2027-02-27T19:00:00+01:00',   // fin indicative (retour à quai) pour l'agenda
+  finEvenement: '2027-03-20T19:00:00+01:00',   // fin indicative (retour à quai) pour l'agenda
   embarquement: { heure: '13 h 30', confirme: true },   // embarquement 13 h 30 (confirmé par Henri le 02/11/2026)
-  dateLimiteReponse: '2027-01-31',
-  dateLimiteConfirmee: false,   // 31 janvier 2027 proposé
+  dateLimiteReponse: '2027-02-20',
+  dateLimiteConfirmee: false,   // 20 février 2027 proposé (un mois avant)
   navire: { nom: 'Vedette privatisée sur la Seine', compagnie: 'Compagnie et bateau à confirmer', quai: 'Quai d\'embarquement à confirmer (Paris)', confirme: false },
   voiture: 'Cadillac ou voiture de collection à définir',
   tenue: { titre: 'Rock chic', note: 'Cuir, foulard, touche de rouge… et des chaussures confortables pour le pont' },
@@ -798,7 +797,7 @@ const CONFIG = {
     { t: 'Elles', s: 'Robe ou jupe, foulard noué, baskets ou talons : ce qui vous plaît.' },
     { t: 'Eux', s: 'Perfecto ou veste, chemise rouge bienvenue : l\'esprit 2007.' },
     { t: 'Tous', s: 'Une touche de rouge, de marine ou d\'or pour être raccord avec l\'affiche.' },
-    { t: 'À bord', s: 'Une petite laine pour le pont : fin février, la Seine rafraîchit.' }
+    { t: 'À bord', s: 'Une petite laine pour le pont : en mars, la Seine rafraîchit encore.' }
   ],
   // Liste fermée des invités — une ligne par invitation (cabine).
   // { prenom, initiale, photo: 'img/marins/xxx.jpg' ou '', avec: { prenom, initiale, photo } (facultatif), photoDuo: 'img/marins/xxx-duo.jpg' (une seule photo à deux), statut: 'oui' | 'attente' }
@@ -814,11 +813,13 @@ const CONFIG = {
     { prenom: 'Antonio', initiale: 'H', avec: { prenom: 'Véronique', initiale: 'H' }, statut: 'attente' },
     { prenom: 'Gilbert', initiale: '', avec: { prenom: 'Madame', initiale: '' }, statut: 'attente' },
     { prenom: 'Marc', initiale: '', avec: { prenom: 'Madame', initiale: '' }, statut: 'attente' },
-    { prenom: 'Philippe', initiale: 'J', avec: { prenom: 'Madame', initiale: 'J' }, statut: 'attente' }
+    { prenom: 'Philippe', initiale: 'J', avec: { prenom: 'Madame', initiale: 'J' }, statut: 'attente' },
+    { prenom: 'Véronique', initiale: 'D', avec: { prenom: 'Philippe', initiale: 'D' }, statut: 'attente' },
+    { prenom: 'Sonia', initiale: 'J', avec: { prenom: 'Hervé', initiale: 'J' }, statut: 'attente' }
   ],
   surprises: [
     { date: '2026-12-24', titre: 'Surprise n° 1', indice: 'Elle tient dans une pochette et se joue à 45 tours.', texte: 'Texte dévoilé à la date : à rédiger par les hôtes.' },
-    { date: '2027-01-27', titre: 'Surprise n° 2', indice: 'Elle a quatre roues, une couleur, et vingt ans de souvenirs.', texte: 'Texte dévoilé à la date : à rédiger par les hôtes.' },
+    { date: '2027-02-20', titre: 'Surprise n° 2', indice: 'Elle a quatre roues, une couleur, et vingt ans de souvenirs.', texte: 'Texte dévoilé à la date : à rédiger par les hôtes.' },
     { date: '2027-02-14', titre: 'Surprise n° 3', indice: 'Elle s\'ouvre le jour de nos vingt ans, jour de Saint-Valentin.', texte: 'Texte dévoilé à la date : à rédiger par les hôtes.' }
   ],
   contacts: [
@@ -1275,7 +1276,7 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
     box.innerHTML = groupes.map((a, gi) => {
       const liste = PHOTOS.map((p, i) => ({ p, i })).filter(x => albumDe(x.p) === a.cle);
       const nb = liste.length, vids = liste.filter(x => x.p.video).length;
-      const cpt = nb ? (nb - vids) + ' photo' + (nb - vids > 1 ? 's' : '') + (vids ? ' · ' + vids + ' vidéo' + (vids > 1 ? 's' : '') : '') : 'Après le 27 février 2027';
+      const cpt = nb ? (nb - vids) + ' photo' + (nb - vids > 1 ? 's' : '') + (vids ? ' · ' + vids + ' vidéo' + (vids > 1 ? 's' : '') : '') : 'Après le 20 mars 2027';
       return '<div class="album" data-album="' + a.cle + '"><div class="album-head"><img src="' + esc(a.cover) + '" data-full="' + esc(a.cover) + '" alt="' + esc(a.titre) + '" loading="lazy"><div><h3><span class="num">' + (gi + 1) + '</span>' + esc(a.titre) + '</h3><p>' + esc(a.sous) + '</p><span class="cpt">' + cpt + '</span></div>' +
         (nb ? '<button class="btn btn-ghost album-dl" type="button" data-zip="' + a.cle + '">Télécharger l\'album (.zip)</button>' : '') + '</div>' +
         (nb ? '<div class="gallery">' + liste.map(({ p, i }) => p.video
@@ -1298,7 +1299,7 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
   const icsDate = d => new Date(d).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
   function ics() {
     const lieu = (CONFIG.voeux.lieu + ' · puis ' + CONFIG.navire.quai).replace(/,/g, '\\,');
-    const txt = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//20-ans-seine//FR', 'BEGIN:VEVENT', 'UID:20-ans-seine-20270227@perez', 'DTSTAMP:' + icsDate(new Date()),
+    const txt = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//20-ans-seine//FR', 'BEGIN:VEVENT', 'UID:20-ans-seine-20270320@perez', 'DTSTAMP:' + icsDate(new Date()),
       'DTSTART:' + icsDate(CONFIG.dateEvenement), 'DTEND:' + icsDate(CONFIG.finEvenement || CONFIG.dateEvenement),
       'SUMMARY:20 ans sur la Seine – Stéphanie & Henri', 'LOCATION:' + lieu,
       'DESCRIPTION:Vœux à ' + CONFIG.voeux.heure + ' · embarquement à ' + CONFIG.embarquement.heure + ' · ' + (CONFIG.siteUrl || location.href.split('#')[0]),
