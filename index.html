@@ -261,6 +261,11 @@ h2{font-family:var(--f-display);font-size:clamp(1.7rem,4vw,2.5rem);font-weight:7
 .fiche .note{font-size:.88rem;color:var(--ink-2);margin:10px 0 0}
 /* Je réponds : mode 60 ans (sélecteur, deux billets, liste des invitations) */
 .trouve .ou{text-align:center;color:var(--ink-2);font-weight:700;margin:-4px 0}
+label.f.auto{position:relative}
+.suggestions{position:absolute;left:0;right:0;top:100%;z-index:20;margin:4px 0 0;padding:6px;list-style:none;background:var(--paper);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);max-height:260px;overflow:auto}
+.suggestions li{padding:9px 12px;border-radius:8px;cursor:pointer;font-weight:700;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.suggestions li em{font-style:normal;font-weight:600;font-size:.8rem;color:var(--ink-2)}
+.suggestions li:hover,.suggestions li[aria-selected="true"]{background:#fff5f8;color:#d81b60}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .trouve-res{display:grid;gap:12px}
 .trouve-vide{color:var(--ink-2);font-style:italic;margin:0;padding:12px 14px;border:1px dashed var(--line);border-radius:12px;background:var(--paper-2)}
@@ -602,8 +607,8 @@ footer small{opacity:.7}
         <div class="eyebrow" style="font-size:1.6rem">Retrouve ton invitation</div>
         <div class="trouve">
           <label class="f">Choisis ton nom dans la liste des invités <select id="sel-invite"><option value="">— Sélectionne ton nom —</option></select></label>
-          <p class="ou">ou tape ton prénom :</p>
-          <label class="f"><span class="sr">Prénom</span><input id="cherche" type="search" placeholder="Tape ton prénom…" autocomplete="off" aria-label="Retrouver ton invitation"></label>
+          <p class="ou">ou tape ton prénom (les noms s'affichent au fur et à mesure) :</p>
+          <label class="f auto"><span class="sr">Prénom</span><input id="cherche" type="search" placeholder="Tape les premières lettres de ton prénom…" autocomplete="off" aria-autocomplete="list" aria-controls="suggestions" aria-label="Retrouver ton invitation"><ul class="suggestions" id="suggestions" role="listbox" hidden></ul></label>
           <div class="trouve-res" id="trouve" aria-live="polite"><p class="trouve-vide">Choisis ton nom ou tape ton prénom.</p></div>
         </div>
       </div>
@@ -634,7 +639,7 @@ footer small{opacity:.7}
           <ol>
             <li>Ouvre l'IA de ton choix et envoie-lui une photo de toi (de face, bien éclairée). Le plus simple : <a class="lien-defi" href="ia.html" target="_blank" rel="noopener">notre assistant photo</a>, qui ouvre ChatGPT avec le texte déjà prêt.</li>
             <li>Colle le texte ci-dessous et laisse-la travailler. Pas satisfait·e ? Demande-lui une autre version.</li>
-            <li>Dépose ta plus belle création : elle ouvre ton hublot dans le trombinoscope. <b>En couple ou en duo d'amis : une seule photo à deux</b>, déguisés ensemble.</li>
+            <li>Dépose ta plus belle création <b>directement dans le formulaire de réponse</b> (question « Ta photo de marin ») : elle ouvre ton hublot dans le trombinoscope. <b>En couple ou en duo d'amis : une seule photo à deux</b>, déguisés ensemble. Pas encore prête ? Tu pourras revenir la déposer plus tard avec le même lien.</li>
           </ol>
         </div>
         <div class="defi-prompt">
@@ -685,7 +690,7 @@ footer small{opacity:.7}
         <div><b>1. Je retrouve mon nom</b><span>Mon invitation s'affiche : seul·e ou à deux. « Répondre » ouvre le formulaire déjà rempli avec mon nom et ma formule.</span></div>
         <div><b>2. Je réponds à tout</b><span>Présence, dès les vœux ou à l'embarquement, venue, taille de t-shirt, régime. Pour deux : si mon conjoint·e ou ami·e vient.</span></div>
         <div><b>3. Mon e-mail de correspondance</b><span>Celui où je veux recevoir le rappel et les infos de quai. Il est vérifié avec notre carnet d'adresses.</span></div>
-        <div><b>4. Ma photo de marin</b><span>Vraie tenue ou création par l'IA (une seule photo à deux pour un couple), sur le formulaire photo ou par mail.</span></div>
+        <div><b>4. Ma photo de marin</b><span>Vraie tenue ou création par l'IA (une seule photo à deux pour un couple), à joindre dans le formulaire de réponse, ou plus tard, ou par mail.</span></div>
       </div>
     </section>
 
@@ -805,17 +810,22 @@ const CONFIG = {
   invites: [
     { prenom: 'Sophie', initiale: 'P', statut: 'attente' },
     { prenom: 'Nicolas', initiale: 'P', statut: 'attente' },
+    { prenom: 'Bernard', initiale: 'K', avec: { prenom: 'Nathalie', initiale: 'K' }, statut: 'attente' },
     { prenom: 'Eliane', initiale: 'P', statut: 'attente' },
     { prenom: 'Geneviève', initiale: 'R', statut: 'attente' },
     { prenom: 'Alain', initiale: 'B', avec: { prenom: 'Madame', initiale: 'B' }, statut: 'attente' },
     { prenom: 'Henri III', initiale: 'P', avec: { prenom: 'Valérie', initiale: 'P' }, statut: 'attente' },
     { prenom: 'Henri II', initiale: 'P', statut: 'attente' },
+    { prenom: 'Sonia', initiale: 'D', avec: { prenom: 'Hervé', initiale: 'J' }, statut: 'attente' },
+    { prenom: 'Philippe', initiale: 'D', avec: { prenom: 'Véronique', initiale: 'D' }, statut: 'attente' },
     { prenom: 'Antonio', initiale: 'H', avec: { prenom: 'Véronique', initiale: 'H' }, statut: 'attente' },
-    { prenom: 'Gilbert', initiale: '', avec: { prenom: 'Madame', initiale: '' }, statut: 'attente' },
-    { prenom: 'Marc', initiale: '', avec: { prenom: 'Madame', initiale: '' }, statut: 'attente' },
-    { prenom: 'Philippe', initiale: 'J', avec: { prenom: 'Madame', initiale: 'J' }, statut: 'attente' },
-    { prenom: 'Véronique', initiale: 'D', avec: { prenom: 'Philippe', initiale: 'D' }, statut: 'attente' },
-    { prenom: 'Sonia', initiale: 'J', avec: { prenom: 'Hervé', initiale: 'J' }, statut: 'attente' }
+    { prenom: 'Gilbert', initiale: 'P', avec: { prenom: 'Nathalie', initiale: 'P' }, statut: 'attente' },
+    { prenom: 'Marc', initiale: 'F', avec: { prenom: 'Stéphanie', initiale: 'F' }, statut: 'attente' },
+    { prenom: 'Philippe', initiale: 'G', avec: { prenom: 'Madame', initiale: 'G' }, statut: 'attente' },
+    { prenom: 'Sébastien', initiale: 'N', avec: { prenom: 'Karona', initiale: 'T' }, statut: 'attente' },
+    { prenom: 'Romain', initiale: 'A', avec: { prenom: 'Madame', initiale: 'A' }, statut: 'attente' },
+    { prenom: 'Taïeb', initiale: 'A', avec: { prenom: 'Jamila', initiale: 'A' }, statut: 'attente' },
+    { prenom: 'Noura', initiale: 'B', statut: 'attente' }
   ],
   surprises: [
     { date: '2026-12-24', titre: 'Surprise n° 1', indice: 'Elle tient dans une pochette et se joue à 45 tours.', texte: 'Texte dévoilé à la date : à rédiger par les hôtes.' },
@@ -1122,7 +1132,7 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
   for (let p = 0; p < nPlaces; p++) html += '<a class="cabin place" href="#reponse"><div class="portholes"><div class="porthole"><span>?</span></div></div><b>Ta cabine ici !</b><span>Réponds et envoie ta photo de marin</span></a>';
   const trombi = $('#crew'); trombi.innerHTML = '<div class="trombi' + (abord > 45 ? ' mini' : abord > 20 ? ' compact' : '') + '">' + html + '</div>';
   const envoi = '<a class="btn btn-primary" href="' + esc(CONFIG.formulairePhotoUrl || '#reponse') + '" target="_blank" rel="noopener">Déposer ma photo de marin</a>' +
-    '<p>Le dépôt passe par un petit formulaire Google : Google demande d\'être connecté à un compte Google (Gmail…).<br><b>Tu ne sais pas utiliser l\'IA ?</b> Aucun souci : dépose une photo normale en précisant « à transformer », Stéphanie et Henri la déguiseront pour toi.<br><b>Pas de compte Google ?</b> Envoie ta photo par mail (précise « à transformer » si besoin) : <span style="user-select:all">' + esc(CONFIG.mailReponse) + '</span>, objet « ' + esc(CONFIG.motCle) + ' PHOTO » et ton prénom.</p>';
+    '<p><b>Le plus simple :</b> joins ta photo en répondant au formulaire (question « Ta photo de marin ») ; tu peux aussi la déposer plus tard avec ce bouton. Dans les deux cas, Google demande d\'être connecté à un compte Google (Gmail…) pour recevoir le fichier.<br><b>Tu ne sais pas utiliser l\'IA ?</b> Aucun souci : dépose une photo normale et coche « photo normale, à transformer », Stéphanie et Henri la déguiseront pour toi.<br><b>Pas de compte Google ?</b> Envoie ta photo par mail (précise « à transformer » si besoin) : <span style="user-select:all">' + esc(CONFIG.mailReponse) + '</span>, objet « ' + esc(CONFIG.motCle) + ' PHOTO » et ton prénom.</p>';
   $('#defi-envoi').innerHTML = envoi;
   $('#photo-howto').innerHTML = '<div class="eyebrow" style="font-size:1.6rem">Envoyer sa photo de marin</div><div class="defi-envoi" style="border:0;padding-top:8px">' + envoi + '</div><p class="lead" style="font-size:.95rem;margin:10px 0 0">Pas encore de tenue ? <a class="lien-defi" href="#reponse">Le défi photo</a> : l\'IA t\'habille en marin en deux minutes.</p>';
   const bp = $('#copier-prompt');
@@ -1167,8 +1177,29 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
     liste.forEach(i => out.appendChild(fiche(i)));
     if (liste.length === 1) { const c = document.querySelector('.deux-qr .qr-card[data-formule="' + (liste[0].avec ? 'duo' : 'solo') + '"]'); if (c) c.classList.add('choisie'); }
   }
-  inp.addEventListener('input', () => { sel.value = ''; const q = norm(inp.value); if (q.length < 2) { out.innerHTML = VIDE; document.querySelectorAll('.deux-qr .qr-card').forEach(c => c.classList.remove('choisie')); return; }
-    montrer(CONFIG.invites.filter(i => norm(i.prenom).indexOf(q) === 0 || norm(invNom(i)).indexOf(q) === 0 || (i.avec && i.avec.prenom !== 'Madame' && norm(i.avec.prenom).indexOf(q) === 0))); });
+  /* saisie automatique : suggestions dès la première lettre, flèches + Entrée au clavier */
+  const sug = $('#suggestions'); let cur = -1;
+  const correspond = (i, q) => norm(i.prenom).indexOf(q) === 0 || norm(invNom(i)).indexOf(q) === 0 || (i.avec && i.avec.prenom !== 'Madame' && norm(i.avec.prenom).indexOf(q) === 0);
+  function fermer() { sug.hidden = true; sug.innerHTML = ''; cur = -1; }
+  function choisir(k) { const i = CONFIG.invites[k]; inp.value = invNom(i); sel.value = k; fermer(); montrer([i]); }
+  function suggerer() {
+    const q = norm(inp.value); sel.value = '';
+    if (!q) { fermer(); out.innerHTML = VIDE; document.querySelectorAll('.deux-qr .qr-card').forEach(c => c.classList.remove('choisie')); return; }
+    const hits = CONFIG.invites.map((i, k) => ({ i, k })).filter(x => correspond(x.i, q));
+    sug.innerHTML = hits.map(({ i, k }) => '<li role="option" data-k="' + k + '">' + esc(invNom(i)) + '<em>' + (i.avec ? 'à deux' : 'seul·e') + '</em></li>').join('');
+    sug.hidden = !hits.length; cur = -1;
+    sug.querySelectorAll('li').forEach(li => li.addEventListener('mousedown', e => { e.preventDefault(); choisir(+li.dataset.k); }));
+    if (hits.length === 1) montrer([hits[0].i]); else if (q.length >= 2) montrer(hits.map(x => x.i)); else out.innerHTML = VIDE;
+  }
+  inp.addEventListener('input', suggerer);
+  inp.addEventListener('focus', () => { if (inp.value) suggerer(); });
+  inp.addEventListener('blur', () => setTimeout(fermer, 150));
+  inp.addEventListener('keydown', e => {
+    const lis = sug.querySelectorAll('li'); if (sug.hidden || !lis.length) return;
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); cur = (cur + (e.key === 'ArrowDown' ? 1 : -1) + lis.length) % lis.length; lis.forEach((li, k) => li.setAttribute('aria-selected', k === cur ? 'true' : 'false')); lis[cur].scrollIntoView({ block: 'nearest' }); }
+    else if (e.key === 'Enter') { e.preventDefault(); choisir(+lis[cur >= 0 ? cur : 0].dataset.k); }
+    else if (e.key === 'Escape') fermer();
+  });
   const tri = CONFIG.invites.map((i, k) => ({ i, k })).sort((a, b) => invNom(a.i).localeCompare(invNom(b.i), 'fr'));
   tri.forEach(({ i, k }) => { const o = document.createElement('option'); o.value = k; o.textContent = invNom(i) + (i.avec ? ' (à deux)' : ' (seul·e)'); sel.appendChild(o); });
   const oa = document.createElement('option'); oa.value = 'absent'; oa.textContent = 'Mon nom n\'est pas dans la liste'; sel.appendChild(oa);
