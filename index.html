@@ -21,7 +21,8 @@ img{max-width:100%}
 [hidden]{display:none!important}
 </style>
 <style>
-/* v2.0 — trombinoscope « mosaïque pleine page » : toutes les invitations, photo plein cadre ou initiales + « photo à venir », sans photo des hôtes.
+/* v2.1 — formulaire orienté par le nom : un seul billet-réponse, lien personnel = nom pré-rempli, « à partir de quand » du conjoint, « autre besoin » dans la venue.
+   v2.0 — trombinoscope « mosaïque pleine page » : toutes les invitations, photo plein cadre ou initiales + « photo à venir », sans photo des hôtes.
    v1.9.1 — onglet Trombinoscope réduit à l'essentiel comme Casablanca (intro, stats, hôtes, mosaïque) ; cadre des hôtes optionnel.
    v1.9 — trombinoscope au format exact du site des 60 ans (mosaïque, taille automatique, hôtes en tête).
    v1.8.1 — renvois identiques au modèle (compteur « voir qui vient », logo + J-xxx, fiche #prenom-initiale, aide par mail).
@@ -242,6 +243,7 @@ h2{font-family:var(--f-display);font-size:clamp(1.7rem,4vw,2.5rem);font-weight:7
 
 /* QR codes */
 .qrs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.qrs.un-qr{grid-template-columns:minmax(0,440px);justify-content:center}
 @media (max-width:460px){.qrs{grid-template-columns:1fr}}
 .qr{background:#fff5f8;color:#13294b;border:2px solid #d81b60;border-radius:12px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
 .qr .box{width:150px;height:150px;display:grid;place-items:center}
@@ -769,20 +771,13 @@ footer small{opacity:.7}
         </div>
       </div>
 
-      <div class="qrs deux-qr">
-        <div class="qr qr-card" data-formule="solo">
-          <span class="qr-bandeau">Invitation pour 1 personne</span>
-          <div class="box" id="qr-solo"></div>
-          <b>Tu es invité·e seul·e</b>
-          <small><span id="nb-solo">–</span> invitations · formulaire « Toi seul·e »</small>
-          <div class="qr-actions"><a class="btn btn-primary" id="lien-solo" target="_blank" rel="noopener">Répondre</a><button class="btn btn-ghost" type="button" data-dlqr="qr-solo">Télécharger</button></div>
-        </div>
-        <div class="qr qr-card" data-formule="duo">
-          <span class="qr-bandeau">Invitation pour 2 personnes</span>
-          <div class="box" id="qr-duo"></div>
-          <b>Toi et ton·ta conjoint·e ou ami·e</b>
-          <small><span id="nb-duo">–</span> invitations · couple ou deux amis</small>
-          <div class="qr-actions"><a class="btn btn-primary" id="lien-duo" target="_blank" rel="noopener">Répondre</a><button class="btn btn-ghost" type="button" data-dlqr="qr-duo">Télécharger</button></div>
+      <div class="qrs deux-qr un-qr">
+        <div class="qr qr-card" data-formule="unique">
+          <span class="qr-bandeau">Le billet-réponse</span>
+          <div class="box" id="qr-unique"></div>
+          <b>Un seul lien pour tous</b>
+          <small><span id="nb-solo">–</span> invitations pour une personne · <span id="nb-duo">–</span> pour deux · ton nom oriente le formulaire</small>
+          <div class="qr-actions"><a class="btn btn-primary" id="lien-unique" target="_blank" rel="noopener">Répondre</a><button class="btn btn-ghost" type="button" data-dlqr="qr-unique">Télécharger</button></div>
         </div>
       </div>
       <div class="copyline" id="form-line" style="margin:12px 0 0"></div>
@@ -828,8 +823,8 @@ footer small{opacity:.7}
       </div>
 
       <div class="steps" style="margin-top:22px">
-        <div><b>1. Je retrouve mon nom</b><span>Mon invitation s'affiche : seul·e ou à deux. « Répondre » ouvre le formulaire déjà rempli avec mon nom et ma formule.</span></div>
-        <div><b>2. Je réponds à tout</b><span>Présence, dès les vœux ou à l'embarquement, venue (plusieurs choix possibles : voiture et hôtel), taille de t-shirt, régime. Invitation à deux : je dis seulement si mon·ma conjoint·e ou ami·e prévu·e vient aussi, jamais une autre personne.</span></div>
+        <div><b>1. Je retrouve mon nom</b><span>Mon invitation s'affiche : seul·e ou à deux. « Répondre » ouvre le formulaire avec mon nom déjà choisi ; le formulaire reconnaît mon invitation et ne pose que les bonnes questions.</span></div>
+        <div><b>2. Je réponds à tout</b><span>Présence, dès les vœux ou à l'embarquement, venue (plusieurs choix possibles : voiture, hôtel, autre besoin), taille de t-shirt, régime. Invitation à deux : je dis seulement si mon·ma conjoint·e ou ami·e prévu·e vient aussi, et à partir de quand — jamais une autre personne.</span></div>
         <div><b>3. Mon e-mail de correspondance</b><span>Celui où je veux recevoir le rappel et les infos de quai. Il est vérifié avec notre carnet d'adresses.</span></div>
         <div><b>4. Ma photo de marin</b><span>Vraie tenue ou création par l'IA (une seule photo à deux pour un couple), à joindre dans le formulaire de réponse, ou plus tard, ou par mail.</span></div>
       </div>
@@ -927,10 +922,8 @@ const CONFIG = {
   motCle: 'SEINE-20',
   mailReponse: 'perez.henri.contact@gmail.com',
   formulaireUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdfyFYIhxCHG0TKyMtQvldGa-1vx7dskkfBsSNMivDm2UO0Bg/viewform',   // formulaire Google de réponse
-  formulaireSolo: 'https://docs.google.com/forms/d/e/1FAIpQLSdfyFYIhxCHG0TKyMtQvldGa-1vx7dskkfBsSNMivDm2UO0Bg/viewform?usp=pp_url&entry.780681837=Toi+seul%C2%B7e',   // QR « 1 personne »
-  formulaireDuo: 'https://docs.google.com/forms/d/e/1FAIpQLSdfyFYIhxCHG0TKyMtQvldGa-1vx7dskkfBsSNMivDm2UO0Bg/viewform?usp=pp_url&entry.780681837=Toi+et+ton+conjoint%C2%B7e+ou+ami%C2%B7e',   // QR « 2 personnes »
+  // v2.1 (08/11/2026) : un seul lien. Le nom choisi dans la liste oriente le formulaire (seul·e → page « Ta réponse », à deux → page « Ton·ta conjoint·e ») : plus de formule à cocher.
   formulairePhotoUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSemTDuriAnBuFZZpLRrDZ8n5jS3cuMfL8q1-v-AWF1OwUz73w/viewform',   // formulaire photo (tenue de marin)
-  champFormule: 'entry.780681837',   // question « Ton invitation » (solo / duo)
   champQui: 'entry.1445342010',      // question « Qui es-tu ? » (liste fermée)
   valeurs: { solo: 'Toi seul·e', duo: 'Toi et ton conjoint·e ou ami·e' },
   siteUrl: 'https://perezhenricontact-a11y.github.io/20ANSSEINE/',   // adresse publique (GitHub Pages)
@@ -1427,7 +1420,7 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
   const nomCourt = p => p.prenom + (p.initiale ? ' ' + p.initiale + '.' : '');
   const libelle = i => nomCourt(i) + (i.avec ? ' & ' + nomCourt(i.avec) + ' — invitation pour deux' : ' — invitation pour une personne');
   const invNom = i => nomCourt(i) + (i.avec ? ' & ' + nomCourt(i.avec) : '');
-  const lien = i => CONFIG.formulaireUrl + '?usp=pp_url&' + CONFIG.champFormule + '=' + encodeURIComponent(i.avec ? CONFIG.valeurs.duo : CONFIG.valeurs.solo) + '&' + CONFIG.champQui + '=' + encodeURIComponent(libelle(i));
+  const lien = i => CONFIG.formulaireUrl + '?usp=pp_url&' + CONFIG.champQui + '=' + encodeURIComponent(libelle(i));   // le nom pré-rempli suffit : il oriente le formulaire
   const qr = (el, url, size) => { try { if (window.QRCode) new QRCode(el, { text: url, width: size, height: size, colorDark: '#d81b60', colorLight: '#fff5f8', correctLevel: QRCode.CorrectLevel.M }); } catch (e) { } };
   document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', () => copyText($('#' + b.dataset.copy).textContent, 'Copié')));
   const limite = CONFIG.dateLimiteReponse ? fmtDate(new Date(CONFIG.dateLimiteReponse + 'T12:00:00')) : '';
@@ -1453,7 +1446,7 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
     if (!liste.length) { out.innerHTML = '<p class="trouve-vide">Pas trouvé : vérifie l\'orthographe, ou <a href="#manquant">signale-le-nous</a> juste en dessous.</p>'; const m = $('#manquant'); m.classList.remove('flash'); void m.offsetWidth; m.classList.add('flash'); return; }
     if (liste.length > 4) { out.innerHTML = '<p class="trouve-vide">Continue à taper ton prénom…</p>'; return; }
     liste.forEach(i => out.appendChild(fiche(i)));
-    if (liste.length === 1) { const c = document.querySelector('.deux-qr .qr-card[data-formule="' + (liste[0].avec ? 'duo' : 'solo') + '"]'); if (c) c.classList.add('choisie'); }
+    if (liste.length === 1) { const c = document.querySelector('.deux-qr .qr-card'); if (c) c.classList.add('choisie'); }
   }
   /* saisie automatique : suggestions dès la première lettre, flèches + Entrée au clavier */
   const sug = $('#suggestions'); let cur = -1;
@@ -1512,19 +1505,18 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
 
   /* 3 bis. Aide : réponse de secours par mail (modèle prêt, comme sur le site des 60 ans) */
   const objAide = CONFIG.motCle + ' – Ma réponse';
-  const modele = 'Bonjour Stéphanie et Henri,\n\nMa réponse pour le samedi 20 mars 2027 :\n• Mon invitation (seul·e / à deux) : …\n• Mon prénom et mon nom : …\n• Mon·ma conjoint·e ou ami·e prévu·e vient aussi (oui / non) : …\n• Présence (oui, avec joie / peut-être / non, hélas) : …\n• À partir de quand (dès les vœux à 10 h / à l\'embarquement) : …\n• Venue (transports en commun / voiture + parking / hôtel souhaité / pas encore décidé) : …\n• Tailles de t-shirt (moi / mon·ma conjoint·e) : …\n• Régime ou allergies : …\n• Mon e-mail de correspondance : …\n• Photo de marin jointe (déjà déguisée / à transformer / plus tard) : …\n• Un mot pour les mariés : …\n\nMerci !';
+  const modele = 'Bonjour Stéphanie et Henri,\n\nMa réponse pour le samedi 20 mars 2027 :\n• Mon prénom et mon nom (l\'invitation est reconnue) : …\n• Mon·ma conjoint·e ou ami·e prévu·e vient aussi (oui / non), et à partir de quand : …\n• Présence (oui, avec joie / peut-être / non, hélas) : …\n• À partir de quand (dès les vœux à 10 h / à l\'embarquement) : …\n• Venue (transports en commun / voiture + parking / hôtel souhaité / pas encore décidé / autre besoin) : …\n• Tailles de t-shirt (moi / mon·ma conjoint·e) : …\n• Régime ou allergies : …\n• Mon e-mail de correspondance : …\n• Photo de marin jointe (déjà déguisée / à transformer / plus tard) : …\n• Un mot pour les mariés : …\n\nMerci !';
   $('#aide-mail').textContent = CONFIG.mailReponse; $('#aide-objet').textContent = objAide; $('#txt-aide').textContent = modele;
   $('#mailto-aide').href = 'mailto:' + CONFIG.mailReponse + '?subject=' + encodeURIComponent(objAide) + '&body=' + encodeURIComponent(modele);
   $('#copy-aide').addEventListener('click', () => copyText(modele, 'Modèle copié : collez-le dans votre mail'));
 
-  /* 4. Les deux billets QR (solo / duo) */
+  /* 4. Le billet-réponse (un seul QR : le nom choisi oriente le formulaire) */
   const pageUrl = (CONFIG.siteUrl || (location.origin + location.pathname)) + '#reponse';
-  const uSolo = CONFIG.formulaireSolo || CONFIG.formulaireUrl || pageUrl, uDuo = CONFIG.formulaireDuo || CONFIG.formulaireUrl || pageUrl;
-  $('#lien-solo').href = uSolo; $('#lien-duo').href = uDuo;
-  qr($('#qr-solo'), uSolo, 150); qr($('#qr-duo'), uDuo, 150);
+  const uForm = CONFIG.formulaireUrl || pageUrl;
+  $('#lien-unique').href = uForm; qr($('#qr-unique'), uForm, 150);
   $('#form-line').innerHTML = CONFIG.formulaireUrl
-    ? '<a class="btn btn-ghost" href="' + esc(CONFIG.formulaireUrl) + '" target="_blank" rel="noopener">Ouvrir le formulaire sans QR code</a><span style="font-size:.9rem;color:var(--ink-2)">Le billet scanné ouvre le formulaire avec la bonne formule déjà cochée ; il ne reste qu\'à choisir ton nom dans la liste.</span>'
-    : '<span class="badge warn">Formulaire en ligne (solo / duo) : bientôt disponible</span>';
+    ? '<a class="btn btn-ghost" href="' + esc(CONFIG.formulaireUrl) + '" target="_blank" rel="noopener">Ouvrir le formulaire sans QR code</a><span style="font-size:.9rem;color:var(--ink-2)">Le billet scanné ouvre le formulaire ; en choisissant ton nom dans la liste, il sait si ton invitation est pour une personne ou pour deux et ne pose que les bonnes questions.</span>'
+    : '<span class="badge warn">Formulaire en ligne : bientôt disponible</span>';
 })();
 
 /* ---------- souvenirs : filtres par époque + galerie + lightbox ---------- */
