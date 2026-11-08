@@ -21,7 +21,8 @@ img{max-width:100%}
 [hidden]{display:none!important}
 </style>
 <style>
-/* v1.8.1 — renvois identiques au modèle (compteur « voir qui vient », logo + J-xxx, fiche #prenom-initiale, aide par mail).
+/* v1.9 — trombinoscope au format exact du site des 60 ans (mosaïque, taille automatique, hôtes en tête).
+   v1.8.1 — renvois identiques au modèle (compteur « voir qui vient », logo + J-xxx, fiche #prenom-initiale, aide par mail).
    v1.8 — 9 onglets, même fonctionnement que « De Casablanca au cochonnet » (statistiques invités, défi photo, hôtels), personnalité croisière conservée.
    Layout : une affiche de croisière rétro — bandeau marine avec carrousel d'affiches, billet d'embarquement crème, onglets comme des talons de billets, vagues animées, jukebox. */
 :root{
@@ -302,45 +303,39 @@ label.f.auto{position:relative}
 .noms-inv button:hover{border-color:#d81b60;color:#d81b60}
 .noms-inv button em{font-style:normal;color:var(--ink-2);font-weight:600}
 .defi{margin-top:22px}
-/* Trombinoscope : places libres, photo à deux, taille automatique */
-.trombi{--t:112px}
-.porthole{width:var(--t);height:var(--t)}
-.porthole.duo{width:calc(var(--t) * 2 + 10px);border-radius:calc(var(--t) / 2)}
-.porthole.duo::after{border-radius:calc(var(--t) / 2)}
-.cabin.place{border-style:dashed;text-decoration:none;color:inherit;background:var(--paper-2)}
-.cabin.place .porthole{border-color:var(--line);background:var(--paper)}
-.cabin.place .porthole span{font-family:var(--f-display);font-size:2rem;color:var(--line)}
-.trombi.compact{--t:84px}
-.trombi.compact .cabin{padding:10px}
-.trombi.mini{--t:64px}
-.trombi.mini .cabin.hosts .banner{aspect-ratio:21/9}
-.trombi{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
-.cabin{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;box-shadow:var(--shadow)}
-.cabin.hosts{grid-column:1/-1;background:linear-gradient(180deg,var(--paper),var(--paper-2));padding:0 0 18px}
-.cabin.hosts .banner{width:100%;aspect-ratio:16/9;object-fit:cover;cursor:zoom-in}
-.cabin.hosts .portholes{margin-top:-56px;position:relative;z-index:1}
+/* Trombinoscope — même format que « De Casablanca au cochonnet » : taille automatique, tout tient dans la page */
+.trombi{display:block;--t:160px}
+.t-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:0 0 18px}
+.t-stats span{background:var(--band);color:var(--band-fg);border:2px solid var(--or);border-radius:14px;padding:8px 14px;font-weight:800;font-size:.85rem}
+.t-stats b{font-family:var(--f-display);color:var(--or-2);font-size:1.3rem;margin-right:6px}
+.t-hotes{display:grid;grid-template-columns:repeat(var(--nh,1),minmax(0,1fr));gap:26px;max-width:calc(var(--nh,1) * 440px + 26px);margin:0 auto 34px}
+@media(max-width:640px){.t-hotes{grid-template-columns:1fr}}
+.t-orient{margin:0;padding:14px;border-radius:999px 999px 22px 22px;background:repeating-conic-gradient(from 45deg,var(--band) 0 25%,var(--or) 0 50%) 0 0/22px 22px;border:4px solid var(--or);box-shadow:0 0 0 5px var(--paper),0 0 0 7px var(--or),var(--shadow)}
+.t-orient-in{aspect-ratio:3/2;border-radius:999px 999px 14px 14px;overflow:hidden;border:4px solid var(--or-2);background:var(--paper-2)}
+.t-orient-in img{width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in}
+.t-orient figcaption{margin:12px auto 0;width:max-content;max-width:100%;padding:6px 18px;border-radius:999px;background:var(--rouge);color:#fff;border:2px solid var(--or-2);font-family:var(--f-script);font-size:1.4rem;line-height:1.1}
+.t-vide{width:100%;height:100%;display:grid;place-items:center;background:repeating-linear-gradient(45deg,var(--seine-3) 0 12px,var(--paper) 12px 24px)}
+.t-vide span{font-weight:800;color:var(--ink-2);background:var(--paper);padding:8px 14px;border-radius:999px;border:1px dashed var(--or)}
+.t-grille{display:flex;flex-wrap:wrap;gap:20px;justify-content:center}
+.t-cadre{margin:0;padding:10px;background:var(--paper);border:3px solid var(--or);border-radius:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;gap:8px;text-decoration:none;color:inherit}
+.t-cadre figcaption{font-family:var(--f-script);font-size:calc(var(--t,160px) / 8 + .2rem);color:var(--seine);text-align:center;line-height:1.1}
+.t-photo{width:var(--t,160px);height:var(--t,160px);border-radius:12px;background:var(--grad,linear-gradient(135deg,var(--band),var(--seine)));display:grid;place-items:center;color:var(--band-fg);font-family:var(--f-display);font-weight:700;font-size:calc(var(--t,160px) / 4);overflow:hidden}
+.t-photo img,.t-photo-duo img{width:100%;height:100%;object-fit:cover;object-position:center 25%;display:block;cursor:zoom-in}
+.t-photo-duo{width:calc(var(--t,160px) * 2 + 10px);height:calc(var(--t,160px) * 1.35);border-radius:12px;overflow:hidden;background:var(--grad,linear-gradient(135deg,var(--band),var(--seine)));display:grid;place-items:center;color:var(--band-fg);font-family:var(--f-display);font-weight:700;font-size:calc(var(--t,160px) / 4.5)}
+.t-place{border-style:dashed;opacity:.8}
+.t-place .t-photo{background:repeating-linear-gradient(45deg,var(--seine-3) 0 12px,var(--paper) 12px 24px);color:var(--or)}
+.trombi.t-compact .t-hotes{max-width:calc(var(--nh,1) * 320px + 18px);gap:18px;margin-bottom:24px}
+.trombi.t-compact .t-orient figcaption{font-size:1.1rem}
+.trombi.t-compact .t-grille{gap:12px}
+.trombi.t-compact .t-cadre{padding:6px;border-width:2px;border-radius:12px}
+.trombi.t-mini .t-hotes{max-width:calc(var(--nh,1) * 230px + 14px);gap:14px;margin-bottom:18px}
+.trombi.t-mini .t-orient{padding:7px;box-shadow:0 0 0 3px var(--paper),0 0 0 4px var(--or)}
+.trombi.t-mini .t-orient figcaption{font-size:.95rem;padding:3px 10px;margin-top:6px}
+.trombi.t-mini .t-grille{gap:8px}
+.trombi.t-mini .t-cadre{padding:4px;gap:4px}
+@media(max-width:420px){.t-photo{width:min(var(--t,160px),130px);height:min(var(--t,160px),130px)}.t-photo-duo{width:min(calc(var(--t,160px) * 2 + 10px),276px);height:min(calc(var(--t,160px) * 1.35),184px)}}
+.ship-rule{margin:26px 0 0}
 .ship-rule img{width:96px;aspect-ratio:1;object-fit:cover;border-radius:50%;border:4px solid var(--or);flex:none;cursor:zoom-in}
-.portholes{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.porthole{width:112px;height:112px;border-radius:50%;position:relative;background:var(--seine-3);border:7px solid var(--or);box-shadow:0 0 0 3px var(--or-2) inset,0 6px 16px rgba(0,0,0,.25);overflow:hidden;display:grid;place-items:center}
-.porthole img{width:100%;height:100%;object-fit:cover}
-.porthole .wait{font-size:.7rem;line-height:1.2;color:var(--seine);padding:10px;font-weight:700}
-.porthole::after{content:"";position:absolute;inset:0;border-radius:50%;background:linear-gradient(135deg,rgba(255,255,255,.35),transparent 45%);pointer-events:none}
-.cabin b{font-family:var(--f-display);font-size:1.05rem}
-.cabin span{font-size:.84rem;color:var(--ink-2)}
-.cabin .st{display:inline-block;border-radius:999px;padding:2px 10px;font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--seine-3);color:var(--seine)}
-.cabin .st.ok{background:rgba(47,138,91,.15);color:var(--ok)}
-
-/* équipage */
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 24px}
-.stat{background:var(--band);color:var(--band-fg);border-radius:12px;padding:14px 16px}
-.stat b{font-family:var(--f-display);font-size:2rem;display:block;line-height:1;font-variant-numeric:tabular-nums}
-.stat span{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--or-2)}
-.crew{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
-.mate{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;gap:12px;align-items:center}
-.mate .av{width:44px;height:44px;border-radius:50%;background:var(--seine-3);color:var(--seine);font-family:var(--f-display);font-weight:700;display:grid;place-items:center;flex:none;font-size:1.05rem}
-.mate.couple .av{background:var(--or);color:#1b2742}
-.mate b{display:block;font-size:1rem}
-.mate span{font-size:.85rem;color:var(--ink-2)}
 .t-note{margin:0 0 14px;color:var(--ink-2)}
 .t-note a{font-weight:700}
 .empty{border:2px dashed var(--line);border-radius:14px;padding:28px;text-align:center;color:var(--ink-2)}
@@ -710,13 +705,12 @@ footer small{opacity:.7}
         <h2>Le trombinoscope des marins</h2>
         <p class="lead" id="trombi-intro">Les invités qui ont confirmé leur venue, en tenue de marin. Une photo par personne, ou une seule photo à deux pour les couples et les duos d'amis. Prénom et initiale seulement : la discrétion est de mise sur le pont.</p>
       </div>
+      <div id="crew"></div>
       <div class="ship-rule">
         <img src="img/marin-stephanie-portrait.jpg" data-full="img/marin-killer-boogie.jpg" alt="Stéphanie en tenue de marin : l'exemple à suivre">
         <div class="eyebrow">Règle du bord</div>
         <p><strong>Tenue de marin obligatoire sur la photo</strong> : marinière, béret à pompon, casquette de capitaine, foulard noué ou vareuse, à vous de choisir. Pas de tenue sous la main ? L'IA vous habille en marin en deux minutes : <a href="#defi" class="lien-defi">le défi photo</a>. Vraiment pas à l'aise ? Envoyez une photo normale en précisant « à transformer » : les capitaines s'en chargent.</p>
       </div>
-      <div class="stats" id="stats-trombi"></div>
-      <div id="crew"></div>
       <div class="card" style="margin-top:22px" id="photo-howto"></div>
     </section>
 
@@ -981,6 +975,8 @@ const CONFIG = {
     { t: 'Tous', s: 'Une touche de rouge, de marine ou d\'or pour être raccord avec l\'affiche.' },
     { t: 'À bord', s: 'Une petite laine pour le pont : en mars, la Seine rafraîchit encore.' }
   ],
+  // Les hôtes en tête du trombinoscope (un cadre par couple d'hôtes, comme sur le site des 60 ans)
+  hotesTrombi: [{ noms: 'Stéphanie & Henri', photo: 'img/hotes-marins.jpg' }],
   // Liste fermée des invités — une ligne par invitation (cabine).
   // { prenom, initiale, photo: 'img/marins/xxx.jpg' ou '', avec: { prenom, initiale, photo } (facultatif), photoDuo: 'img/marins/xxx-duo.jpg' (une seule photo à deux), statut: 'oui' | 'attente' }
   // Seules les invitations « oui » apparaissent dans le trombinoscope (ils ont dit oui), comme sur le site des 60 ans.
@@ -1073,6 +1069,8 @@ const CONFIG = {
 
 /* ---------- utilitaires ---------- */
 const $ = s => document.querySelector(s);
+/* Couleurs des cases sans photo : marine, Seine, or, rouge, nuit */
+const GRADS = ['linear-gradient(135deg,#13294b,#3a76a6)', 'linear-gradient(135deg,#c2303a,#c69b3b)', 'linear-gradient(135deg,#3a76a6,#9cc3e1)', 'linear-gradient(135deg,#c69b3b,#e9d28c)', 'linear-gradient(135deg,#0c1b35,#c2303a)', 'linear-gradient(135deg,#2f8a5b,#3a76a6)'];
 const fmtDate = d => new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Paris' }).format(d);
 const fmtHeure = d => new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' }).format(d).replace(':', ' h ');
 const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
@@ -1312,28 +1310,31 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
   const inv = CONFIG.invites;
   const nm = p => p.prenom + (p.initiale ? ' ' + p.initiale + '.' : '');
   function renderTrombi() {
-  const invitations = inv.length;
-  const personnes = inv.reduce((n, i) => n + (i.avec ? 2 : 1), 0);
-  const ok = inv.filter(i => i.statut === 'oui');
-  const deux = i => i.avec && i.avecVient !== false;   // le conjoint·e prévu·e vient aussi (réponse au formulaire)
-  const abord = ok.reduce((n, i) => n + (deux(i) ? 2 : 1), 0);
-  const photos = inv.reduce((n, i) => n + (i.photoDuo ? 2 : (i.photo ? 1 : 0) + (i.avec && i.avec.photo ? 1 : 0)), 0);
-  $('#stats-trombi').innerHTML = [['' + invitations, 'cabines'], ['' + personnes, 'personnes invitées'], ['' + abord, 'déjà à bord'], ['' + photos, 'photos de marins']]
-    .map(([b, st]) => '<div class="stat"><b>' + b + '</b><span>' + st + '</span></div>').join('');
-  $('#trombi-intro').textContent = (abord ? abord + ' invité' + (abord > 1 ? 's' : '') + ' confirmé' + (abord > 1 ? 's' : '') + ' à ce jour. ' : 'Les premiers marins apparaîtront ici dès leur réponse. ') +
-    'Une photo par personne, ou une seule photo à deux pour les couples et les duos d\'amis. Prénom et initiale seulement : la discrétion est de mise sur le pont.';
-  const hole = (p, label) => '<div class="porthole">' + (p && p.photo ? '<img src="' + esc(p.photo) + '" data-full="' + esc(p.photo) + '" alt="' + esc(label) + '">' : '<span class="wait">Photo de marin attendue</span>') + '</div>';
-  let html = '<div class="cabin hosts"><img class="banner" src="img/hotes-marins.jpg" data-full="img/hotes-marins.jpg" alt="Stéphanie et Henri en tenue de marin, porté acrobatique"><div class="portholes">' +
-    '<div class="porthole"><img src="img/marin-stephanie-portrait.jpg" alt="Stéphanie en marin"></div><div class="porthole"><img src="img/marin-henri-portrait.jpg" alt="Henri en marin"></div></div>' +
-    '<b>Stéphanie &amp; Henri</b><span>Les capitaines · cabine n° 0 · tenue réglementaire</span><span class="st ok">À bord depuis 2007</span></div>';
-  html += ok.map((i, k) => {
-    const names = esc(nm(i)) + (deux(i) ? ' &amp; ' + esc(nm(i.avec)) : '');
-    const ports = deux(i) && i.photoDuo ? '<div class="porthole duo"><img src="' + esc(i.photoDuo) + '" data-full="' + esc(i.photoDuo) + '" alt="' + names + '"></div>' : hole(i, i.prenom) + (deux(i) ? hole(i.avec, i.avec.prenom) : '');
-    return '<div class="cabin"><div class="portholes">' + ports + '</div><b>' + names + '</b><span>Cabine n° ' + (k + 1) + '</span><span class="st ok">À bord</span></div>';
-  }).join('');
-  const nPlaces = abord < 12 ? 3 : 0;
-  for (let p = 0; p < nPlaces; p++) html += '<a class="cabin place" href="#reponse"><div class="portholes"><div class="porthole"><span>?</span></div></div><b>Ta cabine ici !</b><span>Réponds et envoie ta photo de marin</span></a>';
-  const trombi = $('#crew'); trombi.innerHTML = '<p class="t-note">Les hôtes du jour, Stéphanie &amp; Henri, vous accueillent sur <a href="#invitation">l\'onglet Invitation</a> ; <a href="#invites">voir qui vient</a>.</p><div class="trombi' + (abord > 45 ? ' mini' : abord > 20 ? ' compact' : '') + '">' + html + '</div>';
+    const ok = inv.filter(i => i.statut === 'oui');
+    const deux = i => !!(i.avec && i.avecVient !== false);   // le conjoint·e prévu·e vient aussi (réponse au formulaire)
+    const nbPers = ok.reduce((a, i) => a + (deux(i) ? 2 : 1), 0);
+    const personnes = inv.reduce((a, i) => a + (i.avec ? 2 : 1), 0);
+    const photos = ok.reduce((a, i) => a + (deux(i) ? (i.photoDuo ? 1 : 0) : (i.photo ? 1 : 0)), 0);
+    $('#trombi-intro').textContent = (nbPers ? nbPers + ' invité' + (nbPers > 1 ? 's' : '') + ' confirmé' + (nbPers > 1 ? 's' : '') + ' à ce jour. ' : 'Les premiers marins apparaîtront ici dès leur réponse. ') +
+      'Une photo par personne, ou une seule photo à deux pour les couples et les duos d\'amis. Prénom et initiale seulement : la discrétion est de mise sur le pont.';
+    const vide = t => '<div class="t-vide"><span>' + t + '</span></div>';
+    const hotes = '<div class="t-hotes" style="--nh:' + CONFIG.hotesTrombi.length + '">' + CONFIG.hotesTrombi.map(h => '<figure class="t-orient"><div class="t-orient-in">' +
+      (h.photo ? '<img src="' + esc(h.photo) + '" data-full="' + esc(h.photo) + '" alt="' + esc(h.noms) + ' en tenue de marin">' : vide('Photo à venir')) + '</div><figcaption>' + esc(h.noms) + '</figcaption></figure>').join('') + '</div>';
+    const cartes = ok.map((i, k) => {
+      const grad = GRADS[(k * 3) % GRADS.length];
+      if (deux(i)) {
+        const noms = esc(nm(i)) + ' &amp; ' + esc(nm(i.avec));
+        return '<figure class="t-cadre t-duo"><div class="t-photo-duo" style="--grad:' + grad + '">' + (i.photoDuo ? '<img src="' + esc(i.photoDuo) + '" data-full="' + esc(i.photoDuo) + '" alt="' + noms + '">' : '<span>' + esc(i.prenom.charAt(0)) + ' &amp; ' + esc(i.avec.prenom.charAt(0)) + '</span>') + '</div><figcaption>' + noms + '</figcaption></figure>';
+      }
+      return '<figure class="t-cadre"><div class="t-photo" style="--grad:' + grad + '">' + (i.photo ? '<img src="' + esc(i.photo) + '" data-full="' + esc(i.photo) + '" alt="' + esc(nm(i)) + '">' : esc(i.prenom.charAt(0) + (i.initiale || ''))) + '</div><figcaption>' + esc(nm(i)) + '</figcaption></figure>';
+    }).join('');
+    /* Taille automatique : plus il y a de photos, plus elles rétrécissent pour que tout tienne (mêmes paliers que le site des 60 ans) */
+    const unites = nbPers;
+    const t = unites <= 10 ? 160 : unites <= 20 ? 130 : unites <= 36 ? 105 : unites <= 50 ? 92 : unites <= 65 ? 80 : unites <= 80 ? 70 : 60;
+    let places = ''; for (let p = 0; p < (unites < 12 ? 3 : 0); p++) places += '<a class="t-cadre t-place" href="#defi"><div class="t-photo">?</div><figcaption>Ta photo ici !</figcaption></a>';
+    const stats = '<div class="t-stats"><span><b>' + nbPers + '</b>personnes confirmées</span><span><b>' + ok.length + '</b>invitations</span><span><b>' + photos + '</b>photos reçues</span><span><b>' + personnes + '</b>personnes invitées</span></div>';
+    $('#crew').innerHTML = '<div class="trombi' + (unites > 45 ? ' t-mini' : unites > 20 ? ' t-compact' : '') + '" style="--t:' + t + 'px">' + stats +
+      '<p class="t-note">Les hôtes du jour, Stéphanie &amp; Henri, vous accueillent sur <a href="#invitation">l\'onglet Invitation</a> ; <a href="#invites">voir qui vient</a>.</p>' + hotes + '<div class="t-grille">' + cartes + places + '</div></div>';
   }
   renderTrombi(); window.renderTrombi = renderTrombi;
   const envoi = '<a class="btn btn-primary" href="' + esc(CONFIG.formulairePhotoUrl || '#reponse') + '" target="_blank" rel="noopener">Déposer ma photo de marin</a>' +
