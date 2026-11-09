@@ -968,11 +968,9 @@ const CONFIG = {
     { prenom: 'Sophie', initiale: 'P', statut: 'attente' },
     { prenom: 'Nicolas', initiale: 'P', statut: 'attente' },
     { prenom: 'Bernard', initiale: 'K', avec: { prenom: 'Nathalie', initiale: 'K' }, statut: 'attente' },
-    { prenom: 'Eliane', initiale: 'P', statut: 'oui', photo: 'https://lh3.googleusercontent.com/d/1vd3pE3yADq4xNTrVVIH82-9ZSCgloBcK' },
-    { prenom: 'Geneviève', initiale: 'R', statut: 'oui', photo: 'https://lh3.googleusercontent.com/d/1bCLvnhkAW1IjM45ikQTFqe8JP-Fpthet' },
-    { prenom: 'Alain', initiale: 'B', avec: { prenom: 'Madame', initiale: 'B' }, statut: 'attente' },
+    { prenom: 'Eliane', initiale: 'P', statut: 'oui', photo: 'img/marins/eliane-p.jpg' },
+    { prenom: 'Geneviève', initiale: 'R', statut: 'oui', photo: 'img/marins/genevieve-r.jpg' },
     { prenom: 'Henri III', initiale: 'P', avec: { prenom: 'Valérie', initiale: 'P' }, statut: 'attente' },
-    { prenom: 'Henri II', initiale: 'P', statut: 'attente' },
     { prenom: 'Sonia', initiale: 'D', avec: { prenom: 'Hervé', initiale: 'J' }, statut: 'attente' },
     { prenom: 'Philippe', initiale: 'D', avec: { prenom: 'Véronique', initiale: 'D' }, statut: 'attente' },
     { prenom: 'Antonio', initiale: 'H', avec: { prenom: 'Véronique', initiale: 'H' }, statut: 'oui', avecVient: false },
@@ -982,7 +980,8 @@ const CONFIG = {
     { prenom: 'Sébastien', initiale: 'N', avec: { prenom: 'Karona', initiale: 'T' }, statut: 'attente' },
     { prenom: 'Romain', initiale: 'A', avec: { prenom: 'Madame', initiale: 'A' }, statut: 'attente' },
     { prenom: 'Taïeb', initiale: 'A', avec: { prenom: 'Jamila', initiale: 'A' }, statut: 'attente' },
-    { prenom: 'Noura', initiale: 'B', statut: 'attente' }
+    { prenom: 'Noura', initiale: 'B', statut: 'attente' },
+    { prenom: 'Ali', initiale: 'M', avec: { prenom: 'Saliha', initiale: 'M' }, statut: 'attente' }
   ],
   surprises: [
     { date: '2026-12-24', titre: 'Surprise n° 1', indice: 'Elle tient dans une pochette et se joue à 45 tours.', texte: 'Texte dévoilé à la date : à rédiger par les hôtes.' },
@@ -1407,7 +1406,7 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
       const i = parCle[slug(o.cle)]; if (!i) return;
       i.statut = o.statut || 'attente';
       if (i.avec) { i.avecVient = o.avecVient !== false; if (o.avecPrenom && i.avec.prenom === 'Madame') i.avec.prenom = o.avecPrenom; if (o.photoAvec) i.avec.photo = o.photoAvec; }
-      if (o.photo) i.photo = o.photo; if (o.photoDuo) i.photoDuo = o.photoDuo;
+      if (o.photo && !/^img\//.test(i.photo || '')) i.photo = o.photo;   // une photo rangée dans le site (img/marins) reste prioritaire : elle s'affiche partout, artefact compris if (o.photoDuo) i.photoDuo = o.photoDuo;
       n++;
     });
     if (n) { render(); if (window.renderTrombi) window.renderTrombi(); }
