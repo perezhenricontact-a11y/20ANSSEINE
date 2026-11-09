@@ -503,6 +503,11 @@ footer small{opacity:.7}
   *{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
   .boat{display:none}
 }
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0 10px}
+@media(max-width:640px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.stat{padding:16px 10px;border-radius:18px;background:#0f2742;border:2px solid #c9a24a;text-align:center;color:#fff}
+.stat b{display:block;font-family:'Playfair Display',Georgia,serif;font-size:2.3rem;font-weight:800;color:#e9c46a;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{display:block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:1.1px;margin-top:6px;opacity:.92}
 </style>
 </head>
 <body>
@@ -963,14 +968,14 @@ const CONFIG = {
     { prenom: 'Sophie', initiale: 'P', statut: 'attente' },
     { prenom: 'Nicolas', initiale: 'P', statut: 'attente' },
     { prenom: 'Bernard', initiale: 'K', avec: { prenom: 'Nathalie', initiale: 'K' }, statut: 'attente' },
-    { prenom: 'Eliane', initiale: 'P', statut: 'attente' },
-    { prenom: 'Geneviève', initiale: 'R', statut: 'attente' },
+    { prenom: 'Eliane', initiale: 'P', statut: 'oui' },
+    { prenom: 'Geneviève', initiale: 'R', statut: 'oui', photo: 'https://lh3.googleusercontent.com/d/1bCLvnhkAW1IjM45ikQTFqe8JP-Fpthet' },
     { prenom: 'Alain', initiale: 'B', avec: { prenom: 'Madame', initiale: 'B' }, statut: 'attente' },
     { prenom: 'Henri III', initiale: 'P', avec: { prenom: 'Valérie', initiale: 'P' }, statut: 'attente' },
     { prenom: 'Henri II', initiale: 'P', statut: 'attente' },
     { prenom: 'Sonia', initiale: 'D', avec: { prenom: 'Hervé', initiale: 'J' }, statut: 'attente' },
     { prenom: 'Philippe', initiale: 'D', avec: { prenom: 'Véronique', initiale: 'D' }, statut: 'attente' },
-    { prenom: 'Antonio', initiale: 'H', avec: { prenom: 'Véronique', initiale: 'H' }, statut: 'attente' },
+    { prenom: 'Antonio', initiale: 'H', avec: { prenom: 'Véronique', initiale: 'H' }, statut: 'oui', avecVient: false },
     { prenom: 'Gilbert', initiale: 'P', avec: { prenom: 'Nathalie', initiale: 'P' }, statut: 'attente' },
     { prenom: 'Marc', initiale: 'F', avec: { prenom: 'Stéphanie', initiale: 'F' }, statut: 'attente' },
     { prenom: 'Philippe', initiale: 'G', avec: { prenom: 'Madame', initiale: 'G' }, statut: 'attente' },
@@ -1408,7 +1413,7 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
     if (n) { render(); if (window.renderTrombi) window.renderTrombi(); }
     const b = $('#maj-direct'); if (b && d.maj) { const t = new Date(d.maj); b.textContent = 'Réponses lues en direct · ' + t.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) + ' à ' + t.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }); }
   }
-  if (CONFIG.liveUrl) fetch(CONFIG.liveUrl + (CONFIG.liveUrl.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now()).then(r => r.ok ? r.json() : Promise.reject()).then(appliquerDirect).catch(() => { const b = $('#maj-direct'); if (b) b.textContent = 'Réponses en direct indisponibles pour l\'instant (liste du site affichée).'; });
+  if (CONFIG.liveUrl) fetch(CONFIG.liveUrl + (CONFIG.liveUrl.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now()).then(r => r.ok ? r.json() : Promise.reject()).then(appliquerDirect).catch(() => { const b = $('#maj-direct'); if (b) b.textContent = 'Dernier relevé enregistré dans le site : 9 novembre (le direct se lit sur le site en ligne).'; });
   /* réponses en direct (variante CSV) : onglet « Liste publique » publié en CSV (colonnes Invitation, Accompagnant·e, Réponse, Clé). Garde-fou : seules les invitations de la liste sont prises en compte. */
   function parseCSV(t) { const rows = []; let row = [], f = '', q = false; for (let i = 0; i < t.length; i++) { const c = t[i]; if (q) { if (c === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; } else if (c === '"') q = true; else if (c === ',') { row.push(f); f = ''; } else if (c === '\n' || c === '\r') { if (c === '\r' && t[i + 1] === '\n') i++; row.push(f); rows.push(row); row = []; f = ''; } else f += c; } if (f || row.length) { row.push(f); rows.push(row); } return rows; }
   if (CONFIG.guestsCsv) fetch(CONFIG.guestsCsv + (CONFIG.guestsCsv.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now()).then(r => r.ok ? r.text() : Promise.reject()).then(t => {
