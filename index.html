@@ -499,6 +499,7 @@ footer .wrap{display:flex;flex-direction:column;gap:8px;align-items:center}
 footer .presente{font-size:1.5rem}
 footer small{opacity:.7}
 
+.sans-bandeau .masthead{display:none}
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
   .boat{display:none}
@@ -701,8 +702,7 @@ footer small{opacity:.7}
       <div class="section-head">
         <div class="eyebrow">Ils ont dit oui !</div>
         <h2>Le trombinoscope des marins</h2>
-        <p class="lead" id="trombi-intro">Les invités qui ont confirmé leur venue, en tenue de marin. Une photo par personne, ou une seule photo à deux pour les couples et les duos d'amis.</p>
-        <p class="lead" style="font-size:1rem"><b>Tenue de marin obligatoire sur la photo</b> (marinière, béret à pompon, casquette de capitaine, vareuse…) : <a href="#defi" class="lien-defi">le défi photo</a> t'habille en deux minutes, ou dépose une photo normale « à transformer ».</p>
+        <p class="lead" id="trombi-intro" style="font-size:1rem">Pastille verte : à bord. Pas encore de photo ? <a href="#defi" class="lien-defi">Le défi photo</a>.</p>
       </div>
       <div id="crew"></div>
     </section>
@@ -1084,6 +1084,7 @@ function showTab(name, push, scrollTab) {
   if (!TABS.includes(name)) { name = (window.ouvrirFiche && window.ouvrirFiche(name)) ? 'invites' : 'invitation'; }   // #prenom-initiale : la fiche de l'invité
   document.querySelectorAll('.tab').forEach(b => b.setAttribute('aria-selected', b.dataset.tab === name ? 'true' : 'false'));
   TABS.forEach(t => { $('#panel-' + t).hidden = t !== name; });
+  document.body.classList.toggle('sans-bandeau', name !== 'invitation');   // v2.4 : le bandeau commun (affiche, compte à rebours, jukebox) ne s'affiche que sur l'onglet Invitation
   if (push && location.hash !== '#' + name) { try { history.replaceState(null, '', '#' + name); } catch (e) { location.hash = name; } }
   if (scrollTab) { const sel = document.querySelector('.tab[aria-selected="true"]'); if (sel && sel.scrollIntoView) sel.scrollIntoView({ block: 'nearest', inline: 'center' }); }
 }
@@ -1296,14 +1297,14 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
   const inv = CONFIG.invites;
   const nm = p => p.prenom + (p.initiale ? ' ' + p.initiale + '.' : '');
   function renderTrombi() {
-    const liste = inv.filter(i => i.statut !== 'non');   // toutes les invitations de la liste (sauf « non ») : la mosaïque se remplit au fil des réponses et des photos
+    const rang = i => i.statut === 'oui' ? 0 : (i.statut === 'peut-etre' ? 1 : 2);
+    const liste = inv.filter(i => i.statut !== 'non').slice().sort((a, b) => rang(a) - rang(b));   // ceux qui ont dit oui d'abord   // toutes les invitations de la liste (sauf « non ») : la mosaïque se remplit au fil des réponses et des photos
     const deux = i => !!(i.avec && i.avecVient !== false);
     const ok = inv.filter(i => i.statut === 'oui');
     const nbPers = ok.reduce((a, i) => a + (deux(i) ? 2 : 1), 0);
     const personnes = inv.reduce((a, i) => a + (i.avec ? 2 : 1), 0);
     const photos = liste.reduce((a, i) => a + (deux(i) ? (i.photoDuo ? 1 : 0) : (i.photo ? 1 : 0)), 0);
-    $('#trombi-intro').textContent = (nbPers ? nbPers + ' invité' + (nbPers > 1 ? 's' : '') + ' confirmé' + (nbPers > 1 ? 's' : '') + ' à ce jour. ' : '') +
-      'Une case par invitation : la photo de marin s\'affiche dès qu\'elle arrive (une seule photo à deux pour les couples et les duos d\'amis), la pastille verte marque ceux qui ont dit oui.';
+    $('#trombi-intro').innerHTML = '<b>' + nbPers + '</b> à bord · <b>' + photos + '</b> photo' + (photos > 1 ? 's' : '') + ' · pastille verte : a dit oui. Pas encore de photo ? <a href="#defi" class="lien-defi">Le défi photo</a>.';
     const badge = '<span class="t-badge">photo à venir</span>';
     const abord = i => i.statut === 'oui' ? '<span class="t-abord" title="À bord !" aria-label="À bord">✓</span>' : '';
     const cartes = liste.map((i, k) => {
@@ -1319,8 +1320,7 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
     const t = unites <= 10 ? 160 : unites <= 20 ? 130 : unites <= 36 ? 105 : unites <= 50 ? 92 : unites <= 65 ? 80 : unites <= 80 ? 70 : 60;
     const stats = '<div class="t-stats"><span><b>' + nbPers + '</b>personnes confirmées</span><span><b>' + inv.length + '</b>invitations</span><span><b>' + photos + '</b>photos reçues</span><span><b>' + personnes + '</b>personnes invitées</span></div>';
     const hotes = !CONFIG.hotesTrombi.length ? '' : '<div class="t-hotes" style="--nh:' + CONFIG.hotesTrombi.length + '">' + CONFIG.hotesTrombi.map(h => '<figure class="t-orient"><div class="t-orient-in"><img src="' + esc(h.photo) + '" data-full="' + esc(h.photo) + '" alt="' + esc(h.noms) + '"></div><figcaption>' + esc(h.noms) + '</figcaption></figure>').join('') + '</div>';
-    $('#crew').innerHTML = '<div class="trombi' + (unites > 45 ? ' t-mini' : unites > 20 ? ' t-compact' : '') + '" style="--t:' + t + 'px">' + stats +
-      '<p class="t-note">Les hôtes du jour, Stéphanie &amp; Henri, vous accueillent sur <a href="#invitation">l\'onglet Invitation</a> ; <a href="#invites">voir qui vient</a> · <a href="#defi">envoyer ma photo de marin</a>.</p>' + hotes + '<div class="t-grille">' + cartes + '</div></div>';
+    $('#crew').innerHTML = '<div class="trombi' + (unites > 45 ? ' t-mini' : unites > 20 ? ' t-compact' : '') + '" style="--t:' + t + 'px">' + hotes + '<div class="t-grille">' + cartes + '</div></div>';
   }
   renderTrombi(); window.renderTrombi = renderTrombi;
   const envoi = '<a class="btn btn-primary" href="' + esc(CONFIG.formulairePhotoUrl || '#reponse') + '" target="_blank" rel="noopener">Déposer ma photo de marin</a>' +
