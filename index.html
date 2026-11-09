@@ -21,7 +21,8 @@ img{max-width:100%}
 [hidden]{display:none!important}
 </style>
 <style>
-/* v2.1 — formulaire orienté par le nom : un seul billet-réponse, lien personnel = nom pré-rempli, « à partir de quand » du conjoint, « autre besoin » dans la venue.
+/* v2.2 — DIRECT : le site lit l'application Web du script (statuts, conjoint, photos autorisées) → statistiques, trombinoscope et compteur à jour tout seuls.
+   v2.1 — formulaire orienté par le nom : un seul billet-réponse, lien personnel = nom pré-rempli, « à partir de quand » du conjoint, « autre besoin » dans la venue.
    v2.0 — trombinoscope « mosaïque pleine page » : toutes les invitations, photo plein cadre ou initiales + « photo à venir », sans photo des hôtes.
    v1.9.1 — onglet Trombinoscope réduit à l'essentiel comme Casablanca (intro, stats, hôtes, mosaïque) ; cadre des hôtes optionnel.
    v1.9 — trombinoscope au format exact du site des 60 ans (mosaïque, taille automatique, hôtes en tête).
@@ -665,6 +666,7 @@ footer small{opacity:.7}
         <p class="lead">Chaque réponse au formulaire ajoute un marin à l'équipage, avec sa photo en tenue de marin (<a href="#defi" class="lien-defi">le défi photo</a>). Tu n'y es pas encore ? <a href="#reponse" class="lien-defi">Réponds ici</a>. Prénom et initiale seulement : la discrétion est de mise sur le pont.</p>
       </div>
       <div class="stats" id="stats"></div>
+      <div class="count" id="maj-direct" aria-live="polite"></div>
       <div class="heros">
         <div class="heros-duo">
           <figure><img src="img/hotes-marins.jpg" data-full="img/hotes-marins.jpg" alt="Stéphanie et Henri en tenue de marin"><figcaption>En marins…</figcaption></figure>
@@ -994,6 +996,9 @@ const CONFIG = {
   // Réponses en direct : lien CSV de l'onglet « Liste publique » de la feuille de réponses, publié sur le Web (Fichier > Partager > Publier sur le Web > Liste publique > CSV).
   // Vide : la page utilise les statuts de la liste « invites » ci-dessous (mis à jour à la main ou par le script).
   guestsCsv: '',
+  // DIRECT (v2.2) : adresse de l'application Web du script Apps Script (Déployer > Application Web > …/exec). Le site y lit, à chaque ouverture, les statuts (oui / peut-être / non),
+  // le conjoint prévu (vient ou non, son prénom s'il a été donné) et l'adresse des photos de marin dont la publication a été autorisée. Statistiques, trombinoscope et compteur se mettent à jour tout seuls.
+  liveUrl: '',
   // Hôtels (relevé du 08/11/2026, adresses vérifiées) : [groupe, nom, détail, adresse, téléphone, lien]. Paris : dès que le quai est fixé.
   hotelsReleve: '08/11/2026',
   hotels: [
@@ -1389,7 +1394,22 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
   $('#noms-heros').innerHTML = HOTES.map((h, k) => '<button type="button" data-h="' + k + '">Le mot de ' + esc(h.nom) + '</button>').join('');
   $('#noms-heros').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { const h = HOTES[+b.dataset.h]; ouvrir('<div class="carre" style="background-image:url(\'' + esc(h.photo) + '\')"></div><h3>' + esc(h.nom) + '</h3><span class="badge-st b-oui">À bord depuis 2007</span><p class="mot">« ' + esc(h.mot) + ' »</p>'); }));
   render();
-  /* réponses en direct : onglet « Liste publique » publié en CSV (colonnes Invitation, Accompagnant·e, Réponse, Clé). Garde-fou : seules les invitations de la liste sont prises en compte. */
+  /* DIRECT : l'application Web du script (CONFIG.liveUrl) renvoie, pour chaque invitation de la liste, le statut, le conjoint prévu et la photo autorisée. Garde-fou : seules les clés de la liste sont prises en compte. */
+  function appliquerDirect(d) {
+    const parCle = {}; CONFIG.invites.forEach(i => parCle[cle(i)] = i);
+    let n = 0;
+    (d.invites || []).forEach(o => {
+      const i = parCle[slug(o.cle)]; if (!i) return;
+      i.statut = o.statut || 'attente';
+      if (i.avec) { i.avecVient = o.avecVient !== false; if (o.avecPrenom && i.avec.prenom === 'Madame') i.avec.prenom = o.avecPrenom; if (o.photoAvec) i.avec.photo = o.photoAvec; }
+      if (o.photo) i.photo = o.photo; if (o.photoDuo) i.photoDuo = o.photoDuo;
+      n++;
+    });
+    if (n) { render(); if (window.renderTrombi) window.renderTrombi(); }
+    const b = $('#maj-direct'); if (b && d.maj) { const t = new Date(d.maj); b.textContent = 'Réponses lues en direct · ' + t.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) + ' à ' + t.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }); }
+  }
+  if (CONFIG.liveUrl) fetch(CONFIG.liveUrl + (CONFIG.liveUrl.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now()).then(r => r.ok ? r.json() : Promise.reject()).then(appliquerDirect).catch(() => { const b = $('#maj-direct'); if (b) b.textContent = 'Réponses en direct indisponibles pour l\'instant (liste du site affichée).'; });
+  /* réponses en direct (variante CSV) : onglet « Liste publique » publié en CSV (colonnes Invitation, Accompagnant·e, Réponse, Clé). Garde-fou : seules les invitations de la liste sont prises en compte. */
   function parseCSV(t) { const rows = []; let row = [], f = '', q = false; for (let i = 0; i < t.length; i++) { const c = t[i]; if (q) { if (c === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; } else if (c === '"') q = true; else if (c === ',') { row.push(f); f = ''; } else if (c === '\n' || c === '\r') { if (c === '\r' && t[i + 1] === '\n') i++; row.push(f); rows.push(row); row = []; f = ''; } else f += c; } if (f || row.length) { row.push(f); rows.push(row); } return rows; }
   if (CONFIG.guestsCsv) fetch(CONFIG.guestsCsv + (CONFIG.guestsCsv.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now()).then(r => r.ok ? r.text() : Promise.reject()).then(t => {
     const parCle = {}; CONFIG.invites.forEach(i => parCle[cle(i)] = i);
