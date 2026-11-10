@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Portraits festifs — Stéphanie & Henri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Lato:wght@400;700;900&display=swap">
+<style>
+:root{--bg:#f6f2ea;--paper:#fff;--ink:#203044;--ink-2:#5b6b7c;--line:#e3ddd1;--navy:#142b44;--teal:#24526a;--gold:#f2c88d;--red:#a93d35;--ok:#2f7d4f;--ok-2:#e3f3e8;--err:#a93d35;--err-2:#fbe7e4;
+  --f-d:'Playfair Display',Georgia,serif;--f-b:'Lato',system-ui,-apple-system,'Segoe UI',sans-serif}
+*{box-sizing:border-box} html,body{margin:0} body{background:var(--bg);color:var(--ink);font-family:var(--f-b);font-size:16px;line-height:1.5}
+header{background:linear-gradient(115deg,var(--navy),var(--teal));color:#fff;text-align:center;padding:36px max(16px,env(safe-area-inset-right)) 30px max(16px,env(safe-area-inset-left))}
+header small{letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700}
+h1{font-family:var(--f-d);font-size:clamp(30px,6vw,46px);margin:8px 0 6px}
+header p{max-width:620px;margin:0 auto;color:#e4e9e9}
+#bonjour{margin-top:12px;font-weight:700;color:var(--gold)}
+main{max-width:820px;margin:20px auto;padding:0 max(16px,env(safe-area-inset-right)) 60px max(16px,env(safe-area-inset-left));display:flex;flex-direction:column;gap:18px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 12px 34px #142b4410}
+h2{font-family:var(--f-d);font-size:21px;margin:0 0 12px}
+.note{color:var(--ink-2);font-size:14px;margin:6px 0 0}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:560px){.tiles{grid-template-columns:1fr}}
+.tile{border:2px solid var(--line);border-radius:14px;padding:14px;text-align:left;background:#fbfaf7;cursor:pointer;font:inherit;color:inherit;display:flex;flex-direction:column;gap:4px}
+.tile b{font-size:17px} .tile span{font-size:13px;color:var(--ink-2)}
+.tile[aria-pressed="true"]{border-color:var(--teal);background:#e4eef2;box-shadow:inset 0 0 0 1px var(--teal)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:#fbfaf7;border-radius:99px;padding:8px 14px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;color:inherit}
+.chip[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:14px 18px;font:inherit;font-weight:900;cursor:pointer;text-decoration:none}
+.btn.main{background:var(--red);color:#fff;width:100%;font-size:17px}
+.btn.sec{background:#e8eef2;color:var(--navy)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:8px}
+.editor{display:none;flex-direction:column;gap:10px;margin-top:12px}
+.editor.on{display:flex}
+.cadre{position:relative;width:min(100%,320px);aspect-ratio:2/3;margin:0 auto;border-radius:12px;overflow:hidden;background:#dfe5ea;touch-action:none;cursor:grab}
+.cadre canvas{width:100%;height:100%;display:block}
+.cadre .droite{position:absolute;inset:0 0 0 50%;border-left:2px dashed #ffffffcc;pointer-events:none;display:none}
+label.ck{display:flex;gap:10px;align-items:flex-start;font-size:15px;margin:8px 0}
+label.ck input{width:20px;height:20px;margin-top:2px;flex:none}
+input[type=range]{width:100%}
+.status{min-height:24px;font-weight:700;color:var(--teal)}
+.msg{padding:10px 14px;border-radius:10px;font-weight:700}
+.msg.err{background:var(--err-2);color:var(--err)} .msg.ok{background:var(--ok-2);color:var(--ok)}
+.spin{width:22px;height:22px;border-radius:50%;border:3px solid #c9d6de;border-top-color:var(--teal);animation:t 1s linear infinite;display:inline-block;vertical-align:middle}
+@keyframes t{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation-duration:3s}}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.result{border:1px solid var(--line);border-radius:14px;padding:10px;background:#fff;display:flex;flex-direction:column;gap:8px}
+.result img{width:100%;border-radius:10px}
+.code{display:flex;gap:8px;flex-wrap:wrap} .code input{flex:1 1 220px;min-width:0;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit}
+[hidden]{display:none!important}
+footer{text-align:center;color:var(--ink-2);font-size:13px}
+details summary{cursor:pointer;font-weight:700}
+</style>
+</head>
+<body>
+<header>
+  <small>Portraits festifs</small>
+  <h1>Stéphanie &amp; Henri</h1>
+  <p>De la Seine à Casablanca : transformez votre photo en portrait de fête, en marin ou en tenue marocaine.</p>
+  <div id="bonjour" aria-live="polite"></div>
+</header>
+<main>
+  <section class="panel" id="p-code" hidden>
+    <h2>Votre code personnel</h2>
+    <p class="note">Scannez le QR code de votre invitation. S'il ne fonctionne pas, saisissez le code imprimé dessous (par exemple S20-prenom-x-1a2b3c4d).</p>
+    <form class="code" id="f-code"><input id="code" autocomplete="off" placeholder="Votre code" aria-label="Votre code personnel"><button class="btn sec" type="submit">Valider</button></form>
+    <div id="code-msg" class="msg err" hidden></div>
+  </section>
+
+  <div id="app" hidden>
+  <section class="panel">
+    <h2>1. Choisissez votre thème</h2>
+    <div class="tiles" id="themes">
+      <button type="button" class="tile" data-theme="marin" aria-pressed="false"><b>Marin</b><span>« 20 ans sur la Seine » : marinière, foulard rouge, pont de bateau, Tour Eiffel.</span></button>
+      <button type="button" class="tile" data-theme="maroc" aria-pressed="false"><b>Marocain</b><span>« De Casablanca au cochonnet » : djellaba ou caftan, tarbouche, boule de pétanque.</span></button>
+      <button type="button" class="tile" data-theme="deux" aria-pressed="false"><b>Les deux</b><span>Les deux portraits à partir de la même photo.</span></button>
+    </div>
+    <h2 style="margin-top:18px">2. Choisissez l'ambiance</h2>
+    <div class="chips" id="ambiances">
+      <button type="button" class="chip" data-amb="classique" aria-pressed="true">Classique et élégante</button>
+      <button type="button" class="chip" data-amb="retro" aria-pressed="false">Rétro et humoristique</button>
+      <button type="button" class="chip" data-amb="festive" aria-pressed="false">Très festive et décalée</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>3. Votre photo</h2>
+    <p class="note">Une photo de face, bien éclairée, visage bien visible. Le portrait est individuel.</p>
+    <div class="row" style="margin-top:10px">
+      <label class="btn sec" for="f-cam">Prendre une photo</label>
+      <label class="btn sec" for="f-imp">Importer une photo</label>
+    </div>
+    <input id="f-cam" type="file" accept="image/*" capture="user" hidden>
+    <input id="f-imp" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif" hidden>
+    <div class="editor" id="editor">
+      <div class="cadre" id="cadre"><canvas id="cv" width="800" height="1200" aria-label="Aperçu de la photo recadrée"></canvas><div class="droite" id="ligne-droite"></div></div>
+      <label class="note" for="zoom">Zoom (faites glisser la photo pour la placer)</label>
+      <input id="zoom" type="range" min="1" max="4" step="0.01" value="1">
+      <div class="row"><button type="button" class="btn sec" id="rot">Tourner d'un quart de tour</button><button type="button" class="btn sec" id="reset">Recentrer</button></div>
+      <label class="ck"><input type="checkbox" id="droite" checked><span>Photo à plusieurs : garder uniquement la personne de droite (conseillé : recadrez pour ne garder qu'elle).</span></label>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>4. Vos autorisations</h2>
+    <details><summary>Comment votre photo est traitée</summary>
+      <p class="note">Votre photo est envoyée au service de génération d'images d'OpenAI, uniquement quand vous appuyez sur « Créer mon portrait », pour fabriquer le portrait. Elle n'est pas publiée. Si vous l'acceptez ci-dessous, le portrait obtenu est rangé dans un espace privé réservé à Stéphanie et Henri, au nom de votre identifiant, pendant 120 jours au plus. Vous pouvez demander son effacement à tout moment avec le bouton en bas de page. Votre portrait n'apparaît au trombinoscope ou pendant la soirée que si vous cochez la dernière case.</p>
+    </details>
+    <label class="ck"><input type="checkbox" id="c-traitement"><span><b>J'accepte</b> que ma photo soit transformée par le service d'images pour créer mon portrait. <i>(obligatoire)</i></span></label>
+    <label class="ck"><input type="checkbox" id="c-conservation" checked><span>J'accepte que mon portrait soit enregistré dans l'espace privé de Stéphanie et Henri.</span></label>
+    <label class="ck"><input type="checkbox" id="c-publication"><span>J'autorise Stéphanie et Henri à utiliser mon portrait dans le trombinoscope et pendant la soirée (prénom et initiale seulement).</span></label>
+  </section>
+
+  <section class="panel">
+    <button class="btn main" id="go" disabled>Créer mon portrait</button>
+    <p class="note" id="quota"></p>
+    <p class="status" id="status" aria-live="polite"></p>
+    <div id="err" class="msg err" hidden></div>
+  </section>
+
+  <section id="res-panel" class="panel" hidden>
+    <h2>Vos portraits</h2>
+    <div class="results" id="results"></div>
+    <div class="row" style="margin-top:12px">
+      <button class="btn sec" id="variante" type="button">Créer une autre variante</button>
+      <button class="btn sec" id="changer" type="button">Changer de thème</button>
+      <button class="btn sec" id="terminer" type="button">Terminer</button>
+    </div>
+    <div id="fin" class="msg ok" hidden>Merci ! Vos portraits sont prêts. À très bientôt pour la fête.</div>
+  </section>
+
+  <section class="panel">
+    <h2>Mon espace</h2>
+    <div class="row"><button class="btn sec" id="mes" type="button">Revoir mes portraits enregistrés</button><button class="btn sec" id="effacer" type="button">Effacer mes portraits</button></div>
+    <div id="conf-eff" class="msg err" hidden>Tous vos portraits enregistrés seront supprimés. <button class="btn sec" id="eff-ok" type="button">Oui, tout effacer</button> <button class="btn sec" id="eff-non" type="button">Annuler</button></div>
+    <div id="espace-msg" class="msg ok" hidden></div>
+    <div class="results" id="mes-res" style="margin-top:10px"></div>
+  </section>
+  </div>
+  <footer>Stéphanie &amp; Henri · aucune photo n'est rendue publique sans votre accord · <a href="https://perezhenricontact-a11y.github.io/20ANSSEINE/">le site des 20 ans</a> · <a href="https://perezhenricontact-a11y.github.io/60ANSSIXTIESPMHP/">le site de Casablanca</a></footer>
+</main>
+<script>
+const API = 'https://script.google.com/macros/s/AKfycbxjaGQ052N2GCbuNTWya7bgRKs0fUXOK5NubatUm2C6dcphM-uMsP1EWfXLh_LKhL7K/exec';
+const $ = s => document.querySelector(s);
+const st = { invite:'', token:'', theme:'', amb:'classique', img:null, rot:0, zoom:1, dx:0, dy:0 };
+const ss = { get(k){ try { return sessionStorage.getItem(k); } catch(e){ return null; } }, set(k,v){ try { sessionStorage.setItem(k,v); } catch(e){} } };
+async function api(body) {
+  const r = await fetch(API, { method:'POST', headers:{ 'Content-Type':'text/plain;charset=utf-8' }, body: JSON.stringify(body) });
+  if (!r.ok) throw new Error('reseau');
+  return r.json();
+}
+function erreur(t) { const e = $('#err'); e.hidden = !t; e.textContent = t || ''; }
+
+/* ---------- accès : QR code (invite + token) ou code manuel ---------- */
+const q = new URLSearchParams(location.search);
+st.invite = q.get('invite') || ss.get('pf-invite') || ''; st.token = q.get('token') || ss.get('pf-token') || '';
+if (q.get('invite')) { try { history.replaceState(null, '', location.pathname); } catch(e){} }   // retire le jeton de la barre d'adresse
+async function entrer() {
+  if (!st.invite || !st.token) { $('#p-code').hidden = false; return; }
+  $('#bonjour').innerHTML = '<span class="spin"></span>';
+  try {
+    const r = await api({ action:'bonjour', invite: st.invite, token: st.token });
+    if (!r.ok) { ss.set('pf-invite',''); ss.set('pf-token',''); st.invite = st.token = ''; $('#bonjour').textContent = ''; $('#p-code').hidden = false; $('#code-msg').hidden = false; $('#code-msg').textContent = r.erreur; return; }
+    ss.set('pf-invite', st.invite); ss.set('pf-token', st.token);
+    $('#bonjour').textContent = 'Bonjour ' + r.prenom + ' ' + r.initiale + '. !';
+    $('#p-code').hidden = true; $('#app').hidden = false;
+    choisirTheme(r.fete === 'casa60' ? 'maroc' : 'marin');
+    majQuota(r.restant);
+    if (!r.configure) erreur('La création de portraits sera ouverte très bientôt par Stéphanie et Henri. Vous pouvez déjà préparer votre photo.');
+  } catch (e) { $('#bonjour').textContent = ''; $('#p-code').hidden = false; $('#code-msg').hidden = false; $('#code-msg').textContent = 'Connexion impossible pour l\'instant. Vérifiez votre réseau et réessayez.'; }
+}
+$('#f-code').addEventListener('submit', async ev => {
+  ev.preventDefault(); $('#code-msg').hidden = true;
+  try { const r = await api({ action:'code', code: $('#code').value.trim() });
+    if (!r.ok) { $('#code-msg').hidden = false; $('#code-msg').textContent = r.erreur; return; }
+    st.invite = r.invite; st.token = r.token; entrer();
+  } catch (e) { $('#code-msg').hidden = false; $('#code-msg').textContent = 'Connexion impossible pour l\'instant. Réessayez.'; }
+});
+function majQuota(n) { st.restant = n; $('#quota').textContent = n + ' création' + (n > 1 ? 's' : '') + ' restante' + (n > 1 ? 's' : '') + ' (le choix « Les deux » en utilise deux).'; sync(); }
+
+/* ---------- thème et ambiance ---------- */
+function choisirTheme(t) { st.theme = t; document.querySelectorAll('#themes .tile').forEach(b => b.setAttribute('aria-pressed', b.dataset.theme === t)); sync(); }
+document.querySelectorAll('#themes .tile').forEach(b => b.addEventListener('click', () => choisirTheme(b.dataset.theme)));
+document.querySelectorAll('#ambiances .chip').forEach(b => b.addEventListener('click', () => { st.amb = b.dataset.amb; document.querySelectorAll('#ambiances .chip').forEach(x => x.setAttribute('aria-pressed', x === b)); }));
+
+/* ---------- photo : chargement, orientation, recadrage 2:3 ---------- */
+const cv = $('#cv'), cx = cv.getContext('2d');
+async function charger(f) {
+  erreur('');
+  if (!f) return;
+  if (f.size > 25 * 1024 * 1024) { erreur('Photo trop lourde (25 Mo maximum).'); return; }
+  try {
+    const bmp = await createImageBitmap(f, { imageOrientation:'from-image' });
+    st.img = bmp; st.rot = 0; st.zoom = 1; st.dx = st.dy = 0; $('#zoom').value = 1; $('#editor').classList.add('on'); dessiner(); sync();
+  } catch (e) { erreur('Ce format de photo n\'est pas lu par votre navigateur. Sur iPhone, choisissez « Le plus compatible » (JPEG) dans Réglages › Appareil photo › Formats, ou faites une capture d\'écran de la photo.'); }
+}
+$('#f-cam').addEventListener('change', e => charger(e.target.files[0]));
+$('#f-imp').addEventListener('change', e => charger(e.target.files[0]));
+function dessiner(cible, W, H) {
+  const c = cible || cx; W = W || cv.width; H = H || cv.height;
+  c.fillStyle = '#dfe5ea'; c.fillRect(0, 0, W, H); if (!st.img) return;
+  const r = st.rot % 180 !== 0, iw = r ? st.img.height : st.img.width, ih = r ? st.img.width : st.img.height;
+  const s = Math.max(W / iw, H / ih) * st.zoom;
+  c.save(); c.translate(W / 2 + st.dx * W, H / 2 + st.dy * H); c.rotate(st.rot * Math.PI / 180); c.scale(s, s);
+  c.drawImage(st.img, -st.img.width / 2, -st.img.height / 2); c.restore();
+}
+$('#zoom').addEventListener('input', e => { st.zoom = +e.target.value; dessiner(); });
+$('#rot').addEventListener('click', () => { st.rot = (st.rot + 90) % 360; dessiner(); });
+$('#reset').addEventListener('click', () => { st.zoom = 1; st.dx = st.dy = 0; $('#zoom').value = 1; dessiner(); });
+$('#droite').addEventListener('change', () => { $('#ligne-droite').style.display = $('#droite').checked ? 'block' : 'none'; });
+(function glisser() {
+  const el = $('#cadre'); let p = null;
+  el.addEventListener('pointerdown', e => { p = { x:e.clientX, y:e.clientY, dx:st.dx, dy:st.dy }; el.setPointerCapture(e.pointerId); });
+  el.addEventListener('pointermove', e => { if (!p) return; const r = el.getBoundingClientRect(); st.dx = p.dx + (e.clientX - p.x) / r.width; st.dy = p.dy + (e.clientY - p.y) / r.height; dessiner(); });
+  ['pointerup','pointercancel'].forEach(t => el.addEventListener(t, () => p = null));
+})();
+function photoFinale() { const c = document.createElement('canvas'); c.width = 1024; c.height = 1536; dessiner(c.getContext('2d'), 1024, 1536); return c.toDataURL('image/jpeg', 0.9); }
+
+/* ---------- génération ---------- */
+function sync() { $('#go').disabled = !(st.img && st.theme && $('#c-traitement').checked && st.restant > 0); }
+['#c-traitement'].forEach(s => $(s).addEventListener('change', sync));
+$('#c-publication').addEventListener('change', () => { if ($('#c-publication').checked) $('#c-conservation').checked = true; });
+$('#c-conservation').addEventListener('change', () => { if (!$('#c-conservation').checked) $('#c-publication').checked = false; });
+let enCours = false;
+async function generer(variante) {
+  if (enCours) return; erreur(''); $('#fin').hidden = true;
+  const themes = st.theme === 'deux' ? ['marin', 'maroc'] : [st.theme], photo = photoFinale();
+  enCours = true; $('#go').disabled = true; $('#variante').disabled = true;
+  let faits = 0;
+  for (const t of themes) {
+    $('#status').innerHTML = '<span class="spin"></span> Création du portrait ' + (t === 'marin' ? 'marin' : 'marocain') + ' en cours… (environ une minute)';
+    try {
+      const r = await api({ action:'generer', invite:st.invite, token:st.token, theme:t, ambiance:st.amb, photo, droite:$('#droite').checked, variante:!!variante,
+        consentTraitement:$('#c-traitement').checked, consentConservation:$('#c-conservation').checked, consentPublication:$('#c-publication').checked });
+      if (!r.ok) { erreur(r.erreur); break; }
+      afficher(r); faits++; if (typeof r.restant === 'number') majQuota(r.restant);
+    } catch (e) { erreur('La connexion a été interrompue avant la fin. Réessayez : aucune création n\'a été comptée si le portrait ne s\'est pas affiché.'); break; }
+  }
+  $('#status').textContent = faits ? (faits > 1 ? 'Vos deux portraits sont prêts.' : 'Votre portrait est prêt.') : '';
+  enCours = false; sync(); $('#variante').disabled = false;
+}
+function afficher(r) {
+  $('#res-panel').hidden = false;
+  const a = document.createElement('article'); a.className = 'result';
+  const nom = 'portrait-' + (r.theme === 'marin' ? 'marin' : 'marocain') + '-' + Date.now() + '.jpg';
+  a.innerHTML = '<img alt="Votre portrait ' + (r.theme === 'marin' ? 'marin' : 'marocain') + '"><a class="btn main" download="' + nom + '">Télécharger ma photo</a><p class="note">' + (r.enregistre ? 'Enregistré dans l\'espace privé de Stéphanie et Henri.' : 'Non enregistré (vous ne l\'avez pas demandé) : téléchargez-le pour le garder.') + '</p>';
+  a.querySelector('img').src = r.image; a.querySelector('a').href = r.image;
+  $('#results').prepend(a); $('#res-panel').scrollIntoView({ behavior:'smooth' });
+}
+$('#go').addEventListener('click', () => generer(false));
+$('#variante').addEventListener('click', () => generer(true));
+$('#changer').addEventListener('click', () => $('#themes').scrollIntoView({ behavior:'smooth' }));
+$('#terminer').addEventListener('click', () => { $('#fin').hidden = false; });
+
+/* ---------- mon espace : revoir, effacer ---------- */
+$('#mes').addEventListener('click', async () => {
+  $('#espace-msg').hidden = false; $('#espace-msg').innerHTML = '<span class="spin"></span> Chargement…';
+  try { const r = await api({ action:'mes-portraits', invite:st.invite, token:st.token });
+    $('#espace-msg').textContent = r.ok ? (r.portraits.length ? r.portraits.length + ' portrait(s) enregistré(s).' : 'Aucun portrait enregistré.') : r.erreur;
+    $('#mes-res').innerHTML = ''; (r.portraits || []).forEach(p => { const a = document.createElement('article'); a.className = 'result'; a.innerHTML = '<img alt="Portrait enregistré"><p class="note">' + (p.theme === 'marin' ? 'Marin' : 'Marocain') + (p.publication ? ' · trombinoscope autorisé' : '') + '</p>'; a.querySelector('img').src = p.image; $('#mes-res').append(a); });
+  } catch (e) { $('#espace-msg').textContent = 'Connexion impossible pour l\'instant.'; }
+});
+$('#effacer').addEventListener('click', () => { $('#conf-eff').hidden = false; });
+$('#eff-non').addEventListener('click', () => { $('#conf-eff').hidden = true; });
+$('#eff-ok').addEventListener('click', async () => {
+  $('#conf-eff').hidden = true;
+  try { const r = await api({ action:'effacer', invite:st.invite, token:st.token }); $('#espace-msg').hidden = false; $('#espace-msg').textContent = r.ok ? 'C\'est fait : ' + r.efface + ' portrait(s) effacé(s).' : r.erreur; $('#mes-res').innerHTML = ''; }
+  catch (e) { $('#espace-msg').hidden = false; $('#espace-msg').textContent = 'Connexion impossible pour l\'instant.'; }
+});
+entrer();
+</script>
+</body>
+</html>

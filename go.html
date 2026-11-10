@@ -1,0 +1,12 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Défi photo — 20 ans sur la Seine</title>
+<style>body{font-family:system-ui,sans-serif;background:#13294b;color:#f6efe0;display:grid;place-items:center;min-height:100vh;margin:0;padding:20px;text-align:center}a{color:#e9d28c;font-weight:700}</style></head><body>
+<main><h1 style="font-weight:600">Ouverture de ChatGPT…</h1><p>Le texte est prêt : il ne te reste qu'à joindre ta photo (bouton +) et envoyer.</p><p><a id="go" href="https://chatgpt.com/">Si rien ne se passe, touche ici</a></p></main>
+<script>
+// Page relais des QR codes du défi photo : le texte se modifie ici, sans réimprimer les QR codes.
+const AMB = ['classique et élégante', 'rétro et humoristique', 'très festive et décalée'];
+const q = new URLSearchParams(location.search), a = AMB[(+q.get('a') || 1) - 1] || AMB[0], duo = q.get('p') === 'duo';
+const solo = 'transforme cette photo en portrait individuel de marin des années 1950 pour les « 20 ans sur la Seine » de Stéphanie et Henri. Exigence absolue : garde exactement mon visage, mon âge, mes yeux, mes cheveux, mon sourire et mes traits, sans visage inventé. S\'il y a plusieurs personnes, garde seulement celle de droite. Tenue : marinière bleu marine et blanc, foulard rouge, casquette de capitaine ou béret à pompon rouge. Décor : pont d\'un bateau sur la Seine, Tour Eiffel ou pont de Paris au fond. Ambiance ' + a + '. Image nette, format portrait.';
+const deux = 'transforme cette photo de nous deux en portrait de couple de marins des années 1950 pour les « 20 ans sur la Seine » de Stéphanie et Henri. Exigence absolue : garde exactement nos deux visages, nos âges, nos yeux, nos cheveux, nos sourires et nos traits, sans visage inventé. Tenues : marinières bleu marine et blanc, foulards rouges, casquette de capitaine ou béret à pompon rouge. Décor : pont d\'un bateau sur la Seine, Tour Eiffel ou pont de Paris au fond. Ambiance ' + a + '. Image nette, format portrait.';
+const url = 'https://chatgpt.com/?q=' + encodeURIComponent('Je vais t\'envoyer une photo. Quand tu l\'auras : ' + (duo ? deux : solo) + ' Si la photo manque, demande-la-moi.');
+document.getElementById('go').href = url; location.replace(url);
+</script></body></html>
