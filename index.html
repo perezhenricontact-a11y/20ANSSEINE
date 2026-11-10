@@ -1451,7 +1451,18 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
     if (n) { render(); if (window.renderTrombi) window.renderTrombi(); }
     const b = $('#maj-direct'); if (b && d.maj) { const t = new Date(d.maj); b.textContent = 'Réponses lues en direct · ' + t.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) + ' à ' + t.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }); }
   }
-  if (CONFIG.liveUrl) fetch(CONFIG.liveUrl + (CONFIG.liveUrl.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now()).then(r => r.ok ? r.json() : Promise.reject()).then(appliquerDirect).catch(() => { const b = $('#maj-direct'); if (b) b.textContent = 'Dernier relevé enregistré dans le site : 9 novembre (le direct se lit sur le site en ligne).'; });
+  /* direct : lecture à l'ouverture, puis toutes les 30 s et au retour sur la page ; une bulle signale les nouvelles réponses */
+  let avant = null, dernier = 0;
+  const lireDirect = () => {
+    if (!CONFIG.liveUrl || document.hidden || Date.now() - dernier < 8000) return; dernier = Date.now();
+    fetch(CONFIG.liveUrl + (CONFIG.liveUrl.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now()).then(r => r.ok ? r.json() : Promise.reject()).then(d => {
+      const oui = (d.invites || []).filter(o => o.statut && o.statut !== 'attente').length, ph = (d.invites || []).filter(o => o.photo || o.photoDuo).length;
+      appliquerDirect(d);
+      if (avant && typeof toast === 'function') { if (oui > avant.oui) toast(oui - avant.oui === 1 ? 'Nouvelle réponse reçue !' : (oui - avant.oui) + ' nouvelles réponses'); else if (ph > avant.ph) toast('Nouvelle photo dans le trombinoscope !'); }
+      avant = { oui, ph };
+    }).catch(() => { const b = $('#maj-direct'); if (b && !avant) b.textContent = 'Dernier relevé enregistré dans le site : 9 novembre (le direct se lit sur le site en ligne).'; });
+  };
+  lireDirect(); setInterval(lireDirect, 30000); document.addEventListener('visibilitychange', lireDirect); addEventListener('focus', lireDirect);
   /* réponses en direct (variante CSV) : onglet « Liste publique » publié en CSV (colonnes Invitation, Accompagnant·e, Réponse, Clé). Garde-fou : seules les invitations de la liste sont prises en compte. */
   function parseCSV(t) { const rows = []; let row = [], f = '', q = false; for (let i = 0; i < t.length; i++) { const c = t[i]; if (q) { if (c === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; } else if (c === '"') q = true; else if (c === ',') { row.push(f); f = ''; } else if (c === '\n' || c === '\r') { if (c === '\r' && t[i + 1] === '\n') i++; row.push(f); rows.push(row); row = []; f = ''; } else f += c; } if (f || row.length) { row.push(f); rows.push(row); } return rows; }
   if (CONFIG.guestsCsv) fetch(CONFIG.guestsCsv + (CONFIG.guestsCsv.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now()).then(r => r.ok ? r.text() : Promise.reject()).then(t => {
