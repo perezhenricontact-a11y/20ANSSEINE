@@ -1471,7 +1471,8 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
       const i = parCle[slug(o.cle)]; if (!i) return;
       i.statut = o.statut || 'attente';
       if (i.avec) { i.avecVient = o.avecVient !== false; if (o.avecPrenom && i.avec.prenom === 'Madame') i.avec.prenom = o.avecPrenom; if (o.photoAvec) i.avec.photo = o.photoAvec; }
-      if (o.photo && !/^img\//.test(i.photo || '')) i.photo = o.photo;   // une photo rangée dans le site (img/marins) reste prioritaire : elle s'affiche partout, artefact compris if (o.photoDuo) i.photoDuo = o.photoDuo;
+      if (o.photo && !/^img\//.test(i.photo || '')) i.photo = o.photo;   // une photo rangée dans le site (img/marins) reste prioritaire : elle s'affiche partout, artefact compris
+      if (o.photoDuo) i.photoDuo = o.photoDuo;   // photo de couple (une seule photo pour l'invitation)
       n++;
     });
     if (n) { render(); if (window.renderTrombi) window.renderTrombi(); }
