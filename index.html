@@ -102,6 +102,23 @@ button{font:inherit;cursor:pointer}
 .tile.bump b{transform:translateY(-3px)}
 .tile span{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;opacity:.75;margin-top:6px}
 .confirmes{font-size:.95rem;opacity:.92}
+.pastilles-accueil{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:8px 0 2px}
+.pastilles-accueil .pa{width:34px;height:34px;border-radius:50%;display:inline-grid;place-items:center;background:linear-gradient(135deg,#1d4f8a,#3a76a6);background-size:cover;background-position:center 20%;color:#fff;font-weight:800;font-size:.72rem;border:2px solid #2f8a5b;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.pastilles-accueil .pa.ovale{width:52px;border-radius:17px}
+.pastilles-accueil .plus{font-weight:800;font-size:.85rem;margin-left:4px}
+.pastilles-accueil .jour{background:#2f8a5b;color:#fff;border-radius:999px;padding:2px 10px;font-weight:800;font-size:.75rem;margin-left:6px}
+.news{margin:6px 0 0;font-size:.86rem;display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:inherit}
+.hero-text .news,.hero-text .pastilles-accueil{justify-content:center}
+.news-tag{background:var(--or-2);color:#1b2742;border-radius:999px;padding:2px 10px;font-weight:800;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em}
+.news-item{font-weight:700;animation:newsIn .8s both}
+@keyframes newsIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.news-item{animation:none}}
+.retour{flex:none;align-self:center;font-weight:800;font-size:.82rem;border:1.5px solid var(--seine);background:#fff;color:var(--seine);border-radius:999px;padding:4px 10px;cursor:pointer;margin-right:6px;white-space:nowrap}
+.btn-rafr{font-weight:800;font-size:.85rem;background:var(--seine);color:#fff;border:1.5px solid var(--or-2);border-radius:999px;padding:7px 14px;cursor:pointer;margin:4px}
+.btn-rafr:disabled{opacity:.6;cursor:wait}
+.legende-st{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:4px 0 10px}
+.lg{border-radius:999px;padding:3px 11px;font-size:.8rem;font-weight:800;white-space:nowrap;border:2px solid transparent}
+.lg-oui{background:#DDF2E4;color:#1F6B3F;border-color:#2E8B57}.lg-peut-etre{background:#FDEBC8;color:#8A5300;border-color:#E3A21A}.lg-attente{background:#fff;color:#555;border:2px dashed #c9a24a}.lg-non{background:#ECECEC;color:#666;border-color:#9a9a9a}
 .confirmes b{font-family:var(--f-display);font-size:1.35rem;color:var(--or-2);font-variant-numeric:tabular-nums}
 .confirmes a{color:var(--or-2);font-weight:700}
 .hero-btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
@@ -446,7 +463,7 @@ legend{font-weight:700;font-size:.9rem;padding:0;margin-bottom:2px}
 .bulle figcaption em{font-style:normal;font-weight:400;font-size:.78rem;color:var(--ink-2)}
 .lien-duo{font-family:var(--f-script);color:var(--rouge);font-size:1.4rem}
 .badge-st{align-self:center;border-radius:999px;padding:3px 10px;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
-.b-oui{background:rgba(47,138,91,.15);color:var(--ok)}.b-peut-etre{background:var(--warn-bg);color:var(--warn)}.b-non{background:rgba(194,48,58,.12);color:var(--rouge)}.b-attente{background:var(--seine-3);color:var(--seine)}
+.b-oui{background:#DDF2E4;color:#1F6B3F;box-shadow:inset 0 0 0 1.5px #2E8B57}.b-peut-etre{background:#FDEBC8;color:#8A5300;box-shadow:inset 0 0 0 1.5px #E3A21A}.b-non{background:#ECECEC;color:#666;box-shadow:inset 0 0 0 1.5px #9a9a9a}.b-attente{background:#fff;color:#555;outline:2px dashed #c9a24a;outline-offset:-2px}
 .modal{position:fixed;inset:0;background:rgba(5,10,25,.6);display:none;align-items:center;justify-content:center;z-index:31;padding:16px}
 .modal.open{display:flex}
 .modal .box{background:var(--paper);color:var(--ink);border-radius:16px;max-width:420px;width:100%;padding:26px 24px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.5);text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px}
@@ -532,6 +549,7 @@ footer small{opacity:.7}
 <body>
 <nav class="tabs gutter" aria-label="Rubriques">
   <div class="wrap" role="tablist" id="tablist">
+    <button type="button" class="retour" id="retour" hidden aria-label="Revenir à la page précédente">‹ Retour</button>
     <a class="logo" href="#invitation" aria-label="Accueil" id="logo-date">20.03.2027</a>
     <button class="tab" role="tab" data-tab="invitation" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9 6 9-6M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>Invitation</button>
     <button class="tab" role="tab" data-tab="programme" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Programme</button>
@@ -564,6 +582,8 @@ footer small{opacity:.7}
         <div id="date-badge"></div>
       </div>
       <div class="confirmes"><b id="nb-confirmes">0</b> participants déjà confirmés · <a href="#invites">voir qui vient</a></div>
+      <div class="pastilles-accueil" id="pastilles-accueil" aria-label="Ils ont confirmé"></div>
+      <p class="news" id="news" aria-live="polite" hidden><span class="news-tag">Dernières confirmations</span> <span id="news-txt"></span></p>
       <div class="hero-btns"><a class="btn btn-primary" href="#reponse">Je réponds</a><a class="btn btn-ghost light" href="#programme">Le programme</a><a class="btn btn-ghost light" href="#invites">Voir qui vient</a></div>
       <div class="jukebox">
         <div class="rule">Jukebox</div>
@@ -690,7 +710,7 @@ footer small{opacity:.7}
         <p class="lead">Chaque réponse au formulaire ajoute un marin à l'équipage, avec sa photo en tenue de marin (<a href="#defi" class="lien-defi">le défi photo</a>). Tu n'y es pas encore ? <a href="#reponse" class="lien-defi">Réponds ici</a>. Prénom et initiale seulement : la discrétion est de mise sur le pont.</p>
       </div>
       <div class="stats" id="stats"></div>
-      <div class="count" id="maj-direct" aria-live="polite"></div>
+      <div class="count" style="text-align:center"><button type="button" class="btn-rafr" id="btn-rafr">🔄 Rafraîchir maintenant</button> <span id="maj-direct" aria-live="polite"></span></div>
       <div class="heros">
         <div class="heros-duo">
           <figure><img src="img/hotes-marins.jpg" data-full="img/hotes-marins.jpg" alt="Stéphanie et Henri en tenue de marin"><figcaption>En marins…</figcaption></figure>
@@ -1119,6 +1139,8 @@ function fallbackCopy(txt, done) {
 /* ---------- onglets + routage par #ancre ---------- */
 const TABS = ['invitation', 'programme', 'invites', 'trombi', 'defi', 'reponse', 'photos', 'surprise', 'hotels'];   // même structure que « De Casablanca au cochonnet »
 const ALIAS = { equipage: 'trombi', souvenirs: 'photos' };   // anciennes ancres
+/* Bouton « Retour » : revient à l'onglet précédent sans quitter la page (comme sur le site des 60 ans) */
+const PILE_TABS = []; let TAB_COURANT = null, PAR_RETOUR = false;
 function showTab(name, push, scrollTab) {
   name = ALIAS[name] || name;
   if (!TABS.includes(name)) { name = (window.ouvrirFiche && window.ouvrirFiche(name)) ? 'invites' : 'invitation'; }   // #prenom-initiale : la fiche de l'invité
@@ -1126,6 +1148,8 @@ function showTab(name, push, scrollTab) {
   TABS.forEach(t => { $('#panel-' + t).hidden = t !== name; });
   document.body.classList.toggle('sans-bandeau', name !== 'invitation');   // v2.4 : le bandeau commun (affiche, compte à rebours, jukebox) ne s'affiche que sur l'onglet Invitation
   if (push && location.hash !== '#' + name) { try { history.replaceState(null, '', '#' + name); } catch (e) { location.hash = name; } }
+  if (TAB_COURANT && TAB_COURANT !== name && !PAR_RETOUR) PILE_TABS.push(TAB_COURANT);
+  PAR_RETOUR = false; TAB_COURANT = name; const rb = document.getElementById('retour'); if (rb) rb.hidden = !PILE_TABS.length;
   if (scrollTab) { const sel = document.querySelector('.tab[aria-selected="true"]'); if (sel && sel.scrollIntoView) sel.scrollIntoView({ block: 'nearest', inline: 'center' }); }
 }
 function goTab(name) { showTab(name, true, true); const top = name === 'invitation' ? 0 : $('main').offsetTop - $('.tabs').offsetHeight - 8; window.scrollTo({ top: Math.max(0, top), behavior: reduceMotion ? 'auto' : 'smooth' }); }
@@ -1137,6 +1161,7 @@ document.addEventListener('click', e => {
   if (TABS.includes(name)) { e.preventDefault(); goTab(name); }
 });
 showTab(location.hash.slice(1), false, false);
+document.getElementById('retour').addEventListener('click', () => { const t = PILE_TABS.pop(); if (!t) return; PAR_RETOUR = true; goTab(t); });
 
 /* ---------- carrousel des affiches ---------- */
 (function carousel() {
@@ -1413,7 +1438,7 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
     const liste = CONFIG.invites.map((i, k) => ({ i, k })).filter(({ i }) => (actif === 'tous' || (i.statut || 'attente') === actif) && (!q || slug(nm(i) + ' ' + (i.avec ? nm(i.avec) : '')).indexOf(q) >= 0));
     $('#grid').innerHTML = liste.map(({ i, k }) => carte(i, k)).join('');
     $('#empty').hidden = liste.length > 0;
-    $('#count').textContent = liste.length + ' invitation' + (liste.length > 1 ? 's' : '') + ' affichée' + (liste.length > 1 ? 's' : '') + ' sur ' + CONFIG.invites.length + ' · ' + LABEL.oui.replace('·e', '·es') + ' en vert, réponses en attente en bleu';
+    $('#count').innerHTML = liste.length + ' invitation' + (liste.length > 1 ? 's' : '') + ' affichée' + (liste.length > 1 ? 's' : '') + ' sur ' + CONFIG.invites.length + ' <span class="legende-st"><span class="lg lg-oui">● ' + CONFIG.invites.filter(i => i.statut === 'oui').length + ' présents</span><span class="lg lg-peut-etre">● ' + CONFIG.invites.filter(i => i.statut === 'peut-etre').length + ' peut-être</span><span class="lg lg-attente">○ ' + CONFIG.invites.filter(i => !i.statut || i.statut === 'attente').length + ' en attente</span><span class="lg lg-non">● ' + CONFIG.invites.filter(i => i.statut === 'non').length + ' absents</span></span>';
     $('#grid').querySelectorAll('.card-inv').forEach(c => { const open = () => { location.hash = keyOf(CONFIG.invites[+c.dataset.k]); }; c.addEventListener('click', open); c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } }); });
   }
   /* la fiche (modale) : invité ou hôte */
@@ -1452,18 +1477,34 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
     if (n) { render(); if (window.renderTrombi) window.renderTrombi(); }
     const b = $('#maj-direct'); if (b && d.maj) { const t = new Date(d.maj); b.textContent = 'Réponses lues en direct · ' + t.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) + ' à ' + t.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }); }
   }
+  /* page de garde : pastilles des invités qui ont confirmé (photo ou initiales) et bandeau des dernières confirmations, avec celles du jour */
+  function accueilDirect(d) {
+    const parCle = {}; CONFIG.invites.forEach(i => parCle[cle(i)] = i);
+    const oui = (d.invites || []).filter(o => o.statut === 'oui' && parCle[slug(o.cle)]).map(o => ({ o, i: parCle[slug(o.cle)], t: o.recu ? new Date(o.recu) : null }))
+      .sort((a, b) => (b.t || 0) - (a.t || 0));
+    const auj = new Date().toDateString(), nJour = oui.filter(x => x.t && x.t.toDateString() === auj).length;
+    const duoVient = x => !!(x.i.avec && x.o.avecVient !== false);
+    const rond = x => { const ph = x.i.photoDuo || x.i.photo, n = nm(x.i) + (duoVient(x) ? ' & ' + nm(x.i.avec) : '');
+      return '<span class="pa' + (x.i.photoDuo && duoVient(x) ? ' ovale' : '') + '" title="' + esc(n) + '" role="img" aria-label="' + esc(n) + '"' + (ph ? ' style="background-image:url(\'' + esc(ph) + '\')"' : '') + '>' + (ph ? '' : esc(x.i.prenom.charAt(0) + (x.i.initiale || ''))) + '</span>'; };
+    const box = $('#pastilles-accueil');
+    if (box) box.innerHTML = oui.slice(0, 24).map(rond).join('') + (oui.length > 24 ? '<span class="plus">+' + (oui.length - 24) + '</span>' : '') + (nJour ? '<span class="jour">' + nJour + ' aujourd\'hui</span>' : '');
+    const news = $('#news');
+    if (news && oui.length) { news.hidden = false; $('#news-txt').innerHTML = oui.slice(0, 5).map((x, k) => '<span class="news-item" style="animation-delay:' + k * 0.6 + 's">' + esc(nm(x.i)) + (duoVient(x) ? ' et ' + esc(nm(x.i.avec)) : '') + '</span>').join(' · '); }
+  }
+  const br = $('#btn-rafr');
+  if (br) br.addEventListener('click', () => { br.disabled = true; br.textContent = '⏳ Rafraîchissement…'; dernier = 0; lireDirect(true); setTimeout(() => { br.disabled = false; br.textContent = '🔄 Rafraîchir maintenant'; }, 2500); });
   /* direct : lecture à l'ouverture, puis toutes les 30 s et au retour sur la page ; une bulle signale les nouvelles réponses */
   let avant = null, dernier = 0;
-  const lireDirect = () => {
-    if (!CONFIG.liveUrl || document.hidden || Date.now() - dernier < 8000) return; dernier = Date.now();
+  const lireDirect = (force) => {
+    if (!CONFIG.liveUrl || (!force && (document.hidden || Date.now() - dernier < 8000))) return; dernier = Date.now();
     fetch(CONFIG.liveUrl + (CONFIG.liveUrl.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now()).then(r => r.ok ? r.json() : Promise.reject()).then(d => {
       const oui = (d.invites || []).filter(o => o.statut && o.statut !== 'attente').length, ph = (d.invites || []).filter(o => o.photo || o.photoDuo).length;
-      appliquerDirect(d);
+      appliquerDirect(d); accueilDirect(d);
       if (avant && typeof toast === 'function') { if (oui > avant.oui) toast(oui - avant.oui === 1 ? 'Nouvelle réponse reçue !' : (oui - avant.oui) + ' nouvelles réponses'); else if (ph > avant.ph) toast('Nouvelle photo dans le trombinoscope !'); }
       avant = { oui, ph };
     }).catch(() => { const b = $('#maj-direct'); if (b && !avant) b.textContent = 'Dernier relevé enregistré dans le site : 9 novembre (le direct se lit sur le site en ligne).'; });
   };
-  lireDirect(); setInterval(lireDirect, 30000); document.addEventListener('visibilitychange', lireDirect); addEventListener('focus', lireDirect);
+  lireDirect(); setInterval(() => lireDirect(), 30000); document.addEventListener('visibilitychange', () => lireDirect()); addEventListener('focus', () => lireDirect());
   /* réponses en direct (variante CSV) : onglet « Liste publique » publié en CSV (colonnes Invitation, Accompagnant·e, Réponse, Clé). Garde-fou : seules les invitations de la liste sont prises en compte. */
   function parseCSV(t) { const rows = []; let row = [], f = '', q = false; for (let i = 0; i < t.length; i++) { const c = t[i]; if (q) { if (c === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; } else if (c === '"') q = true; else if (c === ',') { row.push(f); f = ''; } else if (c === '\n' || c === '\r') { if (c === '\r' && t[i + 1] === '\n') i++; row.push(f); rows.push(row); row = []; f = ''; } else f += c; } if (f || row.length) { row.push(f); rows.push(row); } return rows; }
   if (CONFIG.guestsCsv) fetch(CONFIG.guestsCsv + (CONFIG.guestsCsv.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now()).then(r => r.ok ? r.text() : Promise.reject()).then(t => {
