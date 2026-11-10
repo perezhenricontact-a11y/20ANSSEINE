@@ -734,26 +734,6 @@ footer small{opacity:.7}
       </div>
 
       <div class="exemples" id="exemples"></div>
-
-      <h3 class="t-titre">Le mode d'emploi, en 4 étapes</h3>
-      <div class="mode-emploi">
-        <div class="me-etape"><span class="me-num">1</span><h4>Choisis ta photo</h4>
-          <p>Une photo <b>de face, bien éclairée</b>, où l'on voit bien ton visage. À deux : une photo où l'on vous voit tous les deux.</p></div>
-        <div class="me-etape"><span class="me-num">2</span><h4>Ouvre une IA gratuite</h4>
-          <p>Le texte est déjà écrit, il ne reste qu'à joindre ta photo :</p>
-          <div class="me-btns">
-            <a class="btn btn-primary" id="defi-chatgpt-solo" href="https://chatgpt.com/" target="_blank" rel="noopener">ChatGPT · seul·e</a>
-            <a class="btn btn-primary" id="defi-chatgpt-duo" href="https://chatgpt.com/" target="_blank" rel="noopener">ChatGPT · à deux</a>
-            <a class="btn btn-ghost" id="defi-copilot" href="https://copilot.microsoft.com/" target="_blank" rel="noopener">Copilot</a>
-            <a class="btn btn-ghost" href="https://gemini.google.com/app" target="_blank" rel="noopener">Gemini</a>
-          </div>
-          <p class="me-note">Un compte gratuit est demandé pour créer des images. Pour Gemini, copie d'abord le texte ci-dessous.</p></div>
-        <div class="me-etape"><span class="me-num">3</span><h4>Joins ta photo et envoie</h4>
-          <p>Appuie sur <b>+</b> (ou le trombone), choisis ta photo, envoie. L'image arrive en une à deux minutes. Pas satisfait·e ? Écris « refais-la » ou « plus de pompon ».</p></div>
-        <div class="me-etape"><span class="me-num">4</span><h4>Enregistre et dépose-la</h4>
-          <p>Sur téléphone : <b>appui long sur l'image</b>, puis « Enregistrer ». Ensuite, dans le formulaire de réponse (question « Ta photo de marin »), avec le bouton « Déposer ma photo » plus bas, ou par mail.</p></div>
-      </div>
-      <p class="me-assistant">Tu préfères être guidé·e écran par écran ? <a class="lien-defi" href="ia.html" target="_blank" rel="noopener">Ouvre notre assistant photo</a>.</p>
 <div class="studio-ia" id="studio-ia">
   <h3 class="studio-titre">Ton portrait en 3 gestes</h3>
   <p class="studio-intro">Choisis, puis ouvre ChatGPT : le texte est déjà écrit, il ne reste qu'à joindre ta photo. Ton visage est conservé tel quel.</p>
@@ -781,6 +761,20 @@ footer small{opacity:.7}
   </div>
   <p class="studio-note">Une fois l'image prête : appui long dessus › « Enregistrer », puis dépose-la dans le formulaire de réponse. Pour Gemini ou une autre IA : « Copier le texte », puis colle-le avec ta photo.</p>
 </div>
+
+      <h3 class="t-titre">Le mode d'emploi, en 4 étapes</h3>
+      <div class="mode-emploi">
+        <div class="me-etape"><span class="me-num">1</span><h4>Choisis ta photo</h4>
+          <p>Une photo <b>de face, bien éclairée</b>, où l'on voit bien ton visage. À deux : une photo où l'on vous voit tous les deux.</p></div>
+        <div class="me-etape"><span class="me-num">2</span><h4>Ouvre ChatGPT</h4>
+          <p>Avec le bloc <b>« Ton portrait en 3 gestes »</b> ci-dessus : le texte est déjà écrit, ton visage est conservé. Sur ordinateur, scanne son QR code avec ton téléphone.</p>
+          <p class="me-note" style="display:none"><a id="defi-chatgpt-solo"></a><a id="defi-chatgpt-duo"></a><a id="defi-copilot"></a></p></div>
+        <div class="me-etape"><span class="me-num">3</span><h4>Joins ta photo et envoie</h4>
+          <p>Appuie sur <b>+</b> (ou le trombone), choisis ta photo, envoie. L'image arrive en une à deux minutes. Pas satisfait·e ? Écris « refais-la » ou « plus de pompon ».</p></div>
+        <div class="me-etape"><span class="me-num">4</span><h4>Enregistre et dépose-la</h4>
+          <p>Sur téléphone : <b>appui long sur l'image</b>, puis « Enregistrer ». Ensuite, dans le formulaire de réponse (question « Ta photo de marin »), avec le bouton « Déposer ma photo » plus bas, ou par mail.</p></div>
+      </div>
+      <p class="me-assistant">Tu préfères être guidé·e écran par écran ? <a class="lien-defi" href="ia.html" target="_blank" rel="noopener">Ouvre notre assistant photo</a>.</p>
 
       <div class="defi" id="defi-marin">
         <div class="defi-txt">
@@ -1761,6 +1755,7 @@ const STUDIO_THEME = { site: CONFIG.siteUrl || (location.origin + location.pathn
   $s("studio-copier").onclick = copier;
   $s("studio-gemini").addEventListener("click", copier);
   maj();
+  const pia = $s("prompt-ia"); if (pia) pia.textContent = texte("solo", "festive");
   /* les anciens boutons de l'étape 2 utilisent aussi le nouveau texte */
   const b1 = $s("defi-chatgpt-solo"), b2 = $s("defi-chatgpt-duo"), b3 = $s("defi-copilot");
   if (b1) b1.href = lienGPT("solo", "festive"); if (b2) b2.href = lienGPT("duo", "festive");
