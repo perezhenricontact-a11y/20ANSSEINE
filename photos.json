@@ -1,0 +1,103 @@
+{
+ "casa60": [
+  {
+   "cle": "sonia-d",
+   "photo": "casa60/sonia-d.jpg"
+  },
+  {
+   "cle": "brandon-f",
+   "photo": "casa60/brandon-f.jpg"
+  },
+  {
+   "cle": "nicolas-e",
+   "photo": "casa60/nicolas-e.jpg"
+  },
+  {
+   "cle": "eliane-p",
+   "photo": "casa60/eliane-p.jpg"
+  },
+  {
+   "cle": "genevieve-r",
+   "photo": "casa60/genevieve-r.jpg"
+  }
+ ],
+ "seine20": [
+  {
+   "cle": "sophie-p",
+   "photo": "seine20/sophie-p.jpg",
+   "statut": "oui"
+  },
+  {
+   "cle": "nicolas-p",
+   "photo": "seine20/nicolas-p.jpg",
+   "statut": "oui"
+  },
+  {
+   "cle": "bernard-k",
+   "statut": "attente"
+  },
+  {
+   "cle": "eliane-p",
+   "photo": "seine20/eliane-p.jpg",
+   "statut": "oui"
+  },
+  {
+   "cle": "genevieve-r",
+   "photo": "seine20/genevieve-r.jpg",
+   "statut": "oui"
+  },
+  {
+   "cle": "henri-iii-p",
+   "photo": "seine20/henri-iii-p.jpg",
+   "statut": "oui"
+  },
+  {
+   "cle": "sonia-d",
+   "statut": "oui"
+  },
+  {
+   "cle": "philippe-d",
+   "statut": "attente"
+  },
+  {
+   "cle": "antonio-h",
+   "statut": "oui"
+  },
+  {
+   "cle": "gilbert-p",
+   "statut": "attente"
+  },
+  {
+   "cle": "marc-f",
+   "statut": "attente"
+  },
+  {
+   "cle": "philippe-g",
+   "statut": "attente"
+  },
+  {
+   "cle": "sebastien-n",
+   "statut": "attente"
+  },
+  {
+   "cle": "romain-a",
+   "statut": "attente"
+  },
+  {
+   "cle": "taieb-a",
+   "statut": "attente"
+  },
+  {
+   "cle": "noura-b",
+   "statut": "attente"
+  },
+  {
+   "cle": "ali-m",
+   "statut": "attente"
+  },
+  {
+   "cle": "rudolphe-m",
+   "statut": "attente"
+  }
+ ]
+}
