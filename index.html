@@ -600,7 +600,7 @@ footer small{opacity:.7}
         </div>
         <div id="date-badge"></div>
       </div>
-      <div class="confirmes"><b id="nb-confirmes">0</b> participants déjà confirmés · <a href="#invites">voir qui vient</a></div>
+      <div class="confirmes"><b id="nb-confirmes">0</b> invités déjà confirmés · <a href="#invites">voir qui vient</a></div>
       <div class="pastilles-accueil" id="pastilles-accueil" aria-label="Ils ont confirmé"></div>
       <p class="news" id="news" aria-live="polite" hidden><span class="news-tag">Dernières confirmations</span> <span id="news-txt"></span></p>
       <div class="hero-btns"><a class="btn btn-primary" href="#reponse">Je réponds</a><a class="btn btn-ghost light" href="#programme">Le programme</a><a class="btn btn-ghost light" href="#invites">Voir qui vient</a></div>
@@ -1440,7 +1440,7 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
   function stats() {
     const inv = CONFIG.invites, rep = inv.filter(i => i.statut && i.statut !== 'attente'), oui = inv.filter(i => i.statut === 'oui');
     const acc = oui.reduce((n, i) => n + (i.avec && i.avecVient !== false ? 1 : 0), 0);
-    $('#nb-confirmes').textContent = oui.length + acc + 2;   // hôtes compris, comme sur le site des 60 ans
+    $('#nb-confirmes').textContent = oui.length + acc;   // invités confirmés (sans les hôtes) : même chiffre que l'onglet Statistiques invités
     $('#stats').innerHTML = [[rep.length, 'réponses'], [oui.length, 'présents confirmés'], [acc, 'accompagnant·es'], [oui.length + acc, 'personnes attendues'], [inv.length, 'invitations'], [inv.reduce((n, i) => n + (i.avec ? 2 : 1), 0), 'personnes invitées']]
       .map(([b, t]) => '<div class="stat"><b>' + b + '</b><span>' + t + '</span></div>').join('');
   }
