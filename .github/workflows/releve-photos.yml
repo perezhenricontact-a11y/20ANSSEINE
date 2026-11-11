@@ -1,0 +1,47 @@
+name: Relevé des photos publiées
+
+# Range dans la branche « releve » une vignette de chaque photo dont la publication est autorisée
+# (20 ans sur la Seine et Casablanca). Sert à tenir à jour les pages de gestion. Ne touche jamais à la branche main.
+on:
+  schedule:
+    - cron: '7,37 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'outils/releve_photos.py'
+      - 'outils/demande-releve.txt'
+      - '.github/workflows/releve-photos.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: releve-photos
+  cancel-in-progress: false
+
+jobs:
+  releve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Récupérer la branche releve (ou la créer)
+        run: |
+          if git ls-remote --exit-code --heads origin releve >/dev/null 2>&1; then
+            git fetch --depth 1 origin releve
+            git worktree add _releve FETCH_HEAD
+            cd _releve && git checkout -B releve
+          else
+            git worktree add --detach _releve
+            cd _releve && git checkout --orphan releve && git rm -rfq . && echo "Relevé automatique des photos publiées (vignettes). Ne pas modifier à la main." > LISEZ-MOI.txt
+          fi
+      - name: Relever les photos
+        run: python3 outils/releve_photos.py _releve
+      - name: Enregistrer s'il y a du nouveau
+        run: |
+          cd _releve
+          git add -A
+          if git diff --cached --quiet; then echo "Rien de nouveau."; exit 0; fi
+          git -c user.name="Relevé automatique" -c user.email="actions@users.noreply.github.com" commit -qm "Relevé des photos publiées"
+          git push origin releve
