@@ -21,15 +21,57 @@
    "photo": "casa60/genevieve-r.jpg"
   }
  ],
+ "casa60_reponses": [
+  {
+   "acc": 0,
+   "cle": "nicolas-e",
+   "recu": "2026-11-10T17:37:25.271Z",
+   "statut": "oui"
+  },
+  {
+   "acc": 1,
+   "cle": "sonia-d",
+   "recu": "2026-11-10T17:48:37.554Z",
+   "statut": "oui"
+  },
+  {
+   "acc": 0,
+   "cle": "hugo-m",
+   "recu": "2026-11-10T19:42:47.481Z",
+   "statut": "oui"
+  },
+  {
+   "acc": 0,
+   "cle": "eliane-p",
+   "recu": "2026-11-11T05:34:13.432Z",
+   "statut": "oui"
+  },
+  {
+   "acc": 0,
+   "cle": "genevieve-r",
+   "recu": "2026-11-11T05:42:55.979Z",
+   "statut": "oui"
+  },
+  {
+   "acc": 0,
+   "cle": "brandon-f",
+   "recu": "2026-11-11T05:48:28.623Z",
+   "statut": "oui"
+  }
+ ],
  "seine20": [
   {
    "cle": "sophie-p",
    "photo": "seine20/sophie-p.jpg",
+   "quand": "Dès les vœux, à 10 h",
+   "recu": "2026-11-10T15:30:58.436Z",
    "statut": "oui"
   },
   {
    "cle": "nicolas-p",
    "photo": "seine20/nicolas-p.jpg",
+   "quand": "Dès les vœux, à 10 h",
+   "recu": "2026-11-10T21:41:38.475Z",
    "statut": "oui"
   },
   {
@@ -39,20 +81,32 @@
   {
    "cle": "eliane-p",
    "photo": "seine20/eliane-p.jpg",
+   "quand": "Dès les vœux, à 10 h",
+   "recu": "2026-11-08T19:08:50.867Z",
    "statut": "oui"
   },
   {
    "cle": "genevieve-r",
    "photo": "seine20/genevieve-r.jpg",
+   "quand": "Dès les vœux, à 10 h",
+   "recu": "2026-11-11T05:53:23.797Z",
    "statut": "oui"
   },
   {
+   "avecPrenom": "HENRI 3",
+   "avecVient": false,
    "cle": "henri-iii-p",
    "photo": "seine20/henri-iii-p.jpg",
+   "quand": "Dès les vœux, à 10 h",
+   "recu": "2026-11-10T15:14:30.842Z",
    "statut": "oui"
   },
   {
+   "avecVient": true,
    "cle": "sonia-d",
+   "quand": "Dès les vœux, à 10 h",
+   "quandAcc": "Dès les vœux, à 10 h",
+   "recu": "2026-11-10T17:49:56.791Z",
    "statut": "oui"
   },
   {
@@ -60,7 +114,10 @@
    "statut": "attente"
   },
   {
+   "avecVient": false,
    "cle": "antonio-h",
+   "quand": "Dès les vœux, à 10 h",
+   "recu": "2026-11-01T16:01:53.588Z",
    "statut": "oui"
   },
   {
