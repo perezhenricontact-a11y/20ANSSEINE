@@ -472,6 +472,25 @@ legend{font-weight:700;font-size:.9rem;padding:0;margin-bottom:2px}
 .modal h3{font-family:var(--f-display);font-size:1.4rem}
 .modal p{color:var(--ink-2);margin:6px 0 0}
 .modal .mot{font-family:var(--f-display);font-style:italic;font-size:1.05rem;color:var(--ink)}
+.modal .fi-tete{align-self:stretch;margin:-26px -24px 6px;padding:22px 24px 18px;border-radius:16px 16px 0 0;background:linear-gradient(120deg,var(--band),var(--seine));color:#fff;text-align:left}
+.modal .fi-tete.b-peut-etre{background:linear-gradient(120deg,#8a5a00,#c98a1a)}.modal .fi-tete.b-non{background:linear-gradient(120deg,#555,#888)}
+.modal .fi-tete small{font-size:.72rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;opacity:.9}
+.modal .fi-tete h3{font-family:var(--f-script);font-size:2.2rem;font-weight:400;color:#fff;margin:4px 0}
+.modal .fi-tete p{margin:0;color:#fff;font-weight:700;font-size:.92rem}
+.modal .fi-accroche{font-family:var(--f-display);font-style:italic;color:var(--rouge);font-size:1.15rem}
+.modal .fi-dit{align-self:stretch;text-align:left;background:var(--warn-bg);border:1px solid var(--or);border-radius:14px;padding:12px 16px;margin-top:8px}
+.modal .fi-dit b{display:block;color:var(--rouge);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+.modal .fi-dit p{margin:4px 0 0;color:var(--ink)}
+.fi-tuiles{align-self:stretch;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.fi-tuile{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:10px 6px;display:flex;flex-direction:column;gap:2px;opacity:.6}
+.fi-tuile.on{opacity:1;border-color:var(--seine)}
+.fi-tuile b{font-family:var(--f-display);color:var(--band);font-size:1rem}
+.fi-tuile span{font-size:.74rem;color:var(--ink-2)}
+.modal .fi-change{color:var(--ink);font-weight:700;margin-top:12px}
+.modal .fi-large{width:100%;justify-content:center}
+.modal .fi-btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.modal .fi-btns .btn{padding:8px 14px;font-size:.86rem}
+.modal .box{max-height:92vh;overflow:auto}
 .modal .close{position:absolute;top:10px;right:10px;border:0;background:var(--paper-2);color:var(--ink);border-radius:999px;width:36px;height:36px;font-size:1.2rem;font-weight:700}
 /* défi photo (onglet) */
 .exemples{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:26px}
@@ -1449,14 +1468,46 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
   const keyOf = i => slug(i.prenom + ' ' + i.initiale).replace(/ /g, '-');   // adresse personnelle de la fiche : #henri-iii-p
   window.ouvrirFiche = k => { const i = CONFIG.invites.find(x => keyOf(x) === k); if (!i) return false; fiche(i); return true; };
   document.addEventListener('keydown', e => { if (e.key === 'Escape') fermer(); });
+  /* Fiche interactive (comme le site des 60 ans) : « Merci X ! », ce que tu nous as dit, la journée, modifier sa réponse, copier son lien, agenda */
+  const libelleFiche = i => { const n = p => p.prenom + (p.initiale ? ' ' + p.initiale + '.' : ''); return n(i) + (i.avec ? ' & ' + n(i.avec) + ' — invitation pour deux' : ' — invitation pour une personne'); };
+  (function lienPerso() {   // lien personnel envoyé par Stéphanie et Henri : …/?r=S20-prenom-x&j=jeton → la fiche s'ouvre, « Modifier ma réponse » reprend les réponses déjà données
+    const u = new URLSearchParams(location.search), r = u.get('r'), j = u.get('j');
+    if (!r || !j || r.indexOf('S20-') !== 0) return;
+    try { localStorage.setItem('reprise20', JSON.stringify({ cle: r.slice(4), id: r, jeton: j })); } catch (e) { }
+    try { history.replaceState(null, '', location.pathname + '#' + r.slice(4)); } catch (e) { }
+  })();
+  function lienModifier(i) {
+    let perso = null; try { perso = JSON.parse(localStorage.getItem('reprise20') || 'null'); } catch (e) { }
+    if (perso && perso.cle === keyOf(i) && CONFIG.liveUrl) return CONFIG.liveUrl + '?reprendre=' + encodeURIComponent(perso.id) + '&jeton=' + encodeURIComponent(perso.jeton);   // lien personnel : réponses déjà cochées
+    return CONFIG.formulaireUrl + '?usp=pp_url&' + CONFIG.champQui + '=' + encodeURIComponent(libelleFiche(i));
+  }
   function fiche(i) {
     const st = i.statut || 'attente', duo = !!i.avec, vient = duo && i.avecVient !== false;
     const photo = duo && vient && i.photoDuo ? '<div class="carre rect" style="background-image:url(\'' + esc(i.photoDuo) + '\')"></div>' : (i.photo ? '<div class="carre" style="background-image:url(\'' + esc(i.photo) + '\')"></div>' : '<div class="carre">' + esc(i.prenom.charAt(0) + (i.initiale || '')) + '</div>');
-    ouvrir(photo + '<h3>' + esc(nm(i)) + (duo ? ' &amp; ' + esc(nm(i.avec)) : '') + '</h3><span class="badge-st b-' + st + '">' + LABEL[st] + '</span>' +
-      '<p>' + (duo ? 'Invitation pour deux' + (st === 'oui' ? (vient ? ' · tous les deux à bord' : ' · ' + esc(nm(i.avec)) + ' ne pourra pas venir') : '') : 'Invitation pour une personne') + '</p>' +
-      (st === 'attente' ? '<p>Pas encore de réponse : <a href="#reponse" class="lien-defi">c\'est par ici</a>.</p>' : '') +
-      ((st === 'oui' && !(i.photo || i.photoDuo)) ? '<p>Photo de marin attendue : <a href="#defi" class="lien-defi">le défi photo</a>.</p>' : '') +
-      '<p style="margin-top:12px"><a class="btn btn-primary" href="#reponse" style="padding:9px 16px;font-size:.9rem">' + (st === 'attente' ? 'Je réponds' : 'Modifier ma réponse') + '</a></p>');
+    const noms = esc(nm(i)) + (duo ? ' &amp; ' + esc(nm(i.avec)) : '');
+    const q = String(i.quand || ''), voeux = /v(œ|oe)ux/i.test(q), embarq = /embarquement/i.test(q);
+    const lien = (CONFIG.siteUrl || location.href.split('#')[0]) + '#' + keyOf(i);
+    if (st === 'attente') {
+      ouvrir(photo + '<h3>' + noms + '</h3><span class="badge-st b-attente">' + LABEL.attente + '</span><p>' + (duo ? 'Invitation pour deux' : 'Invitation pour une personne') + '</p><p>Pas encore de réponse : 2 minutes suffisent.</p>' +
+        '<p style="margin-top:12px"><a class="btn btn-primary" target="_blank" rel="noopener" href="' + esc(lienModifier(i)) + '" style="padding:10px 18px">Je réponds</a></p>');
+      return;
+    }
+    const dit = [];
+    dit.push(st === 'oui' ? 'Présent·e' + (q ? ' : ' + (voeux ? 'dès les vœux à ' + CONFIG.voeux.heure + ', puis la croisière' : embarq ? 'à l\'embarquement (' + CONFIG.embarquement.heure + ') et la croisière' : esc(q)) : '') : st === 'peut-etre' ? 'Peut-être' : 'Absent·e : on pensera à toi');
+    if (st === 'oui') dit.push(duo ? (vient ? 'Vous venez à deux' + (i.quandAcc && i.quandAcc !== q ? ' (' + esc(nm(i.avec)) + ' : ' + esc(i.quandAcc) + ')' : '') : esc(nm(i.avec)) + ' ne pourra pas venir') : 'Tu viens seul·e');
+    if (st === 'oui') dit.push('Ta photo de marin : ' + ((i.photo || i.photoDuo) ? 'reçue, merci !' : 'pas encore reçue'));
+    const tuile = (t, s2, on) => '<div class="fi-tuile' + (on ? ' on' : '') + '"><b>' + t + '</b><span>' + s2 + '</span></div>';
+    const titre = st === 'oui' ? 'Merci ' + esc(i.prenom) + ' !' : st === 'peut-etre' ? 'Merci ' + esc(i.prenom) + ', on croise les doigts !' : 'Merci ' + esc(i.prenom) + ' pour ta réponse';
+    const accroche = st === 'oui' ? 'Ta place est réservée à bord, on a hâte de te voir sur le pont.' : st === 'peut-etre' ? 'Dis-nous dès que tu sais : ta place t\'attend.' : 'Si tes plans changent, ta place t\'attend toujours.';
+    ouvrir('<div class="fi-tete b-' + st + '"><small>Ta réponse · ' + LABEL[st] + '</small><h3>' + titre + '</h3><p>' + esc(CONFIG.dateTexte || 'Samedi 20 mars 2027') + ' · vœux à Serris, puis croisière sur la Seine</p></div>' + photo +
+      '<p class="fi-accroche">' + accroche + '</p>' +
+      '<div class="fi-dit"><b>Ce que tu nous as dit</b><p>' + dit.join('. ') + '.</p></div>' +
+      '<div class="fi-tuiles">' + tuile('Les vœux', CONFIG.voeux.heure + ' · hôtel de ville', st === 'oui' && voeux) + tuile('L\'embarquement', CONFIG.embarquement.heure + ' · sur le quai', st === 'oui' && (voeux || embarq)) + tuile('La croisière', 'rock\'n\'roll sur la Seine', st === 'oui') + '</div>' +
+      '<p class="fi-change">Un changement ? Renvoie le formulaire : seule ta dernière réponse compte.</p>' +
+      '<p><a class="btn btn-primary fi-large" target="_blank" rel="noopener" href="' + esc(lienModifier(i)) + '">Modifier ma réponse</a></p>' +
+      '<p class="fi-btns"><button type="button" class="btn btn-ghost" id="fi-copier">Copier mon lien</button><button type="button" class="btn btn-ghost" id="fi-agenda">Ajouter à mon agenda</button></p>');
+    const c = box.querySelector('#fi-copier'); if (c) c.addEventListener('click', async () => { try { await navigator.clipboard.writeText(lien); c.textContent = 'Lien copié ✓'; } catch (e) { c.textContent = lien; } });
+    const ag = box.querySelector('#fi-agenda'); if (ag) ag.addEventListener('click', () => { const m = document.getElementById('ics-main'); if (m) m.click(); });
   }
   const h0 = location.hash.slice(1); if (h0 && !TABS.includes(h0) && !ALIAS[h0] && window.ouvrirFiche(h0)) showTab('invites', false, true);
   const HOTES = [{ nom: CONFIG.hotes.elle, photo: 'img/marin-stephanie-portrait.jpg', mot: CONFIG.motsHotes.elle }, { nom: CONFIG.hotes.lui, photo: 'img/marin-henri-portrait.jpg', mot: CONFIG.motsHotes.lui }];
@@ -1469,7 +1520,7 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
     let n = 0;
     (d.invites || []).forEach(o => {
       const i = parCle[slug(o.cle)]; if (!i) return;
-      i.statut = o.statut || 'attente';
+      i.statut = o.statut || 'attente'; i.quand = o.quand || ''; i.quandAcc = o.quandAcc || ''; i.recu = o.recu || '';
       if (i.avec) { i.avecVient = o.avecVient !== false; if (o.avecPrenom && i.avec.prenom === 'Madame') i.avec.prenom = o.avecPrenom; if (o.photoAvec) i.avec.photo = o.photoAvec; }
       if (o.photo && !/^img\//.test(i.photo || '')) i.photo = o.photo;   // une photo rangée dans le site (img/marins) reste prioritaire : elle s'affiche partout, artefact compris
       if (o.photoDuo) i.photoDuo = o.photoDuo;   // photo de couple (une seule photo pour l'invitation)
