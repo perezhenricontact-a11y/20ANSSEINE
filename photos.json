@@ -9,6 +9,10 @@
    "photo": "casa60/brandon-f.jpg"
   },
   {
+   "cle": "franck-j",
+   "photo": "casa60/franck-j.jpg"
+  },
+  {
    "cle": "nicolas-e",
    "photo": "casa60/nicolas-e.jpg"
   },
@@ -63,6 +67,12 @@
    "cle": "antonio-h",
    "recu": "2026-11-11T10:32:58.720Z",
    "statut": "oui"
+  },
+  {
+   "acc": 1,
+   "cle": "franck-j",
+   "recu": "2026-11-11T20:03:14.622Z",
+   "statut": "peut-etre"
   }
  ],
  "seine20": [
@@ -88,7 +98,7 @@
    "cle": "eliane-p",
    "photo": "seine20/eliane-p.jpg",
    "quand": "Dès les vœux, à 10 h",
-   "recu": "2026-11-08T19:08:50.867Z",
+   "recu": "2026-11-11T19:57:39.602Z",
    "statut": "oui"
   },
   {
