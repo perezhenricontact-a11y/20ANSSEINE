@@ -544,6 +544,11 @@ footer small{opacity:.7}
 .reprise-ligne .btn{padding:9px 16px;font-size:.9rem}
 .reprise-msg{font-weight:700;min-height:1.2em}
 .reprise-msg .btn{margin:6px 0 0;padding:9px 16px;font-size:.9rem}
+.reprise-oubli{background:none;border:0;padding:0;color:var(--seine);text-decoration:underline;cursor:pointer;font:inherit}
+.reprise-oubli:disabled{opacity:.6;cursor:wait}
+.reprise-aide{border-top:1px dashed var(--line);margin:8px 0;padding-top:8px}
+.reprise-aide .btn{padding:9px 16px;font-size:.9rem}
+.reprise-indice{font-weight:800;letter-spacing:.03em;user-select:all;white-space:nowrap}
 .fiche .deja{font-weight:700;color:var(--ok)}
 .sans-bandeau .masthead{display:none}
 @media (prefers-reduced-motion:reduce){
@@ -1159,21 +1164,33 @@ function blocReprise(i, lienVierge) {
   d.innerHTML = '<p><b>Pour modifier ta réponse sans tout ressaisir</b>, indique l\'e-mail que tu avais donné :</p>' +
     '<div class="reprise-ligne"><input type="email" autocomplete="email" placeholder="ton e-mail" aria-label="Ton e-mail de correspondance"><button type="button" class="btn btn-primary">Retrouver mes réponses</button></div>' +
     '<p class="reprise-msg" aria-live="polite"></p>' +
-    '<p class="note">Autre possibilité : <a href="' + esc(lienVierge) + '" target="_blank" rel="noopener">repartir d\'un formulaire vierge</a>. Seule ta dernière réponse compte.</p>';
-  const inp = d.querySelector('input'), b = d.querySelector('button'), m = d.querySelector('.reprise-msg');
+    '<p class="note"><button type="button" class="reprise-oubli">J\'ai oublié l\'adresse que j\'avais donnée</button></p>' +
+    '<div class="reprise-aide" aria-live="polite" hidden></div>' +
+    '<p class="note">Autre possibilité : <a href="' + esc(lienVierge) + '" target="_blank" rel="noopener">repartir d\'un formulaire vierge</a>. Seule ta dernière réponse compte, et ta photo déjà envoyée est conservée.</p>';
+  const inp = d.querySelector('input'), b = d.querySelector('.reprise-ligne button'), m = d.querySelector('.reprise-msg'), ob = d.querySelector('.reprise-oubli'), aide = d.querySelector('.reprise-aide');
   const vierge = ' Tu peux aussi repartir d\'un formulaire vierge.';
+  /* E-mail oublié : un indice (adresse masquée, donnée par le script), puis la demande du lien personnel aux hôtes */
+  const nom = i.prenom + (i.initiale ? ' ' + i.initiale + '.' : '');
+  const demande = 'mailto:' + CONFIG.mailReponse + '?subject=' + encodeURIComponent(CONFIG.motCle + ' – Mon lien personnel (' + nom + ')') + '&body=' + encodeURIComponent('Bonjour Stéphanie et Henri,\n\nJe voudrais modifier ma réponse pour « 20 ans sur la Seine », mais je ne retrouve plus l\'adresse e-mail que j\'avais donnée.\nPouvez-vous m\'envoyer mon lien personnel ?\n\nMerci !\n' + nom);
+  const montrerAide = ind => { aide.hidden = false; aide.innerHTML = (ind ? '<p><b>Indice :</b> ton adresse ressemble à <span class="reprise-indice">' + esc(ind) + '</span></p>' : '<p>Pas d\'indice disponible pour l\'instant.</p>') + '<p>Toujours bloqué·e ? <a class="btn btn-ghost" href="' + esc(demande) + '">Demander mon lien personnel à Stéphanie et Henri</a></p>'; };
   const go = async () => {
     const mail = inp.value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) { m.textContent = 'Indique une adresse e-mail complète.'; return; }
     b.disabled = true; m.textContent = 'Recherche de ta réponse…';
     try {
       const r = await fetch(CONFIG.liveUrl, { method: 'POST', body: JSON.stringify({ action: 'reprise', cle: cleNorm(i), mail }) }).then(x => x.json());
-      if (r.ok && r.url) m.innerHTML = '✓ Réponses retrouvées.<br><a class="btn btn-primary" href="' + esc(r.url) + '" target="_blank" rel="noopener">Ouvrir mon formulaire pré-rempli</a>';
-      else m.textContent = ({ mail: 'Cet e-mail ne correspond pas à celui de ta réponse.' + vierge, trop: 'Trop d\'essais : réessaie dans une heure.' + vierge, sans: 'Nous ne retrouvons pas encore ta réponse.' + vierge })[r.erreur] || 'Recherche impossible pour l\'instant.' + vierge;
+      if (r.ok && r.url) { aide.hidden = true; m.innerHTML = '✓ Réponses retrouvées.<br><a class="btn btn-primary" href="' + esc(r.url) + '" target="_blank" rel="noopener">Ouvrir mon formulaire pré-rempli</a>'; }
+      else { m.textContent = ({ mail: 'Cet e-mail ne correspond pas à celui de ta réponse.' + vierge, trop: 'Trop d\'essais : réessaie dans une heure.' + vierge, sans: 'Nous ne retrouvons pas encore ta réponse.' + vierge })[r.erreur] || 'Recherche impossible pour l\'instant.' + vierge; if (r.erreur === 'mail' || r.erreur === 'trop') montrerAide(r.indice || ''); }
     } catch (e) { m.textContent = 'Recherche impossible pour l\'instant.' + vierge; }
     b.disabled = false;
   };
   b.addEventListener('click', go); inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); go(); } });
+  ob.addEventListener('click', async () => {
+    ob.disabled = true; aide.hidden = false; aide.innerHTML = '<p>Recherche d\'un indice…</p>';
+    try { const r = await fetch(CONFIG.liveUrl, { method: 'POST', body: JSON.stringify({ action: 'indice', cle: cleNorm(i) }) }).then(x => x.json()); montrerAide(r && r.ok ? r.indice : ''); }
+    catch (e) { montrerAide(''); }
+    ob.disabled = false;
+  });
   return d;
 }
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
