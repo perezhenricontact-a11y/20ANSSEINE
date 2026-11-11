@@ -53,6 +53,9 @@ def main(dossier):
     d = json.loads(lire(S20 + '?t=1'))
     for o in d.get('invites', []):
         ligne = {'cle': slug(o.get('cle')), 'statut': o.get('statut', 'attente')}
+        for champ in ('avecVient', 'avecPrenom', 'quand', 'quandAcc', 'recu'):   # champs publics, les mêmes que sur le site
+            if o.get(champ) not in (None, ''):
+                ligne[champ] = o[champ]
         for champ, suffixe in (('photo', ''), ('photoDuo', '-duo'), ('photoAvec', '-avec')):
             ident = id_drive(o.get(champ))
             if ident:
@@ -72,6 +75,8 @@ def main(dossier):
         f = 'casa60/%s.jpg' % cle
         if vignette(ident, os.path.join(dossier, f)):
             etat['casa60'].append({'cle': cle, 'photo': f})
+    # réponses publiques de Casablanca (prénom et initiale, présence, nombre d'accompagnants, date) : pour les compteurs des pages de gestion
+    etat['casa60_reponses'] = [{'cle': slug('%s %s' % (r[0], str(r[1]).replace('.', ''))), 'statut': r[2], 'acc': r[4], 'recu': r[9] if len(r) > 9 else ''} for r in d.get('reponses', [])]
     # ---- ménage : on retire les vignettes qui ne sont plus publiées
     gardes = {l[c] for l in etat['seine20'] for c in ('photo', 'photoDuo', 'photoAvec') if c in l} | {l['photo'] for l in etat['casa60']}
     for sous in ('seine20', 'casa60'):
@@ -80,7 +85,7 @@ def main(dossier):
             if '%s/%s' % (sous, nom) not in gardes:
                 os.remove(os.path.join(rep, nom))
     json.dump(etat, open(os.path.join(dossier, 'photos.json'), 'w'), ensure_ascii=False, indent=1, sort_keys=True)
-    print('20 ans : %d photos · Casablanca : %d photos' % (sum(1 for l in etat['seine20'] if len(l) > 2), len(etat['casa60'])))
+    print('20 ans : %d photos · Casablanca : %d photos' % (sum(1 for l in etat['seine20'] if 'photo' in l or 'photoDuo' in l), len(etat['casa60'])))
 
 
 if __name__ == '__main__':

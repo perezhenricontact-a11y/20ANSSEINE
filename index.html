@@ -484,13 +484,14 @@ legend{font-weight:700;font-size:.9rem;padding:0;margin-bottom:2px}
 .fi-tuiles{align-self:stretch;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
 .fi-tuile{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:10px 6px;display:flex;flex-direction:column;gap:2px;opacity:.6}
 .fi-tuile.on{opacity:1;border-color:var(--seine)}
-.fi-tuile b{font-family:var(--f-display);color:var(--band);font-size:1rem}
+.fi-tuile b{font-family:var(--f-display);color:var(--band);font-size:.88rem;overflow-wrap:anywhere}
 .fi-tuile span{font-size:.74rem;color:var(--ink-2)}
 .modal .fi-change{color:var(--ink);font-weight:700;margin-top:12px}
 .modal .fi-large{width:100%;justify-content:center}
 .modal .fi-btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
 .modal .fi-btns .btn{padding:8px 14px;font-size:.86rem}
 .modal .box{max-height:92vh;overflow:auto}
+.modal .box>*{flex-shrink:0}
 .modal .close{position:absolute;top:10px;right:10px;border:0;background:var(--paper-2);color:var(--ink);border-radius:999px;width:36px;height:36px;font-size:1.2rem;font-weight:700}
 /* défi photo (onglet) */
 .exemples{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:26px}
@@ -535,6 +536,15 @@ footer .wrap{display:flex;flex-direction:column;gap:8px;align-items:center}
 footer .presente{font-size:1.5rem}
 footer small{opacity:.7}
 
+.etat-direct{font-size:.8rem;opacity:.85;min-height:1.2em;text-align:center}
+.reprise{align-self:stretch;text-align:left;border:1px dashed var(--seine);border-radius:12px;padding:12px 14px;margin-top:10px;background:var(--paper-2)}
+.reprise p{margin:0 0 8px}
+.reprise-ligne{display:flex;gap:8px;flex-wrap:wrap}
+.reprise-ligne input{flex:1 1 180px;min-width:0;font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink)}
+.reprise-ligne .btn{padding:9px 16px;font-size:.9rem}
+.reprise-msg{font-weight:700;min-height:1.2em}
+.reprise-msg .btn{margin:6px 0 0;padding:9px 16px;font-size:.9rem}
+.fiche .deja{font-weight:700;color:var(--ok)}
 .sans-bandeau .masthead{display:none}
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
@@ -601,6 +611,7 @@ footer small{opacity:.7}
         <div id="date-badge"></div>
       </div>
       <div class="confirmes"><b id="nb-confirmes">0</b> invités déjà confirmés · <a href="#invites">voir qui vient</a></div>
+      <div class="etat-direct" id="etat-direct" aria-live="polite"></div>
       <div class="pastilles-accueil" id="pastilles-accueil" aria-label="Ils ont confirmé"></div>
       <p class="news" id="news" aria-live="polite" hidden><span class="news-tag">Dernières confirmations</span> <span id="news-txt"></span></p>
       <div class="hero-btns"><a class="btn btn-primary" href="#reponse">Je réponds</a><a class="btn btn-ghost light" href="#programme">Le programme</a><a class="btn btn-ghost light" href="#invites">Voir qui vient</a></div>
@@ -1042,16 +1053,17 @@ const CONFIG = {
   // Liste fermée des invités — une ligne par invitation (cabine).
   // { prenom, initiale, photo: 'img/marins/xxx.jpg' ou '', avec: { prenom, initiale, photo } (facultatif), photoDuo: 'img/marins/xxx-duo.jpg' (une seule photo à deux), statut: 'oui' | 'attente' }
   // Seules les invitations « oui » apparaissent dans le trombinoscope (ils ont dit oui), comme sur le site des 60 ans.
+  releve: '11 novembre 2026 à 8 h 36',   // date du relevé de secours ci-dessous (la lecture en direct le remplace dès qu'elle répond)
   invites: [
-    { prenom: 'Sophie', initiale: 'P', statut: 'attente' },
-    { prenom: 'Nicolas', initiale: 'P', statut: 'attente' },
+    { prenom: 'Sophie', initiale: 'P', statut: 'oui', photo: 'img/marins/sophie-p.jpg', quand: 'Dès les vœux, à 10 h', recu: '2026-11-10T15:30:58.436Z' },
+    { prenom: 'Nicolas', initiale: 'P', statut: 'oui', photo: 'img/marins/nicolas-p.jpg', quand: 'Dès les vœux, à 10 h', recu: '2026-11-10T21:41:38.475Z' },
     { prenom: 'Bernard', initiale: 'K', avec: { prenom: 'Nathalie', initiale: 'K' }, statut: 'attente' },
-    { prenom: 'Eliane', initiale: 'P', statut: 'oui', photo: 'img/marins/eliane-p.jpg' },
-    { prenom: 'Geneviève', initiale: 'R', statut: 'oui', photo: 'img/marins/genevieve-r.jpg' },
-    { prenom: 'Henri III', initiale: 'P', avec: { prenom: 'Valérie', initiale: 'P' }, statut: 'attente' },
-    { prenom: 'Sonia', initiale: 'D', avec: { prenom: 'Hervé', initiale: 'J' }, statut: 'attente' },
+    { prenom: 'Eliane', initiale: 'P', statut: 'oui', photo: 'img/marins/eliane-p.jpg', quand: 'Dès les vœux, à 10 h', recu: '2026-11-08T19:08:50.867Z' },
+    { prenom: 'Geneviève', initiale: 'R', statut: 'oui', photo: 'img/marins/genevieve-r.jpg', quand: 'Dès les vœux, à 10 h', recu: '2026-11-11T05:53:23.797Z' },
+    { prenom: 'Henri III', initiale: 'P', avec: { prenom: 'Valérie', initiale: 'P' }, statut: 'oui', avecVient: false, photo: 'img/marins/henri-iii-p.jpg', quand: 'Dès les vœux, à 10 h', recu: '2026-11-10T15:14:30.842Z' },
+    { prenom: 'Sonia', initiale: 'D', avec: { prenom: 'Hervé', initiale: 'J' }, statut: 'oui', avecVient: true, quand: 'Dès les vœux, à 10 h', recu: '2026-11-10T17:49:56.791Z' },
     { prenom: 'Philippe', initiale: 'D', avec: { prenom: 'Véronique', initiale: 'D' }, statut: 'attente' },
-    { prenom: 'Antonio', initiale: 'H', avec: { prenom: 'Véronique', initiale: 'H' }, statut: 'oui', avecVient: false },
+    { prenom: 'Antonio', initiale: 'H', avec: { prenom: 'Véronique', initiale: 'H' }, statut: 'oui', avecVient: false, quand: 'Dès les vœux, à 10 h', recu: '2026-11-01T16:01:53.588Z' },
     { prenom: 'Gilbert', initiale: 'P', avec: { prenom: 'Nathalie', initiale: 'P' }, statut: 'attente' },
     { prenom: 'Marc', initiale: 'F', avec: { prenom: 'Stéphanie', initiale: 'F' }, statut: 'attente' },
     { prenom: 'Philippe', initiale: 'G', avec: { prenom: 'Madame', initiale: 'G' }, statut: 'attente' },
@@ -1140,6 +1152,30 @@ const fmtDate = d => new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'n
 const fmtHeure = d => new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' }).format(d).replace(':', ' h ');
 const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+/* Reprise : l'invité qui a déjà répondu retrouve son formulaire pré-rempli en indiquant l'e-mail de sa réponse (vérifié par le script, 5 essais par heure) */
+const cleNorm = i => String(i.prenom + ' ' + (i.initiale || '')).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9 ]/g, '').trim();
+function blocReprise(i, lienVierge) {
+  const d = document.createElement('div'); d.className = 'reprise';
+  d.innerHTML = '<p><b>Pour modifier ta réponse sans tout ressaisir</b>, indique l\'e-mail que tu avais donné :</p>' +
+    '<div class="reprise-ligne"><input type="email" autocomplete="email" placeholder="ton e-mail" aria-label="Ton e-mail de correspondance"><button type="button" class="btn btn-primary">Retrouver mes réponses</button></div>' +
+    '<p class="reprise-msg" aria-live="polite"></p>' +
+    '<p class="note">Autre possibilité : <a href="' + esc(lienVierge) + '" target="_blank" rel="noopener">repartir d\'un formulaire vierge</a>. Seule ta dernière réponse compte.</p>';
+  const inp = d.querySelector('input'), b = d.querySelector('button'), m = d.querySelector('.reprise-msg');
+  const vierge = ' Tu peux aussi repartir d\'un formulaire vierge.';
+  const go = async () => {
+    const mail = inp.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) { m.textContent = 'Indique une adresse e-mail complète.'; return; }
+    b.disabled = true; m.textContent = 'Recherche de ta réponse…';
+    try {
+      const r = await fetch(CONFIG.liveUrl, { method: 'POST', body: JSON.stringify({ action: 'reprise', cle: cleNorm(i), mail }) }).then(x => x.json());
+      if (r.ok && r.url) m.innerHTML = '✓ Réponses retrouvées.<br><a class="btn btn-primary" href="' + esc(r.url) + '" target="_blank" rel="noopener">Ouvrir mon formulaire pré-rempli</a>';
+      else m.textContent = ({ mail: 'Cet e-mail ne correspond pas à celui de ta réponse.' + vierge, trop: 'Trop d\'essais : réessaie dans une heure.' + vierge, sans: 'Nous ne retrouvons pas encore ta réponse.' + vierge })[r.erreur] || 'Recherche impossible pour l\'instant.' + vierge;
+    } catch (e) { m.textContent = 'Recherche impossible pour l\'instant.' + vierge; }
+    b.disabled = false;
+  };
+  b.addEventListener('click', go); inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); go(); } });
+  return d;
+}
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let toastTimer;
 function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2400); }
@@ -1495,7 +1531,7 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
     const dit = [];
     dit.push(st === 'oui' ? 'Présent·e' + (q ? ' : ' + (voeux ? 'dès les vœux à ' + CONFIG.voeux.heure + ', puis la croisière' : embarq ? 'à l\'embarquement (' + CONFIG.embarquement.heure + ') et la croisière' : esc(q)) : '') : st === 'peut-etre' ? 'Peut-être' : 'Absent·e : on pensera à toi');
     if (st === 'oui') dit.push(duo ? (vient ? 'Vous venez à deux' + (i.quandAcc && i.quandAcc !== q ? ' (' + esc(nm(i.avec)) + ' : ' + esc(i.quandAcc) + ')' : '') : esc(nm(i.avec)) + ' ne pourra pas venir') : 'Tu viens seul·e');
-    if (st === 'oui') dit.push('Ta photo de marin : ' + ((i.photo || i.photoDuo) ? 'reçue, merci !' : 'pas encore reçue'));
+    if (st === 'oui') dit.push('Ta photo de marin : ' + ((i.photo || i.photoDuo) ? 'bien reçue' : 'pas encore reçue'));
     const tuile = (t, s2, on) => '<div class="fi-tuile' + (on ? ' on' : '') + '"><b>' + t + '</b><span>' + s2 + '</span></div>';
     const titre = st === 'oui' ? 'Merci ' + esc(i.prenom) + ' !' : st === 'peut-etre' ? 'Merci ' + esc(i.prenom) + ', on croise les doigts !' : 'Merci ' + esc(i.prenom) + ' pour ta réponse';
     const accroche = st === 'oui' ? 'Ta place est réservée à bord, on a hâte de te voir sur le pont.' : st === 'peut-etre' ? 'Dis-nous dès que tu sais : ta place t\'attend.' : 'Si tes plans changent, ta place t\'attend toujours.';
@@ -1506,6 +1542,8 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
       '<p class="fi-change">Un changement ? Renvoie le formulaire : seule ta dernière réponse compte.</p>' +
       '<p><a class="btn btn-primary fi-large" target="_blank" rel="noopener" href="' + esc(lienModifier(i)) + '">Modifier ma réponse</a></p>' +
       '<p class="fi-btns"><button type="button" class="btn btn-ghost" id="fi-copier">Copier mon lien</button><button type="button" class="btn btn-ghost" id="fi-agenda">Ajouter à mon agenda</button></p>');
+    const perso = (() => { try { const x = JSON.parse(localStorage.getItem('reprise20') || 'null'); return !!x && x.cle === keyOf(i); } catch (e) { return false; } })();
+    if (!perso) { const g = box.querySelector('.fi-large'); if (g) g.parentElement.replaceWith(blocReprise(i, lienModifier(i))); }
     const c = box.querySelector('#fi-copier'); if (c) c.addEventListener('click', async () => { try { await navigator.clipboard.writeText(lien); c.textContent = 'Lien copié ✓'; } catch (e) { c.textContent = lien; } });
     const ag = box.querySelector('#fi-agenda'); if (ag) ag.addEventListener('click', () => { const m = document.getElementById('ics-main'); if (m) m.click(); });
   }
@@ -1515,15 +1553,16 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
   $('#noms-heros').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { const h = HOTES[+b.dataset.h]; ouvrir('<div class="carre" style="background-image:url(\'' + esc(h.photo) + '\')"></div><h3>' + esc(h.nom) + '</h3><span class="badge-st b-oui">À bord depuis 2007</span><p class="mot">« ' + esc(h.mot) + ' »</p>'); }));
   render();
   /* DIRECT : l'application Web du script (CONFIG.liveUrl) renvoie, pour chaque invitation de la liste, le statut, le conjoint prévu et la photo autorisée. Garde-fou : seules les clés de la liste sont prises en compte. */
+  const vg = u => /^https:\/\/lh3\.googleusercontent\.com\/d\/[-\w]+$/.test(u || '') ? u + '=w480' : (u || '');   // vignette de 480 px au lieu de l'original
   function appliquerDirect(d) {
     const parCle = {}; CONFIG.invites.forEach(i => parCle[cle(i)] = i);
     let n = 0;
     (d.invites || []).forEach(o => {
       const i = parCle[slug(o.cle)]; if (!i) return;
       i.statut = o.statut || 'attente'; i.quand = o.quand || ''; i.quandAcc = o.quandAcc || ''; i.recu = o.recu || '';
-      if (i.avec) { i.avecVient = o.avecVient !== false; if (o.avecPrenom && i.avec.prenom === 'Madame') i.avec.prenom = o.avecPrenom; if (o.photoAvec) i.avec.photo = o.photoAvec; }
-      if (o.photo && !/^img\//.test(i.photo || '')) i.photo = o.photo;   // une photo rangée dans le site (img/marins) reste prioritaire : elle s'affiche partout, artefact compris
-      if (o.photoDuo) i.photoDuo = o.photoDuo;   // photo de couple (une seule photo pour l'invitation)
+      if (i.avec) { i.avecVient = o.avecVient !== false; if (o.avecPrenom && i.avec.prenom === 'Madame') i.avec.prenom = o.avecPrenom; if (o.photoAvec) i.avec.photo = vg(o.photoAvec); }
+      if (o.photo) i.photo = vg(o.photo);   // la photo lue en direct fait foi ; celle rangée dans le site (img/marins) sert d'attente et de secours
+      if (o.photoDuo) i.photoDuo = vg(o.photoDuo);   // photo de couple (une seule photo pour l'invitation)
       n++;
     });
     if (n) { render(); if (window.renderTrombi) window.renderTrombi(); }
@@ -1549,13 +1588,17 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
   let avant = null, dernier = 0;
   const lireDirect = (force) => {
     if (!CONFIG.liveUrl || (!force && (document.hidden || Date.now() - dernier < 8000))) return; dernier = Date.now();
+    const e0 = $('#etat-direct'), b0 = $('#maj-direct'); if (!avant) { if (e0) e0.textContent = '⏳ Lecture des réponses en direct…'; if (b0) b0.textContent = '⏳ Lecture des réponses en direct…'; }
     fetch(CONFIG.liveUrl + (CONFIG.liveUrl.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now()).then(r => r.ok ? r.json() : Promise.reject()).then(d => {
       const oui = (d.invites || []).filter(o => o.statut && o.statut !== 'attente').length, ph = (d.invites || []).filter(o => o.photo || o.photoDuo).length;
       appliquerDirect(d); accueilDirect(d);
+      if (e0) e0.textContent = '✓ Réponses lues en direct à ' + new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
       if (avant && typeof toast === 'function') { if (oui > avant.oui) toast(oui - avant.oui === 1 ? 'Nouvelle réponse reçue !' : (oui - avant.oui) + ' nouvelles réponses'); else if (ph > avant.ph) toast('Nouvelle photo dans le trombinoscope !'); }
       avant = { oui, ph };
-    }).catch(() => { const b = $('#maj-direct'); if (b && !avant) b.textContent = 'Dernier relevé enregistré dans le site : 9 novembre (le direct se lit sur le site en ligne).'; });
+    }).catch(() => { if (avant) return; const t = 'Lecture en direct impossible ici : la page affiche le relevé du ' + CONFIG.releve + '.'; if (b0) b0.textContent = t; if (e0) e0.textContent = t; });
   };
+  window.__lireDirect = () => fetch(CONFIG.liveUrl + (CONFIG.liveUrl.indexOf('?') >= 0 ? '&' : '?') + 'vignettes=1&t=' + Date.now()).then(r => r.json()).then(d => { appliquerDirect(d); accueilDirect(d); });   // lecture depuis l'application Claude (photos intégrées)
+  accueilDirect({ invites: CONFIG.invites.map(i => ({ cle: cle(i), statut: i.statut || 'attente', avecVient: i.avecVient, recu: i.recu || '' })) });
   lireDirect(); setInterval(() => lireDirect(), 30000); document.addEventListener('visibilitychange', () => lireDirect()); addEventListener('focus', () => lireDirect());
   /* réponses en direct (variante CSV) : onglet « Liste publique » publié en CSV (colonnes Invitation, Accompagnant·e, Réponse, Clé). Garde-fou : seules les invitations de la liste sont prises en compte. */
   function parseCSV(t) { const rows = []; let row = [], f = '', q = false; for (let i = 0; i < t.length; i++) { const c = t[i]; if (q) { if (c === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; } else if (c === '"') q = true; else if (c === ',') { row.push(f); f = ''; } else if (c === '\n' || c === '\r') { if (c === '\r' && t[i + 1] === '\n') i++; row.push(f); rows.push(row); row = []; f = ''; } else f += c; } if (f || row.length) { row.push(f); rows.push(row); } return rows; }
@@ -1606,6 +1649,12 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
       '<p class="note">Pense à ton e-mail de correspondance : il servira pour le rappel, le quai et l\'horaire.</p></div>' +
       '<div class="qr"><div class="box"></div></div>';
     qr(d.querySelector('.box'), lien(i), 110);
+    if (i.statut && i.statut !== 'attente') {   // déjà répondu : reprendre ses réponses sans tout ressaisir
+      const a = d.querySelector('a.btn-primary'), LIB = { oui: 'présent·e', 'peut-etre': 'peut-être', non: 'absent·e' };
+      const p = document.createElement('p'); p.className = 'deja';
+      p.textContent = '✓ Tu as déjà répondu : ' + (LIB[i.statut] || i.statut) + (i.recu ? ', le ' + new Date(i.recu).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) : '') + '.';
+      a.replaceWith(p, blocReprise(i, lien(i)));
+    }
     return d;
   }
   function montrer(liste) {
@@ -1703,7 +1752,7 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
   }
   render();
   const lb = $('#lightbox'), lbi = $('#lb-img');
-  document.addEventListener('click', e => { const img = e.target.closest('img[data-full]'); if (!img) return; lbi.src = img.dataset.full; lbi.alt = img.alt; lb.classList.add('open'); });
+  document.addEventListener('click', e => { const img = e.target.closest('img[data-full]'); if (!img) return; lbi.src = String(img.dataset.full).replace(/=w\d+$/, '=w1600'); lbi.alt = img.alt; lb.classList.add('open'); });
   function close() { lb.classList.remove('open'); lbi.src = ''; }
   $('#lb-close').addEventListener('click', close);
   lb.addEventListener('click', e => { if (e.target === lb) close(); });
