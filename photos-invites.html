@@ -105,7 +105,7 @@ async function charger() {
     const r = await appel(fete, { action: "photoListe" });
     if (!r || !r.ok) { message(r && r.erreur === "cle" ? "Accès refusé : le lien privé n'est plus valable. Demandez-en un nouveau à Claude." : "Lecture impossible pour l'instant. Réessayez dans un instant.", "err"); return; }
     LISTE = r.invitations || []; message(""); afficher();
-    if (invVoulu) { const el = document.getElementById("i-" + CSS.escape(invVoulu)); if (el) { el.scrollIntoView({ block: "center" }); el.style.outline = "3px solid var(--accent)"; } invVoulu = ""; }
+    if (invVoulu) { const el = carte(invVoulu); if (el) { el.scrollIntoView({ block: "center" }); el.style.outline = "3px solid var(--accent)"; } invVoulu = ""; }
   } catch (e) { message("Lecture impossible pour l'instant (connexion ?). Réessayez dans un instant.", "err"); }
 }
 function afficher() {
@@ -124,7 +124,7 @@ function afficher() {
         <div class="etat" aria-live="polite"></div></div></article>`;
   }).join("") || `<p class="sous">Aucune invitation pour ce filtre.</p>`;
 }
-const carte = id => document.getElementById("i-" + CSS.escape(id));
+const carte = id => document.getElementById("i-" + id);
 function etat(id, t, genre) { const c = carte(id); if (!c) return; const e = c.querySelector(".etat"); e.textContent = t || ""; e.className = "etat" + (genre ? " " + genre : ""); }
 function occupe(id, oui) { const c = carte(id); if (c) c.querySelectorAll("button").forEach(b => b.disabled = oui); }
 
