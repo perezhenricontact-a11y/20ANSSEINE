@@ -37,12 +37,6 @@
    "statut": "oui"
   },
   {
-   "acc": 1,
-   "cle": "sonia-d",
-   "recu": "2026-11-10T17:48:37.554Z",
-   "statut": "oui"
-  },
-  {
    "acc": 0,
    "cle": "hugo-m",
    "recu": "2026-11-10T19:42:47.481Z",
@@ -82,6 +76,12 @@
    "acc": 0,
    "cle": "noura-b",
    "recu": "2026-11-12T19:25:04.174Z",
+   "statut": "oui"
+  },
+  {
+   "acc": 1,
+   "cle": "sonia-d",
+   "recu": "2026-11-12T19:44:11.902Z",
    "statut": "oui"
   }
  ],
@@ -130,9 +130,10 @@
   {
    "avecVient": true,
    "cle": "sonia-d",
+   "photoDuo": "seine20/sonia-d-duo.jpg",
    "quand": "Dès les vœux, à 10 h",
    "quandAcc": "Dès les vœux, à 10 h",
-   "recu": "2026-11-10T17:49:56.791Z",
+   "recu": "2026-11-12T19:37:03.569Z",
    "statut": "oui"
   },
   {
