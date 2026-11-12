@@ -168,8 +168,13 @@
    "statut": "attente"
   },
   {
+   "avecPrenom": "Jamila",
+   "avecVient": true,
    "cle": "taieb-a",
-   "statut": "attente"
+   "quand": "À l'embarquement",
+   "quandAcc": "À l'embarquement",
+   "recu": "2026-11-12T21:28:14.806Z",
+   "statut": "oui"
   },
   {
    "cle": "noura-b",
