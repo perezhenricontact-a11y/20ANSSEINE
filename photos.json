@@ -1,6 +1,10 @@
 {
  "casa60": [
   {
+   "cle": "noura-b",
+   "photo": "casa60/noura-b.jpg"
+  },
+  {
    "cle": "sonia-d",
    "photo": "casa60/sonia-d.jpg"
   },
@@ -73,6 +77,12 @@
    "cle": "franck-j",
    "recu": "2026-11-11T20:03:14.622Z",
    "statut": "peut-etre"
+  },
+  {
+   "acc": 0,
+   "cle": "noura-b",
+   "recu": "2026-11-12T19:25:04.174Z",
+   "statut": "oui"
   }
  ],
  "seine20": [
@@ -162,7 +172,10 @@
   },
   {
    "cle": "noura-b",
-   "statut": "attente"
+   "photo": "seine20/noura-b.jpg",
+   "quand": "Dès les vœux, à 10 h",
+   "recu": "2026-11-12T19:22:57.379Z",
+   "statut": "oui"
   },
   {
    "cle": "ali-m",
