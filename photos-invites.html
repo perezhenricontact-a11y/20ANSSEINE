@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Photos des invités</title>
+<style>
+/* Page privée de l'administrateur : ajouter, remplacer ou retirer la photo d'une invitation (une seule photo par personne ou par couple).
+   Elle ne montre rien sans la clé privée, reçue une fois par le lien ouvert depuis « Gestion des invités ». */
+:root{--fond:#f4f1ea;--carte:#fff;--encre:#1c2733;--doux:#5a6672;--filet:#d9d3c6;--casa:#b4532a;--seine:#1d4f8a;--accent:var(--casa);--ok:#24814f;--ok2:#ddf1e5;--att:#8a6a12;--att2:#f6edd2;--non:#b23a3a;--non2:#f6e0e0}
+body.seine{--accent:var(--seine)}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--fond);color:var(--encre);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:16px max(16px,env(safe-area-inset-right)) 60px max(16px,env(safe-area-inset-left))}
+.wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+h1{font:700 1.7rem/1.2 Georgia,"Times New Roman",serif;margin:0}
+p{margin:0}
+.sous{color:var(--doux);font-size:.95rem}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.barre{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{border:1.5px solid var(--filet);background:var(--carte);border-radius:999px;padding:7px 14px;font-weight:700;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.barre input[type=search]{flex:1 1 200px;min-width:0;border:1.5px solid var(--filet);background:var(--carte);border-radius:10px;padding:9px 12px}
+.info{background:var(--carte);border:1px solid var(--filet);border-left:5px solid var(--accent);border-radius:10px;padding:10px 14px;font-size:.93rem}
+.info.err{border-left-color:var(--non);background:var(--non2)}
+.info.ok{border-left-color:var(--ok);background:var(--ok2)}
+.liste{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.inv{background:var(--carte);border:1px solid var(--filet);border-radius:14px;padding:12px;display:grid;grid-template-columns:84px minmax(0,1fr);gap:12px;align-items:center}
+.vig{width:84px;height:84px;border-radius:12px;background:#e9e4d8 center 22%/cover no-repeat;display:grid;place-items:center;font-weight:800;font-size:1.4rem;color:var(--doux);border:2px solid var(--filet);overflow:hidden}
+.vig.a{border-color:var(--ok)}
+.inv h2{font-size:1.02rem;margin:0;overflow-wrap:anywhere}
+.inv .avec{color:var(--doux);font-size:.88rem}
+.st{display:inline-block;border-radius:999px;padding:1px 9px;font-size:.74rem;font-weight:800;margin-top:3px}
+.st.oui{background:var(--ok2);color:var(--ok)}.st.attente,.st.peut-etre{background:var(--att2);color:var(--att)}.st.non{background:var(--non2);color:var(--non)}
+.act{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.btn{border:1.5px solid var(--accent);background:var(--accent);color:#fff;border-radius:999px;padding:6px 13px;font-weight:700;font-size:.86rem;cursor:pointer}
+.btn.clair{background:var(--carte);color:var(--accent)}
+.btn.danger{border-color:var(--non);background:var(--carte);color:var(--non)}
+.btn:disabled{opacity:.55;cursor:wait}
+.etat{font-size:.82rem;color:var(--doux);margin-top:4px;min-height:1.1em}
+.etat.err{color:var(--non);font-weight:700}.etat.ok{color:var(--ok);font-weight:700}
+.compte{color:var(--doux);font-size:.9rem}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Photos des invités</h1>
+    <p class="sous">Ajoutez, remplacez ou retirez la photo d'une invitation. Une seule photo par personne ou par couple : la plus récente remplace l'ancienne et s'affiche sur le site dans la minute.</p>
+  </header>
+  <div class="barre" id="fetes" role="group" aria-label="Fête"></div>
+  <div class="barre">
+    <input type="search" id="q" placeholder="Chercher un prénom ou un nom" aria-label="Chercher un invité">
+    <button type="button" class="chip" id="f-sans" aria-pressed="false">Sans photo</button>
+    <button type="button" class="chip" id="recharger">🔄 Relire</button>
+  </div>
+  <p class="compte" id="compte" aria-live="polite"></p>
+  <div class="info" id="msg" hidden></div>
+  <div class="liste" id="liste"></div>
+  <input type="file" id="fichier" accept="image/*" hidden>
+</div>
+<script>
+const FETES = {
+  casa: { nom: "De Casablanca au cochonnet", court: "Casablanca", classe: "", champ: "id", site: "https://perezhenricontact-a11y.github.io/60ANSSIXTIESPMHP/#trombi",
+    exec: "https://script.google.com/macros/s/AKfycbwQDL-PFspsg7rDw2DOaBLAxYGfSlllPCx__I4PM2E1zd9b4-PnovGeCX2jKmpCDwNmFw/exec" },
+  seine: { nom: "20 ans sur la Seine", court: "20 ans", classe: "seine", champ: "inv", site: "https://perezhenricontact-a11y.github.io/20ANSSEINE/#trombi",
+    exec: "https://script.google.com/macros/s/AKfycbxjaGQ052N2GCbuNTWya7bgRKs0fUXOK5NubatUm2C6dcphM-uMsP1EWfXLh_LKhL7K/exec" }
+};
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const norm = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const LBL = { oui: "Présent·e", "peut-etre": "Peut-être", non: "Absent·e", attente: "Sans réponse" };
+
+/* Clés privées : reçues une fois dans l'adresse (après le #, jamais envoyé à un serveur), gardées sur cet appareil, puis retirées de l'adresse. */
+let CLES = {};
+try { CLES = JSON.parse(localStorage.getItem("photosInvites") || "{}") || {}; } catch (e) { CLES = {}; }
+let voulu = "", invVoulu = "";
+(function lireAdresse() {
+  const h = new URLSearchParams(location.hash.replace(/^#/, ""));
+  ["casa", "seine"].forEach(k => { const v = h.get(k); if (v) CLES[k] = v; });
+  voulu = h.get("fete") || ""; invVoulu = h.get("inv") || "";
+  if (location.hash) { try { localStorage.setItem("photosInvites", JSON.stringify(CLES)); } catch (e) { } try { history.replaceState(null, "", location.pathname); } catch (e) { } }
+})();
+
+let fete = (voulu && CLES[voulu]) ? voulu : (CLES.casa ? "casa" : CLES.seine ? "seine" : "");
+let LISTE = [], sansPhoto = false, cible = null;
+function message(t, genre) { const m = $("#msg"); m.hidden = !t; m.textContent = t || ""; m.className = "info" + (genre ? " " + genre : ""); }
+async function appel(k, corps) {
+  const r = await fetch(FETES[k].exec, { method: "POST", body: JSON.stringify(Object.assign({ cle: CLES[k] }, corps)) });
+  return r.json();
+}
+function boutonsFetes() {
+  $("#fetes").innerHTML = Object.keys(FETES).filter(k => CLES[k]).map(k => `<button type="button" class="chip" data-f="${k}" aria-pressed="${k === fete}">${esc(FETES[k].nom)}</button>`).join("");
+  $("#fetes").querySelectorAll("button").forEach(b => b.onclick = () => { fete = b.dataset.f; boutonsFetes(); charger(); });
+  document.body.className = fete ? FETES[fete].classe : "";
+}
+async function charger() {
+  if (!fete) { $("#liste").innerHTML = ""; $("#compte").textContent = ""; message("Cette page est privée. Ouvrez-la avec votre lien personnel (donné par Claude ou depuis « Gestion des invités ») : il enregistre l'accès sur cet appareil.", "err"); return; }
+  message("Lecture des invitations…"); $("#liste").innerHTML = "";
+  try {
+    const r = await appel(fete, { action: "photoListe" });
+    if (!r || !r.ok) { message(r && r.erreur === "cle" ? "Accès refusé : le lien privé n'est plus valable. Demandez-en un nouveau à Claude." : "Lecture impossible pour l'instant. Réessayez dans un instant.", "err"); return; }
+    LISTE = r.invitations || []; message(""); afficher();
+    if (invVoulu) { const el = document.getElementById("i-" + CSS.escape(invVoulu)); if (el) { el.scrollIntoView({ block: "center" }); el.style.outline = "3px solid var(--accent)"; } invVoulu = ""; }
+  } catch (e) { message("Lecture impossible pour l'instant (connexion ?). Réessayez dans un instant.", "err"); }
+}
+function afficher() {
+  const q = norm($("#q").value);
+  const L = LISTE.filter(i => (!sansPhoto || !i.photo) && (!q || norm(i.nom + " " + (i.avec || "")).includes(q)))
+    .sort((a, b) => norm(a.nom).localeCompare(norm(b.nom), "fr"));
+  const avec = LISTE.filter(i => i.photo).length;
+  $("#compte").textContent = `${FETES[fete].court} : ${LISTE.length} invitations · ${avec} avec photo · ${LISTE.length - avec} sans photo` + (L.length !== LISTE.length ? ` · ${L.length} affichées` : "");
+  $("#liste").innerHTML = L.map(i => {
+    const ini = i.nom.split(/\s+/).map(x => x.charAt(0)).join("").slice(0, 2).toUpperCase(), st = LBL[i.reponse] ? i.reponse : "attente";
+    return `<article class="inv" id="i-${esc(i.id)}" data-id="${esc(i.id)}">
+      <div class="vig${i.photo ? " a" : ""}" ${i.photo ? `style="background-image:url('${esc(i.photo)}')"` : ""} role="img" aria-label="${i.photo ? "Photo de " + esc(i.nom) : "Pas de photo"}">${i.photo ? "" : esc(ini)}</div>
+      <div><h2>${esc(i.nom)}</h2>${i.avec ? `<div class="avec">avec ${esc(i.avec)} · une photo pour deux</div>` : ""}
+        <span class="st ${st}">${LBL[st]}</span>${i.photo && i.admin ? ` <span class="avec">· photo ajoutée par vous</span>` : ""}
+        <div class="act"><button type="button" class="btn" data-a="choisir">${i.photo ? "Remplacer la photo" : "Ajouter une photo"}</button>${i.photo ? `<button type="button" class="btn danger" data-a="retirer">Retirer</button>` : ""}</div>
+        <div class="etat" aria-live="polite"></div></div></article>`;
+  }).join("") || `<p class="sous">Aucune invitation pour ce filtre.</p>`;
+}
+const carte = id => document.getElementById("i-" + CSS.escape(id));
+function etat(id, t, genre) { const c = carte(id); if (!c) return; const e = c.querySelector(".etat"); e.textContent = t || ""; e.className = "etat" + (genre ? " " + genre : ""); }
+function occupe(id, oui) { const c = carte(id); if (c) c.querySelectorAll("button").forEach(b => b.disabled = oui); }
+
+/* Photo choisie : réduite dans le navigateur (1600 px au plus, JPEG), puis envoyée au script de la fête. */
+function reduire(file) {
+  return new Promise((res, rej) => {
+    const url = URL.createObjectURL(file), im = new Image();
+    im.onload = () => {
+      try {
+        const k = Math.min(1, 1600 / Math.max(im.naturalWidth, im.naturalHeight)), c = document.createElement("canvas");
+        c.width = Math.max(1, Math.round(im.naturalWidth * k)); c.height = Math.max(1, Math.round(im.naturalHeight * k));
+        const x = c.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, c.width, c.height); x.drawImage(im, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url); res(c.toDataURL("image/jpeg", 0.86));
+      } catch (e) { URL.revokeObjectURL(url); rej(e); }
+    };
+    im.onerror = () => { URL.revokeObjectURL(url); rej(new Error("illisible")); };
+    im.src = url;
+  });
+}
+async function envoyer(id, file) {
+  const i = LISTE.find(x => x.id === id); if (!i) return;
+  occupe(id, true); etat(id, "Préparation de la photo…");
+  let image;
+  try { image = await reduire(file); } catch (e) { occupe(id, false); etat(id, "Cette image n'a pas pu être lue. Essayez un fichier JPEG ou PNG (les photos HEIC d'iPhone : choisissez-les depuis l'iPhone, ou convertissez-les).", "err"); return; }
+  etat(id, "Envoi…");
+  try {
+    const r = await appel(fete, { action: "photoAdmin", [FETES[fete].champ]: id, image });
+    if (r && r.ok) { i.photo = r.photo || image; i.admin = true; afficher(); etat(id, "✓ Photo publiée : elle apparaît sur le site dans la minute.", "ok"); }
+    else { etat(id, ({ cle: "Accès refusé : lien privé à renouveler.", invitation: "Invitation introuvable.", image: "Image refusée : envoyez un JPEG ou un PNG.", taille: "Image trop lourde." })[r && r.erreur] || "Envoi refusé. Réessayez.", "err"); occupe(id, false); }
+  } catch (e) { etat(id, "Envoi impossible pour l'instant (connexion ?). Vérifiez avec « Relire » avant de recommencer.", "err"); occupe(id, false); }
+}
+async function retirer(id, bouton) {
+  if (bouton.dataset.sur !== "1") { bouton.dataset.sur = "1"; bouton.textContent = "Confirmer le retrait"; setTimeout(() => { if (bouton.isConnected) { bouton.dataset.sur = ""; bouton.textContent = "Retirer"; } }, 5000); return; }
+  const i = LISTE.find(x => x.id === id); if (!i) return;
+  occupe(id, true); etat(id, "Retrait…");
+  try {
+    const r = await appel(fete, { action: "photoRetirer", [FETES[fete].champ]: id });
+    if (r && r.ok) { i.photo = ""; i.admin = false; afficher(); etat(id, "✓ Photo retirée du site (le fichier reste dans votre Drive).", "ok"); }
+    else { etat(id, "Retrait refusé. Réessayez.", "err"); occupe(id, false); }
+  } catch (e) { etat(id, "Retrait impossible pour l'instant.", "err"); occupe(id, false); }
+}
+$("#liste").addEventListener("click", e => {
+  const b = e.target.closest("button[data-a]"); if (!b) return;
+  const id = b.closest(".inv").dataset.id;
+  if (b.dataset.a === "choisir") { cible = id; const f = $("#fichier"); f.value = ""; f.click(); }
+  else if (b.dataset.a === "retirer") retirer(id, b);
+});
+$("#fichier").addEventListener("change", e => { const f = e.target.files && e.target.files[0]; if (f && cible) envoyer(cible, f); });
+$("#q").addEventListener("input", afficher);
+$("#f-sans").addEventListener("click", () => { sansPhoto = !sansPhoto; $("#f-sans").setAttribute("aria-pressed", sansPhoto); afficher(); });
+$("#recharger").addEventListener("click", charger);
+boutonsFetes(); charger();
+</script>
+</body>
+</html>
