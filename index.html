@@ -130,6 +130,23 @@ button{font:inherit;cursor:pointer}
 .hn-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:22px 0 0}
 .hn-actions .btn{padding:9px 16px;font-size:.92rem;cursor:pointer;font-family:inherit}
 @keyframes hn-entre{from{opacity:0;transform:translateY(18px) scale(.94)}}
+/* dans le bandeau d'accueil : sous l'affiche sur ordinateur ; sur téléphone, sous le compte à rebours (l'affiche y est tout en bas du bandeau) */
+.hero-cote{display:flex;flex-direction:column;align-items:center;gap:20px;min-width:0}
+.hero-cote .carousel{margin-inline:0}
+.hero-cote.avec-honneur{align-self:start}
+.hero-cote.avec-honneur .carousel{width:min(100%,310px)}   /* l'affiche rétrécit un peu pour que les marins à l'honneur se voient dès l'arrivée */
+.hn-zone.hn-bandeau{margin:0;padding:0;background:none;border:0;box-shadow:none;width:100%;max-width:440px;text-align:center}
+.hn-bandeau .hn-tete{margin-bottom:12px}
+.hn-bandeau .eyebrow{color:var(--or-2);font-size:1.6rem}
+.hn-grille.hn-ligne{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;max-width:none}
+.hn-ligne .hn-carte{color:var(--band-fg)}
+.hn-ligne .hn-photo{border-width:4px;box-shadow:0 0 0 2px #0c1b35,0 0 0 4px var(--or-2),0 8px 16px rgba(0,0,0,.4);margin-bottom:6px;font-size:1.2rem}
+.hn-ligne .hn-ancre{width:22px;height:22px;font-size:.66rem;top:-3px;right:-2px;border-width:1.5px}
+.hn-ligne .hn-nom{font-size:.8rem}
+.hn-ligne .hn-detail{display:none}
+.hn-lien{margin-top:10px;background:none;border:0;padding:4px 8px;font:900 .84rem var(--f-body);color:var(--band-fg);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.hn-bandeau.hn-tel{display:none}
+@media (max-width:900px){.hero-cote.avec-honneur{align-self:auto}.hn-bandeau.hn-ordi{display:none}.hn-bandeau.hn-tel{display:block}.hero-cote.avec-honneur .carousel{width:min(100%,380px)}.hn-grille.hn-ligne{gap:10px}}
 @media (max-width:720px){.hn-zone{padding:18px 14px 16px}.hn-grille{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 18px;max-width:380px}.hn-ancre{width:30px;height:30px;font-size:.9rem}}
 @media (prefers-reduced-motion:reduce){.hn-carte{animation:none}.hn-photo{transition:none}}
 .retour{flex:none;align-self:center;font-weight:800;font-size:.82rem;border:1.5px solid var(--seine);background:#fff;color:var(--seine);border-radius:999px;padding:4px 10px;cursor:pointer;margin-right:6px;white-space:nowrap}
@@ -634,6 +651,11 @@ footer small{opacity:.7}
         </div>
         <div id="date-badge"></div>
       </div>
+      <div class="hn-zone hn-bandeau hn-tel" hidden>
+        <div class="hn-tete"><div class="eyebrow">Nos marins à l'honneur</div></div>
+        <div class="hn-grille hn-ligne" data-honneur></div>
+        <button type="button" class="hn-btn hn-lien">🎲 Quatre autres marins</button>
+      </div>
       <div class="confirmes"><b id="nb-confirmes">0</b> invités déjà confirmés · <a href="#invites">voir qui vient</a></div>
       <div class="etat-direct" id="etat-direct" aria-live="polite"></div>
       <div class="pastilles-accueil" id="pastilles-accueil" aria-label="Ils ont confirmé"></div>
@@ -646,6 +668,7 @@ footer small{opacity:.7}
         <div class="juke-now" id="juke-now">Choisissez une ambiance, puis lancez le vinyle.</div>
       </div>
     </div>
+    <div class="hero-cote">
     <div class="carousel" id="carousel" aria-roledescription="carrousel" aria-label="Les affiches de la croisière">
       <img src="img/affiche-voyage.jpg" class="active" alt="Affiche : 20 ans après, le plus beau voyage, c'est nous. Stéphanie et Henri sur une vedette en bois sur la Seine, avec leurs trois chiens et leur chat." data-full="img/affiche-voyage.jpg">
       <img src="img/affiche-grease.jpg" alt="Affiche rétro « Grease sur Seine » : Stéphanie et Henri dansent le rock sur le pont d'un bateau, Tour Eiffel en arrière-plan." data-full="img/affiche-grease.jpg">
@@ -653,6 +676,12 @@ footer small{opacity:.7}
       <button class="car-nav prev" type="button" id="car-prev" aria-label="Affiche précédente">‹</button>
       <button class="car-nav next" type="button" id="car-next" aria-label="Affiche suivante">›</button>
       <div class="dots" id="dots"></div>
+    </div>
+      <div class="hn-zone hn-bandeau hn-ordi" hidden>
+        <div class="hn-tete"><div class="eyebrow">Nos marins à l'honneur</div></div>
+        <div class="hn-grille hn-ligne" data-honneur></div>
+        <button type="button" class="hn-btn hn-lien">🎲 Quatre autres marins</button>
+      </div>
     </div>
   </div>
   <div class="waves" aria-hidden="true">
@@ -673,15 +702,6 @@ footer small{opacity:.7}
 
     <!-- ================= INVITATION ================= -->
     <section class="panel" id="panel-invitation" role="tabpanel">
-      <div class="hn-zone" hidden>
-        <div class="hn-tete">
-          <div class="eyebrow">Tirage au sort</div>
-          <h2>Quatre marins à l'honneur</h2>
-          <p>Tirés au sort parmi ceux qui ont dit oui. Le tirage change à chaque visite : reviens voir si c'est ton tour !</p>
-        </div>
-        <div class="hn-grille" data-honneur></div>
-        <p class="hn-actions"><button type="button" class="btn btn-ghost hn-btn">🎲 Quatre autres marins</button><a class="btn btn-ghost" href="#trombi">Tout le trombinoscope</a></p>
-      </div>
       <div class="grid-2">
         <div>
           <div class="section-head">
@@ -771,6 +791,11 @@ footer small{opacity:.7}
         <div class="eyebrow">Statistiques invités</div>
         <h2>Les guest stars du pont</h2>
         <p class="lead">Chaque réponse au formulaire ajoute un marin à l'équipage, avec sa photo en tenue de marin (<a href="#defi" class="lien-defi">le défi photo</a>). Tu n'y es pas encore ? <a href="#reponse" class="lien-defi">Réponds ici</a>. Prénom et initiale seulement : la discrétion est de mise sur le pont.</p>
+      </div>
+      <div class="hn-zone" hidden>
+        <div class="hn-tete"><div class="eyebrow">À l'honneur en ce moment</div></div>
+        <div class="hn-grille" data-honneur></div>
+        <p class="hn-actions"><button type="button" class="btn btn-ghost hn-btn">🎲 Quatre autres marins</button></p>
       </div>
       <div class="stats" id="stats"></div>
       <div class="count" style="text-align:center"><button type="button" class="btn-rafr" id="btn-rafr">🔄 Rafraîchir maintenant</button> <span id="maj-direct" aria-live="polite"></span></div>
@@ -895,6 +920,11 @@ footer small{opacity:.7}
         <p class="lead">Deux minutes suffisent. Commence par retrouver ton nom : ton invitation est prévue <b>pour toi seul·e</b> ou <b>pour toi et ton·ta conjoint·e ou ami·e</b>, merci de la respecter. <b>Ce formulaire est réservé aux personnes figurant sur la liste des invités</b> : une réponse d'une personne non invitée ne sera pas prise en compte. Dans le formulaire, indique <b>ton e-mail de correspondance</b> : c'est là que nous t'écrirons (rappel, quai, horaire) ; nous le rapprochons de notre carnet d'adresses. Le formulaire ne s'ouvre pas ? <a href="#aide">Réponds par mail</a>. Hôtel souhaité ? <a href="#hotels">Nos adresses</a>.</p>
       </div>
 
+      <div class="hn-zone" hidden>
+        <div class="hn-tete"><div class="eyebrow">Ils ont déjà dit oui. Et toi ?</div></div>
+        <div class="hn-grille" data-honneur></div>
+        <p class="hn-actions"><button type="button" class="btn btn-ghost hn-btn">🎲 Quatre autres marins</button></p>
+      </div>
       <div class="card">
         <div class="eyebrow" style="font-size:1.6rem">Retrouve ton invitation</div>
         <div class="trouve">
@@ -1660,6 +1690,7 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
         (x.ph ? '<img src="' + esc(x.ph) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : '') + '</span><span class="hn-nom">' + esc(x.nom) + '</span><span class="hn-detail">' + esc(x.mot) + '</span></a>'; }).join('');
     if (html !== HONNEUR_HTML) { HONNEUR_HTML = html; document.querySelectorAll('[data-honneur]').forEach(b => { b.innerHTML = html; }); }
     document.querySelectorAll('.hn-zone').forEach(z => { z.hidden = !HONNEUR.length; });
+    document.querySelectorAll('.hero-cote').forEach(z => { z.classList.toggle('avec-honneur', HONNEUR.length > 0); });
     document.querySelectorAll('.hn-btn').forEach(b => { b.hidden = c.length <= 4; });
   }
   document.addEventListener('click', e => { if (e.target.closest('.hn-btn')) honneur(true); });
