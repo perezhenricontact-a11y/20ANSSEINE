@@ -7,7 +7,7 @@
 <meta name="description" content="Stéphanie et Henri renouvellent leurs vœux le samedi 20 mars 2027, puis cap sur la Seine : invitation, programme, trombinoscope des marins, réponses et souvenirs.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="20 ans sur la Seine — Stéphanie & Henri">
-<meta property="og:description" content="Vingt ans après le 14 février 2007, on se redit oui : vœux à 10 h, embarquement à 13 h 30 pour une croisière rock'n'roll sur la Seine, samedi 27 février 2027. Embarquez !">
+<meta property="og:description" content="Vingt ans après le 14 février 2007, on se redit oui : vœux à 10 h, embarquement à 13 h 30 pour une croisière rock'n'roll sur la Seine, samedi 20 mars 2027. Embarquez !">
 <meta property="og:image" content="https://perezhenricontact-a11y.github.io/20ANSSEINE/img/apercu-partage.jpg">
 <meta property="og:url" content="https://perezhenricontact-a11y.github.io/20ANSSEINE/">
 <meta name="twitter:card" content="summary_large_image">
@@ -113,6 +113,25 @@ button{font:inherit;cursor:pointer}
 .news-item{font-weight:700;animation:newsIn .8s both}
 @keyframes newsIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.news-item{animation:none}}
+/* Invités à l'honneur : quatre invitations confirmées tirées au sort, dans un hublot (accueil et trombinoscope) */
+.hn-zone{margin:0 0 40px;padding:22px 22px 20px;border-radius:22px;background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow)}
+.hn-tete{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;margin-bottom:22px}
+.hn-tete h2,.hn-tete h3{font-family:var(--f-display);font-weight:700;font-size:clamp(1.4rem,3.4vw,2rem);line-height:1.1;margin:0}
+.hn-tete p{color:var(--ink-2);font-size:.98rem;max-width:56ch;margin:0}
+.hn-grille{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px;max-width:860px;margin:0 auto}
+.hn-carte{position:relative;display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center;text-decoration:none;color:var(--ink);animation:hn-entre .7s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--k,0) * .12s)}
+.hn-photo{position:relative;width:100%;aspect-ratio:1;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:var(--grad,linear-gradient(135deg,var(--band),var(--seine)));color:#f6efe0;font:700 clamp(1.5rem,5vw,2.4rem) var(--f-display);border:6px solid var(--or);box-shadow:0 0 0 3px #13294b,0 0 0 6px var(--or-2),0 14px 26px rgba(27,39,66,.28);margin-bottom:10px;transition:transform .3s}
+.hn-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%}
+.hn-photo::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.4),inset 0 10px 20px rgba(0,0,0,.25);pointer-events:none}
+.hn-carte:hover .hn-photo,.hn-carte:focus-visible .hn-photo{transform:translateY(-5px) rotate(-3deg)}
+.hn-ancre{position:absolute;top:-4px;right:2%;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--rouge-2,#a3262f);color:#fff;font-size:1rem;line-height:1;border:2px solid var(--or-2);box-shadow:0 4px 10px rgba(0,0,0,.28);z-index:1}
+.hn-nom{font-family:var(--f-display);font-weight:700;font-size:clamp(.95rem,2.1vw,1.12rem);line-height:1.15}
+.hn-detail{font-size:.84rem;font-weight:700;color:var(--ink-2);line-height:1.25}
+.hn-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:22px 0 0}
+.hn-actions .btn{padding:9px 16px;font-size:.92rem;cursor:pointer;font-family:inherit}
+@keyframes hn-entre{from{opacity:0;transform:translateY(18px) scale(.94)}}
+@media (max-width:720px){.hn-zone{padding:18px 14px 16px}.hn-grille{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 18px;max-width:380px}.hn-ancre{width:30px;height:30px;font-size:.9rem}}
+@media (prefers-reduced-motion:reduce){.hn-carte{animation:none}.hn-photo{transition:none}}
 .retour{flex:none;align-self:center;font-weight:800;font-size:.82rem;border:1.5px solid var(--seine);background:#fff;color:var(--seine);border-radius:999px;padding:4px 10px;cursor:pointer;margin-right:6px;white-space:nowrap}
 .btn-rafr{font-weight:800;font-size:.85rem;background:var(--seine);color:#fff;border:1.5px solid var(--or-2);border-radius:999px;padding:7px 14px;cursor:pointer;margin:4px}
 .btn-rafr:disabled{opacity:.6;cursor:wait}
@@ -654,6 +673,15 @@ footer small{opacity:.7}
 
     <!-- ================= INVITATION ================= -->
     <section class="panel" id="panel-invitation" role="tabpanel">
+      <div class="hn-zone" hidden>
+        <div class="hn-tete">
+          <div class="eyebrow">Tirage au sort</div>
+          <h2>Quatre marins à l'honneur</h2>
+          <p>Tirés au sort parmi ceux qui ont dit oui. Le tirage change à chaque visite : reviens voir si c'est ton tour !</p>
+        </div>
+        <div class="hn-grille" data-honneur></div>
+        <p class="hn-actions"><button type="button" class="btn btn-ghost hn-btn">🎲 Quatre autres marins</button><a class="btn btn-ghost" href="#trombi">Tout le trombinoscope</a></p>
+      </div>
       <div class="grid-2">
         <div>
           <div class="section-head">
@@ -776,6 +804,11 @@ footer small{opacity:.7}
         <div class="eyebrow">Ils ont dit oui !</div>
         <h2>Le trombinoscope des marins</h2>
         <p class="lead" id="trombi-intro" style="font-size:1rem">Pastille verte : à bord. Pas encore de photo ? <a href="#defi" class="lien-defi">Le défi photo</a>.</p>
+      </div>
+      <div class="hn-zone" hidden>
+        <div class="hn-tete"><div class="eyebrow">À l'honneur en ce moment</div></div>
+        <div class="hn-grille" data-honneur></div>
+        <p class="hn-actions"><button type="button" class="btn btn-ghost hn-btn">🎲 Quatre autres marins</button></p>
       </div>
       <div id="crew"></div>
     </section>
@@ -1582,7 +1615,7 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
       if (o.photoDuo) i.photoDuo = vg(o.photoDuo);   // photo de couple (une seule photo pour l'invitation)
       n++;
     });
-    if (n) { render(); if (window.renderTrombi) window.renderTrombi(); }
+    if (n) { render(); if (window.renderTrombi) window.renderTrombi(); honneur(); }
     const b = $('#maj-direct'); if (b && d.maj) { const t = new Date(d.maj); b.textContent = 'Réponses lues en direct · ' + t.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) + ' à ' + t.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }); }
   }
   /* page de garde : pastilles des invités qui ont confirmé (photo ou initiales) et bandeau des dernières confirmations, avec celles du jour */
@@ -1599,6 +1632,41 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
     const news = $('#news');
     if (news && oui.length) { news.hidden = false; $('#news-txt').innerHTML = oui.slice(0, 5).map((x, k) => '<span class="news-item" style="animation-delay:' + k * 0.6 + 's">' + esc(nm(x.i)) + (duoVient(x) ? ' et ' + esc(nm(x.i.avec)) : '') + '</span>').join(' · '); }
   }
+  /* Invités à l'honneur : quatre invitations confirmées tirées au sort, celles qui ont une photo d'abord.
+     Nouveau tirage à chaque visite, toutes les 20 secondes et au bouton. Données publiques seulement (prénom + initiale, photo publiée). */
+  let HONNEUR = [], HONNEUR_HTML = null;
+  function candidatsHonneur() {
+    return CONFIG.invites.filter(i => i.statut === 'oui').map((i, k) => {
+      const duo = !!(i.avec && i.avecVient !== false), q = String(i.quand || '');
+      return { id: keyOf(i), nom: nm(i) + (duo ? ' & ' + nm(i.avec) : ''), init: duo ? i.prenom.charAt(0) + '&' + i.avec.prenom.charAt(0) : i.prenom.charAt(0) + (i.initiale || ''),
+        ph: (duo ? i.photoDuo || i.photo : i.photo || i.photoDuo) || '', grad: GRADS[(k * 3) % GRADS.length],
+        mot: /v(œ|oe)ux/i.test(q) ? 'À bord dès les vœux' : /embarquement/i.test(q) ? 'Rendez-vous à l\'embarquement' : 'À bord !' };
+    });
+  }
+  function honneur(nouveau) {
+    const c = candidatsHonneur(), parId = {}; c.forEach(x => parId[x.id] = x);
+    const melange = a => a.map(x => [Math.random(), x]).sort((x, y) => x[0] - y[0]).map(x => x[1]);
+    const avec = c.filter(x => x.ph), sans = c.filter(x => !x.ph), nb = Math.min(4, c.length);
+    HONNEUR = HONNEUR.filter(id => parId[id]);
+    /* on retire au sort si on le demande, s'il manque quelqu'un, ou si une photo vient d'arriver pour un invité qui n'est pas affiché */
+    if (nouveau || HONNEUR.length < nb || HONNEUR.filter(id => !parId[id].ph).length !== Math.max(0, nb - avec.length)) {
+      const vus = HONNEUR, neufs = a => melange(a.filter(x => !vus.includes(x.id))).concat(melange(a.filter(x => vus.includes(x.id))));   // ceux qu'on ne vient pas de voir passent devant
+      const choix = neufs(avec).slice(0, 4);
+      if (choix.length < 4) choix.push(...neufs(sans).slice(0, 4 - choix.length));
+      HONNEUR = melange(choix).map(x => x.id);
+    }
+    const html = HONNEUR.map((id, k) => { const x = parId[id];
+      return '<a class="hn-carte" href="#' + esc(x.id) + '" style="--k:' + k + ';--grad:' + x.grad + '" title="Ouvrir la fiche de ' + esc(x.nom) + '"><span class="hn-ancre" aria-hidden="true">⚓</span><span class="hn-photo"><span aria-hidden="true">' + esc(x.init) + '</span>' +
+        (x.ph ? '<img src="' + esc(x.ph) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : '') + '</span><span class="hn-nom">' + esc(x.nom) + '</span><span class="hn-detail">' + esc(x.mot) + '</span></a>'; }).join('');
+    if (html !== HONNEUR_HTML) { HONNEUR_HTML = html; document.querySelectorAll('[data-honneur]').forEach(b => { b.innerHTML = html; }); }
+    document.querySelectorAll('.hn-zone').forEach(z => { z.hidden = !HONNEUR.length; });
+    document.querySelectorAll('.hn-btn').forEach(b => { b.hidden = c.length <= 4; });
+  }
+  document.addEventListener('click', e => { if (e.target.closest('.hn-btn')) honneur(true); });
+  setInterval(() => {   // tirage automatique toutes les 20 s (pas pendant qu'on survole une carte, ni si l'appareil demande moins d'animations)
+    if (document.hidden || reduceMotion || document.querySelector('.hn-carte:hover,.hn-carte:focus')) return;
+    if (candidatsHonneur().length > 4) honneur(true);
+  }, 20000);
   const br = $('#btn-rafr');
   if (br) br.addEventListener('click', () => { br.disabled = true; br.textContent = '⏳ Rafraîchissement…'; dernier = 0; lireDirect(true); setTimeout(() => { br.disabled = false; br.textContent = '🔄 Rafraîchir maintenant'; }, 2500); });
   /* direct : lecture à l'ouverture, puis toutes les 30 s et au retour sur la page ; une bulle signale les nouvelles réponses */
@@ -1616,6 +1684,7 @@ $('#programme-badge').innerHTML = CONFIG.programmeConfirme ? '' : '<span class="
   };
   window.__lireDirect = () => fetch(CONFIG.liveUrl + (CONFIG.liveUrl.indexOf('?') >= 0 ? '&' : '?') + 'vignettes=1&t=' + Date.now()).then(r => r.json()).then(d => { appliquerDirect(d); accueilDirect(d); });   // lecture depuis l'application Claude (photos intégrées)
   accueilDirect({ invites: CONFIG.invites.map(i => ({ cle: cle(i), statut: i.statut || 'attente', avecVient: i.avecVient, recu: i.recu || '' })) });
+  honneur();
   lireDirect(); setInterval(() => lireDirect(), 30000); document.addEventListener('visibilitychange', () => lireDirect()); addEventListener('focus', () => lireDirect());
   /* réponses en direct (variante CSV) : onglet « Liste publique » publié en CSV (colonnes Invitation, Accompagnant·e, Réponse, Clé). Garde-fou : seules les invitations de la liste sont prises en compte. */
   function parseCSV(t) { const rows = []; let row = [], f = '', q = false; for (let i = 0; i < t.length; i++) { const c = t[i]; if (q) { if (c === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; } else if (c === '"') q = true; else if (c === ',') { row.push(f); f = ''; } else if (c === '\n' || c === '\r') { if (c === '\r' && t[i + 1] === '\n') i++; row.push(f); rows.push(row); row = []; f = ''; } else f += c; } if (f || row.length) { row.push(f); rows.push(row); } return rows; }
