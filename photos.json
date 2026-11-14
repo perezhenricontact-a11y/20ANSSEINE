@@ -13,6 +13,10 @@
    "photo": "casa60/brandon-f.jpg"
   },
   {
+   "cle": "antonio-h",
+   "photo": "casa60/antonio-h.jpg"
+  },
+  {
    "cle": "franck-j",
    "photo": "casa60/franck-j.jpg"
   },
@@ -95,6 +99,12 @@
    "cle": "jean-a",
    "recu": "2026-11-14T04:10:57.221Z",
    "statut": "non"
+  },
+  {
+   "acc": 0,
+   "cle": "sebastien-n",
+   "recu": "2026-11-14T05:56:18.843Z",
+   "statut": "non"
   }
  ],
  "seine20": [
@@ -153,10 +163,12 @@
    "statut": "attente"
   },
   {
-   "avecVient": false,
+   "avecVient": true,
    "cle": "antonio-h",
+   "photoDuo": "seine20/antonio-h-duo.jpg",
    "quand": "Dès les vœux, à 10 h",
-   "recu": "2026-11-01T16:01:53.588Z",
+   "quandAcc": "Dès les vœux, à 10 h",
+   "recu": "2026-11-14T05:55:25.364Z",
    "statut": "oui"
   },
   {
@@ -174,8 +186,11 @@
    "statut": "attente"
   },
   {
+   "avecVient": true,
    "cle": "sebastien-n",
-   "statut": "attente"
+   "photoDuo": "seine20/sebastien-n-duo.jpg",
+   "recu": "2026-11-14T05:54:45.369Z",
+   "statut": "oui"
   },
   {
    "cle": "romain-a",
@@ -207,6 +222,18 @@
   },
   {
    "cle": "ghislain-d",
+   "statut": "attente"
+  },
+  {
+   "cle": "remi-r",
+   "statut": "attente"
+  },
+  {
+   "cle": "vitor-r",
+   "statut": "attente"
+  },
+  {
+   "cle": "xavier-r",
    "statut": "attente"
   }
  ]
