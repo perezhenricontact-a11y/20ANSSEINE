@@ -1121,7 +1121,7 @@ const CONFIG = {
   // Liste fermée des invités — une ligne par invitation (cabine).
   // { prenom, initiale, photo: 'img/marins/xxx.jpg' ou '', avec: { prenom, initiale, photo } (facultatif), photoDuo: 'img/marins/xxx-duo.jpg' (une seule photo à deux), statut: 'oui' | 'attente' }
   // Seules les invitations « oui » apparaissent dans le trombinoscope (ils ont dit oui), comme sur le site des 60 ans.
-  releve: '14 novembre 2026 à 5 h 10',   // date du relevé de secours ci-dessous (la lecture en direct le remplace dès qu'elle répond)
+  releve: '14 novembre 2026 à 7 h 10',   // date du relevé de secours ci-dessous (la lecture en direct le remplace dès qu'elle répond)
   invites: [
     { prenom: 'Sophie', initiale: 'P', statut: 'oui', photo: 'img/marins/sophie-p.jpg', quand: 'Dès les vœux, à 10 h', recu: '2026-11-10T15:30:58.436Z' },
     { prenom: 'Nicolas', initiale: 'P', statut: 'oui', photo: 'img/marins/nicolas-p.jpg', quand: 'Dès les vœux, à 10 h', recu: '2026-11-11T19:53:20.777Z' },
@@ -1131,11 +1131,11 @@ const CONFIG = {
     { prenom: 'Henri III', initiale: 'P', avec: { prenom: 'Valérie', initiale: 'P' }, statut: 'oui', avecVient: false, photo: 'img/marins/henri-iii-p.jpg', quand: 'Dès les vœux, à 10 h', recu: '2026-11-10T15:14:30.842Z' },
     { prenom: 'Sonia', initiale: 'D', avec: { prenom: 'Hervé', initiale: 'J' }, statut: 'oui', avecVient: true, photoDuo: 'img/marins/sonia-d-duo.jpg', quand: 'Dès les vœux, à 10 h', quandAcc: 'Dès les vœux, à 10 h', recu: '2026-11-12T19:37:03.569Z' },
     { prenom: 'Philippe', initiale: 'D', avec: { prenom: 'Véronique', initiale: 'D' }, statut: 'attente' },
-    { prenom: 'Antonio', initiale: 'H', avec: { prenom: 'Véronique', initiale: 'H' }, statut: 'oui', avecVient: false, quand: 'Dès les vœux, à 10 h', recu: '2026-11-01T16:01:53.588Z' },
+    { prenom: 'Antonio', initiale: 'H', avec: { prenom: 'Véronique', initiale: 'H' }, statut: 'oui', avecVient: true, photoDuo: 'img/marins/antonio-h-duo.jpg', quand: 'Dès les vœux, à 10 h', quandAcc: 'Dès les vœux, à 10 h', recu: '2026-11-14T05:55:25.364Z' },
     { prenom: 'Gilbert', initiale: 'P', avec: { prenom: 'Nathalie', initiale: 'P' }, statut: 'non', avecVient: false, recu: '2026-11-14T04:09:30.211Z' },
     { prenom: 'Marc', initiale: 'F', avec: { prenom: 'Stéphanie', initiale: 'F' }, statut: 'attente' },
     { prenom: 'Philippe', initiale: 'G', avec: { prenom: 'Madame', initiale: 'G' }, statut: 'attente' },
-    { prenom: 'Sébastien', initiale: 'N', avec: { prenom: 'Karona', initiale: 'T' }, statut: 'attente' },
+    { prenom: 'Sébastien', initiale: 'N', avec: { prenom: 'Karona', initiale: 'T' }, statut: 'oui', avecVient: true, photoDuo: 'img/marins/sebastien-n-duo.jpg', recu: '2026-11-14T05:54:45.369Z' },
     { prenom: 'Romain', initiale: 'A', avec: { prenom: 'Madame', initiale: 'A' }, statut: 'attente' },
     { prenom: 'Taïeb', initiale: 'A', avec: { prenom: 'Jamila', initiale: 'A' }, statut: 'oui', avecVient: true, quand: 'À l\'embarquement', quandAcc: 'À l\'embarquement', recu: '2026-11-12T21:28:14.806Z' },
     { prenom: 'Noura', initiale: 'B', statut: 'oui', photo: 'img/marins/noura-b.jpg', quand: 'Dès les vœux, à 10 h', recu: '2026-11-12T19:22:57.379Z' },
