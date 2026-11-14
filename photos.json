@@ -225,8 +225,14 @@
    "statut": "attente"
   },
   {
+   "avecPrenom": "Martine",
+   "avecVient": true,
    "cle": "remi-r",
-   "statut": "attente"
+   "photoDuo": "seine20/remi-r-duo.jpg",
+   "quand": "À l'embarquement",
+   "quandAcc": "À l'embarquement",
+   "recu": "2026-11-14T17:30:33.749Z",
+   "statut": "oui"
   },
   {
    "cle": "vitor-r",
