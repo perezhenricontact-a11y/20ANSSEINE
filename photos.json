@@ -83,6 +83,18 @@
    "cle": "sonia-d",
    "recu": "2026-11-13T02:44:53.114Z",
    "statut": "oui"
+  },
+  {
+   "acc": 0,
+   "cle": "philippe-d",
+   "recu": "2026-11-14T04:10:47.746Z",
+   "statut": "non"
+  },
+  {
+   "acc": 0,
+   "cle": "jean-a",
+   "recu": "2026-11-14T04:10:57.221Z",
+   "statut": "non"
   }
  ],
  "seine20": [
@@ -148,8 +160,10 @@
    "statut": "oui"
   },
   {
+   "avecVient": false,
    "cle": "gilbert-p",
-   "statut": "attente"
+   "recu": "2026-11-14T04:09:30.211Z",
+   "statut": "non"
   },
   {
    "cle": "marc-f",
@@ -189,6 +203,10 @@
   },
   {
    "cle": "rudolphe-m",
+   "statut": "attente"
+  },
+  {
+   "cle": "ghislain-d",
    "statut": "attente"
   }
  ]
