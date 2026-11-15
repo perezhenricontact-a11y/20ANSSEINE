@@ -185,12 +185,12 @@
    "statut": "oui"
   },
   {
-   "avecPrenom": "Veronique",
    "avecVient": true,
    "cle": "philippe-d",
+   "photoDuo": "seine20/philippe-d-duo.jpg",
    "quand": "Dès les vœux, à 10 h",
    "quandAcc": "Dès les vœux, à 10 h",
-   "recu": "2026-11-15T13:52:01.761Z",
+   "recu": "2026-11-15T16:21:52.998Z",
    "statut": "oui"
   },
   {
@@ -244,8 +244,13 @@
    "statut": "oui"
   },
   {
+   "avecVient": true,
    "cle": "ali-m",
-   "statut": "attente"
+   "photoDuo": "seine20/ali-m-duo.jpg",
+   "quand": "Dès les vœux, à 10 h",
+   "quandAcc": "Dès les vœux, à 10 h",
+   "recu": "2026-11-15T16:21:50.471Z",
+   "statut": "oui"
   },
   {
    "cle": "rudolphe-m",
@@ -270,8 +275,23 @@
    "statut": "attente"
   },
   {
+   "avecPrenom": "Isabelle",
+   "avecVient": true,
    "cle": "xavier-r",
+   "quand": "Dès les vœux, à 10 h",
+   "quandAcc": "Dès les vœux, à 10 h",
+   "recu": "2026-11-15T15:48:18.721Z",
+   "statut": "oui"
+  },
+  {
+   "cle": "david-p",
    "statut": "attente"
+  },
+  {
+   "avecVient": false,
+   "cle": "ana",
+   "recu": "2026-11-15T16:21:54.058Z",
+   "statut": "non"
   }
  ]
 }
