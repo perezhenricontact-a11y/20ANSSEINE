@@ -159,8 +159,13 @@
    "statut": "oui"
   },
   {
+   "avecPrenom": "Veronique",
+   "avecVient": true,
    "cle": "philippe-d",
-   "statut": "attente"
+   "quand": "Dès les vœux, à 10 h",
+   "quandAcc": "Dès les vœux, à 10 h",
+   "recu": "2026-11-15T13:52:01.761Z",
+   "statut": "oui"
   },
   {
    "avecVient": true,
