@@ -256,8 +256,13 @@
    "statut": "oui"
   },
   {
+   "avecVient": true,
    "cle": "rudolphe-m",
-   "statut": "attente"
+   "photoDuo": "seine20/rudolphe-m-duo.jpg",
+   "quand": "Dès les vœux, à 10 h",
+   "quandAcc": "Dès les vœux, à 10 h",
+   "recu": "2026-11-15T18:30:30.344Z",
+   "statut": "oui"
   },
   {
    "cle": "ghislain-d",
