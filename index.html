@@ -1121,11 +1121,11 @@ const CONFIG = {
   // Liste fermée des invités — une ligne par invitation (cabine).
   // { prenom, initiale, photo: 'img/marins/xxx.jpg' ou '', avec: { prenom, initiale, photo } (facultatif), photoDuo: 'img/marins/xxx-duo.jpg' (une seule photo à deux), statut: 'oui' | 'attente' }
   // Seules les invitations « oui » apparaissent dans le trombinoscope (ils ont dit oui), comme sur le site des 60 ans.
-  releve: '15 novembre 2026 à 16 h 20',   // date du relevé de secours ci-dessous (la lecture en direct le remplace dès qu'elle répond)
+  releve: '15 novembre 2026 à 17 h 25',   // date du relevé de secours ci-dessous (la lecture en direct le remplace dès qu'elle répond)
   invites: [
     { prenom: 'Sophie', initiale: 'P', statut: 'oui', photo: 'img/marins/sophie-p.jpg', quand: 'Dès les vœux, à 10 h', recu: '2026-11-10T15:30:58.436Z' },
     { prenom: 'Nicolas', initiale: 'P', statut: 'oui', photo: 'img/marins/nicolas-p.jpg', quand: 'Dès les vœux, à 10 h', recu: '2026-11-11T19:53:20.777Z' },
-    { prenom: 'Bernard', initiale: 'K', avec: { prenom: 'Nathalie', initiale: 'K' }, statut: 'attente' },
+    { prenom: 'Bernard', initiale: 'K', avec: { prenom: 'Nathalie', initiale: 'K' }, statut: 'non', avecVient: false, recu: '2026-11-15T14:27:50.885Z' },
     { prenom: 'Eliane', initiale: 'P', statut: 'oui', photo: 'img/marins/eliane-p.jpg', quand: 'Dès les vœux, à 10 h', recu: '2026-11-11T19:57:39.602Z' },
     { prenom: 'Geneviève', initiale: 'R', avec: { prenom: 'Thierry', initiale: '' }, avecVient: true, statut: 'oui', photoDuo: 'img/marins/genevieve-r-duo.jpg', quand: 'Dès les vœux, à 10 h', quandAcc: 'Dès les vœux, à 10 h', recu: '2026-11-15T15:20:00.000Z' },
     { prenom: 'Henri III', initiale: 'P', avec: { prenom: 'Valérie', initiale: 'P' }, statut: 'oui', avecVient: false, photo: 'img/marins/henri-iii-p.jpg', quand: 'Dès les vœux, à 10 h', recu: '2026-11-10T15:14:30.842Z' },
@@ -1144,7 +1144,9 @@ const CONFIG = {
     { prenom: 'Ghislain', initiale: 'D', avec: { prenom: 'Madame', initiale: 'D' }, statut: 'attente' },
     { prenom: 'Rémi', initiale: 'R', avec: { prenom: 'Martine', initiale: 'R' }, statut: 'oui', avecVient: true, photoDuo: 'img/marins/remi-r-duo.jpg', quand: 'À l\'embarquement', quandAcc: 'À l\'embarquement', recu: '2026-11-14T17:30:33.749Z' },
     { prenom: 'Vitor', initiale: 'R', avec: { prenom: 'Madame', initiale: 'R' }, statut: 'attente' },
-    { prenom: 'Xavier', initiale: 'R', avec: { prenom: 'Madame', initiale: 'R' }, statut: 'attente' }
+    { prenom: 'Xavier', initiale: 'R', avec: { prenom: 'Madame', initiale: 'R' }, statut: 'attente' },
+    { prenom: 'David', initiale: 'P', avec: { prenom: 'Laurence', initiale: 'P' }, statut: 'attente' },
+    { prenom: 'Ana', initiale: '', avec: { prenom: 'Marco', initiale: '' }, statut: 'non', avecVient: false, recu: '2026-11-15T16:21:54.058Z' }
   ],
   surprises: [
     { date: '2026-12-24', titre: 'Surprise n° 1', indice: 'Elle tient dans une pochette et se joue à 45 tours.', texte: 'Texte dévoilé à la date : à rédiger par les hôtes.' },
