@@ -25,8 +25,8 @@
    "photo": "casa60/nicolas-e.jpg"
   },
   {
-   "cle": "kevin-m",
-   "photo": "casa60/kevin-m.jpg"
+   "cle": "kevin-maronne",
+   "photo": "casa60/kevin-maronne.jpg"
   },
   {
    "cle": "eliane-p",
@@ -209,8 +209,11 @@
    "statut": "non"
   },
   {
+   "avecVient": true,
    "cle": "marc-f",
-   "statut": "attente"
+   "photoDuo": "seine20/marc-f-duo.jpg",
+   "recu": "2026-11-15T17:09:41.209Z",
+   "statut": "peut-etre"
   },
   {
    "cle": "philippe-g",
