@@ -25,6 +25,10 @@
    "photo": "casa60/nicolas-e.jpg"
   },
   {
+   "cle": "kevin-m",
+   "photo": "casa60/kevin-m.jpg"
+  },
+  {
    "cle": "eliane-p",
    "photo": "casa60/eliane-p.jpg"
   },
@@ -50,12 +54,6 @@
    "acc": 0,
    "cle": "eliane-p",
    "recu": "2026-11-11T05:34:13.432Z",
-   "statut": "oui"
-  },
-  {
-   "acc": 0,
-   "cle": "genevieve-r",
-   "recu": "2026-11-11T05:42:55.979Z",
    "statut": "oui"
   },
   {
@@ -111,6 +109,24 @@
    "cle": "bernard-k",
    "recu": "2026-11-15T14:34:42.014Z",
    "statut": "non"
+  },
+  {
+   "acc": 0,
+   "cle": "bastien-c",
+   "recu": "2026-11-15T15:09:49.903Z",
+   "statut": "non"
+  },
+  {
+   "acc": 0,
+   "cle": "michel-b",
+   "recu": "2026-11-15T15:10:06.436Z",
+   "statut": "non"
+  },
+  {
+   "acc": 1,
+   "cle": "genevieve-r",
+   "recu": "2026-11-15T15:20:21.774Z",
+   "statut": "oui"
   }
  ],
  "seine20": [
@@ -142,10 +158,12 @@
    "statut": "oui"
   },
   {
+   "avecVient": true,
    "cle": "genevieve-r",
-   "photo": "seine20/genevieve-r.jpg",
+   "photoDuo": "seine20/genevieve-r-duo.jpg",
    "quand": "Dès les vœux, à 10 h",
-   "recu": "2026-11-11T05:53:23.797Z",
+   "quandAcc": "Dès les vœux, à 10 h",
+   "recu": "2026-11-15T15:16:29.075Z",
    "statut": "oui"
   },
   {
