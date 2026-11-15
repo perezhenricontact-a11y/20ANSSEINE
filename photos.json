@@ -105,6 +105,12 @@
    "cle": "sebastien-n",
    "recu": "2026-11-14T05:56:18.843Z",
    "statut": "non"
+  },
+  {
+   "acc": 0,
+   "cle": "bernard-k",
+   "recu": "2026-11-15T14:34:42.014Z",
+   "statut": "non"
   }
  ],
  "seine20": [
@@ -123,8 +129,10 @@
    "statut": "oui"
   },
   {
+   "avecVient": false,
    "cle": "bernard-k",
-   "statut": "attente"
+   "recu": "2026-11-15T14:27:50.885Z",
+   "statut": "non"
   },
   {
    "cle": "eliane-p",
