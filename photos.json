@@ -33,6 +33,10 @@
    "photo": "casa60/nicolas-e.jpg"
   },
   {
+   "cle": "thierry-h",
+   "photo": "casa60/thierry-h.jpg"
+  },
+  {
    "cle": "kevin-m",
    "photo": "casa60/kevin-m.jpg"
   },
@@ -177,6 +181,12 @@
    "cle": "stephane-d",
    "recu": "2026-11-17T04:09:34.355Z",
    "statut": "non"
+  },
+  {
+   "acc": 1,
+   "cle": "thierry-h",
+   "recu": "2026-11-17T18:26:16.688Z",
+   "statut": "oui"
   }
  ],
  "seine20": [
