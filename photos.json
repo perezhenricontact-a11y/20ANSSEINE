@@ -25,6 +25,10 @@
    "photo": "casa60/reda-z.jpg"
   },
   {
+   "cle": "hugo-m",
+   "photo": "casa60/hugo-m.jpg"
+  },
+  {
    "cle": "nicolas-e",
    "photo": "casa60/nicolas-e.jpg"
   },
@@ -178,10 +182,7 @@
  "seine20": [
   {
    "cle": "sophie-p",
-   "photo": "seine20/sophie-p.jpg",
-   "quand": "Dès les vœux, à 10 h",
-   "recu": "2026-11-10T15:30:58.436Z",
-   "statut": "oui"
+   "statut": "attente"
   },
   {
    "cle": "nicolas-p",
@@ -213,13 +214,8 @@
    "statut": "oui"
   },
   {
-   "avecPrenom": "HENRI 3",
-   "avecVient": false,
    "cle": "henri-iii-p",
-   "photo": "seine20/henri-iii-p.jpg",
-   "quand": "Dès les vœux, à 10 h",
-   "recu": "2026-11-10T15:14:30.842Z",
-   "statut": "oui"
+   "statut": "attente"
   },
   {
    "avecVient": true,
@@ -280,6 +276,7 @@
    "avecPrenom": "Jamila",
    "avecVient": true,
    "cle": "taieb-a",
+   "photoDuo": "seine20/taieb-a-duo.jpg",
    "quand": "À l'embarquement",
    "quandAcc": "À l'embarquement",
    "recu": "2026-11-12T21:28:14.806Z",
@@ -332,6 +329,7 @@
    "avecPrenom": "Isabelle",
    "avecVient": true,
    "cle": "xavier-r",
+   "photoDuo": "seine20/xavier-r-duo.jpg",
    "quand": "Dès les vœux, à 10 h",
    "quandAcc": "Dès les vœux, à 10 h",
    "recu": "2026-11-15T15:48:18.721Z",
