@@ -33,6 +33,10 @@
    "photo": "casa60/nicolas-e.jpg"
   },
   {
+   "cle": "laurent-o",
+   "photo": "casa60/laurent-o.jpg"
+  },
+  {
    "cle": "thierry-h",
    "photo": "casa60/thierry-h.jpg"
   },
@@ -186,6 +190,12 @@
    "acc": 1,
    "cle": "thierry-h",
    "recu": "2026-11-17T18:26:16.688Z",
+   "statut": "oui"
+  },
+  {
+   "acc": 0,
+   "cle": "laurent-o",
+   "recu": "2026-11-18T19:25:01.618Z",
    "statut": "oui"
   }
  ],
